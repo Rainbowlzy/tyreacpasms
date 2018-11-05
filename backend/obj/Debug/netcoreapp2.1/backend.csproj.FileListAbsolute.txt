@@ -1,0 +1,14 @@
+D:\code\tyreacpasms\backend\bin\Debug\netcoreapp2.1\backend.deps.json
+D:\code\tyreacpasms\backend\bin\Debug\netcoreapp2.1\backend.runtimeconfig.json
+D:\code\tyreacpasms\backend\bin\Debug\netcoreapp2.1\backend.runtimeconfig.dev.json
+D:\code\tyreacpasms\backend\bin\Debug\netcoreapp2.1\backend.dll
+D:\code\tyreacpasms\backend\bin\Debug\netcoreapp2.1\backend.pdb
+D:\code\tyreacpasms\backend\obj\Debug\netcoreapp2.1\backend.csprojAssemblyReference.cache
+D:\code\tyreacpasms\backend\obj\Debug\netcoreapp2.1\backend.csproj.CoreCompileInputs.cache
+D:\code\tyreacpasms\backend\obj\Debug\netcoreapp2.1\backend.RazorAssemblyInfo.cache
+D:\code\tyreacpasms\backend\obj\Debug\netcoreapp2.1\backend.RazorAssemblyInfo.cs
+D:\code\tyreacpasms\backend\obj\Debug\netcoreapp2.1\backend.AssemblyInfoInputs.cache
+D:\code\tyreacpasms\backend\obj\Debug\netcoreapp2.1\backend.AssemblyInfo.cs
+D:\code\tyreacpasms\backend\obj\Debug\netcoreapp2.1\backend.RazorTargetAssemblyInfo.cache
+D:\code\tyreacpasms\backend\obj\Debug\netcoreapp2.1\backend.dll
+D:\code\tyreacpasms\backend\obj\Debug\netcoreapp2.1\backend.pdb
