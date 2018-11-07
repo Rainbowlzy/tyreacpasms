@@ -6,227 +6,14 @@
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/07/2018 17:07:31
- * 生成版本：11/07/2018 17:06:29 
+ * 生成时间：11/07/2018 19:52:12
+ * 生成版本：11/07/2018 19:51:53 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 using System;
 
 namespace T.Evaluators 
 {
-
-    /// <summary>
-    /// 用户角色 搜索条件实体模型
-    /// </summary>
-    public class UserRoleSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
-        public string URRoleName { get; set; }
-
-
-
-        /// <summary>
-        /// 登录名
-        /// </summary>
-        public string URLoginName { get; set; }
-
-
-
-    }
-
-    /// <summary>
-    /// 菜单配置 搜索条件实体模型
-    /// </summary>
-    public class MenuConfigurationSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-
-
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string MCCaption { get; set; }
-
-
-
-        /// <summary>
-        /// 父级标题
-        /// </summary>
-        public string MCParentTitle { get; set; }
-
-
-
-        /// <summary>
-        /// 链接
-        /// </summary>
-        public string MCLink { get; set; }
-
-
-
-        /// <summary>
-        /// 菜单类型
-        /// </summary>
-        public string MCMenuType { get; set; }
-
-
-
-
-        /// <summary>
-        /// 最小顺序
-        /// </summary>
-        public int? MinMCSequence { get; set; }
-
-        /// <summary>
-        /// 最大顺序
-        /// </summary>
-        public int? MaxMCSequence { get; set; }
-
-
-
-        /// <summary>
-        /// 显示名称
-        /// </summary>
-        public string MCDisplayName { get; set; }
-
-
-
-        /// <summary>
-        /// 图片
-        /// </summary>
-        public string MCPicture { get; set; }
-
-
-
-    }
-
-    /// <summary>
-    /// 角色菜单 搜索条件实体模型
-    /// </summary>
-    public class RoleMenuSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
-        public string RMRoleName { get; set; }
-
-
-
-        /// <summary>
-        /// 菜单标题
-        /// </summary>
-        public string RMMenuTitle { get; set; }
-
-
-
-    }
-
-    /// <summary>
-    /// 角色配置 搜索条件实体模型
-    /// </summary>
-    public class RoleConfigurationSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
-        public string RCRoleName { get; set; }
-
-
-
-        /// <summary>
-        /// 所属组织
-        /// </summary>
-        public string RCAffiliatedOrganization { get; set; }
-
-
-
-    }
 
     /// <summary>
     /// 用户信息 搜索条件实体模型
@@ -322,6 +109,176 @@ namespace T.Evaluators
         /// 密码
         /// </summary>
         public string UICode { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 菜单配置 搜索条件实体模型
+    /// </summary>
+    public class MenuConfigurationSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string MCCaption { get; set; }
+
+
+
+        /// <summary>
+        /// 父级标题
+        /// </summary>
+        public string MCParentTitle { get; set; }
+
+
+
+        /// <summary>
+        /// 链接
+        /// </summary>
+        public string MCLink { get; set; }
+
+
+
+        /// <summary>
+        /// 菜单类型
+        /// </summary>
+        public string MCMenuType { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小顺序
+        /// </summary>
+        public int? MinMCSequence { get; set; }
+
+        /// <summary>
+        /// 最大顺序
+        /// </summary>
+        public int? MaxMCSequence { get; set; }
+
+
+
+        /// <summary>
+        /// 显示名称
+        /// </summary>
+        public string MCDisplayName { get; set; }
+
+
+
+        /// <summary>
+        /// 图片
+        /// </summary>
+        public string MCPicture { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 角色配置 搜索条件实体模型
+    /// </summary>
+    public class RoleConfigurationSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string RCRoleName { get; set; }
+
+
+
+        /// <summary>
+        /// 所属组织
+        /// </summary>
+        public string RCAffiliatedOrganization { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 用户角色 搜索条件实体模型
+    /// </summary>
+    public class UserRoleSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string URRoleName { get; set; }
+
+
+
+        /// <summary>
+        /// 登录名
+        /// </summary>
+        public string URLoginName { get; set; }
 
 
 
@@ -457,6 +414,49 @@ namespace T.Evaluators
         /// 值
         /// </summary>
         public string SCAccrued { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 角色菜单 搜索条件实体模型
+    /// </summary>
+    public class RoleMenuSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string RMRoleName { get; set; }
+
+
+
+        /// <summary>
+        /// 菜单标题
+        /// </summary>
+        public string RMMenuTitle { get; set; }
 
 
 
@@ -608,16 +608,9 @@ namespace T.Evaluators
 
 
         /// <summary>
-        /// 姓
+        /// 姓名
         /// </summary>
         public string CName { get; set; }
-
-
-
-        /// <summary>
-        /// 名
-        /// </summary>
-        public string CCard { get; set; }
 
 
 

@@ -1,8 +1,8 @@
   
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/07/2018 17:07:07
- * 生成版本：11/07/2018 17:06:29 
+ * 生成时间：11/07/2018 19:52:09
+ * 生成版本：11/07/2018 19:51:53 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 console.group("正在加载脚本")
@@ -69,12 +69,12 @@ $(document).ready(function(){
 				//表格传区域ID参数
 				var url = "";
 				$table.attr("data-url", "/T/DefaultHandler.ashx?method=getCustomertypeList&data=" + JSON.stringify(GetRequest()) + "&");
-				console.log($.buildColumns({"debug":null,"Columns":[{"column_name":"CCustomerNumber","column_description":"客户编号","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"CustomerNumber"},{"column_name":"CName","column_description":"姓","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Name"},{"column_name":"CCard","column_description":"名","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Card"},{"column_name":"CChairperson","column_description":"性别","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Chairperson"},{"column_name":"CCall","column_description":"称呼","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Call"},{"column_name":"CCommonModeOfContact","column_description":"联系方式","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"CommonModeOfContact"},{"column_name":"CAddress","column_description":"地址","dbtype":"NVARCHAR(4000)","max_length":0,"pascal_column_name":"Address"}],"Children":null,"Parent":null,"r":null,"table_name":"Customertype","table_name_en":"Customertype","table_name_ch":"客户","column_name":null,"column_description":null,"dbtype":null,"max_length":0}));
+				console.log($.buildColumns({"debug":null,"Columns":[{"column_name":"CCustomerNumber","column_description":"客户编号","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"CustomerNumber"},{"column_name":"CName","column_description":"姓名","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Name"},{"column_name":"CChairperson","column_description":"性别","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Chairperson"},{"column_name":"CCall","column_description":"称呼","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Call"},{"column_name":"CCommonModeOfContact","column_description":"联系方式","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"CommonModeOfContact"},{"column_name":"CAddress","column_description":"地址","dbtype":"NVARCHAR(4000)","max_length":0,"pascal_column_name":"Address"}],"Children":null,"Parent":null,"r":null,"table_name":"Customertype","table_name_en":"Customertype","table_name_ch":"客户","column_name":null,"column_description":null,"dbtype":null,"max_length":0}));
 				$table.bootstrapTable({
 					striped: true,
 					height: getHeight(),
 					columns: 
-					$.buildColumns({"debug":null,"Columns":[{"column_name":"CCustomerNumber","column_description":"客户编号","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"CustomerNumber"},{"column_name":"CName","column_description":"姓","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Name"},{"column_name":"CCard","column_description":"名","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Card"},{"column_name":"CChairperson","column_description":"性别","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Chairperson"},{"column_name":"CCall","column_description":"称呼","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Call"},{"column_name":"CCommonModeOfContact","column_description":"联系方式","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"CommonModeOfContact"},{"column_name":"CAddress","column_description":"地址","dbtype":"NVARCHAR(4000)","max_length":0,"pascal_column_name":"Address"}],"Children":null,"Parent":null,"r":null,"table_name":"Customertype","table_name_en":"Customertype","table_name_ch":"客户","column_name":null,"column_description":null,"dbtype":null,"max_length":0}),
+					$.buildColumns({"debug":null,"Columns":[{"column_name":"CCustomerNumber","column_description":"客户编号","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"CustomerNumber"},{"column_name":"CName","column_description":"姓名","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Name"},{"column_name":"CChairperson","column_description":"性别","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Chairperson"},{"column_name":"CCall","column_description":"称呼","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"Call"},{"column_name":"CCommonModeOfContact","column_description":"联系方式","dbtype":"NVARCHAR(50)","max_length":0,"pascal_column_name":"CommonModeOfContact"},{"column_name":"CAddress","column_description":"地址","dbtype":"NVARCHAR(4000)","max_length":0,"pascal_column_name":"Address"}],"Children":null,"Parent":null,"r":null,"table_name":"Customertype","table_name_en":"Customertype","table_name_ch":"客户","column_name":null,"column_description":null,"dbtype":null,"max_length":0}),
 				});
 		
 				$table.bootstrapTable('refresh');

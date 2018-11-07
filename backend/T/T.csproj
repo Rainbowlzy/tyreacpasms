@@ -1041,7 +1041,6 @@
     <Compile Include="Evaluators\GetCurrentUserInformationEvaluator.cs" />
     <Compile Include="2_map\RTSP.aspx.cs">
       <DependentUpon>RTSP.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="2_map\RTSP.aspx.designer.cs">
       <DependentUpon>RTSP.aspx</DependentUpon>

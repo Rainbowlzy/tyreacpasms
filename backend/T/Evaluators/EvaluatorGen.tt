@@ -184,7 +184,7 @@ foreach(var table_name in table_schema2.Keys){
             {
 				// 行级排他锁开始
                 var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.id == null;
+                var isnew = entity.TransactionID == null;
                 if (!isnew)
                 {
                     var one = ctx.<#=table_name#>.FirstOrDefault(p=>p.id==entity.id);

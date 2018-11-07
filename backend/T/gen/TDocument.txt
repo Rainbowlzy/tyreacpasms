@@ -5,318 +5,10 @@
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/07/2018 17:07:32
- * 生成版本：11/07/2018 17:06:29 
+ * 生成时间：11/07/2018 19:52:12
+ * 生成版本：11/07/2018 19:51:53 
  * 作者：路正遥
  * ------------------------------------------------------------ */
-
------------------------------------------------------------------------
-模块名称：		用户角色
-模块英文名称：		UserRole
-Git：			http://122.97.218.162:18206/summary/T.git
-参考页面：		http://223.112.112.26:58080/T/gen/UserRoleList.html
------------------------------------------------------------------------
-接口名称：保存用户角色接口
-接口功能：保存（新增/编辑）用户角色结果
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=SaveUserRole
-	data=JSON.stringify({
-		id : "string",
-		URRoleName : "string", //角色名称
-		URLoginName : "string", //登录名
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：删除用户角色接口
-接口功能：删除一条用户角色记录
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=DeleteUserRole
-	data=JSON.stringify({
-		id : "string",
-		URRoleName : "string", //角色名称
-		URLoginName : "string", //登录名
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：查询用户角色列表接口
-接口功能：分页查询用户角色列表
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=GetUserRoleList
-	data=JSON.stringify({
-		id : "string",
-		URRoleName : "string",//角色名称
-		URLoginName : "string",//登录名
-	})
-	search=搜索关键字
-	offset=分页页码
-	limit=每页条数
-	sort=排序字段(URRoleName,URLoginName,)
-	order=asc/desc
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息",
-		total: 条数,
-		rows: [
-		{
-			id : "string",
-			URRoleName : "string",//角色名称
-			URLoginName : "string",//登录名
-		}
-		]
-	}
-
-
-
------------------------------------------------------------------------
-模块名称：		菜单配置
-模块英文名称：		MenuConfiguration
-Git：			http://122.97.218.162:18206/summary/T.git
-参考页面：		http://223.112.112.26:58080/T/gen/MenuConfigurationList.html
------------------------------------------------------------------------
-接口名称：保存菜单配置接口
-接口功能：保存（新增/编辑）菜单配置结果
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=SaveMenuConfiguration
-	data=JSON.stringify({
-		id : "string",
-		MCCaption : "string", //标题
-		MCParentTitle : "string", //父级标题
-		MCLink : "string", //链接
-		MCMenuType : "string", //菜单类型
-		MCSequence : "Nullable<int>", //顺序
-		MCDisplayName : "string", //显示名称
-		MCPicture : "string", //图片
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：删除菜单配置接口
-接口功能：删除一条菜单配置记录
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=DeleteMenuConfiguration
-	data=JSON.stringify({
-		id : "string",
-		MCCaption : "string", //标题
-		MCParentTitle : "string", //父级标题
-		MCLink : "string", //链接
-		MCMenuType : "string", //菜单类型
-		MCSequence : "Nullable<int>", //顺序
-		MCDisplayName : "string", //显示名称
-		MCPicture : "string", //图片
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：查询菜单配置列表接口
-接口功能：分页查询菜单配置列表
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=GetMenuConfigurationList
-	data=JSON.stringify({
-		id : "string",
-		MCCaption : "string",//标题
-		MCParentTitle : "string",//父级标题
-		MCLink : "string",//链接
-		MCMenuType : "string",//菜单类型
-		MCSequence : "Nullable<int>",//顺序
-		MCDisplayName : "string",//显示名称
-		MCPicture : "string",//图片
-	})
-	search=搜索关键字
-	offset=分页页码
-	limit=每页条数
-	sort=排序字段(MCCaption,MCParentTitle,MCLink,MCMenuType,MCSequence,MCDisplayName,MCPicture,)
-	order=asc/desc
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息",
-		total: 条数,
-		rows: [
-		{
-			id : "string",
-			MCCaption : "string",//标题
-			MCParentTitle : "string",//父级标题
-			MCLink : "string",//链接
-			MCMenuType : "string",//菜单类型
-			MCSequence : "Nullable<int>",//顺序
-			MCDisplayName : "string",//显示名称
-			MCPicture : "string",//图片
-		}
-		]
-	}
-
-
-
------------------------------------------------------------------------
-模块名称：		角色菜单
-模块英文名称：		RoleMenu
-Git：			http://122.97.218.162:18206/summary/T.git
-参考页面：		http://223.112.112.26:58080/T/gen/RoleMenuList.html
------------------------------------------------------------------------
-接口名称：保存角色菜单接口
-接口功能：保存（新增/编辑）角色菜单结果
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=SaveRoleMenu
-	data=JSON.stringify({
-		id : "string",
-		RMRoleName : "string", //角色名称
-		RMMenuTitle : "string", //菜单标题
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：删除角色菜单接口
-接口功能：删除一条角色菜单记录
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=DeleteRoleMenu
-	data=JSON.stringify({
-		id : "string",
-		RMRoleName : "string", //角色名称
-		RMMenuTitle : "string", //菜单标题
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：查询角色菜单列表接口
-接口功能：分页查询角色菜单列表
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=GetRoleMenuList
-	data=JSON.stringify({
-		id : "string",
-		RMRoleName : "string",//角色名称
-		RMMenuTitle : "string",//菜单标题
-	})
-	search=搜索关键字
-	offset=分页页码
-	limit=每页条数
-	sort=排序字段(RMRoleName,RMMenuTitle,)
-	order=asc/desc
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息",
-		total: 条数,
-		rows: [
-		{
-			id : "string",
-			RMRoleName : "string",//角色名称
-			RMMenuTitle : "string",//菜单标题
-		}
-		]
-	}
-
-
-
------------------------------------------------------------------------
-模块名称：		角色配置
-模块英文名称：		RoleConfiguration
-Git：			http://122.97.218.162:18206/summary/T.git
-参考页面：		http://223.112.112.26:58080/T/gen/RoleConfigurationList.html
------------------------------------------------------------------------
-接口名称：保存角色配置接口
-接口功能：保存（新增/编辑）角色配置结果
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=SaveRoleConfiguration
-	data=JSON.stringify({
-		id : "string",
-		RCRoleName : "string", //角色名称
-		RCAffiliatedOrganization : "string", //所属组织
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：删除角色配置接口
-接口功能：删除一条角色配置记录
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=DeleteRoleConfiguration
-	data=JSON.stringify({
-		id : "string",
-		RCRoleName : "string", //角色名称
-		RCAffiliatedOrganization : "string", //所属组织
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：查询角色配置列表接口
-接口功能：分页查询角色配置列表
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=GetRoleConfigurationList
-	data=JSON.stringify({
-		id : "string",
-		RCRoleName : "string",//角色名称
-		RCAffiliatedOrganization : "string",//所属组织
-	})
-	search=搜索关键字
-	offset=分页页码
-	limit=每页条数
-	sort=排序字段(RCRoleName,RCAffiliatedOrganization,)
-	order=asc/desc
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息",
-		total: 条数,
-		rows: [
-		{
-			id : "string",
-			RCRoleName : "string",//角色名称
-			RCAffiliatedOrganization : "string",//所属组织
-		}
-		]
-	}
-
-
 
 -----------------------------------------------------------------------
 模块名称：		用户信息
@@ -416,6 +108,242 @@ Git：			http://122.97.218.162:18206/summary/T.git
 			UICustomerType : "string",//用户类型
 			UIUserLevel : "string",//用户级别
 			UICode : "string",//密码
+		}
+		]
+	}
+
+
+
+-----------------------------------------------------------------------
+模块名称：		菜单配置
+模块英文名称：		MenuConfiguration
+Git：			http://122.97.218.162:18206/summary/T.git
+参考页面：		http://223.112.112.26:58080/T/gen/MenuConfigurationList.html
+-----------------------------------------------------------------------
+接口名称：保存菜单配置接口
+接口功能：保存（新增/编辑）菜单配置结果
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=SaveMenuConfiguration
+	data=JSON.stringify({
+		id : "string",
+		MCCaption : "string", //标题
+		MCParentTitle : "string", //父级标题
+		MCLink : "string", //链接
+		MCMenuType : "string", //菜单类型
+		MCSequence : "Nullable<int>", //顺序
+		MCDisplayName : "string", //显示名称
+		MCPicture : "string", //图片
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：删除菜单配置接口
+接口功能：删除一条菜单配置记录
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=DeleteMenuConfiguration
+	data=JSON.stringify({
+		id : "string",
+		MCCaption : "string", //标题
+		MCParentTitle : "string", //父级标题
+		MCLink : "string", //链接
+		MCMenuType : "string", //菜单类型
+		MCSequence : "Nullable<int>", //顺序
+		MCDisplayName : "string", //显示名称
+		MCPicture : "string", //图片
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：查询菜单配置列表接口
+接口功能：分页查询菜单配置列表
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=GetMenuConfigurationList
+	data=JSON.stringify({
+		id : "string",
+		MCCaption : "string",//标题
+		MCParentTitle : "string",//父级标题
+		MCLink : "string",//链接
+		MCMenuType : "string",//菜单类型
+		MCSequence : "Nullable<int>",//顺序
+		MCDisplayName : "string",//显示名称
+		MCPicture : "string",//图片
+	})
+	search=搜索关键字
+	offset=分页页码
+	limit=每页条数
+	sort=排序字段(MCCaption,MCParentTitle,MCLink,MCMenuType,MCSequence,MCDisplayName,MCPicture,)
+	order=asc/desc
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息",
+		total: 条数,
+		rows: [
+		{
+			id : "string",
+			MCCaption : "string",//标题
+			MCParentTitle : "string",//父级标题
+			MCLink : "string",//链接
+			MCMenuType : "string",//菜单类型
+			MCSequence : "Nullable<int>",//顺序
+			MCDisplayName : "string",//显示名称
+			MCPicture : "string",//图片
+		}
+		]
+	}
+
+
+
+-----------------------------------------------------------------------
+模块名称：		角色配置
+模块英文名称：		RoleConfiguration
+Git：			http://122.97.218.162:18206/summary/T.git
+参考页面：		http://223.112.112.26:58080/T/gen/RoleConfigurationList.html
+-----------------------------------------------------------------------
+接口名称：保存角色配置接口
+接口功能：保存（新增/编辑）角色配置结果
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=SaveRoleConfiguration
+	data=JSON.stringify({
+		id : "string",
+		RCRoleName : "string", //角色名称
+		RCAffiliatedOrganization : "string", //所属组织
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：删除角色配置接口
+接口功能：删除一条角色配置记录
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=DeleteRoleConfiguration
+	data=JSON.stringify({
+		id : "string",
+		RCRoleName : "string", //角色名称
+		RCAffiliatedOrganization : "string", //所属组织
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：查询角色配置列表接口
+接口功能：分页查询角色配置列表
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=GetRoleConfigurationList
+	data=JSON.stringify({
+		id : "string",
+		RCRoleName : "string",//角色名称
+		RCAffiliatedOrganization : "string",//所属组织
+	})
+	search=搜索关键字
+	offset=分页页码
+	limit=每页条数
+	sort=排序字段(RCRoleName,RCAffiliatedOrganization,)
+	order=asc/desc
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息",
+		total: 条数,
+		rows: [
+		{
+			id : "string",
+			RCRoleName : "string",//角色名称
+			RCAffiliatedOrganization : "string",//所属组织
+		}
+		]
+	}
+
+
+
+-----------------------------------------------------------------------
+模块名称：		用户角色
+模块英文名称：		UserRole
+Git：			http://122.97.218.162:18206/summary/T.git
+参考页面：		http://223.112.112.26:58080/T/gen/UserRoleList.html
+-----------------------------------------------------------------------
+接口名称：保存用户角色接口
+接口功能：保存（新增/编辑）用户角色结果
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=SaveUserRole
+	data=JSON.stringify({
+		id : "string",
+		URRoleName : "string", //角色名称
+		URLoginName : "string", //登录名
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：删除用户角色接口
+接口功能：删除一条用户角色记录
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=DeleteUserRole
+	data=JSON.stringify({
+		id : "string",
+		URRoleName : "string", //角色名称
+		URLoginName : "string", //登录名
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：查询用户角色列表接口
+接口功能：分页查询用户角色列表
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=GetUserRoleList
+	data=JSON.stringify({
+		id : "string",
+		URRoleName : "string",//角色名称
+		URLoginName : "string",//登录名
+	})
+	search=搜索关键字
+	offset=分页页码
+	limit=每页条数
+	sort=排序字段(URRoleName,URLoginName,)
+	order=asc/desc
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息",
+		total: 条数,
+		rows: [
+		{
+			id : "string",
+			URRoleName : "string",//角色名称
+			URLoginName : "string",//登录名
 		}
 		]
 	}
@@ -639,6 +567,78 @@ Git：			http://122.97.218.162:18206/summary/T.git
 
 
 -----------------------------------------------------------------------
+模块名称：		角色菜单
+模块英文名称：		RoleMenu
+Git：			http://122.97.218.162:18206/summary/T.git
+参考页面：		http://223.112.112.26:58080/T/gen/RoleMenuList.html
+-----------------------------------------------------------------------
+接口名称：保存角色菜单接口
+接口功能：保存（新增/编辑）角色菜单结果
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=SaveRoleMenu
+	data=JSON.stringify({
+		id : "string",
+		RMRoleName : "string", //角色名称
+		RMMenuTitle : "string", //菜单标题
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：删除角色菜单接口
+接口功能：删除一条角色菜单记录
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=DeleteRoleMenu
+	data=JSON.stringify({
+		id : "string",
+		RMRoleName : "string", //角色名称
+		RMMenuTitle : "string", //菜单标题
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：查询角色菜单列表接口
+接口功能：分页查询角色菜单列表
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=GetRoleMenuList
+	data=JSON.stringify({
+		id : "string",
+		RMRoleName : "string",//角色名称
+		RMMenuTitle : "string",//菜单标题
+	})
+	search=搜索关键字
+	offset=分页页码
+	limit=每页条数
+	sort=排序字段(RMRoleName,RMMenuTitle,)
+	order=asc/desc
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息",
+		total: 条数,
+		rows: [
+		{
+			id : "string",
+			RMRoleName : "string",//角色名称
+			RMMenuTitle : "string",//菜单标题
+		}
+		]
+	}
+
+
+
+-----------------------------------------------------------------------
 模块名称：		员工
 模块英文名称：		Staffname
 Git：			http://122.97.218.162:18206/summary/T.git
@@ -756,8 +756,7 @@ Git：			http://122.97.218.162:18206/summary/T.git
 	data=JSON.stringify({
 		id : "string",
 		CCustomerNumber : "string", //客户编号
-		CName : "string", //姓
-		CCard : "string", //名
+		CName : "string", //姓名
 		CChairperson : "string", //性别
 		CCall : "string", //称呼
 		CCommonModeOfContact : "string", //联系方式
@@ -778,8 +777,7 @@ Git：			http://122.97.218.162:18206/summary/T.git
 	data=JSON.stringify({
 		id : "string",
 		CCustomerNumber : "string", //客户编号
-		CName : "string", //姓
-		CCard : "string", //名
+		CName : "string", //姓名
 		CChairperson : "string", //性别
 		CCall : "string", //称呼
 		CCommonModeOfContact : "string", //联系方式
@@ -800,8 +798,7 @@ Git：			http://122.97.218.162:18206/summary/T.git
 	data=JSON.stringify({
 		id : "string",
 		CCustomerNumber : "string",//客户编号
-		CName : "string",//姓
-		CCard : "string",//名
+		CName : "string",//姓名
 		CChairperson : "string",//性别
 		CCall : "string",//称呼
 		CCommonModeOfContact : "string",//联系方式
@@ -810,7 +807,7 @@ Git：			http://122.97.218.162:18206/summary/T.git
 	search=搜索关键字
 	offset=分页页码
 	limit=每页条数
-	sort=排序字段(CCustomerNumber,CName,CCard,CChairperson,CCall,CCommonModeOfContact,CAddress,)
+	sort=排序字段(CCustomerNumber,CName,CChairperson,CCall,CCommonModeOfContact,CAddress,)
 	order=asc/desc
 
 返回结果：
@@ -822,8 +819,7 @@ Git：			http://122.97.218.162:18206/summary/T.git
 		{
 			id : "string",
 			CCustomerNumber : "string",//客户编号
-			CName : "string",//姓
-			CCard : "string",//名
+			CName : "string",//姓名
 			CChairperson : "string",//性别
 			CCall : "string",//称呼
 			CCommonModeOfContact : "string",//联系方式

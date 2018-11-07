@@ -2,24 +2,32 @@
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/07/2018 17:06:55
- * 生成版本：11/07/2018 17:06:29 
+ * 生成时间：11/07/2018 19:52:07
+ * 生成版本：11/07/2018 19:51:53 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 -----------------------------------------------------------------------
-模块名称：用户角色
-模块英文名称：UserRole
-参考页面：http://www.dsmlyw.com/gen/UserRoleList.html
+模块名称：用户信息
+模块英文名称：UserInformation
+参考页面：http://www.dsmlyw.com/gen/UserInformationList.html
 -----------------------------------------------------------------------
-接口名称：保存用户角色接口
-接口功能：保存（新增/编辑）用户角色结果
+接口名称：保存用户信息接口
+接口功能：保存（新增/编辑）用户信息结果
 接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
 参数：
-	method=SaveUserRole
+	method=SaveUserInformation
 	data=JSON.stringify({
 		id : "string",
-		URRoleName : "string", //角色名称
-		URLoginName : "string", //登录名
+		UILoginName : "string", //登录名
+		UINickname : "string", //昵称
+		UIRealName : "string", //真实姓名
+		UIHeadPortrait : "string", //头像
+		UISubordinateDepartment : "string", //所属部门
+		UIBooth : "string", //电话
+		UIPhoto : "string", //照片
+		UICustomerType : "string", //用户类型
+		UIUserLevel : "string", //用户级别
+		UICode : "string", //密码
 	})
 
 返回结果：
@@ -28,15 +36,23 @@
 		message : "错误消息"
 	}
 -----------------------------------------------------------------------
-接口名称：删除用户角色接口
-接口功能：删除一条用户角色记录
+接口名称：删除用户信息接口
+接口功能：删除一条用户信息记录
 接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
 参数：
-	method=DeleteUserRole
+	method=DeleteUserInformation
 	data=JSON.stringify({
 		id : "string",
-		URRoleName : "string", //角色名称
-		URLoginName : "string", //登录名
+		UILoginName : "string", //登录名
+		UINickname : "string", //昵称
+		UIRealName : "string", //真实姓名
+		UIHeadPortrait : "string", //头像
+		UISubordinateDepartment : "string", //所属部门
+		UIBooth : "string", //电话
+		UIPhoto : "string", //照片
+		UICustomerType : "string", //用户类型
+		UIUserLevel : "string", //用户级别
+		UICode : "string", //密码
 	})
 
 返回结果：
@@ -45,20 +61,28 @@
 		message : "错误消息"
 	}
 -----------------------------------------------------------------------
-接口名称：查询用户角色列表接口
-接口功能：分页查询用户角色列表
+接口名称：查询用户信息列表接口
+接口功能：分页查询用户信息列表
 接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
 参数：
-	method=GetUserRoleList
+	method=GetUserInformationList
 	data=JSON.stringify({
 		id : "string",
-		URRoleName : "string",//角色名称
-		URLoginName : "string",//登录名
+		UILoginName : "string",//登录名
+		UINickname : "string",//昵称
+		UIRealName : "string",//真实姓名
+		UIHeadPortrait : "string",//头像
+		UISubordinateDepartment : "string",//所属部门
+		UIBooth : "string",//电话
+		UIPhoto : "string",//照片
+		UICustomerType : "string",//用户类型
+		UIUserLevel : "string",//用户级别
+		UICode : "string",//密码
 	})
 	search=搜索关键字
 	offset=分页页码
 	limit=每页条数
-	sort=排序字段(URRoleName,URLoginName,)
+	sort=排序字段(UILoginName,UINickname,UIRealName,UIHeadPortrait,UISubordinateDepartment,UIBooth,UIPhoto,UICustomerType,UIUserLevel,UICode,)
 	order=asc/desc
 
 返回结果：
@@ -69,8 +93,16 @@
 		rows: [
 		{
 			id : "string",
-			URRoleName : "string",//角色名称
-			URLoginName : "string",//登录名
+			UILoginName : "string",//登录名
+			UINickname : "string",//昵称
+			UIRealName : "string",//真实姓名
+			UIHeadPortrait : "string",//头像
+			UISubordinateDepartment : "string",//所属部门
+			UIBooth : "string",//电话
+			UIPhoto : "string",//照片
+			UICustomerType : "string",//用户类型
+			UIUserLevel : "string",//用户级别
+			UICode : "string",//密码
 		}
 		]
 	}
@@ -169,77 +201,6 @@
 
 
 -----------------------------------------------------------------------
-模块名称：角色菜单
-模块英文名称：RoleMenu
-参考页面：http://www.dsmlyw.com/gen/RoleMenuList.html
------------------------------------------------------------------------
-接口名称：保存角色菜单接口
-接口功能：保存（新增/编辑）角色菜单结果
-接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
-参数：
-	method=SaveRoleMenu
-	data=JSON.stringify({
-		id : "string",
-		RMRoleName : "string", //角色名称
-		RMMenuTitle : "string", //菜单标题
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：删除角色菜单接口
-接口功能：删除一条角色菜单记录
-接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
-参数：
-	method=DeleteRoleMenu
-	data=JSON.stringify({
-		id : "string",
-		RMRoleName : "string", //角色名称
-		RMMenuTitle : "string", //菜单标题
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：查询角色菜单列表接口
-接口功能：分页查询角色菜单列表
-接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
-参数：
-	method=GetRoleMenuList
-	data=JSON.stringify({
-		id : "string",
-		RMRoleName : "string",//角色名称
-		RMMenuTitle : "string",//菜单标题
-	})
-	search=搜索关键字
-	offset=分页页码
-	limit=每页条数
-	sort=排序字段(RMRoleName,RMMenuTitle,)
-	order=asc/desc
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息",
-		total: 条数,
-		rows: [
-		{
-			id : "string",
-			RMRoleName : "string",//角色名称
-			RMMenuTitle : "string",//菜单标题
-		}
-		]
-	}
-
-
-
------------------------------------------------------------------------
 模块名称：角色配置
 模块英文名称：RoleConfiguration
 参考页面：http://www.dsmlyw.com/gen/RoleConfigurationList.html
@@ -311,27 +272,19 @@
 
 
 -----------------------------------------------------------------------
-模块名称：用户信息
-模块英文名称：UserInformation
-参考页面：http://www.dsmlyw.com/gen/UserInformationList.html
+模块名称：用户角色
+模块英文名称：UserRole
+参考页面：http://www.dsmlyw.com/gen/UserRoleList.html
 -----------------------------------------------------------------------
-接口名称：保存用户信息接口
-接口功能：保存（新增/编辑）用户信息结果
+接口名称：保存用户角色接口
+接口功能：保存（新增/编辑）用户角色结果
 接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
 参数：
-	method=SaveUserInformation
+	method=SaveUserRole
 	data=JSON.stringify({
 		id : "string",
-		UILoginName : "string", //登录名
-		UINickname : "string", //昵称
-		UIRealName : "string", //真实姓名
-		UIHeadPortrait : "string", //头像
-		UISubordinateDepartment : "string", //所属部门
-		UIBooth : "string", //电话
-		UIPhoto : "string", //照片
-		UICustomerType : "string", //用户类型
-		UIUserLevel : "string", //用户级别
-		UICode : "string", //密码
+		URRoleName : "string", //角色名称
+		URLoginName : "string", //登录名
 	})
 
 返回结果：
@@ -340,23 +293,15 @@
 		message : "错误消息"
 	}
 -----------------------------------------------------------------------
-接口名称：删除用户信息接口
-接口功能：删除一条用户信息记录
+接口名称：删除用户角色接口
+接口功能：删除一条用户角色记录
 接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
 参数：
-	method=DeleteUserInformation
+	method=DeleteUserRole
 	data=JSON.stringify({
 		id : "string",
-		UILoginName : "string", //登录名
-		UINickname : "string", //昵称
-		UIRealName : "string", //真实姓名
-		UIHeadPortrait : "string", //头像
-		UISubordinateDepartment : "string", //所属部门
-		UIBooth : "string", //电话
-		UIPhoto : "string", //照片
-		UICustomerType : "string", //用户类型
-		UIUserLevel : "string", //用户级别
-		UICode : "string", //密码
+		URRoleName : "string", //角色名称
+		URLoginName : "string", //登录名
 	})
 
 返回结果：
@@ -365,28 +310,20 @@
 		message : "错误消息"
 	}
 -----------------------------------------------------------------------
-接口名称：查询用户信息列表接口
-接口功能：分页查询用户信息列表
+接口名称：查询用户角色列表接口
+接口功能：分页查询用户角色列表
 接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
 参数：
-	method=GetUserInformationList
+	method=GetUserRoleList
 	data=JSON.stringify({
 		id : "string",
-		UILoginName : "string",//登录名
-		UINickname : "string",//昵称
-		UIRealName : "string",//真实姓名
-		UIHeadPortrait : "string",//头像
-		UISubordinateDepartment : "string",//所属部门
-		UIBooth : "string",//电话
-		UIPhoto : "string",//照片
-		UICustomerType : "string",//用户类型
-		UIUserLevel : "string",//用户级别
-		UICode : "string",//密码
+		URRoleName : "string",//角色名称
+		URLoginName : "string",//登录名
 	})
 	search=搜索关键字
 	offset=分页页码
 	limit=每页条数
-	sort=排序字段(UILoginName,UINickname,UIRealName,UIHeadPortrait,UISubordinateDepartment,UIBooth,UIPhoto,UICustomerType,UIUserLevel,UICode,)
+	sort=排序字段(URRoleName,URLoginName,)
 	order=asc/desc
 
 返回结果：
@@ -397,16 +334,8 @@
 		rows: [
 		{
 			id : "string",
-			UILoginName : "string",//登录名
-			UINickname : "string",//昵称
-			UIRealName : "string",//真实姓名
-			UIHeadPortrait : "string",//头像
-			UISubordinateDepartment : "string",//所属部门
-			UIBooth : "string",//电话
-			UIPhoto : "string",//照片
-			UICustomerType : "string",//用户类型
-			UIUserLevel : "string",//用户级别
-			UICode : "string",//密码
+			URRoleName : "string",//角色名称
+			URLoginName : "string",//登录名
 		}
 		]
 	}
@@ -627,6 +556,77 @@
 
 
 -----------------------------------------------------------------------
+模块名称：角色菜单
+模块英文名称：RoleMenu
+参考页面：http://www.dsmlyw.com/gen/RoleMenuList.html
+-----------------------------------------------------------------------
+接口名称：保存角色菜单接口
+接口功能：保存（新增/编辑）角色菜单结果
+接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
+参数：
+	method=SaveRoleMenu
+	data=JSON.stringify({
+		id : "string",
+		RMRoleName : "string", //角色名称
+		RMMenuTitle : "string", //菜单标题
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：删除角色菜单接口
+接口功能：删除一条角色菜单记录
+接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
+参数：
+	method=DeleteRoleMenu
+	data=JSON.stringify({
+		id : "string",
+		RMRoleName : "string", //角色名称
+		RMMenuTitle : "string", //菜单标题
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：查询角色菜单列表接口
+接口功能：分页查询角色菜单列表
+接口地址：[POST] http://www.dsmlyw.com/DefaultHandler.ashx
+参数：
+	method=GetRoleMenuList
+	data=JSON.stringify({
+		id : "string",
+		RMRoleName : "string",//角色名称
+		RMMenuTitle : "string",//菜单标题
+	})
+	search=搜索关键字
+	offset=分页页码
+	limit=每页条数
+	sort=排序字段(RMRoleName,RMMenuTitle,)
+	order=asc/desc
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息",
+		total: 条数,
+		rows: [
+		{
+			id : "string",
+			RMRoleName : "string",//角色名称
+			RMMenuTitle : "string",//菜单标题
+		}
+		]
+	}
+
+
+
+-----------------------------------------------------------------------
 模块名称：员工
 模块英文名称：Staffname
 参考页面：http://www.dsmlyw.com/gen/StaffnameList.html
@@ -742,8 +742,7 @@
 	data=JSON.stringify({
 		id : "string",
 		CCustomerNumber : "string", //客户编号
-		CName : "string", //姓
-		CCard : "string", //名
+		CName : "string", //姓名
 		CChairperson : "string", //性别
 		CCall : "string", //称呼
 		CCommonModeOfContact : "string", //联系方式
@@ -764,8 +763,7 @@
 	data=JSON.stringify({
 		id : "string",
 		CCustomerNumber : "string", //客户编号
-		CName : "string", //姓
-		CCard : "string", //名
+		CName : "string", //姓名
 		CChairperson : "string", //性别
 		CCall : "string", //称呼
 		CCommonModeOfContact : "string", //联系方式
@@ -786,8 +784,7 @@
 	data=JSON.stringify({
 		id : "string",
 		CCustomerNumber : "string",//客户编号
-		CName : "string",//姓
-		CCard : "string",//名
+		CName : "string",//姓名
 		CChairperson : "string",//性别
 		CCall : "string",//称呼
 		CCommonModeOfContact : "string",//联系方式
@@ -796,7 +793,7 @@
 	search=搜索关键字
 	offset=分页页码
 	limit=每页条数
-	sort=排序字段(CCustomerNumber,CName,CCard,CChairperson,CCall,CCommonModeOfContact,CAddress,)
+	sort=排序字段(CCustomerNumber,CName,CChairperson,CCall,CCommonModeOfContact,CAddress,)
 	order=asc/desc
 
 返回结果：
@@ -808,8 +805,7 @@
 		{
 			id : "string",
 			CCustomerNumber : "string",//客户编号
-			CName : "string",//姓
-			CCard : "string",//名
+			CName : "string",//姓名
 			CChairperson : "string",//性别
 			CCall : "string",//称呼
 			CCommonModeOfContact : "string",//联系方式
