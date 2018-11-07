@@ -1,0 +1,1759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="89706bc3-57a0-44a2-b639-0ab0fd284d0b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/XiangXi_node_modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SetData/obj/Debug/SetData.csprojAssemblyReference.cache" afterPath="$PROJECT_DIR$/../SetData/obj/Debug/SetData.csprojAssemblyReference.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SetData/bin/Debug/SetData.exe" afterPath="$PROJECT_DIR$/../SetData/bin/Debug/SetData.exe" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SetData/obj/Debug/SetData.exe" afterPath="$PROJECT_DIR$/../SetData/obj/Debug/SetData.exe" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SetData/bin/Debug/SetData.pdb" afterPath="$PROJECT_DIR$/../SetData/bin/Debug/SetData.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SetData/obj/Debug/SetData.pdb" afterPath="$PROJECT_DIR$/../SetData/obj/Debug/SetData.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/XiangXi.csprojAssemblyReference.cache" afterPath="$PROJECT_DIR$/obj/Debug/XiangXi.csprojAssemblyReference.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXi.dll" afterPath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXi.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/XiangXi.dll" afterPath="$PROJECT_DIR$/bin/XiangXi.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/XiangXi.dll" afterPath="$PROJECT_DIR$/obj/Debug/XiangXi.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXi.pdb" afterPath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXi.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/XiangXi.pdb" afterPath="$PROJECT_DIR$/bin/XiangXi.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/XiangXi.pdb" afterPath="$PROJECT_DIR$/obj/Debug/XiangXi.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiENtities/obj/Debug/XiangXiENtities.csprojAssemblyReference.cache" afterPath="$PROJECT_DIR$/../XiangXiENtities/obj/Debug/XiangXiENtities.csprojAssemblyReference.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SetData/bin/Debug/XiangXiENtities.dll" afterPath="$PROJECT_DIR$/../SetData/bin/Debug/XiangXiENtities.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiENtities/bin/Debug/XiangXiENtities.dll" afterPath="$PROJECT_DIR$/../XiangXiENtities/bin/Debug/XiangXiENtities.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiENtities/obj/Debug/XiangXiENtities.dll" afterPath="$PROJECT_DIR$/../XiangXiENtities/obj/Debug/XiangXiENtities.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXiENtities.dll" afterPath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXiENtities.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/XiangXiENtities.dll" afterPath="$PROJECT_DIR$/bin/XiangXiENtities.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SetData/bin/Debug/XiangXiENtities.pdb" afterPath="$PROJECT_DIR$/../SetData/bin/Debug/XiangXiENtities.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiENtities/bin/Debug/XiangXiENtities.pdb" afterPath="$PROJECT_DIR$/../XiangXiENtities/bin/Debug/XiangXiENtities.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiENtities/obj/Debug/XiangXiENtities.pdb" afterPath="$PROJECT_DIR$/../XiangXiENtities/obj/Debug/XiangXiENtities.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXiENtities.pdb" afterPath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXiENtities.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/XiangXiENtities.pdb" afterPath="$PROJECT_DIR$/bin/XiangXiENtities.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/obj/Debug/XiangXiTests1.csprojAssemblyReference.cache" afterPath="$PROJECT_DIR$/../XiangXiTests1/obj/Debug/XiangXiTests1.csprojAssemblyReference.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXiTests1.dll" afterPath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXiTests1.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/obj/Debug/XiangXiTests1.dll" afterPath="$PROJECT_DIR$/../XiangXiTests1/obj/Debug/XiangXiTests1.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXiTests1.pdb" afterPath="$PROJECT_DIR$/../XiangXiTests1/bin/Debug/XiangXiTests1.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/obj/Debug/XiangXiTests1.pdb" afterPath="$PROJECT_DIR$/../XiangXiTests1/obj/Debug/XiangXiTests1.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/TempPE/gen.Analysis.html.dll" afterPath="$PROJECT_DIR$/obj/Debug/TempPE/gen.Analysis.html.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/TempPE/gen.PageListHTML.html.dll" afterPath="$PROJECT_DIR$/obj/Debug/TempPE/gen.PageListHTML.html.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/TempPE/gen.PageListJS.html.dll" afterPath="$PROJECT_DIR$/obj/Debug/TempPE/gen.PageListJS.html.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/TempPE/gen.PageOneHTML.html.dll" afterPath="$PROJECT_DIR$/obj/Debug/TempPE/gen.PageOneHTML.html.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/TempPE/gen.PageOneJS.html.dll" afterPath="$PROJECT_DIR$/obj/Debug/TempPE/gen.PageOneJS.html.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/TempPE/gen.SearchFormModel.cs.dll" afterPath="$PROJECT_DIR$/obj/Debug/TempPE/gen.SearchFormModel.cs.dll" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Access.html" afterPath="$PROJECT_DIR$/gen/Access.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Access.js" afterPath="$PROJECT_DIR$/gen/Access.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AccessList.html" afterPath="$PROJECT_DIR$/gen/AccessList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AccessList.js" afterPath="$PROJECT_DIR$/gen/AccessList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AccessRecord.html" afterPath="$PROJECT_DIR$/gen/AccessRecord.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AccessRecord.js" afterPath="$PROJECT_DIR$/gen/AccessRecord.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AccessRecordList.html" afterPath="$PROJECT_DIR$/gen/AccessRecordList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AccessRecordList.js" afterPath="$PROJECT_DIR$/gen/AccessRecordList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ActiveInspection.html" afterPath="$PROJECT_DIR$/gen/ActiveInspection.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ActiveInspection.js" afterPath="$PROJECT_DIR$/gen/ActiveInspection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ActiveInspectionList.html" afterPath="$PROJECT_DIR$/gen/ActiveInspectionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ActiveInspectionList.js" afterPath="$PROJECT_DIR$/gen/ActiveInspectionList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ActivityInformation.html" afterPath="$PROJECT_DIR$/gen/ActivityInformation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ActivityInformation.js" afterPath="$PROJECT_DIR$/gen/ActivityInformation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ActivityInformationList.html" afterPath="$PROJECT_DIR$/gen/ActivityInformationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ActivityInformationList.js" afterPath="$PROJECT_DIR$/gen/ActivityInformationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Advise.html" afterPath="$PROJECT_DIR$/gen/Advise.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Advise.js" afterPath="$PROJECT_DIR$/gen/Advise.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AdviseList.html" afterPath="$PROJECT_DIR$/gen/AdviseList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AdviseList.js" afterPath="$PROJECT_DIR$/gen/AdviseList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AllLists.html" afterPath="$PROJECT_DIR$/gen/AllLists.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AllLists.js" afterPath="$PROJECT_DIR$/gen/AllLists.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AllListsList.html" afterPath="$PROJECT_DIR$/gen/AllListsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AllListsList.js" afterPath="$PROJECT_DIR$/gen/AllListsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationFormForSocialManagementServicesRetireesInWuzhongDistrict.html" afterPath="$PROJECT_DIR$/gen/ApplicationFormForSocialManagementServicesRetireesInWuzhongDistrict.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationFormForSocialManagementServicesRetireesInWuzhongDistrict.js" afterPath="$PROJECT_DIR$/gen/ApplicationFormForSocialManagementServicesRetireesInWuzhongDistrict.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationFormForSocialManagementServicesRetireesInWuzhongDistrictList.html" afterPath="$PROJECT_DIR$/gen/ApplicationFormForSocialManagementServicesRetireesInWuzhongDistrictList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationFormForSocialManagementServicesRetireesInWuzhongDistrictList.js" afterPath="$PROJECT_DIR$/gen/ApplicationFormForSocialManagementServicesRetireesInWuzhongDistrictList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationListForIdentificationOfEmploymentDifficulties.html" afterPath="$PROJECT_DIR$/gen/ApplicationListForIdentificationOfEmploymentDifficulties.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationListForIdentificationOfEmploymentDifficulties.js" afterPath="$PROJECT_DIR$/gen/ApplicationListForIdentificationOfEmploymentDifficulties.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationListForIdentificationOfEmploymentDifficultiesList.html" afterPath="$PROJECT_DIR$/gen/ApplicationListForIdentificationOfEmploymentDifficultiesList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationListForIdentificationOfEmploymentDifficultiesList.js" afterPath="$PROJECT_DIR$/gen/ApplicationListForIdentificationOfEmploymentDifficultiesList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationListOfFlexibleEmploymentSocialInsuranceAllowance.html" afterPath="$PROJECT_DIR$/gen/ApplicationListOfFlexibleEmploymentSocialInsuranceAllowance.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationListOfFlexibleEmploymentSocialInsuranceAllowance.js" afterPath="$PROJECT_DIR$/gen/ApplicationListOfFlexibleEmploymentSocialInsuranceAllowance.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationListOfFlexibleEmploymentSocialInsuranceAllowanceList.html" afterPath="$PROJECT_DIR$/gen/ApplicationListOfFlexibleEmploymentSocialInsuranceAllowanceList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ApplicationListOfFlexibleEmploymentSocialInsuranceAllowanceList.js" afterPath="$PROJECT_DIR$/gen/ApplicationListOfFlexibleEmploymentSocialInsuranceAllowanceList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AwardList2018.html" afterPath="$PROJECT_DIR$/gen/AwardList2018.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AwardList2018.js" afterPath="$PROJECT_DIR$/gen/AwardList2018.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AwardList2018List.html" afterPath="$PROJECT_DIR$/gen/AwardList2018List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/AwardList2018List.js" afterPath="$PROJECT_DIR$/gen/AwardList2018List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BeautifulCountryside.html" afterPath="$PROJECT_DIR$/gen/BeautifulCountryside.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BeautifulCountryside.js" afterPath="$PROJECT_DIR$/gen/BeautifulCountryside.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BeautifulCountrysideList.html" afterPath="$PROJECT_DIR$/gen/BeautifulCountrysideList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BeautifulCountrysideList.js" afterPath="$PROJECT_DIR$/gen/BeautifulCountrysideList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BeautifulVillageConstruction.html" afterPath="$PROJECT_DIR$/gen/BeautifulVillageConstruction.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BeautifulVillageConstruction.js" afterPath="$PROJECT_DIR$/gen/BeautifulVillageConstruction.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BeautifulVillageConstructionList.html" afterPath="$PROJECT_DIR$/gen/BeautifulVillageConstructionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BeautifulVillageConstructionList.js" afterPath="$PROJECT_DIR$/gen/BeautifulVillageConstructionList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BonusRecord.html" afterPath="$PROJECT_DIR$/gen/BonusRecord.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BonusRecord.js" afterPath="$PROJECT_DIR$/gen/BonusRecord.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BonusRecordList.html" afterPath="$PROJECT_DIR$/gen/BonusRecordList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BonusRecordList.js" afterPath="$PROJECT_DIR$/gen/BonusRecordList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Bourgeois.html" afterPath="$PROJECT_DIR$/gen/Bourgeois.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Bourgeois.js" afterPath="$PROJECT_DIR$/gen/Bourgeois.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BourgeoisList.html" afterPath="$PROJECT_DIR$/gen/BourgeoisList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BourgeoisList.js" afterPath="$PROJECT_DIR$/gen/BourgeoisList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Building.html" afterPath="$PROJECT_DIR$/gen/Building.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Building.js" afterPath="$PROJECT_DIR$/gen/Building.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BuildingList.html" afterPath="$PROJECT_DIR$/gen/BuildingList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BuildingList.js" afterPath="$PROJECT_DIR$/gen/BuildingList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BuildingaCleanAndHonestPartyStyle.html" afterPath="$PROJECT_DIR$/gen/BuildingaCleanAndHonestPartyStyle.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BuildingaCleanAndHonestPartyStyle.js" afterPath="$PROJECT_DIR$/gen/BuildingaCleanAndHonestPartyStyle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BuildingaCleanAndHonestPartyStyleList.html" afterPath="$PROJECT_DIR$/gen/BuildingaCleanAndHonestPartyStyleList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BuildingaCleanAndHonestPartyStyleList.js" afterPath="$PROJECT_DIR$/gen/BuildingaCleanAndHonestPartyStyleList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BusinessManagement.html" afterPath="$PROJECT_DIR$/gen/BusinessManagement.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BusinessManagement.js" afterPath="$PROJECT_DIR$/gen/BusinessManagement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BusinessManagementList.html" afterPath="$PROJECT_DIR$/gen/BusinessManagementList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BusinessManagementList.js" afterPath="$PROJECT_DIR$/gen/BusinessManagementList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BusinessReservation.html" afterPath="$PROJECT_DIR$/gen/BusinessReservation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BusinessReservation.js" afterPath="$PROJECT_DIR$/gen/BusinessReservation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BusinessReservationList.html" afterPath="$PROJECT_DIR$/gen/BusinessReservationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/BusinessReservationList.js" afterPath="$PROJECT_DIR$/gen/BusinessReservationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Cadre.html" afterPath="$PROJECT_DIR$/gen/Cadre.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Cadre.js" afterPath="$PROJECT_DIR$/gen/Cadre.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CadreList.html" afterPath="$PROJECT_DIR$/gen/CadreList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CadreList.js" afterPath="$PROJECT_DIR$/gen/CadreList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ChildrensMedicalInsurancePaymentList.html" afterPath="$PROJECT_DIR$/gen/ChildrensMedicalInsurancePaymentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ChildrensMedicalInsurancePaymentList.js" afterPath="$PROJECT_DIR$/gen/ChildrensMedicalInsurancePaymentList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ChildrensMedicalInsurancePaymentListList.html" afterPath="$PROJECT_DIR$/gen/ChildrensMedicalInsurancePaymentListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ChildrensMedicalInsurancePaymentListList.js" afterPath="$PROJECT_DIR$/gen/ChildrensMedicalInsurancePaymentListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CivilianLife.html" afterPath="$PROJECT_DIR$/gen/CivilianLife.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CivilianLife.js" afterPath="$PROJECT_DIR$/gen/CivilianLife.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CivilianLifeList.html" afterPath="$PROJECT_DIR$/gen/CivilianLifeList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CivilianLifeList.js" afterPath="$PROJECT_DIR$/gen/CivilianLifeList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ClaimsForUnemploymentPay.html" afterPath="$PROJECT_DIR$/gen/ClaimsForUnemploymentPay.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ClaimsForUnemploymentPay.js" afterPath="$PROJECT_DIR$/gen/ClaimsForUnemploymentPay.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ClaimsForUnemploymentPayList.html" afterPath="$PROJECT_DIR$/gen/ClaimsForUnemploymentPayList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ClaimsForUnemploymentPayList.js" afterPath="$PROJECT_DIR$/gen/ClaimsForUnemploymentPayList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CollectionOfInformationOnUniversalParticipationInInsurance.html" afterPath="$PROJECT_DIR$/gen/CollectionOfInformationOnUniversalParticipationInInsurance.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CollectionOfInformationOnUniversalParticipationInInsurance.js" afterPath="$PROJECT_DIR$/gen/CollectionOfInformationOnUniversalParticipationInInsurance.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CollectionOfInformationOnUniversalParticipationInInsuranceList.html" afterPath="$PROJECT_DIR$/gen/CollectionOfInformationOnUniversalParticipationInInsuranceList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CollectionOfInformationOnUniversalParticipationInInsuranceList.js" afterPath="$PROJECT_DIR$/gen/CollectionOfInformationOnUniversalParticipationInInsuranceList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ContractManagement.html" afterPath="$PROJECT_DIR$/gen/ContractManagement.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ContractManagement.js" afterPath="$PROJECT_DIR$/gen/ContractManagement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ContractManagementList.html" afterPath="$PROJECT_DIR$/gen/ContractManagementList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ContractManagementList.js" afterPath="$PROJECT_DIR$/gen/ContractManagementList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CriticalHousingCrisis.html" afterPath="$PROJECT_DIR$/gen/CriticalHousingCrisis.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CriticalHousingCrisis.js" afterPath="$PROJECT_DIR$/gen/CriticalHousingCrisis.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CriticalHousingCrisisList.html" afterPath="$PROJECT_DIR$/gen/CriticalHousingCrisisList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/CriticalHousingCrisisList.js" afterPath="$PROJECT_DIR$/gen/CriticalHousingCrisisList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiENtities/EF/DefaultContext.tt" afterPath="$PROJECT_DIR$/../XiangXiENtities/EF/DefaultContext.tt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiENtities/EF/DefaultContext1.cs" afterPath="$PROJECT_DIR$/../XiangXiENtities/EF/DefaultContext1.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DemandCollection.html" afterPath="$PROJECT_DIR$/gen/DemandCollection.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DemandCollection.js" afterPath="$PROJECT_DIR$/gen/DemandCollection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DemandCollectionList.html" afterPath="$PROJECT_DIR$/gen/DemandCollectionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DemandCollectionList.js" afterPath="$PROJECT_DIR$/gen/DemandCollectionList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsAndRenewalOfOnlineTransactions.html" afterPath="$PROJECT_DIR$/gen/DetailsAndRenewalOfOnlineTransactions.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsAndRenewalOfOnlineTransactions.js" afterPath="$PROJECT_DIR$/gen/DetailsAndRenewalOfOnlineTransactions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsAndRenewalOfOnlineTransactionsList.html" afterPath="$PROJECT_DIR$/gen/DetailsAndRenewalOfOnlineTransactionsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsAndRenewalOfOnlineTransactionsList.js" afterPath="$PROJECT_DIR$/gen/DetailsAndRenewalOfOnlineTransactionsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfMedicaidSubsidyForFarmersInXiangxiCounty.html" afterPath="$PROJECT_DIR$/gen/DetailsOfMedicaidSubsidyForFarmersInXiangxiCounty.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfMedicaidSubsidyForFarmersInXiangxiCounty.js" afterPath="$PROJECT_DIR$/gen/DetailsOfMedicaidSubsidyForFarmersInXiangxiCounty.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfMedicaidSubsidyForFarmersInXiangxiCountyList.html" afterPath="$PROJECT_DIR$/gen/DetailsOfMedicaidSubsidyForFarmersInXiangxiCountyList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfMedicaidSubsidyForFarmersInXiangxiCountyList.js" afterPath="$PROJECT_DIR$/gen/DetailsOfMedicaidSubsidyForFarmersInXiangxiCountyList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment.html" afterPath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment.js" afterPath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment2018.html" afterPath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment2018.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment2018.js" afterPath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment2018.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment2018List.html" afterPath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment2018List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment2018List.js" afterPath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatment2018List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatmentList.html" afterPath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatmentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatmentList.js" afterPath="$PROJECT_DIR$/gen/DetailsOfPreferentialTreatmentList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfServiceObjects2018.html" afterPath="$PROJECT_DIR$/gen/DetailsOfServiceObjects2018.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfServiceObjects2018.js" afterPath="$PROJECT_DIR$/gen/DetailsOfServiceObjects2018.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfServiceObjects2018List.html" afterPath="$PROJECT_DIR$/gen/DetailsOfServiceObjects2018List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DetailsOfServiceObjects2018List.js" afterPath="$PROJECT_DIR$/gen/DetailsOfServiceObjects2018List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DividendsIn.html" afterPath="$PROJECT_DIR$/gen/DividendsIn.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DividendsIn.js" afterPath="$PROJECT_DIR$/gen/DividendsIn.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DividendsInList.html" afterPath="$PROJECT_DIR$/gen/DividendsInList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DividendsInList.js" afterPath="$PROJECT_DIR$/gen/DividendsInList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DocumentManagement.html" afterPath="$PROJECT_DIR$/gen/DocumentManagement.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DocumentManagement.js" afterPath="$PROJECT_DIR$/gen/DocumentManagement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DocumentManagementList.html" afterPath="$PROJECT_DIR$/gen/DocumentManagementList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DocumentManagementList.js" afterPath="$PROJECT_DIR$/gen/DocumentManagementList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DongShan1.txt" afterPath="$PROJECT_DIR$/gen/DongShan1.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DrawWaterUpaHill.html" afterPath="$PROJECT_DIR$/gen/DrawWaterUpaHill.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DrawWaterUpaHill.js" afterPath="$PROJECT_DIR$/gen/DrawWaterUpaHill.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DrawWaterUpaHillList.html" afterPath="$PROJECT_DIR$/gen/DrawWaterUpaHillList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/DrawWaterUpaHillList.js" afterPath="$PROJECT_DIR$/gen/DrawWaterUpaHillList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EdgeDetails2018.html" afterPath="$PROJECT_DIR$/gen/EdgeDetails2018.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EdgeDetails2018.js" afterPath="$PROJECT_DIR$/gen/EdgeDetails2018.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EdgeDetails2018List.html" afterPath="$PROJECT_DIR$/gen/EdgeDetails2018List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EdgeDetails2018List.js" afterPath="$PROJECT_DIR$/gen/EdgeDetails2018List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EmploymentAssistance.html" afterPath="$PROJECT_DIR$/gen/EmploymentAssistance.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EmploymentAssistance.js" afterPath="$PROJECT_DIR$/gen/EmploymentAssistance.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EmploymentAssistanceList.html" afterPath="$PROJECT_DIR$/gen/EmploymentAssistanceList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EmploymentAssistanceList.js" afterPath="$PROJECT_DIR$/gen/EmploymentAssistanceList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EmploymentModule.html" afterPath="$PROJECT_DIR$/gen/EmploymentModule.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EmploymentModule.js" afterPath="$PROJECT_DIR$/gen/EmploymentModule.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EmploymentModuleList.html" afterPath="$PROJECT_DIR$/gen/EmploymentModuleList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EmploymentModuleList.js" afterPath="$PROJECT_DIR$/gen/EmploymentModuleList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Establishment.html" afterPath="$PROJECT_DIR$/gen/Establishment.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Establishment.js" afterPath="$PROJECT_DIR$/gen/Establishment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EstablishmentList.html" afterPath="$PROJECT_DIR$/gen/EstablishmentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/EstablishmentList.js" afterPath="$PROJECT_DIR$/gen/EstablishmentList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Evaluators/EvaluatorGen.cs" afterPath="$PROJECT_DIR$/Evaluators/EvaluatorGen.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ExcellentPartyBranch.html" afterPath="$PROJECT_DIR$/gen/ExcellentPartyBranch.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ExcellentPartyBranch.js" afterPath="$PROJECT_DIR$/gen/ExcellentPartyBranch.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ExcellentPartyBranchList.html" afterPath="$PROJECT_DIR$/gen/ExcellentPartyBranchList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ExcellentPartyBranchList.js" afterPath="$PROJECT_DIR$/gen/ExcellentPartyBranchList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ExpertManagement.html" afterPath="$PROJECT_DIR$/gen/ExpertManagement.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ExpertManagement.js" afterPath="$PROJECT_DIR$/gen/ExpertManagement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ExpertManagementList.html" afterPath="$PROJECT_DIR$/gen/ExpertManagementList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ExpertManagementList.js" afterPath="$PROJECT_DIR$/gen/ExpertManagementList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Family.html" afterPath="$PROJECT_DIR$/gen/Family.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Family.js" afterPath="$PROJECT_DIR$/gen/Family.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FamilyList.html" afterPath="$PROJECT_DIR$/gen/FamilyList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FamilyList.js" afterPath="$PROJECT_DIR$/gen/FamilyList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FeaturesOfXiangxi.html" afterPath="$PROJECT_DIR$/gen/FeaturesOfXiangxi.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FeaturesOfXiangxi.js" afterPath="$PROJECT_DIR$/gen/FeaturesOfXiangxi.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FeaturesOfXiangxiList.html" afterPath="$PROJECT_DIR$/gen/FeaturesOfXiangxiList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FeaturesOfXiangxiList.js" afterPath="$PROJECT_DIR$/gen/FeaturesOfXiangxiList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FirstOrderGrid.html" afterPath="$PROJECT_DIR$/gen/FirstOrderGrid.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FirstOrderGrid.js" afterPath="$PROJECT_DIR$/gen/FirstOrderGrid.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FirstOrderGridList.html" afterPath="$PROJECT_DIR$/gen/FirstOrderGridList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FirstOrderGridList.js" afterPath="$PROJECT_DIR$/gen/FirstOrderGridList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FisheryAdministration.html" afterPath="$PROJECT_DIR$/gen/FisheryAdministration.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FisheryAdministration.js" afterPath="$PROJECT_DIR$/gen/FisheryAdministration.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FisheryAdministrationList.html" afterPath="$PROJECT_DIR$/gen/FisheryAdministrationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FisheryAdministrationList.js" afterPath="$PROJECT_DIR$/gen/FisheryAdministrationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FreeSkillsTrainingRoster.html" afterPath="$PROJECT_DIR$/gen/FreeSkillsTrainingRoster.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FreeSkillsTrainingRoster.js" afterPath="$PROJECT_DIR$/gen/FreeSkillsTrainingRoster.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FreeSkillsTrainingRosterList.html" afterPath="$PROJECT_DIR$/gen/FreeSkillsTrainingRosterList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/FreeSkillsTrainingRosterList.js" afterPath="$PROJECT_DIR$/gen/FreeSkillsTrainingRosterList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GroupList.html" afterPath="$PROJECT_DIR$/gen/GroupList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GroupList.js" afterPath="$PROJECT_DIR$/gen/GroupList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GroupListList.html" afterPath="$PROJECT_DIR$/gen/GroupListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GroupListList.js" afterPath="$PROJECT_DIR$/gen/GroupListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GuideToAffairs.html" afterPath="$PROJECT_DIR$/gen/GuideToAffairs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GuideToAffairs.js" afterPath="$PROJECT_DIR$/gen/GuideToAffairs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GuideToAffairsList.html" afterPath="$PROJECT_DIR$/gen/GuideToAffairsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GuideToAffairsList.js" afterPath="$PROJECT_DIR$/gen/GuideToAffairsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GuideToPartyAffairs.html" afterPath="$PROJECT_DIR$/gen/GuideToPartyAffairs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GuideToPartyAffairs.js" afterPath="$PROJECT_DIR$/gen/GuideToPartyAffairs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GuideToPartyAffairsList.html" afterPath="$PROJECT_DIR$/gen/GuideToPartyAffairsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/GuideToPartyAffairsList.js" afterPath="$PROJECT_DIR$/gen/GuideToPartyAffairsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HouseProperty.html" afterPath="$PROJECT_DIR$/gen/HouseProperty.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HouseProperty.js" afterPath="$PROJECT_DIR$/gen/HouseProperty.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HousePropertyList.html" afterPath="$PROJECT_DIR$/gen/HousePropertyList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HousePropertyList.js" afterPath="$PROJECT_DIR$/gen/HousePropertyList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HydroelectricCoalPendingPersonnel.html" afterPath="$PROJECT_DIR$/gen/HydroelectricCoalPendingPersonnel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HydroelectricCoalPendingPersonnel.js" afterPath="$PROJECT_DIR$/gen/HydroelectricCoalPendingPersonnel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HydroelectricCoalPendingPersonnelList.html" afterPath="$PROJECT_DIR$/gen/HydroelectricCoalPendingPersonnelList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HydroelectricCoalPendingPersonnelList.js" afterPath="$PROJECT_DIR$/gen/HydroelectricCoalPendingPersonnelList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HydropowerCoalPaymentRecord.html" afterPath="$PROJECT_DIR$/gen/HydropowerCoalPaymentRecord.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HydropowerCoalPaymentRecord.js" afterPath="$PROJECT_DIR$/gen/HydropowerCoalPaymentRecord.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HydropowerCoalPaymentRecordList.html" afterPath="$PROJECT_DIR$/gen/HydropowerCoalPaymentRecordList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/HydropowerCoalPaymentRecordList.js" afterPath="$PROJECT_DIR$/gen/HydropowerCoalPaymentRecordList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ImplementationOfResponsibilitySupervision.html" afterPath="$PROJECT_DIR$/gen/ImplementationOfResponsibilitySupervision.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ImplementationOfResponsibilitySupervision.js" afterPath="$PROJECT_DIR$/gen/ImplementationOfResponsibilitySupervision.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ImplementationOfResponsibilitySupervisionList.html" afterPath="$PROJECT_DIR$/gen/ImplementationOfResponsibilitySupervisionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ImplementationOfResponsibilitySupervisionList.js" afterPath="$PROJECT_DIR$/gen/ImplementationOfResponsibilitySupervisionList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ImportProc.svc.cs" afterPath="$PROJECT_DIR$/gen/ImportProc.svc.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InTheXiangxiCommunitySpringFestivalCondolencesTo.html" afterPath="$PROJECT_DIR$/gen/InTheXiangxiCommunitySpringFestivalCondolencesTo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InTheXiangxiCommunitySpringFestivalCondolencesTo.js" afterPath="$PROJECT_DIR$/gen/InTheXiangxiCommunitySpringFestivalCondolencesTo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InTheXiangxiCommunitySpringFestivalCondolencesToList.html" afterPath="$PROJECT_DIR$/gen/InTheXiangxiCommunitySpringFestivalCondolencesToList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InTheXiangxiCommunitySpringFestivalCondolencesToList.js" afterPath="$PROJECT_DIR$/gen/InTheXiangxiCommunitySpringFestivalCondolencesToList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/IndustrialParkHousingReceipts.html" afterPath="$PROJECT_DIR$/gen/IndustrialParkHousingReceipts.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/IndustrialParkHousingReceipts.js" afterPath="$PROJECT_DIR$/gen/IndustrialParkHousingReceipts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/IndustrialParkHousingReceiptsList.html" afterPath="$PROJECT_DIR$/gen/IndustrialParkHousingReceiptsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/IndustrialParkHousingReceiptsList.js" afterPath="$PROJECT_DIR$/gen/IndustrialParkHousingReceiptsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InformationManagementOfPartyMembers.html" afterPath="$PROJECT_DIR$/gen/InformationManagementOfPartyMembers.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InformationManagementOfPartyMembers.js" afterPath="$PROJECT_DIR$/gen/InformationManagementOfPartyMembers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InformationManagementOfPartyMembersList.html" afterPath="$PROJECT_DIR$/gen/InformationManagementOfPartyMembersList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InformationManagementOfPartyMembersList.js" afterPath="$PROJECT_DIR$/gen/InformationManagementOfPartyMembersList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InformationManagementOfPartyOrganization.html" afterPath="$PROJECT_DIR$/gen/InformationManagementOfPartyOrganization.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InformationManagementOfPartyOrganization.js" afterPath="$PROJECT_DIR$/gen/InformationManagementOfPartyOrganization.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InformationManagementOfPartyOrganizationList.html" afterPath="$PROJECT_DIR$/gen/InformationManagementOfPartyOrganizationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/InformationManagementOfPartyOrganizationList.js" afterPath="$PROJECT_DIR$/gen/InformationManagementOfPartyOrganizationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/KeyPersonnel.html" afterPath="$PROJECT_DIR$/gen/KeyPersonnel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/KeyPersonnel.js" afterPath="$PROJECT_DIR$/gen/KeyPersonnel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/KeyPersonnelList.html" afterPath="$PROJECT_DIR$/gen/KeyPersonnelList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/KeyPersonnelList.js" afterPath="$PROJECT_DIR$/gen/KeyPersonnelList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LabourUnion.html" afterPath="$PROJECT_DIR$/gen/LabourUnion.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LabourUnion.js" afterPath="$PROJECT_DIR$/gen/LabourUnion.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LabourUnionList.html" afterPath="$PROJECT_DIR$/gen/LabourUnionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LabourUnionList.js" afterPath="$PROJECT_DIR$/gen/LabourUnionList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Leaflet.html" afterPath="$PROJECT_DIR$/gen/Leaflet.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Leaflet.js" afterPath="$PROJECT_DIR$/gen/Leaflet.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LeafletList.html" afterPath="$PROJECT_DIR$/gen/LeafletList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LeafletList.js" afterPath="$PROJECT_DIR$/gen/LeafletList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LetterAndVisit.html" afterPath="$PROJECT_DIR$/gen/LetterAndVisit.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LetterAndVisit.js" afterPath="$PROJECT_DIR$/gen/LetterAndVisit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LetterAndVisitList.html" afterPath="$PROJECT_DIR$/gen/LetterAndVisitList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LetterAndVisitList.js" afterPath="$PROJECT_DIR$/gen/LetterAndVisitList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/List.html" afterPath="$PROJECT_DIR$/gen/List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/List.js" afterPath="$PROJECT_DIR$/gen/List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListList.html" afterPath="$PROJECT_DIR$/gen/ListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListList.js" afterPath="$PROJECT_DIR$/gen/ListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfAccreditedPlacesIn2018.html" afterPath="$PROJECT_DIR$/gen/ListOfAccreditedPlacesIn2018.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfAccreditedPlacesIn2018.js" afterPath="$PROJECT_DIR$/gen/ListOfAccreditedPlacesIn2018.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfAccreditedPlacesIn2018List.html" afterPath="$PROJECT_DIR$/gen/ListOfAccreditedPlacesIn2018List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfAccreditedPlacesIn2018List.js" afterPath="$PROJECT_DIR$/gen/ListOfAccreditedPlacesIn2018List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfActiveServicemen.html" afterPath="$PROJECT_DIR$/gen/ListOfActiveServicemen.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfActiveServicemen.js" afterPath="$PROJECT_DIR$/gen/ListOfActiveServicemen.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfActiveServicemenList.html" afterPath="$PROJECT_DIR$/gen/ListOfActiveServicemenList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfActiveServicemenList.js" afterPath="$PROJECT_DIR$/gen/ListOfActiveServicemenList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfRecruits.html" afterPath="$PROJECT_DIR$/gen/ListOfRecruits.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfRecruits.js" afterPath="$PROJECT_DIR$/gen/ListOfRecruits.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfRecruitsList.html" afterPath="$PROJECT_DIR$/gen/ListOfRecruitsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ListOfRecruitsList.js" afterPath="$PROJECT_DIR$/gen/ListOfRecruitsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LogonRecord.html" afterPath="$PROJECT_DIR$/gen/LogonRecord.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LogonRecord.js" afterPath="$PROJECT_DIR$/gen/LogonRecord.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LogonRecordList.html" afterPath="$PROJECT_DIR$/gen/LogonRecordList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LogonRecordList.js" afterPath="$PROJECT_DIR$/gen/LogonRecordList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LongitudeAndLatitudeCollection.html" afterPath="$PROJECT_DIR$/gen/LongitudeAndLatitudeCollection.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LongitudeAndLatitudeCollection.js" afterPath="$PROJECT_DIR$/gen/LongitudeAndLatitudeCollection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LongitudeAndLatitudeCollectionList.html" afterPath="$PROJECT_DIR$/gen/LongitudeAndLatitudeCollectionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/LongitudeAndLatitudeCollectionList.js" afterPath="$PROJECT_DIR$/gen/LongitudeAndLatitudeCollectionList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MailList.html" afterPath="$PROJECT_DIR$/gen/MailList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MailList.js" afterPath="$PROJECT_DIR$/gen/MailList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MailListList.html" afterPath="$PROJECT_DIR$/gen/MailListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MailListList.js" afterPath="$PROJECT_DIR$/gen/MailListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiENtities/CodeTemplates/Manager.ttinclude" afterPath="$PROJECT_DIR$/../XiangXiENtities/CodeTemplates/Manager.ttinclude" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MembershipDuesPaymentManagement.html" afterPath="$PROJECT_DIR$/gen/MembershipDuesPaymentManagement.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MembershipDuesPaymentManagement.js" afterPath="$PROJECT_DIR$/gen/MembershipDuesPaymentManagement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MembershipDuesPaymentManagementList.html" afterPath="$PROJECT_DIR$/gen/MembershipDuesPaymentManagementList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MembershipDuesPaymentManagementList.js" afterPath="$PROJECT_DIR$/gen/MembershipDuesPaymentManagementList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MenuConfiguration.html" afterPath="$PROJECT_DIR$/gen/MenuConfiguration.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MenuConfiguration.js" afterPath="$PROJECT_DIR$/gen/MenuConfiguration.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MenuConfigurationList.html" afterPath="$PROJECT_DIR$/gen/MenuConfigurationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MenuConfigurationList.js" afterPath="$PROJECT_DIR$/gen/MenuConfigurationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Militia.html" afterPath="$PROJECT_DIR$/gen/Militia.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Militia.js" afterPath="$PROJECT_DIR$/gen/Militia.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MilitiaList.html" afterPath="$PROJECT_DIR$/gen/MilitiaList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MilitiaList.js" afterPath="$PROJECT_DIR$/gen/MilitiaList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MinimumAssuranceDetails2018.html" afterPath="$PROJECT_DIR$/gen/MinimumAssuranceDetails2018.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MinimumAssuranceDetails2018.js" afterPath="$PROJECT_DIR$/gen/MinimumAssuranceDetails2018.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MinimumAssuranceDetails2018List.html" afterPath="$PROJECT_DIR$/gen/MinimumAssuranceDetails2018List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MinimumAssuranceDetails2018List.js" afterPath="$PROJECT_DIR$/gen/MinimumAssuranceDetails2018List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MuslimFoodSubsidies.html" afterPath="$PROJECT_DIR$/gen/MuslimFoodSubsidies.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MuslimFoodSubsidies.js" afterPath="$PROJECT_DIR$/gen/MuslimFoodSubsidies.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MuslimFoodSubsidiesList.html" afterPath="$PROJECT_DIR$/gen/MuslimFoodSubsidiesList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/MuslimFoodSubsidiesList.js" afterPath="$PROJECT_DIR$/gen/MuslimFoodSubsidiesList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/NameOfTheNewborn.html" afterPath="$PROJECT_DIR$/gen/NameOfTheNewborn.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/NameOfTheNewborn.js" afterPath="$PROJECT_DIR$/gen/NameOfTheNewborn.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/NameOfTheNewbornList.html" afterPath="$PROJECT_DIR$/gen/NameOfTheNewbornList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/NameOfTheNewbornList.js" afterPath="$PROJECT_DIR$/gen/NameOfTheNewbornList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionAssetInformation.html" afterPath="$PROJECT_DIR$/gen/OnlineTransactionAssetInformation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionAssetInformation.js" afterPath="$PROJECT_DIR$/gen/OnlineTransactionAssetInformation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionAssetInformationList.html" afterPath="$PROJECT_DIR$/gen/OnlineTransactionAssetInformationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionAssetInformationList.js" afterPath="$PROJECT_DIR$/gen/OnlineTransactionAssetInformationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionLeasingInformation.html" afterPath="$PROJECT_DIR$/gen/OnlineTransactionLeasingInformation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionLeasingInformation.js" afterPath="$PROJECT_DIR$/gen/OnlineTransactionLeasingInformation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionLeasingInformationList.html" afterPath="$PROJECT_DIR$/gen/OnlineTransactionLeasingInformationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionLeasingInformationList.js" afterPath="$PROJECT_DIR$/gen/OnlineTransactionLeasingInformationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionRenewalUnit.html" afterPath="$PROJECT_DIR$/gen/OnlineTransactionRenewalUnit.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionRenewalUnit.js" afterPath="$PROJECT_DIR$/gen/OnlineTransactionRenewalUnit.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionRenewalUnitList.html" afterPath="$PROJECT_DIR$/gen/OnlineTransactionRenewalUnitList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/OnlineTransactionRenewalUnitList.js" afterPath="$PROJECT_DIR$/gen/OnlineTransactionRenewalUnitList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/POI.html" afterPath="$PROJECT_DIR$/gen/POI.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/POI.js" afterPath="$PROJECT_DIR$/gen/POI.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/POIList.html" afterPath="$PROJECT_DIR$/gen/POIList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/POIList.js" afterPath="$PROJECT_DIR$/gen/POIList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PageOneJS.html" afterPath="$PROJECT_DIR$/gen/PageOneJS.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuilding.html" afterPath="$PROJECT_DIR$/gen/PartyBuilding.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuilding.js" afterPath="$PROJECT_DIR$/gen/PartyBuilding.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingActivities.html" afterPath="$PROJECT_DIR$/gen/PartyBuildingActivities.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingActivities.js" afterPath="$PROJECT_DIR$/gen/PartyBuildingActivities.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingActivitiesList.html" afterPath="$PROJECT_DIR$/gen/PartyBuildingActivitiesList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingActivitiesList.js" afterPath="$PROJECT_DIR$/gen/PartyBuildingActivitiesList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingList.html" afterPath="$PROJECT_DIR$/gen/PartyBuildingList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingList.js" afterPath="$PROJECT_DIR$/gen/PartyBuildingList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingProject.html" afterPath="$PROJECT_DIR$/gen/PartyBuildingProject.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingProject.js" afterPath="$PROJECT_DIR$/gen/PartyBuildingProject.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingProjectList.html" afterPath="$PROJECT_DIR$/gen/PartyBuildingProjectList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyBuildingProjectList.js" afterPath="$PROJECT_DIR$/gen/PartyBuildingProjectList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyFeeManagement.html" afterPath="$PROJECT_DIR$/gen/PartyFeeManagement.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyFeeManagement.js" afterPath="$PROJECT_DIR$/gen/PartyFeeManagement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyFeeManagementList.html" afterPath="$PROJECT_DIR$/gen/PartyFeeManagementList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyFeeManagementList.js" afterPath="$PROJECT_DIR$/gen/PartyFeeManagementList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyGroupFormation.html" afterPath="$PROJECT_DIR$/gen/PartyGroupFormation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyGroupFormation.js" afterPath="$PROJECT_DIR$/gen/PartyGroupFormation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyGroupFormationList.html" afterPath="$PROJECT_DIR$/gen/PartyGroupFormationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyGroupFormationList.js" afterPath="$PROJECT_DIR$/gen/PartyGroupFormationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyMembersActivities.html" afterPath="$PROJECT_DIR$/gen/PartyMembersActivities.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyMembersActivities.js" afterPath="$PROJECT_DIR$/gen/PartyMembersActivities.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyMembersActivitiesList.html" afterPath="$PROJECT_DIR$/gen/PartyMembersActivitiesList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyMembersActivitiesList.js" afterPath="$PROJECT_DIR$/gen/PartyMembersActivitiesList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyNewsManagement.html" afterPath="$PROJECT_DIR$/gen/PartyNewsManagement.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyNewsManagement.js" afterPath="$PROJECT_DIR$/gen/PartyNewsManagement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyNewsManagementList.html" afterPath="$PROJECT_DIR$/gen/PartyNewsManagementList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PartyNewsManagementList.js" afterPath="$PROJECT_DIR$/gen/PartyNewsManagementList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Pat.html" afterPath="$PROJECT_DIR$/gen/Pat.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Pat.js" afterPath="$PROJECT_DIR$/gen/Pat.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PatList.html" afterPath="$PROJECT_DIR$/gen/PatList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PatList.js" afterPath="$PROJECT_DIR$/gen/PatList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PersonalInformation.html" afterPath="$PROJECT_DIR$/gen/PersonalInformation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PersonalInformation.js" afterPath="$PROJECT_DIR$/gen/PersonalInformation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PersonalInformationList.html" afterPath="$PROJECT_DIR$/gen/PersonalInformationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PersonalInformationList.js" afterPath="$PROJECT_DIR$/gen/PersonalInformationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PolicyDocument.html" afterPath="$PROJECT_DIR$/gen/PolicyDocument.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PolicyDocument.js" afterPath="$PROJECT_DIR$/gen/PolicyDocument.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PolicyDocumentCategory.html" afterPath="$PROJECT_DIR$/gen/PolicyDocumentCategory.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PolicyDocumentCategory.js" afterPath="$PROJECT_DIR$/gen/PolicyDocumentCategory.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PolicyDocumentCategoryList.html" afterPath="$PROJECT_DIR$/gen/PolicyDocumentCategoryList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PolicyDocumentCategoryList.js" afterPath="$PROJECT_DIR$/gen/PolicyDocumentCategoryList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PolicyDocumentList.html" afterPath="$PROJECT_DIR$/gen/PolicyDocumentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PolicyDocumentList.js" afterPath="$PROJECT_DIR$/gen/PolicyDocumentList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Population.html" afterPath="$PROJECT_DIR$/gen/Population.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Population.js" afterPath="$PROJECT_DIR$/gen/Population.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PopulationList.html" afterPath="$PROJECT_DIR$/gen/PopulationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/PopulationList.js" afterPath="$PROJECT_DIR$/gen/PopulationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ProblemSolvingOfSuzhouVillage.html" afterPath="$PROJECT_DIR$/gen/ProblemSolvingOfSuzhouVillage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ProblemSolvingOfSuzhouVillage.js" afterPath="$PROJECT_DIR$/gen/ProblemSolvingOfSuzhouVillage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ProblemSolvingOfSuzhouVillageList.html" afterPath="$PROJECT_DIR$/gen/ProblemSolvingOfSuzhouVillageList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ProblemSolvingOfSuzhouVillageList.js" afterPath="$PROJECT_DIR$/gen/ProblemSolvingOfSuzhouVillageList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/QualificationCertification.html" afterPath="$PROJECT_DIR$/gen/QualificationCertification.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/QualificationCertification.js" afterPath="$PROJECT_DIR$/gen/QualificationCertification.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/QualificationCertificationList.html" afterPath="$PROJECT_DIR$/gen/QualificationCertificationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/QualificationCertificationList.js" afterPath="$PROJECT_DIR$/gen/QualificationCertificationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecommendedTreatment.html" afterPath="$PROJECT_DIR$/gen/RecommendedTreatment.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecommendedTreatment.js" afterPath="$PROJECT_DIR$/gen/RecommendedTreatment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecommendedTreatmentList.html" afterPath="$PROJECT_DIR$/gen/RecommendedTreatmentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecommendedTreatmentList.js" afterPath="$PROJECT_DIR$/gen/RecommendedTreatmentList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecordOfElectricityPayment.html" afterPath="$PROJECT_DIR$/gen/RecordOfElectricityPayment.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecordOfElectricityPayment.js" afterPath="$PROJECT_DIR$/gen/RecordOfElectricityPayment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecordOfElectricityPaymentList.html" afterPath="$PROJECT_DIR$/gen/RecordOfElectricityPaymentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecordOfElectricityPaymentList.js" afterPath="$PROJECT_DIR$/gen/RecordOfElectricityPaymentList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecordingLectures.html" afterPath="$PROJECT_DIR$/gen/RecordingLectures.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecordingLectures.js" afterPath="$PROJECT_DIR$/gen/RecordingLectures.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecordingLecturesList.html" afterPath="$PROJECT_DIR$/gen/RecordingLecturesList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RecordingLecturesList.js" afterPath="$PROJECT_DIR$/gen/RecordingLecturesList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RegisterOfUnemploymentRegistration.html" afterPath="$PROJECT_DIR$/gen/RegisterOfUnemploymentRegistration.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RegisterOfUnemploymentRegistration.js" afterPath="$PROJECT_DIR$/gen/RegisterOfUnemploymentRegistration.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RegisterOfUnemploymentRegistrationList.html" afterPath="$PROJECT_DIR$/gen/RegisterOfUnemploymentRegistrationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RegisterOfUnemploymentRegistrationList.js" afterPath="$PROJECT_DIR$/gen/RegisterOfUnemploymentRegistrationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ReimbursementList.html" afterPath="$PROJECT_DIR$/gen/ReimbursementList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ReimbursementList.js" afterPath="$PROJECT_DIR$/gen/ReimbursementList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ReimbursementListList.html" afterPath="$PROJECT_DIR$/gen/ReimbursementListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ReimbursementListList.js" afterPath="$PROJECT_DIR$/gen/ReimbursementListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RentRecord.html" afterPath="$PROJECT_DIR$/gen/RentRecord.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RentRecord.js" afterPath="$PROJECT_DIR$/gen/RentRecord.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RentRecordList.html" afterPath="$PROJECT_DIR$/gen/RentRecordList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RentRecordList.js" afterPath="$PROJECT_DIR$/gen/RentRecordList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ResidentsMedicalInsurancePaymentList.html" afterPath="$PROJECT_DIR$/gen/ResidentsMedicalInsurancePaymentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ResidentsMedicalInsurancePaymentList.js" afterPath="$PROJECT_DIR$/gen/ResidentsMedicalInsurancePaymentList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ResidentsMedicalInsurancePaymentListList.html" afterPath="$PROJECT_DIR$/gen/ResidentsMedicalInsurancePaymentListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ResidentsMedicalInsurancePaymentListList.js" afterPath="$PROJECT_DIR$/gen/ResidentsMedicalInsurancePaymentListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RetireTwoAnd.html" afterPath="$PROJECT_DIR$/gen/RetireTwoAnd.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RetireTwoAnd.js" afterPath="$PROJECT_DIR$/gen/RetireTwoAnd.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RetireTwoAndList.html" afterPath="$PROJECT_DIR$/gen/RetireTwoAndList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RetireTwoAndList.js" afterPath="$PROJECT_DIR$/gen/RetireTwoAndList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RoleConfiguration.html" afterPath="$PROJECT_DIR$/gen/RoleConfiguration.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RoleConfiguration.js" afterPath="$PROJECT_DIR$/gen/RoleConfiguration.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RoleConfigurationList.html" afterPath="$PROJECT_DIR$/gen/RoleConfigurationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RoleConfigurationList.js" afterPath="$PROJECT_DIR$/gen/RoleConfigurationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RoleMenu.html" afterPath="$PROJECT_DIR$/gen/RoleMenu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RoleMenu.js" afterPath="$PROJECT_DIR$/gen/RoleMenu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RoleMenuList.html" afterPath="$PROJECT_DIR$/gen/RoleMenuList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RoleMenuList.js" afterPath="$PROJECT_DIR$/gen/RoleMenuList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RuralMedicalTreatment.html" afterPath="$PROJECT_DIR$/gen/RuralMedicalTreatment.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RuralMedicalTreatment.js" afterPath="$PROJECT_DIR$/gen/RuralMedicalTreatment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RuralMedicalTreatmentList.html" afterPath="$PROJECT_DIR$/gen/RuralMedicalTreatmentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/RuralMedicalTreatmentList.js" afterPath="$PROJECT_DIR$/gen/RuralMedicalTreatmentList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SafetyProduction.html" afterPath="$PROJECT_DIR$/gen/SafetyProduction.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SafetyProduction.js" afterPath="$PROJECT_DIR$/gen/SafetyProduction.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SafetyProductionList.html" afterPath="$PROJECT_DIR$/gen/SafetyProductionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SafetyProductionList.js" afterPath="$PROJECT_DIR$/gen/SafetyProductionList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ScheduleManagement.html" afterPath="$PROJECT_DIR$/gen/ScheduleManagement.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ScheduleManagement.js" afterPath="$PROJECT_DIR$/gen/ScheduleManagement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ScheduleManagementList.html" afterPath="$PROJECT_DIR$/gen/ScheduleManagementList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ScheduleManagementList.js" afterPath="$PROJECT_DIR$/gen/ScheduleManagementList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ScheduleWork.html" afterPath="$PROJECT_DIR$/gen/ScheduleWork.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ScheduleWork.js" afterPath="$PROJECT_DIR$/gen/ScheduleWork.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ScheduleWorkList.html" afterPath="$PROJECT_DIR$/gen/ScheduleWorkList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ScheduleWorkList.js" afterPath="$PROJECT_DIR$/gen/ScheduleWorkList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SearchFormModel.cs" afterPath="$PROJECT_DIR$/gen/SearchFormModel.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SecurityCheck.html" afterPath="$PROJECT_DIR$/gen/SecurityCheck.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SecurityCheck.js" afterPath="$PROJECT_DIR$/gen/SecurityCheck.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SecurityCheckList.html" afterPath="$PROJECT_DIR$/gen/SecurityCheckList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SecurityCheckList.js" afterPath="$PROJECT_DIR$/gen/SecurityCheckList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Service.html" afterPath="$PROJECT_DIR$/gen/Service.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Service.js" afterPath="$PROJECT_DIR$/gen/Service.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ServiceList.html" afterPath="$PROJECT_DIR$/gen/ServiceList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ServiceList.js" afterPath="$PROJECT_DIR$/gen/ServiceList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ServiceReservation.html" afterPath="$PROJECT_DIR$/gen/ServiceReservation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ServiceReservation.js" afterPath="$PROJECT_DIR$/gen/ServiceReservation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ServiceReservationList.html" afterPath="$PROJECT_DIR$/gen/ServiceReservationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ServiceReservationList.js" afterPath="$PROJECT_DIR$/gen/ServiceReservationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SetData/obj/Debug/SetData.csproj.CoreCompileInputs.cache" afterPath="$PROJECT_DIR$/../SetData/obj/Debug/SetData.csproj.CoreCompileInputs.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SocialConditionsAndPublicOpinions.html" afterPath="$PROJECT_DIR$/gen/SocialConditionsAndPublicOpinions.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SocialConditionsAndPublicOpinions.js" afterPath="$PROJECT_DIR$/gen/SocialConditionsAndPublicOpinions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SocialConditionsAndPublicOpinionsList.html" afterPath="$PROJECT_DIR$/gen/SocialConditionsAndPublicOpinionsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SocialConditionsAndPublicOpinionsList.js" afterPath="$PROJECT_DIR$/gen/SocialConditionsAndPublicOpinionsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SpecialWork.html" afterPath="$PROJECT_DIR$/gen/SpecialWork.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SpecialWork.js" afterPath="$PROJECT_DIR$/gen/SpecialWork.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SpecialWorkList.html" afterPath="$PROJECT_DIR$/gen/SpecialWorkList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SpecialWorkList.js" afterPath="$PROJECT_DIR$/gen/SpecialWorkList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Staff.html" afterPath="$PROJECT_DIR$/gen/Staff.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/Staff.js" afterPath="$PROJECT_DIR$/gen/Staff.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/StaffList.html" afterPath="$PROJECT_DIR$/gen/StaffList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/StaffList.js" afterPath="$PROJECT_DIR$/gen/StaffList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SuggestionRecord.html" afterPath="$PROJECT_DIR$/gen/SuggestionRecord.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SuggestionRecord.js" afterPath="$PROJECT_DIR$/gen/SuggestionRecord.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SuggestionRecordList.html" afterPath="$PROJECT_DIR$/gen/SuggestionRecordList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SuggestionRecordList.js" afterPath="$PROJECT_DIR$/gen/SuggestionRecordList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SummaryOfXiangxiCommunityEldersApplication.html" afterPath="$PROJECT_DIR$/gen/SummaryOfXiangxiCommunityEldersApplication.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SummaryOfXiangxiCommunityEldersApplication.js" afterPath="$PROJECT_DIR$/gen/SummaryOfXiangxiCommunityEldersApplication.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SummaryOfXiangxiCommunityEldersApplicationList.html" afterPath="$PROJECT_DIR$/gen/SummaryOfXiangxiCommunityEldersApplicationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SummaryOfXiangxiCommunityEldersApplicationList.js" afterPath="$PROJECT_DIR$/gen/SummaryOfXiangxiCommunityEldersApplicationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SystemConfiguration.html" afterPath="$PROJECT_DIR$/gen/SystemConfiguration.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SystemConfiguration.js" afterPath="$PROJECT_DIR$/gen/SystemConfiguration.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SystemConfigurationList.html" afterPath="$PROJECT_DIR$/gen/SystemConfigurationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/SystemConfigurationList.js" afterPath="$PROJECT_DIR$/gen/SystemConfigurationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheCommunistYouthLeague.html" afterPath="$PROJECT_DIR$/gen/TheCommunistYouthLeague.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheCommunistYouthLeague.js" afterPath="$PROJECT_DIR$/gen/TheCommunistYouthLeague.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheCommunistYouthLeagueList.html" afterPath="$PROJECT_DIR$/gen/TheCommunistYouthLeagueList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheCommunistYouthLeagueList.js" afterPath="$PROJECT_DIR$/gen/TheCommunistYouthLeagueList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheObjectOfCare.html" afterPath="$PROJECT_DIR$/gen/TheObjectOfCare.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheObjectOfCare.js" afterPath="$PROJECT_DIR$/gen/TheObjectOfCare.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheObjectOfCareList.html" afterPath="$PROJECT_DIR$/gen/TheObjectOfCareList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheObjectOfCareList.js" afterPath="$PROJECT_DIR$/gen/TheObjectOfCareList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheStudyOfPartyStyleAndCleanGovernment.html" afterPath="$PROJECT_DIR$/gen/TheStudyOfPartyStyleAndCleanGovernment.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheStudyOfPartyStyleAndCleanGovernment.js" afterPath="$PROJECT_DIR$/gen/TheStudyOfPartyStyleAndCleanGovernment.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheStudyOfPartyStyleAndCleanGovernmentList.html" afterPath="$PROJECT_DIR$/gen/TheStudyOfPartyStyleAndCleanGovernmentList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheStudyOfPartyStyleAndCleanGovernmentList.js" afterPath="$PROJECT_DIR$/gen/TheStudyOfPartyStyleAndCleanGovernmentList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheTownOfXiangduShuduIsBeing.html" afterPath="$PROJECT_DIR$/gen/TheTownOfXiangduShuduIsBeing.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheTownOfXiangduShuduIsBeing.js" afterPath="$PROJECT_DIR$/gen/TheTownOfXiangduShuduIsBeing.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheTownOfXiangduShuduIsBeingList.html" afterPath="$PROJECT_DIR$/gen/TheTownOfXiangduShuduIsBeingList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TheTownOfXiangduShuduIsBeingList.js" afterPath="$PROJECT_DIR$/gen/TheTownOfXiangduShuduIsBeingList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThematicStudy.html" afterPath="$PROJECT_DIR$/gen/ThematicStudy.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThematicStudy.js" afterPath="$PROJECT_DIR$/gen/ThematicStudy.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThematicStudyList.html" afterPath="$PROJECT_DIR$/gen/ThematicStudyList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThematicStudyList.js" afterPath="$PROJECT_DIR$/gen/ThematicStudyList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeProductionAndOthers.html" afterPath="$PROJECT_DIR$/gen/ThreeProductionAndOthers.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeProductionAndOthers.js" afterPath="$PROJECT_DIR$/gen/ThreeProductionAndOthers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeProductionAndOthersList.html" afterPath="$PROJECT_DIR$/gen/ThreeProductionAndOthersList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeProductionAndOthersList.js" afterPath="$PROJECT_DIR$/gen/ThreeProductionAndOthersList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeSessions.html" afterPath="$PROJECT_DIR$/gen/ThreeSessions.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeSessions.js" afterPath="$PROJECT_DIR$/gen/ThreeSessions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeSessionsList.html" afterPath="$PROJECT_DIR$/gen/ThreeSessionsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeSessionsList.js" afterPath="$PROJECT_DIR$/gen/ThreeSessionsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeStageGrid.html" afterPath="$PROJECT_DIR$/gen/ThreeStageGrid.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeStageGrid.js" afterPath="$PROJECT_DIR$/gen/ThreeStageGrid.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeStageGridList.html" afterPath="$PROJECT_DIR$/gen/ThreeStageGridList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/ThreeStageGridList.js" afterPath="$PROJECT_DIR$/gen/ThreeStageGridList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TwoCategoriesOfPersonnel.html" afterPath="$PROJECT_DIR$/gen/TwoCategoriesOfPersonnel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TwoCategoriesOfPersonnel.js" afterPath="$PROJECT_DIR$/gen/TwoCategoriesOfPersonnel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TwoCategoriesOfPersonnelList.html" afterPath="$PROJECT_DIR$/gen/TwoCategoriesOfPersonnelList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TwoCategoriesOfPersonnelList.js" afterPath="$PROJECT_DIR$/gen/TwoCategoriesOfPersonnelList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TwoStageGrid.html" afterPath="$PROJECT_DIR$/gen/TwoStageGrid.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TwoStageGrid.js" afterPath="$PROJECT_DIR$/gen/TwoStageGrid.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TwoStageGridList.html" afterPath="$PROJECT_DIR$/gen/TwoStageGridList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/TwoStageGridList.js" afterPath="$PROJECT_DIR$/gen/TwoStageGridList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnionMembers.html" afterPath="$PROJECT_DIR$/gen/UnionMembers.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnionMembers.js" afterPath="$PROJECT_DIR$/gen/UnionMembers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnionMembersList.html" afterPath="$PROJECT_DIR$/gen/UnionMembersList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnionMembersList.js" afterPath="$PROJECT_DIR$/gen/UnionMembersList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnitedFrontMilitia.html" afterPath="$PROJECT_DIR$/gen/UnitedFrontMilitia.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnitedFrontMilitia.js" afterPath="$PROJECT_DIR$/gen/UnitedFrontMilitia.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnitedFrontMilitiaList.html" afterPath="$PROJECT_DIR$/gen/UnitedFrontMilitiaList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnitedFrontMilitiaList.js" afterPath="$PROJECT_DIR$/gen/UnitedFrontMilitiaList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnitedFrontObjectDetails.html" afterPath="$PROJECT_DIR$/gen/UnitedFrontObjectDetails.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnitedFrontObjectDetails.js" afterPath="$PROJECT_DIR$/gen/UnitedFrontObjectDetails.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnitedFrontObjectDetailsList.html" afterPath="$PROJECT_DIR$/gen/UnitedFrontObjectDetailsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UnitedFrontObjectDetailsList.js" afterPath="$PROJECT_DIR$/gen/UnitedFrontObjectDetailsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UniversityStudentSubscriptionList.html" afterPath="$PROJECT_DIR$/gen/UniversityStudentSubscriptionList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UniversityStudentSubscriptionList.js" afterPath="$PROJECT_DIR$/gen/UniversityStudentSubscriptionList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UniversityStudentSubscriptionListList.html" afterPath="$PROJECT_DIR$/gen/UniversityStudentSubscriptionListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UniversityStudentSubscriptionListList.js" afterPath="$PROJECT_DIR$/gen/UniversityStudentSubscriptionListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserInformation.html" afterPath="$PROJECT_DIR$/gen/UserInformation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserInformation.js" afterPath="$PROJECT_DIR$/gen/UserInformation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserInformationList.html" afterPath="$PROJECT_DIR$/gen/UserInformationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserInformationList.js" afterPath="$PROJECT_DIR$/gen/UserInformationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserMenu.html" afterPath="$PROJECT_DIR$/gen/UserMenu.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserMenu.js" afterPath="$PROJECT_DIR$/gen/UserMenu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserMenuList.html" afterPath="$PROJECT_DIR$/gen/UserMenuList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserMenuList.js" afterPath="$PROJECT_DIR$/gen/UserMenuList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserRole.html" afterPath="$PROJECT_DIR$/gen/UserRole.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserRole.js" afterPath="$PROJECT_DIR$/gen/UserRole.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserRoleList.html" afterPath="$PROJECT_DIR$/gen/UserRoleList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/UserRoleList.js" afterPath="$PROJECT_DIR$/gen/UserRoleList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VenusVillageCoOrdinateMedicalInsuranceSubsidyDetails.html" afterPath="$PROJECT_DIR$/gen/VenusVillageCoOrdinateMedicalInsuranceSubsidyDetails.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VenusVillageCoOrdinateMedicalInsuranceSubsidyDetails.js" afterPath="$PROJECT_DIR$/gen/VenusVillageCoOrdinateMedicalInsuranceSubsidyDetails.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VenusVillageCoOrdinateMedicalInsuranceSubsidyDetailsList.html" afterPath="$PROJECT_DIR$/gen/VenusVillageCoOrdinateMedicalInsuranceSubsidyDetailsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VenusVillageCoOrdinateMedicalInsuranceSubsidyDetailsList.js" afterPath="$PROJECT_DIR$/gen/VenusVillageCoOrdinateMedicalInsuranceSubsidyDetailsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VideoPointBitInformation.html" afterPath="$PROJECT_DIR$/gen/VideoPointBitInformation.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VideoPointBitInformation.js" afterPath="$PROJECT_DIR$/gen/VideoPointBitInformation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VideoPointBitInformationList.html" afterPath="$PROJECT_DIR$/gen/VideoPointBitInformationList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VideoPointBitInformationList.js" afterPath="$PROJECT_DIR$/gen/VideoPointBitInformationList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VillageHistory.html" afterPath="$PROJECT_DIR$/gen/VillageHistory.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VillageHistory.js" afterPath="$PROJECT_DIR$/gen/VillageHistory.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VillageHistoryList.html" afterPath="$PROJECT_DIR$/gen/VillageHistoryList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VillageHistoryList.js" afterPath="$PROJECT_DIR$/gen/VillageHistoryList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VisitingListOfNewRetireesInXiangxiCommunity.html" afterPath="$PROJECT_DIR$/gen/VisitingListOfNewRetireesInXiangxiCommunity.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VisitingListOfNewRetireesInXiangxiCommunity.js" afterPath="$PROJECT_DIR$/gen/VisitingListOfNewRetireesInXiangxiCommunity.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VisitingListOfNewRetireesInXiangxiCommunityList.html" afterPath="$PROJECT_DIR$/gen/VisitingListOfNewRetireesInXiangxiCommunityList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/VisitingListOfNewRetireesInXiangxiCommunityList.js" afterPath="$PROJECT_DIR$/gen/VisitingListOfNewRetireesInXiangxiCommunityList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WelfareGrant.html" afterPath="$PROJECT_DIR$/gen/WelfareGrant.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WelfareGrant.js" afterPath="$PROJECT_DIR$/gen/WelfareGrant.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WelfareGrantList.html" afterPath="$PROJECT_DIR$/gen/WelfareGrantList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WelfareGrantList.js" afterPath="$PROJECT_DIR$/gen/WelfareGrantList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WomensFederationExecutiveCommitteeList.html" afterPath="$PROJECT_DIR$/gen/WomensFederationExecutiveCommitteeList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WomensFederationExecutiveCommitteeList.js" afterPath="$PROJECT_DIR$/gen/WomensFederationExecutiveCommitteeList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WomensFederationExecutiveCommitteeListList.html" afterPath="$PROJECT_DIR$/gen/WomensFederationExecutiveCommitteeListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WomensFederationExecutiveCommitteeListList.js" afterPath="$PROJECT_DIR$/gen/WomensFederationExecutiveCommitteeListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WorkLog.html" afterPath="$PROJECT_DIR$/gen/WorkLog.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WorkLog.js" afterPath="$PROJECT_DIR$/gen/WorkLog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WorkLogList.html" afterPath="$PROJECT_DIR$/gen/WorkLogList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WorkLogList.js" afterPath="$PROJECT_DIR$/gen/WorkLogList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WorkingPaper.html" afterPath="$PROJECT_DIR$/gen/WorkingPaper.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WorkingPaper.js" afterPath="$PROJECT_DIR$/gen/WorkingPaper.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WorkingPaperList.html" afterPath="$PROJECT_DIR$/gen/WorkingPaperList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/WorkingPaperList.js" afterPath="$PROJECT_DIR$/gen/WorkingPaperList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/obj/Debug/XiangXi.csproj.CoreCompileInputs.cache" afterPath="$PROJECT_DIR$/obj/Debug/XiangXi.csproj.CoreCompileInputs.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/XiangXi.iml" afterPath="$PROJECT_DIR$/.idea/XiangXi.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangXiDocument.txt" afterPath="$PROJECT_DIR$/gen/XiangXiDocument.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiENtities/obj/Debug/XiangXiENtities.csproj.CoreCompileInputs.cache" afterPath="$PROJECT_DIR$/../XiangXiENtities/obj/Debug/XiangXiENtities.csproj.CoreCompileInputs.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../XiangXiTests1/obj/Debug/XiangXiTests1.csproj.CoreCompileInputs.cache" afterPath="$PROJECT_DIR$/../XiangXiTests1/obj/Debug/XiangXiTests1.csproj.CoreCompileInputs.cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityDisabilityList2018.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityDisabilityList2018.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityDisabilityList2018.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityDisabilityList2018.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityDisabilityList2018List.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityDisabilityList2018List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityDisabilityList2018List.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityDisabilityList2018List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySpringFestivalCondolencesToPovertyStrickenFamiliesInUrbanAndRuralElderlySurveySummaryForm2018.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySpringFestivalCondolencesToPovertyStrickenFamiliesInUrbanAndRuralElderlySurveySummaryForm2018.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySpringFestivalCondolencesToPovertyStrickenFamiliesInUrbanAndRuralElderlySurveySummaryForm2018.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySpringFestivalCondolencesToPovertyStrickenFamiliesInUrbanAndRuralElderlySurveySummaryForm2018.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySpringFestivalCondolencesToPovertyStrickenFamiliesInUrbanAndRuralElderlySurveySummaryForm2018List.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySpringFestivalCondolencesToPovertyStrickenFamiliesInUrbanAndRuralElderlySurveySummaryForm2018List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySpringFestivalCondolencesToPovertyStrickenFamiliesInUrbanAndRuralElderlySurveySummaryForm2018List.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySpringFestivalCondolencesToPovertyStrickenFamiliesInUrbanAndRuralElderlySurveySummaryForm2018List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList2018.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList2018.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList2018.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList2018.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList2018List.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList2018List.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList2018List.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesList2018List.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesListList.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesListList.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunitySummerSentCoolCondolencesListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsMedicalInsuranceTwoSubsidyDetails.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsMedicalInsuranceTwoSubsidyDetails.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsMedicalInsuranceTwoSubsidyDetails.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsMedicalInsuranceTwoSubsidyDetails.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsMedicalInsuranceTwoSubsidyDetailsList.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsMedicalInsuranceTwoSubsidyDetailsList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsMedicalInsuranceTwoSubsidyDetailsList.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsMedicalInsuranceTwoSubsidyDetailsList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsPensionInsuranceApplicationFuneralFeeList.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsPensionInsuranceApplicationFuneralFeeList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsPensionInsuranceApplicationFuneralFeeList.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsPensionInsuranceApplicationFuneralFeeList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsPensionInsuranceApplicationFuneralFeeListList.html" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsPensionInsuranceApplicationFuneralFeeListList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsPensionInsuranceApplicationFuneralFeeListList.js" afterPath="$PROJECT_DIR$/gen/XiangxiCommunityUrbanAndRuralResidentsPensionInsuranceApplicationFuneralFeeListList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/aGuideToTheConvenienceOfPeople.html" afterPath="$PROJECT_DIR$/gen/aGuideToTheConvenienceOfPeople.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/aGuideToTheConvenienceOfPeople.js" afterPath="$PROJECT_DIR$/gen/aGuideToTheConvenienceOfPeople.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/aGuideToTheConvenienceOfPeopleList.html" afterPath="$PROJECT_DIR$/gen/aGuideToTheConvenienceOfPeopleList.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/aGuideToTheConvenienceOfPeopleList.js" afterPath="$PROJECT_DIR$/gen/aGuideToTheConvenienceOfPeopleList.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="XiangXi" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="BusinessReservationList.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gen/BusinessReservationList.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="120" column="7" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/1_index/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+              <folding>
+                <marker date="1541069590945" expanded="true" signature="1362:1378" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cmodules.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/0-common/cmodules.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <marker date="1541064805540" expanded="true" signature="4725:6327" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="4743:5029" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="4766:5018" placeholder="..." />
+                <marker date="1541064805540" expanded="false" signature="4816:4996" placeholder="..." />
+                <marker date="1541064805540" expanded="false" signature="5075:5159" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="5180:6320" placeholder="..." />
+                <marker date="1541064805540" expanded="false" signature="5211:5227" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="5228:6309" placeholder="..." />
+                <marker date="1541064805540" expanded="false" signature="5302:5345" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="5346:6294" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="5384:5580" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="5506:5558" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="5644:5929" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="5749:5907" placeholder="..." />
+                <marker date="1541064805540" expanded="false" signature="5958:5989" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="5990:6276" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="6037:6254" placeholder="..." />
+                <marker date="1541064805540" expanded="false" signature="6075:6092" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="6093:6229" placeholder="..." />
+                <marker date="1541064805540" expanded="false" signature="6172:6197" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="7629:7833" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="7933:8129" placeholder="..." />
+                <marker date="1541064805540" expanded="true" signature="15268:15280" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/0-common/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="45" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new-index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/js/2-index/new-index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.53289473">
+              <caret line="391" column="59" selection-start-line="391" selection-start-column="59" selection-end-line="391" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="points.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/3-map/points.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="14" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <marker date="1540952251367" expanded="true" signature="379:391" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="515:530" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="614:633" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="649:664" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="869:888" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="904:919" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="1098:1117" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="1133:1148" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="3474:3486" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="3610:3625" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="3709:3728" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="3744:3759" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="3964:3983" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="3999:4014" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="4193:4212" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="4228:4243" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="5026:5038" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="5162:5177" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="5261:5280" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="5296:5311" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="5516:5535" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="5551:5566" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="5745:5764" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="5780:5795" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="6556:6568" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="6690:6705" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="6788:6807" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="6823:6838" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="7542:7554" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="7676:7691" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="7774:7793" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="7809:7824" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="8469:8481" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="8603:8618" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="8701:8720" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="8736:8751" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="9554:9566" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="9688:9703" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="9785:9804" placeholder="..." />
+                <marker date="1540952251367" expanded="true" signature="9820:9835" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pageonecss.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/css/pageonecss.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="business.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/1_index/business.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="business.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/2-index/business.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="80" column="69" selection-start-line="80" selection-start-column="69" selection-end-line="80" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+        <option value="Html5" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>专项工作</find>
+      <find>svcHeader</find>
+      <find>metation</find>
+      <find>&quot;https://unpkg.com/element-ui/lib/index.js&quot;</find>
+      <find>app</find>
+      <find>map.</find>
+      <find>qq_03.png</find>
+      <find>container</find>
+      <find>collapseFour</find>
+      <find>map_btn-population</find>
+      <find>start</find>
+      <find>添加标记</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/assets/js/1-login/login.js" />
+        <option value="$PROJECT_DIR$/4_login/login.html" />
+        <option value="$PROJECT_DIR$/assets/js/app.js" />
+        <option value="$PROJECT_DIR$/assets/js/0-common/userrole.js" />
+        <option value="$PROJECT_DIR$/assets/js/0-common/menurole.js" />
+        <option value="$PROJECT_DIR$/0_common/menurole.html" />
+        <option value="$PROJECT_DIR$/assets/js/0-common/initfakedmap.js" />
+        <option value="$PROJECT_DIR$/gen/MenuConfiguration.html" />
+        <option value="$PROJECT_DIR$/gen/SYS_CodeList.html" />
+        <option value="$PROJECT_DIR$/gen/SYS_Code.html" />
+        <option value="$PROJECT_DIR$/assets/css/0-common/common.css" />
+        <option value="$PROJECT_DIR$/assets/css/2-index/business.css" />
+        <option value="$PROJECT_DIR$/assets/css/0-common/bootstrap.min.css" />
+        <option value="$PROJECT_DIR$/1_index/business2.html" />
+        <option value="$PROJECT_DIR$/assets/css/common.css" />
+        <option value="$PROJECT_DIR$/1_index/business_modules.html" />
+        <option value="$PROJECT_DIR$/assets/js/0-common/bootstrap.min.js - 副本.txt" />
+        <option value="$PROJECT_DIR$/assets/js/0-common/bootstrap.min.js" />
+        <option value="$PROJECT_DIR$/5_specialwork/SpecialWork.html" />
+        <option value="$PROJECT_DIR$/0_common/playground.html" />
+        <option value="$PROJECT_DIR$/assets/js/bootstrap.js" />
+        <option value="$PROJECT_DIR$/assets/js/0-common/bootstrap.js" />
+        <option value="$PROJECT_DIR$/gen/PopulationList.html" />
+        <option value="localhost/XiangXi/gen/PopulationList.html" />
+        <option value="localhost/XiangXi/assets/js/0-common/jquery.min.js" />
+        <option value="localhost/XiangXi/assets/js/0-common/require.js" />
+        <option value="localhost/XiangXi/assets/js/0-common/bootstrap-table.js" />
+        <option value="chrome-extension://flliilndjeohchalpbbcdekjklbdgfkk/adguard/adguard-content.js" />
+        <option value="localhost/XiangXi/assets/js/0-common/bootstrap-table-export.js" />
+        <option value="localhost/XiangXi/assets/js/0-common/tableExport.js" />
+        <option value="$PROJECT_DIR$/gen/MilitiaList.html" />
+        <option value="localhost/XiangXi/1_index/business.html?data={%22id%22:%22d6b1c802-306f-465a-a468-1fa18bcf2e45%22,%22MCCaption%22:%22%E7%BB%9F%E8%AE%A1%E7%AE%A1%E7%90%86%22,%22MCLink%22:null,%22MCPicture%22:%22/XiangXi/Upload/Image/3b0a56b0-4803-4f5b-8423-88c3b40aff56.png%22,%22MCParentTitle%22:null,%22MCMenuType%22:null,%22MCSequence%22:null,%22VersionNo%22:null,%22TransactionID%22:%2272cb0f48-aba7-4804-bba0-c3e97559d512%22,%22CreateBy%22:%22xiangxi%22,%22CreateOn%22:%222018-05-07T00:00:00%22,%22UpdateBy%22:%22xiangxi%22,%22UpdateOn%22:%222018-05-14T15:35:02.43%22,%22DataLevel%22:null,%22Latitude%22:null,%22Longitude%22:null,%22IsDeleted%22:0}" />
+        <option value="$PROJECT_DIR$/2_map/big_map.html" />
+        <option value="localhost/XiangXi/2_map/full_map.html?data=%7B%22CreateBy%22%3A%22xiangxi%22%2C%22CreateOn%22%3A%22%2FDate(1525708800000%2B0800)%2F%22%2C%22DataLevel%22%3Anull%2C%22IsDeleted%22%3A0%2C%22Latitude%22%3Anull%2C%22Longitude%22%3Anull%2C%22PBuildingNumber%22%3A%221%22%2C%22PChairperson%22%3A%22%E7%94%B7%22%2C%22PDoorNumber%22%3A%221%22%2C%22PForm%22%3A%22%E6%AE%8B%E7%96%BE%E4%BA%BA%22%2C%22PIdNumber%22%3A%22320323193309666666%22%2C%22PName%22%3A%22%E5%BC%A0%E4%B8%89%22%2C%22PPermanentResidence%22%3A%22%E6%B1%9F%E8%8B%8F%E7%9C%81%E8%8B%8F%E5%B7%9E%E5%B8%82%E7%AB%B9%E5%9B%AD%E8%B7%AF209%E5%8F%B7%22%2C%22PRegisteredResidence%22%3A%22%E6%B1%9F%E8%8B%8F%E7%9C%81%E8%8B%8F%E5%B7%9E%E5%B8%82%E7%AB%B9%E5%9B%AD%E8%B7%AF209%E5%8F%B7%22%2C%22PUnitNumber%22%3A%221%22%2C%22Polygon%22%3Anull%2C%22Polyline%22%3Anull%2C%22TransactionID%22%3A%22f758d82f-81f5-4d2b-b325-95461305613a%22%2C%22UpdateBy%22%3A%22xiangxi%22%2C%22UpdateOn%22%3A%22%2FDate(1528353685500%2B0800)%2F%22%2C%22VersionNo%22%3Anull%2C%22id%22%3A%22693b9b45-4033-4256-9278-3b44707ea490%22%2C%22ord%22%3Anull%2C%22address%22%3A%22%E6%B1%9F%E8%8B%8F%E7%9C%81%E8%8B%8F%E5%B7%9E%E5%B8%82%E7%AB%B9%E5%9B%AD%E8%B7%AF209%E5%8F%B7%22%7D" />
+        <option value="vm:1064" />
+        <option value="vm:1065" />
+        <option value="chrome-extension://aapbdbdomjkkjkaonfhkkikfgjllcleb/bubble_compiled.js" />
+        <option value="localhost/XiangXi/2_map/map.html?lnglat=[120.511929,31.252366]&amp;zoom=16" />
+        <option value="$PROJECT_DIR$/2_map/full_map.html" />
+        <option value="$PROJECT_DIR$/2_map/inner_population.html" />
+        <option value="$PROJECT_DIR$/assets/js/0-common/full_map.js" />
+        <option value="$PROJECT_DIR$/gen/BusinessReservationList.html" />
+        <option value="$PROJECT_DIR$/2_map/map.html" />
+        <option value="$PROJECT_DIR$/assets/css/pageonecss.css" />
+        <option value="$PROJECT_DIR$/assets/js/3-map/points.js" />
+        <option value="$PROJECT_DIR$/1_index/business.html" />
+        <option value="$PROJECT_DIR$/assets/js/2-index/business.js" />
+        <option value="$PROJECT_DIR$/1_index/index.html" />
+        <option value="$PROJECT_DIR$/assets/js/0-common/app.js" />
+        <option value="$PROJECT_DIR$/assets/js/0-common/cmodules.js" />
+        <option value="$PROJECT_DIR$/assets/js/2-index/new-index.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/assets/js/0-common/typeahead/node_modules" />
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="22" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XiangXi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XiangXi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XiangXi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XiangXi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XiangXi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XiangXi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XiangXi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XiangXi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="XiangXi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="0-common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.prettier" value="true" />
+    <property name="node.js.path.for.package.prettier" value="project" />
+    <property name="node.js.selected.package.prettier" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="settings.editor.selected.configurable" value="liveEdit" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="recentsLimit" value="5" />
+    <property name="SearchEverywhereHistoryKey" value="baohua&#9;FILE&#9;file://D:/branchs/香溪社区/XiangXi/XiangXi/1_index/baohua_index.html&#10;app.js&#9;FILE&#9;file://D:/branchs/香溪社区/XiangXi/XiangXi/assets/js/0-common/app.js&#10;menuconfiguration&#9;FILE&#9;file://D:/branchs/香溪社区/XiangXi/XiangXi/gen/MenuConfiguration.html&#10;menuconfi&#9;FILE&#9;file://D:/branchs/香溪社区/XiangXi/XiangXi/gen/MenuConfiguration.html" />
+    <property name="JavaScriptLanguageLevel" value="ES6" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\XiangXi\XiangXi\assets\i" />
+      <recent name="E:\XiangXi\XiangXi\menu" />
+      <recent name="E:\XiangXi\XiangXi\2_map" />
+      <recent name="E:\code\XiangXi\XiangXi\assets\js\0-common" />
+      <recent name="E:\code\XiangXi\XiangXi\2_map" />
+      <recent name="E:\code\XiangXi\XiangXi\assets\i" />
+      <recent name="E:\code\XiangXi\XiangXi\assets\js\0-common" />
+      <recent name="E:\code\XiangXi\XiangXi\2_map" />
+      <recent name="E:\code\XiangXi\XiangXi\assets\js" />
+      <recent name="E:\code\XiangXi\XiangXi\5_specialwork" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.business.html">
+    <configuration default="false" name="business.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/XiangXi/1_index/business.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="Pat.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/XiangXi/gen/Pat.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="BusinessReservationList.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/XiangXi/gen/BusinessReservationList.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="playground.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/XiangXi/0_common/playground.html">
+      <method />
+    </configuration>
+    <configuration default="false" name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/XiangXi/1_index/index.html">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <method />
+    </configuration>
+    <configuration default="true" type="FirefoxRemoteDebugType" factoryName="Firefox Remote">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="JsTestDriver-test-runner" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="Chrome" />
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.business.html" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.Pat.html" />
+      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.BusinessReservationList.html" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.playground.html" />
+      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.business.html" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.index.html" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.playground.html" />
+        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.BusinessReservationList.html" />
+        <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.Pat.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="89706bc3-57a0-44a2-b639-0ab0fd284d0b" name="Default" comment="" />
+      <created>1523582751430</created>
+      <option name="number" value="Default" />
+      <updated>1523582751430</updated>
+      <workItem from="1523582753611" duration="2720000" />
+      <workItem from="1524621199565" duration="1081000" />
+      <workItem from="1524622397453" duration="1742000" />
+      <workItem from="1527648187931" duration="1831000" />
+      <workItem from="1527650047069" duration="742000" />
+      <workItem from="1527658293840" duration="1497000" />
+      <workItem from="1527660105402" duration="1783000" />
+      <workItem from="1527661912598" duration="1787000" />
+      <workItem from="1527837242214" duration="13610000" />
+      <workItem from="1527954488380" duration="502000" />
+      <workItem from="1530320283903" duration="1759000" />
+      <workItem from="1530322095126" duration="1784000" />
+      <workItem from="1530324301311" duration="1032000" />
+      <workItem from="1530326886818" duration="599000" />
+      <workItem from="1529386987355" duration="1443000" />
+      <workItem from="1529389655853" duration="1786000" />
+      <workItem from="1529391474521" duration="1788000" />
+      <workItem from="1529393535959" duration="1277000" />
+      <workItem from="1529395370118" duration="1813000" />
+      <workItem from="1529397210603" duration="1784000" />
+      <workItem from="1529399021432" duration="36000" />
+      <workItem from="1529399088090" duration="3062000" />
+    </task>
+    <task id="LOCAL-00001" summary="界面调整&#10;1. 子模块内页去掉文字标注&#10;2. 饼图绘图标题居中&#10;3. 编辑新增内页添加标题，js健壮性&#10;4. 首页js报错处理">
+      <created>1527579306554</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1527579306554</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="45458000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="22" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21302083" sideWeight="0.49224806" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32945284" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3701979" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2575357" sideWeight="0.50775194" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32945284" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282887" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497309" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32945284" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35846993" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32945284" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896176" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282887" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21016411" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497309" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32945284" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="界面调整&#10;1. 子模块内页去掉文字标注&#10;2. 饼图绘图标题居中&#10;3. 编辑新增内页添加标题，js健壮性&#10;4. 首页js报错处理" />
+    <option name="LAST_COMMIT_MESSAGE" value="界面调整&#10;1. 子模块内页去掉文字标注&#10;2. 饼图绘图标题居中&#10;3. 编辑新增内页添加标题，js健壮性&#10;4. 首页js报错处理" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="javascript">
+          <url>file://$PROJECT_DIR$/gen/PopulationList.html</url>
+          <line>109</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/2_map/menuJson.js</url>
+          <line>34</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/2_map/menuJson.js</url>
+          <line>42</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="31" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/1_index/business.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="251" column="21" selection-start-line="251" selection-start-column="21" selection-end-line="251" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/menuJson.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/ContractManagementList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/5_specialwork/SpecialWork.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/zhuanxiang.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1_index/business.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="251" column="21" selection-start-line="251" selection-start-column="21" selection-end-line="251" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/ContractManagementList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/5_specialwork/SpecialWork.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/zhuanxiang.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1_index/business.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="251" column="21" selection-start-line="251" selection-start-column="21" selection-end-line="251" selection-end-column="21" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/ContractManagementList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ImageHandler.ashx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/menuJson.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="373" column="32" selection-start-line="373" selection-start-column="32" selection-end-line="373" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/5_specialwork/SpecialWork.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/ContractManagementList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="46" selection-start-line="53" selection-start-column="46" selection-end-line="53" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/zhuanxiang.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="35" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/menuJson.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/ContractManagementList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/5_specialwork/SpecialWork.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/PopulationList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="13" selection-start-line="70" selection-start-column="13" selection-end-line="70" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/map.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="402" column="88" selection-start-line="402" selection-start-column="70" selection-end-line="402" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/ContractManagementList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/hanfei.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/menuJson.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+          <folding>
+            <element signature="e#21#999#0" expanded="false" />
+            <element signature="e#1381#1544#0" expanded="false" />
+            <element signature="e#1548#3264#0" expanded="false" />
+            <element signature="e#3268#9605#0" expanded="false" />
+            <element signature="e#9609#16585#0" expanded="false" />
+            <element signature="e#16589#25515#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/hanfei.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/menuJson.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+          <folding>
+            <element signature="e#21#999#0" expanded="false" />
+            <element signature="e#1381#1544#0" expanded="false" />
+            <element signature="e#1548#3264#0" expanded="false" />
+            <element signature="e#3268#9605#0" expanded="false" />
+            <element signature="e#9609#16585#0" expanded="false" />
+            <element signature="e#16589#25515#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/5_specialwork/SpecialWork.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/ContractManagementList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="222" column="20" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/menu/jquery.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="http://localhost/XiangXi/2_map/map.html?lnglat=[120.511929,31.252366]&amp;zoom=16">
+      <provider selected="true" editor-type-id="httpFileEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/full_map.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/inner_population.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="102" column="39" selection-start-line="102" selection-start-column="39" selection-end-line="102" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/0-common/full_map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/Pat.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20930232">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/0_common/playground.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.772087">
+          <caret line="32" column="1745242" selection-start-line="32" selection-start-column="14" selection-end-line="32" selection-end-column="1745371" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/2_map/map.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.2394366">
+          <caret line="162" column="37" selection-start-line="162" selection-start-column="37" selection-end-line="162" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/pageonecss.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/BusinessReservationList.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="120" column="7" selection-start-line="120" selection-start-column="7" selection-end-line="120" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/3-map/playground.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33273056">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1_index/business.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#1;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1_index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding>
+            <marker date="1541069590945" expanded="true" signature="1362:1378" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/3-map/points.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="14" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1540952251367" expanded="true" signature="379:391" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="515:530" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="614:633" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="649:664" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="869:888" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="904:919" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="1098:1117" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="1133:1148" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="3474:3486" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="3610:3625" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="3709:3728" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="3744:3759" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="3964:3983" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="3999:4014" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="4193:4212" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="4228:4243" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="5026:5038" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="5162:5177" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="5261:5280" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="5296:5311" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="5516:5535" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="5551:5566" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="5745:5764" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="5780:5795" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="6556:6568" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="6690:6705" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="6788:6807" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="6823:6838" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="7542:7554" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="7676:7691" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="7774:7793" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="7809:7824" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="8469:8481" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="8603:8618" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="8701:8720" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="8736:8751" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="9554:9566" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="9688:9703" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="9785:9804" placeholder="..." />
+            <marker date="1540952251367" expanded="true" signature="9820:9835" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/2-index/business.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="69" selection-start-line="80" selection-start-column="69" selection-end-line="80" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/0-common/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="45" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/0-common/cmodules.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <marker date="1541064805540" expanded="true" signature="4725:6327" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="4743:5029" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="4766:5018" placeholder="..." />
+            <marker date="1541064805540" expanded="false" signature="4816:4996" placeholder="..." />
+            <marker date="1541064805540" expanded="false" signature="5075:5159" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="5180:6320" placeholder="..." />
+            <marker date="1541064805540" expanded="false" signature="5211:5227" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="5228:6309" placeholder="..." />
+            <marker date="1541064805540" expanded="false" signature="5302:5345" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="5346:6294" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="5384:5580" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="5506:5558" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="5644:5929" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="5749:5907" placeholder="..." />
+            <marker date="1541064805540" expanded="false" signature="5958:5989" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="5990:6276" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="6037:6254" placeholder="..." />
+            <marker date="1541064805540" expanded="false" signature="6075:6092" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="6093:6229" placeholder="..." />
+            <marker date="1541064805540" expanded="false" signature="6172:6197" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="7629:7833" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="7933:8129" placeholder="..." />
+            <marker date="1541064805540" expanded="true" signature="15268:15280" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/2-index/new-index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53289473">
+          <caret line="391" column="59" selection-start-line="391" selection-start-column="59" selection-end-line="391" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

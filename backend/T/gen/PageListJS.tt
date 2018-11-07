@@ -1,0 +1,132 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ include file="$(SolutionDir)\TEntities\CodeTemplates\Manager.ttinclude"#>
+<#@ output extension=".html" #>
+<#@ import namespace="TEntities.CodeTemplates" #>
+<#@ assembly name="$(SolutionDir)\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll"#>
+<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+
+<# var manager = Manager.Create(Host, GenerationEnvironment); #>
+
+<#
+var invisible_fields = "详情，上传文件，标题，显示名称，菜单类型，父级标题链接，顺序，图片，，角色名称，菜单标题，登录名，所属组织，昵称，所属部门，电话，用户类型，用户级别，状态头像，密码，照片，登录时间，所在党支部，入党日期，转正日期，工作岗位身份证号，民族，学历，类别，联系电话，家庭住址，月收入，月党费身份证号，年龄，课程名称，课程时间，课程摘要，学习情况身份证号码，日期，主题，类型，参与人员，与会人数，主持人内容，专题内容，文件号，年份，政策文件类别，专文件主题内容，类别名称，描述，联系方式，补贴标准，实发金额身份证号码，备注，访问者，访问菜单ID，文化程度，家庭情况身份证号码，出生年月，户口所在地，政治面貌，户口性质，毕业院校，联系方式身份证号码，序号，籍贯，志愿时间，入团年月备注，事由，目前状态，居住地户籍地，投诉事件，投诉地点，办理结果，所在社区，罪名，家庭住址性别，身份证号码，家庭组织名称，新生儿姓名，死亡证明，居住地，户编号，股权证编号，户主，基本股，应得股份股，户合计股数，配股说明身份证号码，周岁，股份类型，股票占比，发放金额，发放时间，负责人负责人联系方式，干部类型，上级领导，所属支部，劳模身份证号码，民兵类型，所属番号，上级领导身份证号码，工业园名称，楼号，单元号，门牌号，承租户，起止，承租面积，押金，单价，月租金，年租金，租凭单位性质环保手续，建筑面积，开始时间，结束时间，联系人，审批文件，负责人，负责人联系方式，范围，地址，工业园名称,企业名称，付款金额，收款人，收款金额，收款时间，应收款时间负责人电话，收款人电话，企业名称，条线，办理事项，是否完成，完成时间备注，作者，通知发送日期，通知发送对象，摘要内容，内容，作者原件图片，居村委会，住址，楼栋号，出发位置，目的地位置，交通费，住宿费，住勤补贴，公交费，报销日期，所属机构，职位，手机，邮箱，QQ，微信上级领导，发布时间图片，位置，拍照时间，区域，点赞数目用户ID，设备，创建时间，巡检问题，状态用户，业务，服务，受理时间，状态身份证，对象，处理人，处理日期内容，学习对象，学习日期内容，名称，归属，换新日期，是否损坏，分类，子分类，是否生效内容，发布时间内容，缴纳金额，缴纳日期，合同编号，合同名称，项目名称，甲方名称，乙方名称，丙方名称，签署日期签署机构，合同文件上传，上次登录时间电话，头像，地点，结束时间内容，发布时间查看，预览，办事内容，所需材料办事程序，适用范围内容，业务类型，服务类型，申请人，大厅受理时间，经办人，人员编号，免缴种类，免缴号码联系人，身份证，操作，福利类型，发放日期，区域身份证号，被保人id，预约人，预约时间，审核时间，审核登记，活动类型，开始日期，结束日期，电话内容，技术特长，联系电话身份证，访问时间，发布时间，摘要图片，处理日期，菜单项，主标题，副标题，工作主题，状态工作内容，监控点名称，监控点编号，所属区域所属平台，经度，纬度，个人编号，是否残疾，培训意愿，人员类型，就业形式性别，总户数，是否检测，评估户数，测绘户数，交房户数签字户数，每日进展情况，厂房楼栋，需求内容，期望交付时间，党组织名称，组织类别，上级党组织名称，党组织书记，党组织联系人党组织联系电话，党组织书记，常住地，户口所在地身份证，用人单位，职位描述，生效时间，失效时间发布人，职位职责内容，职位要求内容，成员姓名，所属党组织，创建时间身份证号码，活动名称，活动简介，覆盖范围活动照片，月份，标题照片，建设成果，子类别，地址内容，组织名称，上级，成员编号，单位组织机构代码，单位或单位主体的国民经济行业分类代码，单位或单位主体的单位类别，单位地址，单位职工总数人，单位会员数人，工会负责人联系电话工会办公电话，上级工会，本单位已交至苏州银行的会员身份证复印件数量，单位女职工数人，单位女会员数人，单位工会名称，建会时间，工会负责人，入会时间民族，身份证号，手机号码，身份证有效期限，是否从事有毒有害工作是否，员工编号，负责区域，所属条线上级，问题编号，问题类别，问题描述，问题状态，确认时间，处理时间照片，回访时间，渔证编号，持证人姓名，发证日期，下次换证日期，是否有效，职务，性质，资产编号，资产名称，资产类别，会计科目，所属单位，人员姓名，缴费周期日，缴费周期月，缴费周期年身份证，缴费金额，缴费日期，活动编号，活动标题，活动日期，人员类别，村居，所属社区，社保编号，造成生活困难的原因，符合总医疗费用，个人自费，医保自负，乡镇，特扶帐号，现有子女情况，实发金额，始发放日期，申报日期，退出日期家庭地址，出生年份，出生月份，户数，电话号码，每月发放金，应发月份，每月发放金额，应发金额，补发金额，扣除已领农村奖励，村，慰问对象类型，基本情况备注，网格片区编号，网格内职务，所在单位，管理区域，辖区信息性别，职务描述，所在村，刑期，释放时间，解除帮教时间，帮教责任人身份证号码，释放地点，工作单位，所属地区，重新犯罪情况，联络员联系方式，户籍地址，联系电话性别，申请类别，申请日期性别，登记时间身份证号码，缴费类型，缴费金额身份证号码，大户，中户，小户，小小户，个人现金，个人自负，补助金额，银行卡号，补助时间，补助金额身份证号，户籍所在地详细地址，申请日期身份证号，银行卡账号，残疾类型，残疾等级，残疾证号，家庭地址，监护人出生年月，联系电话,身份证号，总费用，二次结报性别，镇区年终医疗救助，医院门诊报销，社区补助，标题内容，附件，交易形式，产业类别，交易面积，拟租期限年，起租日期，到期日期起租价元月，年合同租金元，上次单位租金元月，上次年合同租金元，增长率，保证金万元，租金收缴先缴后用，招租发包、续租说明说明招租方向及要求，规定等，信息发布范围，交易地点，指导价，是否达到指导价，立项日期年月日，交易号，立项申请单位，单位负责人，合同租赁期限，合同起始日期，合同到期日期经办人，经办人联系电话，坐落位置，资产价值万元，所属平台，资产属性，资产来源，起租日期年月日，到期日期年月日，起租价元月，续租单位，上次租金收缴情况，税务注册地，统一社会代码，生产经营地址，员工人数，主营业务，企业性质，审核意见，实际承租方，实际合同租金元，交易日期年月日，实际承租面积，备注1，备注2，备注3，备注4，企业性质身份证号，立项日期，资产来源经办人，组织关系所在单位，加入中共组织日期，进入党支部日期，进入党支部类型性别，教育类别，入学日期，学位，毕业时间，参加工作日期，工作岗位开始时间，工作岗位，一线情况，居民身份证号，加入组织类型，转正情况，是否班子成员，其他党团，其他党团开始时间，新社会阶层人员，是否出国境党员，户口所在派出所，月交纳党费金额，是否流出党员，特长，公民身份证号，月党费，发布时间活动图片，应有股份，金额市民卡号，摘要，子分类附件，编号，报名时间，培训志愿一，培训志愿二，培训志愿三性别，认证日期，居住地址公民身份证，备注老人死亡日期，现居住地地址，走访时间身份证号码，终止类别，发生时间，社区登记时间身份证号码，二次结报身份证号码，镇、区年终医疗救助，村社区，活动内容，申请金额，领取人备注，慰问对象类型基本情况，符合类型，人员类别总医疗费用，监护人姓名公民身份证号码，监护人身份证号，联系电话1，联系电话2，申请人员类别，暂时住址，是否居住本住址，是否外地参保，当前状态，走访日期身份证号码，就业形式，失业登记时间，失业登记类别身份证号码，申请日期身份证号码，地址身份证，退出日期性别，每月发放金1额(元)，应发月份1，每月发放金额2(元)，应发月份2，社保个人编号，顺序性别，居住地址，残疾证号出生年月，监护人，街道乡镇，社区村，户主姓名，救助类别，主要致贫原因，低保证号，家庭总收入，起始保障家庭人口，保障人口，保障金额，客户名称，承租期起始时间，承租期终止时间，年度未收回金额单价，年度收款小计"
+.Split('，');
+var limit_length_fields = "内容，标题".Split('，');
+
+foreach(var table in table_schema)
+{
+	var tbl = table.Key;
+	var drops = table_schema[tbl].Join(dropdowns, col=>col.column_name, drop=>drop.fieldNameEn, (col,drop)=>drop);
+	var current_table = table_schema2[tbl];
+	var table_name_ch = current_table.table_name_ch;
+#>
+<# manager.StartNewFile(string.Format("{0}List.js",tbl)); #>  
+/* ------------------------------------------------------------ *
+ * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
+ * 生成时间：<#=DateTime.Now#>
+ * 生成版本：<#=g.DomainVersionTime#> 
+ * 作者：路正遥
+ * ------------------------------------------------------------ */
+console.group("正在加载脚本")
+require([
+	"vue", 
+	"jquery", 
+	"jquery.cookie", 
+	"bootstrap", 
+	"bootstrap-table", 
+	"bootstrap-select", 
+    "bootstrap-table-zh-CN",
+	"bootstrap-datetimepicker", 
+//	"bootstrap-datetimepicker.zh-CN",
+	"fileinput",
+	"fileinput_locale_zh",
+	"cmodules"
+], function(Vue,$) {
+console.log("正在加载自定义逻辑")
+$(document).ready(function(){
+		var vm = new Vue({
+			el:"#cnav<#=tbl#>",
+			data:{
+				request:GetRequest(),
+				nav_list:[],
+				current_menu:'<#=table_name_ch#>'
+			},
+			computed:{
+			},
+			methods:{
+				setNavi:function(link,id){
+					return setNavi(link,id);
+				},
+				parseEmpty: function(nav){
+					return "javascript:parent.location.href='/T/1_index/business.html?data="+encodeURIComponent(JSON.stringify(nav))+"'"
+				}
+			},
+			mounted:function(){
+				
+				$('.excel-import-button-<#=tbl#>').click(function () {
+						$('.table_add_modal').modal('hide');
+						$('.table_excel_modal-<#=tbl#>').on('shown.bs.modal',function(){
+							$('.table_excel_modal-<#=tbl#> .modal-body').html('<input class="excel_file input-file form-control" type="file">');
+							$(".excel_file").fileinput({
+								language: 'zh', //设置语言
+								uploadUrl: "/T/ExcelImport.ashx?fileType=<#=tbl#>", //上传的地址
+								allowedFileExtensions: ['xls','xlsx'],//接收的文件后缀,
+								showUpload: true, //是否显示上传按钮
+								dropZoneEnabled: true,
+								showCaption: true,//是否显示标题
+								browseClass: "btn btn-primary", //按钮样式             
+								previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+								msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！"
+							});
+							$(".excel_file").on("fileuploaded",function(){
+								//window.location.href = site_gen+"<#=tbl#>List.html"
+								if($table)$table.bootstrapTable('refresh');
+							});
+						})
+
+						$('.table_excel_modal-<#=tbl#>').modal('show');
+					})
+				
+				var $table = $("#table<#=tbl#>")
+				//表格传区域ID参数
+				var url = "";
+				$table.attr("data-url", "/T/DefaultHandler.ashx?method=get<#=tbl#>List&data=" + JSON.stringify(GetRequest()) + "&");
+				console.log($.buildColumns(<#=Newtonsoft.Json.JsonConvert.SerializeObject(table_schema2[tbl])#>));
+				$table.bootstrapTable({
+					striped: true,
+					height: getHeight(),
+					columns: 
+					$.buildColumns(<#=Newtonsoft.Json.JsonConvert.SerializeObject(table_schema2[tbl])#>),
+				});
+		
+				$table.bootstrapTable('refresh');
+				$("input[type=text]:first").focus();
+				setTimeout(function(){
+				$table.bootstrapTable('refresh');},5000)
+				
+			}
+		})
+		
+		var request = GetRequest();
+		if(request && request.nav){
+			try{
+
+				$.call("querynav2",JSON.parse(request.nav),function(resp){
+					vm.$data.nav_list = resp
+				})
+			}catch (e) {
+				console.error(e)
+			}
+		}
+	})
+	
+	console.log("加载自定义逻辑完毕")
+})
+console.log("加载脚本完毕")
+console.groupEnd();
+<#
+				}
+#>
+
+<# manager.EndBlock(); #>  
+
+<# manager.Process(true); #> 

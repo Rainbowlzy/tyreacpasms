@@ -1,4 +1,4 @@
-# tyreacpasms
+# xiangxi_front_end
 
 ## Project setup
 ```
@@ -24,6 +24,3 @@ npm run test
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

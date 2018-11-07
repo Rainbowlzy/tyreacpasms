@@ -1,0 +1,125 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="..\CodeTemplates\Manager.ttinclude"#>  
+<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+<#@ import namespace="TEntities.CodeTemplates" #>
+
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Migrations;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
+using EF.Entities;
+
+namespace EF.Entities
+{
+<#
+
+foreach(var ent in table_schema2.Values){ 
+var table_name = ent.table_name;
+var line = ent;
+var table = line;
+var tableName = line.table_name_ch;
+var pascalCaseTableName = line.table_name_en;
+var fields = table.Columns;
+var prefix = string.Concat(pascalCaseTableName.Where(c=>c>='A' && c<='Z'));
+#>
+	
+    /// <summary>
+    ///  <#=table.table_name_ch#> 
+    /// </summary>
+	[Table("<#=table_name#>")]
+    public class <#=table_name#> 
+    {
+			        
+        /// <summary>
+        ///  <#=table_name#>编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  经度
+        /// </summary>
+        public string Longitude { get; set; }
+        /// <summary>
+        ///  纬度
+        /// </summary>
+        public string Latitude { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+<#
+            foreach(var col in fields){#>
+			
+        /// <summary>
+        ///  <#=col.column_description#> <#=col.dbtype#> <#=col.dbtype.Split('(').Length>1 ? col.dbtype.Split('(')[1].Trim(new char[]{')'}) : "" #>
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "<#=col.column_description#>不能为空")]
+		<#
+		if(col.dbtype.ToLower()=="datetime"){
+			#>
+		[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+		<#
+
+		}else if(col.dbtype.ToLower().Split('(')[0]=="nvarchar"){
+			var max = 4000;
+		if(col.dbtype.Split('(').Length>1) int.TryParse(col.dbtype.Split('(')[1].Trim(new char[]{')'}), out max);
+			#>/* [StringLengthValidator(0,<#=max#>)] */<#
+		}
+			#>
+
+        public <#=SqlServerDbTypeMap.MapCsharpType(col.dbtype.Split('(')[0])#> <#=col.column_name#> { get; set; }
+<#		}
+			if(table.Children!=null)
+            foreach(var child in table.Children){#>
+			
+        /// <summary>
+        ///  <#=child.table_name_ch#> 
+        /// </summary>
+        // public List<<#=child.table_name_en#>> <#=child.table_name_en#> { get; set; }
+<# 
+			}
+			#>
+	}
+
+<# } #>
+}

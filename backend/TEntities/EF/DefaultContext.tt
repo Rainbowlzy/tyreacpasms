@@ -1,0 +1,109 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="..\CodeTemplates\Manager.ttinclude"#>  
+<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+<#@ import namespace="TEntities.CodeTemplates" #>
+
+<#@ output extension=".cs" #>
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Migrations;
+using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
+using EF.Entities;
+
+namespace TEntities.EF
+{
+    public class DefaultContext : DbContext
+    {
+	
+#if DEBUG
+        public DefaultContext():base("LocalDefaultContext") { }
+#elif RELEASE
+#endif
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+			
+			<#
+foreach(var ent in table_schema2.Values){ 
+var table_name = ent.table_name;
+var table = ent;
+#>
+modelBuilder.Entity<<#=table_name#>>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			<#
+			}
+#>
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DefaultContext, Configuration>());
+        }
+
+		public void BuildMenu()
+		{
+            var TransactionID = Guid.NewGuid().ToString();
+            var CreateBy = "Initialization Job";
+            var UICode = "123";
+			<#
+foreach(var ent in table_schema2.Values){ 
+var table_name = ent.table_name;
+var table = ent;
+#>
+
+			if (!MenuConfiguration.Any(t => t.MCCaption == "<#=table.table_name_ch#>"))
+			{
+				MenuConfiguration.Add(new MenuConfiguration
+				{
+					
+					MCCaption = "<#=table.table_name_ch#>",
+					MCLink = "/T/gen/<#=table_name#>List.html",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+				MenuConfiguration.Add(new MenuConfiguration
+				{
+					
+					MCCaption = "<#=table.table_name_ch#>统计",
+					MCLink = "/T/gen/<#=table_name#>Analysis.html",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+			}
+			var <#=table.table_name_en.ToLower()#> = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "<#=table.table_name_ch#>");
+			if(<#=table.table_name_en.ToLower()#>!=null)
+			{
+				<#=table.table_name_en.ToLower()#>.MCLink = "/T/gen/<#=table_name#>List.html";
+				MenuConfiguration.AddOrUpdate(<#=table.table_name_en.ToLower()#>);
+			}
+<#}
+#>
+            
+
+		    SaveChanges();
+		}
+<#
+foreach(var ent in table_schema2.Values){ 
+var table_name = ent.table_name;
+var table = ent;
+#>
+
+        /// <summary>
+        ///  <#=table.table_name_ch#> 
+        /// </summary>
+        public virtual DbSet<<#=table_name#>> <#=table_name#> { get; set; }
+<#}
+#>
+    }
+}

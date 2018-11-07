@@ -1,0 +1,4 @@
+D:\code\tyreacpasms\backend\XiangXiTests1\obj\Debug\tyreacpasmsTests1.csprojAssemblyReference.cache
+D:\code\tyreacpasms\backend\XiangXiTests1\obj\Debug\tyreacpasmsTests1.csproj.CoreCompileInputs.cache
+D:\code\tyreacpasms\backend\XiangXiTests1\obj\Debug\XiangXiTests1.dll
+D:\code\tyreacpasms\backend\XiangXiTests1\obj\Debug\XiangXiTests1.pdb
