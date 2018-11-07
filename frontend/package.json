@@ -1,5 +1,5 @@
 {
-  "name": "front_end",
+  "name": "tyreacpasms",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -61,5 +61,20 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "description": "```\r npm install\r ```",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rainbowlzy/tyreacpasms.git"
+  },
+  "keywords": [
+    "复旦作业"
+  ],
+  "author": "路正遥",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rainbowlzy/tyreacpasms/issues"
+  },
+  "homepage": "https://github.com/Rainbowlzy/tyreacpasms#readme"
 }
