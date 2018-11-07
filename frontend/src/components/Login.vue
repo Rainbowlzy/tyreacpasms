@@ -45,7 +45,7 @@ label {
   color: #ffffff;
 }
 .login-page {
-  background: url("../../public/i/bg.jpg") 0% 0% / cover no-repeat;
+  background: lightblue 0% 0% / cover no-repeat;
   position: fixed;
   top: 0px;
   left: 0px;

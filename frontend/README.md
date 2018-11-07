@@ -1,5 +1,11 @@
 # xiangxi_front_end
 
+
+### 使用之前先安装一下必要的东西 
+```
+npm install -g @vue/cli
+```
+
 ## Project setup
 ```
 npm install

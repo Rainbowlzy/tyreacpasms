@@ -12,9 +12,9 @@ modules:{
         },
         {
             loader:"postcss-loader",
-            options: {           // Èç¹ûÃ»ÓĞoptionsÕâ¸öÑ¡Ïî½«»á±¨´í No PostCSS Config found
+            options: {           // å¦‚æœæ²¡æœ‰optionsè¿™ä¸ªé€‰é¡¹å°†ä¼šæŠ¥é”™ No PostCSS Config found
                 plugins: (loader) => [
-                    require('autoprefixer')(), //CSSä¯ÀÀÆ÷¼æÈİ
+                    require('autoprefixer')(), //CSSæµè§ˆå™¨å…¼å®¹
                 ]
             }
         },

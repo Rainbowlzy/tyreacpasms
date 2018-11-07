@@ -55,7 +55,7 @@
         line-height: 50px;
         width: 673px;
         height: 94px;
-        background: url(../../public/i/metaicon/宝华首页_03.png) no-repeat 0% 0%;
+        background: lightblue no-repeat 0% 0%;
     }
 
     .menu-bar {

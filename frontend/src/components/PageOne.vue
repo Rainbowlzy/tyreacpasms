@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-xs-6 form-group" v-for="col in Columns">
+                <div class="col-xs-6 form-group" v-for="col in Columns" :key="col.column_name">
                     <label class="col-xs-3 control-label" :for="col.column_name">{{col.column_description}}</label>
                     <div class="col-xs-8"><input type="text" class="form-control" :id="col.column_name" v-model="entity[col.column_name]"/></div>
                 </div>
@@ -91,7 +91,7 @@
     }
     .top-bar {
         overflow: hidden;
-        background-image: url(../../public/i/metaicon/e.jpg);
+        background-color: lightblue;
         background-repeat: no-repeat;
         background-size: cover;
         z-index: -200;

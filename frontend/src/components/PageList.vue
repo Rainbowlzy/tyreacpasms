@@ -267,7 +267,7 @@
     }
     .top-bar {
         overflow: hidden;
-        background: url(../../public/i/metaicon/e.jpg) no-repeat;
+        background: lightblue no-repeat;
         background-size: cover;
         z-index: -200;
     }

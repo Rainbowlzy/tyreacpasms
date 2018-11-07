@@ -46,7 +46,7 @@
 
     .index-page {
         overflow: hidden;
-        background-image: url(../../public/i/metaicon/e.jpg);
+        background-color: lightblue;
         background-repeat: no-repeat;
         background-size: cover;
         width: 100%;
