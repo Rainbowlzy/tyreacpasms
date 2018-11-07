@@ -160,178 +160,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="0_common\bigone.html" />
-    <Content Include="0_common\calendar.html" />
-    <Content Include="0_common\imageeditor.html" />
-    <Content Include="0_common\inner_map.html" />
-    <Content Include="0_common\map_editor.html" />
-    <Content Include="0_common\map_editor_tool.html" />
-    <Content Include="0_common\menurole.html" />
-    <Content Include="0_common\playground - 复制.html" />
-    <Content Include="0_common\playground.html" />
-    <Content Include="0_common\playground_backup.html" />
-    <Content Include="0_common\submenulist.html" />
-    <Content Include="0_common\uploadedimage.html" />
-    <Content Include="0_common\userrole.html" />
-    <Content Include="1_index\baohua_index.html" />
-    <Content Include="1_index\business.html" />
-    <Content Include="1_index\business_backup.html" />
-    <Content Include="1_index\business_modules.html" />
-    <Content Include="1_index\C-business.html" />
-    <Content Include="1_index\gusucun.html" />
-    <Content Include="1_index\index.html" />
-    <Content Include="1_index\main.html" />
-    <Content Include="1_index\PopulationShortList.html" />
-    <Content Include="1_index\router.html" />
-    <Content Include="2_map\1.html" />
-    <Content Include="2_map\11.html" />
-    <Content Include="2_map\3.html" />
-    <Content Include="2_map\big_map.html" />
-    <Content Include="2_map\full_map.html" />
-    <Content Include="2_map\hanfei.html" />
-    <Content Include="2_map\hflogin.html" />
-    <Content Include="2_map\hfmain.html" />
-    <Content Include="2_map\hls.html" />
-    <Content Include="2_map\hls_player.aspx" />
-    <Content Include="2_map\hls_player.html" />
-    <Content Include="2_map\inner_building.html" />
-    <Content Include="2_map\inner_camera.html" />
-    <Content Include="2_map\inner_old_man.html" />
-    <Content Include="2_map\inner_party_member.html" />
-    <Content Include="2_map\inner_disabled.html" />
-    <Content Include="2_map\inner_jiangfu.html" />
-    <Content Include="2_map\inner_tefu.html" />
-    <Content Include="2_map\inner_youfu.html" />
-    <Content Include="2_map\inner_dibao.html" />
-    <Content Include="2_map\inner_bianyuan.html" />
-    <Content Include="2_map\inner_population.html" />
-    <Content Include="2_map\RTSP.aspx" />
-    <Content Include="3_maintain\change_password.html" />
-    <Content Include="4_login\C-login.html" />
-    <Content Include="4_login\login.html" />
-    <Content Include="5_specialwork\SpecialWork.html" />
-    <Content Include="6_tree\raphael.js" />
-    <Content Include="6_tree\test.css" />
-    <Content Include="6_tree\test.html" />
-    <Content Include="6_tree\Treant.css" />
-    <Content Include="6_tree\Treant.js" />
-    <Content Include="assets\css\0-common\common.css" />
-    <Content Include="assets\css\common.css" />
-    <Content Include="assets\css\docs.css" />
-    <Content Include="assets\css\pageonecss.css" />
-    <Content Include="assets\i\bitbug_favicon.ico" />
-    <Content Include="assets\js\0-common\app-compiled.js" />
-    <Content Include="assets\js\0-common\app-local.js" />
-    <Content Include="assets\js\0-common\app.js" />
-    <Content Include="assets\js\0-common\baguetteBox.js" />
-    <Content Include="assets\js\0-common\bootstrap-datetimepicker.min.js" />
-    <Content Include="assets\js\0-common\bootstrap-datetimepicker.zh-CN.js" />
-    <Content Include="assets\js\0-common\bootstrap-editable.js" />
-    <Content Include="assets\js\0-common\bootstrap-select.min.js" />
-    <Content Include="assets\js\0-common\bootstrap-table-editable.js" />
-    <Content Include="assets\js\0-common\bootstrap-table-export.js" />
-    <Content Include="assets\js\0-common\bootstrap-table-zh-CN.js" />
-    <Content Include="assets\js\0-common\bootstrap-table-zh-CN.min.js" />
-    <Content Include="assets\js\0-common\bootstrap-table.js" />
-    <Content Include="assets\js\0-common\bootstrap.js" />
-    <Content Include="assets\js\0-common\bootstrap.min.js" />
-    <Content Include="assets\js\0-common\C-cmodules.js" />
-    <Content Include="assets\js\0-common\calendar.js" />
-    <Content Include="assets\js\0-common\cmodules-compiled.js" />
-    <Content Include="assets\js\0-common\cmodules.js" />
-    <Content Include="assets\js\0-common\codemirror.js" />
-    <Content Include="assets\js\0-common\echarts-all.js" />
-    <Content Include="assets\js\0-common\echarts-gl.js" />
-    <Content Include="assets\js\0-common\echarts.js" />
-    <Content Include="assets\js\0-common\echarts.min.js" />
-    <Content Include="assets\js\0-common\fileinput.min.js" />
-    <Content Include="assets\js\0-common\fileinput_locale_zh.js" />
-    <Content Include="assets\js\0-common\fullcalendar-zh-cn.js" />
-    <Content Include="assets\js\0-common\fullcalendar.min.js" />
-    <Content Include="assets\js\0-common\full_map-compiled-compiled.js" />
-    <Content Include="assets\js\0-common\full_map-compiled.js" />
-    <Content Include="assets\js\0-common\full_map.js" />
-    <Content Include="assets\js\0-common\holder.min.js" />
-    <Content Include="assets\js\0-common\initfakedmap.js" />
-    <Content Include="assets\js\0-common\inner_map-compiled.js" />
-    <Content Include="assets\js\0-common\inner_map.js" />
-    <Content Include="assets\js\0-common\javascript.js" />
-    <Content Include="assets\js\0-common\jquery.cookie.js" />
-    <Content Include="assets\js\0-common\jquery.ztree.all.min.js" />
-    <Content Include="assets\js\0-common\leaflet-compiled.js" />
-    <Content Include="assets\js\0-common\leaflet.js" />
-    <Content Include="assets\js\0-common\loadpagelist.js" />
-    <Content Include="assets\js\0-common\main.js" />
-    <Content Include="assets\js\0-common\MD5.js" />
-    <Content Include="assets\js\0-common\menurole-compiled.js" />
-    <Content Include="assets\js\0-common\menurole.js" />
-    <Content Include="assets\js\0-common\moment.min.js" />
-    <Content Include="assets\js\0-common\pie.js" />
-    <Content Include="assets\js\0-common\playground.js" />
-    <Content Include="assets\js\0-common\require-compiled.js" />
-    <Content Include="assets\js\0-common\require.js" />
-    <Content Include="assets\js\0-common\submenulist.js" />
-    <Content Include="assets\js\0-common\tableExport.js" />
-    <Content Include="assets\js\0-common\third-party\lang\en\en.js" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\addimage.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\alldeletebtnhoverskin.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\alldeletebtnupskin.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\background.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\button.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\copy.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\deletedisable.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\deleteenable.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\listbackground.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\localimage.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\music.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\rotateleftdisable.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\rotateleftenable.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\rotaterightdisable.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\rotaterightenable.png" />
-    <Content Include="assets\js\0-common\third-party\lang\en\images\upload.png" />
-    <Content Include="assets\js\0-common\third-party\lang\zh-cn\images\copy.png" />
-    <Content Include="assets\js\0-common\third-party\lang\zh-cn\images\localimage.png" />
-    <Content Include="assets\js\0-common\third-party\lang\zh-cn\images\music.png" />
-    <Content Include="assets\js\0-common\third-party\lang\zh-cn\images\upload.png" />
-    <Content Include="assets\js\0-common\third-party\lang\zh-cn\zh-cn.js" />
-    <Content Include="assets\js\0-common\third-party\zeroclipboard\ZeroClipboard.js" />
-    <Content Include="assets\js\0-common\TileHeadPic.js" />
-    <Content Include="assets\js\0-common\ueditor.all.js" />
-    <Content Include="assets\js\0-common\ueditor.all.min.js" />
-    <Content Include="assets\js\0-common\ueditor.config.js" />
-    <Content Include="assets\js\0-common\userrole-compiled.js" />
-    <Content Include="assets\js\0-common\userrole.js" />
-    <Content Include="assets\js\0-common\vue.js" />
-    <Content Include="assets\js\0-common\vue.min.js" />
-    <Content Include="assets\js\0-common\webuploader.min.js" />
-    <Content Include="assets\js\2-index\baohua_index.js" />
-    <Content Include="assets\js\2-index\business-compiled.js" />
-    <Content Include="assets\js\2-index\business.js" />
-    <Content Include="assets\js\2-index\index.js" />
-    <Content Include="assets\js\2-index\index_Z.js" />
-    <Content Include="assets\js\2-index\main.js" />
-    <Content Include="assets\js\2-index\map-loader.js" />
-    <Content Include="assets\js\2-index\new-index.js" />
-    <Content Include="assets\js\2-index\router.js" />
-    <Content Include="assets\js\2-index\temp.js" />
-    <Content Include="assets\js\3-map\inner_building.js" />
-    <Content Include="assets\js\3-map\inner_camera.js" />
-    <Content Include="assets\js\3-map\inner_disabled.js" />
-    <Content Include="assets\js\3-map\inner_old_man.js" />
-    <Content Include="assets\js\3-map\inner_party_member.js" />
-    <Content Include="assets\js\3-map\inner_bianyuan.js" />
-    <Content Include="assets\js\3-map\inner_dibao.js" />
-    <Content Include="assets\js\3-map\inner_youfu.js" />
-    <Content Include="assets\js\3-map\inner_tefu.js" />
-    <Content Include="assets\js\3-map\inner_jiangfu.js" />
-    <Content Include="assets\js\3-map\inner_population.js" />
-    <Content Include="assets\js\3-map\map.js" />
-    <Content Include="assets\js\options.js" />
-    <Content Include="assets\js\3-map\map_Z.js" />
-    <Content Include="assets\js\3-map\playground.js" />
-    <Content Include="assets\js\3-map\points.js" />
-    <Content Include="assets\js\3-map\test.js" />
-    <Content Include="assets\js\jquery-3.1.0.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -704,24 +532,12 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PageListHTML.html</LastGenOutput>
     </Content>
-    <Content Include="assets\js\0-common\app-compiled.js.map" />
-    <Content Include="assets\js\0-common\cmodules-compiled.js.map" />
-    <Content Include="assets\js\0-common\full_map-compiled-compiled.js.map" />
-    <Content Include="assets\js\0-common\full_map-compiled.js.map" />
-    <Content Include="assets\js\0-common\inner_map-compiled.js.map" />
-    <Content Include="assets\js\0-common\leaflet-compiled.js.map" />
-    <Content Include="assets\js\0-common\menurole-compiled.js.map" />
-    <Content Include="assets\js\0-common\package-lock.json" />
-    <Content Include="assets\js\0-common\require-compiled.js.map" />
-    <Content Include="assets\js\0-common\userrole-compiled.js.map" />
-    <Content Include="0_common\智慧香溪.apk" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="assets\js\2-index\business-compiled.js.map" />
     <Content Include="gen\Warehouse.html">
       <DependentUpon>PageOneHTML.tt</DependentUpon>
     </Content>
@@ -753,10 +569,7 @@
       <DependentUpon>PageListJS.tt</DependentUpon>
     </Content>
     <Content Include="hanfei\.idea\hanfei.iml" />
-    <Content Include="assets\js\0-common\net\controller.ashx" />
-    <Content Include="assets\UEditor-utf8-net\net\controller.ashx" />
     <Content Include="gen\net\controller.ashx" />
-    <Content Include="assets\js\0-common\net\config.json" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <Content Include="hanfei\.idea\modules.xml" />
     <Content Include="hanfei\.idea\workspace.xml" />
@@ -1039,20 +852,6 @@
       <DependentUpon>EvaluatorGen.tt</DependentUpon>
     </Compile>
     <Compile Include="Evaluators\GetCurrentUserInformationEvaluator.cs" />
-    <Compile Include="2_map\RTSP.aspx.cs">
-      <DependentUpon>RTSP.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="2_map\RTSP.aspx.designer.cs">
-      <DependentUpon>RTSP.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="assets\js\0-common\net\App_Code\Config.cs" />
-    <Compile Include="assets\js\0-common\net\App_Code\ConfigHandler.cs" />
-    <Compile Include="assets\js\0-common\net\App_Code\CrawlerHandler.cs" />
-    <Compile Include="assets\js\0-common\net\App_Code\Handler.cs" />
-    <Compile Include="assets\js\0-common\net\App_Code\ListFileHandler.cs" />
-    <Compile Include="assets\js\0-common\net\App_Code\NotSupportedHandler.cs" />
-    <Compile Include="assets\js\0-common\net\App_Code\PathFormater.cs" />
-    <Compile Include="assets\js\0-common\net\App_Code\UploadHandler.cs" />
     <Compile Include="Evaluators\CacheOptionsAttribute.cs" />
     <Compile Include="Evaluators\CommonOutputList.cs" />
     <Compile Include="Controllers\CommonOutputT.cs" />
@@ -1146,8 +945,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="assets\js\1-login\0-common\net\App_Code\" />
-    <Folder Include="assets\js\10-travel\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
