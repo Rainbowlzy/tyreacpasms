@@ -10,13 +10,34 @@ namespace SetData
 {
     class Program
     {
+        private static void Run()
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var transactionId = Guid.NewGuid().ToString();
+                ctx.UserInformation.AddRange(Enumerable.Range(1000, 1050).Select(i => new UserInformation
+                {
+                    id = i,
+                    UILoginName = i.ToString(),
+                    UICode = "123",
+                    IsDeleted = 0,
+                    TransactionID = transactionId,
+                    CreateBy = "JOB",
+                    UpdateBy = "JOB",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now
+                }));
+                ctx.SaveChanges();
+            }
+        }
         private static void Create()
         {
+#if DEBUG
+            Run();
+#else
             try
             {
-                using (var ctx = new DefaultContext())
-                {
-                }
+                Run();
             }
             catch (Exception exception)
             {
@@ -26,6 +47,7 @@ namespace SetData
                 Console.WriteLine(exception?.InnerException?.StackTrace);
                 Console.ReadLine();
             }
+#endif
         }
 
         static void Main(string[] args)

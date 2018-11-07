@@ -6,13 +6,15 @@
                 <div class="col-xs-3"><input type="text" @keydown.enter="doLogin" class="form-control" id="UILoginName" v-model="user.UILoginName" placeholder="请输入登录名"/></div>
                 <div class="col-xs-2"><label for="UICode" class="form-label">密码</label></div>
                 <div class="col-xs-3"><input type="password" @keydown.enter="doLogin" class="form-control"  id="UICode" v-model="user.UICode"/></div>
-                <div class="col-xs-2"><button class="btn btn-primary" @click="doLogin">登录</button></div>
+                <div class="col-xs-2"><button class="btn btn-success" @click="doLogin">登录</button></div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
@@ -20,17 +22,10 @@ export default {
   computed: {
     ...mapState(["user"])
   },
-  data: function() {
-    return {
-      UILoginName: "",
-      UICode: ""
-    };
-  },
   methods: {
     ...mapMutations(["login"]),
     ...mapActions(["doLogin"])
-  },
-  mounted: function() {}
+  }
 };
 </script>
 

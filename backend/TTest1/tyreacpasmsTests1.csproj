@@ -76,11 +76,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XiangXiENtities\TEntities.csproj">
+    <ProjectReference Include="..\TEntities\TEntities.csproj">
       <Project>{4ca863b2-6982-4dc5-a725-e2f72aebb134}</Project>
       <Name>TEntities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\XiangXi\T.csproj">
+    <ProjectReference Include="..\T\T.csproj">
       <Project>{cb81e6d4-2b90-433f-9eff-584f5a3f271f}</Project>
       <Name>T</Name>
     </ProjectReference>

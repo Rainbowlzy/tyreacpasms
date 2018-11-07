@@ -99,7 +99,7 @@
         };
         this.prototype.linkFormatter = function linkFormatter(col) {
             return function (value, row, index) {
-                ;
+                
                 return [row[col] ? $('<a></a>').attr('href', row[col]).text(strlimit(row[col], 30)).get(0).outerHTML : ''];
             };
         };

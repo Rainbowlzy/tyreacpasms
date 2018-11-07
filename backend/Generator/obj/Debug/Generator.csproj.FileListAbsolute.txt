@@ -34,3 +34,12 @@ D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CoreCompileInpu
 D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CopyComplete
 D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.dll
 D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.pdb
+F:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.dll
+F:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.pdb
+F:\code\tyreacpasms\backend\Generator\bin\Debug\Newtonsoft.Json.dll
+F:\code\tyreacpasms\backend\Generator\bin\Debug\Newtonsoft.Json.xml
+F:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csprojAssemblyReference.cache
+F:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CoreCompileInputs.cache
+F:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CopyComplete
+F:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.dll
+F:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.pdb

@@ -1,0 +1,10 @@
+F:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.csprojAssemblyReference.cache
+F:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.csproj.CoreCompileInputs.cache
+F:\code\tyreacpasms\backend\TTests\bin\Debug\XiangXiTests.dll.config
+F:\code\tyreacpasms\backend\TTests\bin\Debug\XiangXiTests.dll
+F:\code\tyreacpasms\backend\TTests\bin\Debug\XiangXiTests.pdb
+F:\code\tyreacpasms\backend\TTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+F:\code\tyreacpasms\backend\TTests\bin\Debug\zh-Hans\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+F:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.csproj.CopyComplete
+F:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.dll
+F:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.pdb

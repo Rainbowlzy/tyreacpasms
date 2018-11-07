@@ -1,5 +1,5 @@
-modules:{
-    rules: [
+{
+    [
         {
             test: /\.(png|jpg|gif|ico)$/,
             exclude: /(node_modules|bower_components)/,

@@ -52,11 +52,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Evaluators\EvaluatorTests.cs" />
-    <Compile Include="Evaluators\MapQueryEvaluatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XiangXi\XiangXi.csproj">
+    <ProjectReference Include="..\T\T.csproj">
       <Project>{CB81E6D4-2B90-433F-9EFF-584F5A3F271F}</Project>
       <Name>XiangXi</Name>
     </ProjectReference>
