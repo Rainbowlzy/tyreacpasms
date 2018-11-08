@@ -1,16 +1,19 @@
 <template>
 <div class="login-page">
+    <div class="login-header">
+        <h1>黄河电器公司进销存管理系统</h1>
+    </div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-2"><label for="UILoginName" class="form-label">登录名</label></div>
+            <div class="col-xs-1"><label for="UILoginName" class="control-label">登录名</label></div>
             <div class="col-xs-3">
                 <input type="text" @keydown.enter="login" class="form-control" id="UILoginName" v-model="user.UILoginName" placeholder="请输入登录名"/>
             </div>
-                <div class="col-xs-2"><label for="UICode" class="form-label">密码</label></div>
+                <div class="col-xs-1"><label for="UICode" class="control-label">密码</label></div>
                 <div class="col-xs-3">
                     <input type="password" @keydown.enter="login" class="form-control"  id="UICode" v-model="user.UICode"/>
             </div>
-                    <div class="col-xs-2"><button class="btn btn-success" @click="login">登录</button></div>
+                    <div class="col-xs-1"><button class="btn btn-success" @click="login">登录</button></div>
                 </div>
             </div>
         </div>
@@ -53,22 +56,26 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
+
+.login-header > h1 {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+}
+.login-header {
+  position: fixed;
+  top:0px;left:0px;
+  height:70%;width:100%;
+  background: #42B983;
+}
 .container {
   position: fixed;
   left: 30%;
-  top: 50%;
+  top: 80%;
+}
+label{
+  height:30px;
+  line-height: 30px;
 }
 
-label {
-  color: #ffffff;
-}
-
-.login-page {
-  background: lightblue 0% 0% / cover no-repeat;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-}
 </style>
