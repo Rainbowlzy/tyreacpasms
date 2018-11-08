@@ -5,7 +5,6 @@
             <TopBar style="width:3000px;"></TopBar>
         </div>
         <div class="row">
-            <b-table striped hover :items="items"></b-table>
         </div>
     </div>
 </template>

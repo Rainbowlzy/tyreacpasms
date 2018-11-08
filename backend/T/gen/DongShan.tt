@@ -3,7 +3,6 @@
 <#@ output extension=".txt" #>
 <#@ import namespace="TEntities.CodeTemplates" #>
 <#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
-
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
  * 生成时间：<#=DateTime.Now#>

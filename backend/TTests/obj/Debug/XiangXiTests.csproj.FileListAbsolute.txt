@@ -8,13 +8,5 @@ F:\code\tyreacpasms\backend\TTests\bin\Debug\zh-Hans\Microsoft.VisualStudio.Qual
 F:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.csproj.CopyComplete
 F:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.dll
 F:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.pdb
-D:\code\tyreacpasms\backend\TTests\bin\Debug\XiangXiTests.dll.config
-D:\code\tyreacpasms\backend\TTests\bin\Debug\XiangXiTests.dll
-D:\code\tyreacpasms\backend\TTests\bin\Debug\XiangXiTests.pdb
-D:\code\tyreacpasms\backend\TTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-D:\code\tyreacpasms\backend\TTests\bin\Debug\zh-Hans\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
 D:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.csprojAssemblyReference.cache
 D:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.csproj.CoreCompileInputs.cache
-D:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.csproj.CopyComplete
-D:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.dll
-D:\code\tyreacpasms\backend\TTests\obj\Debug\XiangXiTests.pdb

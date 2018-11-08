@@ -1,7 +1,7 @@
 ﻿
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/08/2018 11:51:12
+ * 生成时间：11/08/2018 16:58:56
  * 生成版本：11/08/2018 11:49:42 
  * 作者：路正遥
  * ------------------------------------------------------------ */
@@ -20,6 +20,8 @@ using static System.Linq.Enumerable;
 using EF.Entities;
 using Validation = Microsoft.Practices.EnterpriseLibrary.Validation.Validation;
 using ValidationResult = Microsoft.Practices.EnterpriseLibrary.Validation.ValidationResult;
+
+using Generator.Tools;
 
 namespace T.Evaluators
 {

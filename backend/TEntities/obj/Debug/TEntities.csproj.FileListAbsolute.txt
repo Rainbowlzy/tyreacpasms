@@ -90,3 +90,4 @@ D:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.csproj.CoreCompileInpu
 D:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.csproj.CopyComplete
 D:\code\tyreacpasms\backend\TEntities\obj\Debug\XiangXiENtities.dll
 D:\code\tyreacpasms\backend\TEntities\obj\Debug\XiangXiENtities.pdb
+D:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.csprojAssemblyReference.cache

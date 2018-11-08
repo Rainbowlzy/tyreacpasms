@@ -5,32 +5,30 @@ import Axios from "axios";
 Vue.use(Vuex);
 const baseUrl = "http://localhost/tyreacpasms/DefaultHandler.ashx";
 export default new Vuex.Store({
-//   strict: true,
+  //   strict: true,
   state: {
     user: {
       UILoginName: "",
-      UICode: ""
+      UICode: "",
+      token: "",
     }
   },
   mutations: {
     login(currentState, response) {
-        Vue.set(currentState.user,'token',response.data);
+      Vue.set(currentState.user, 'token', response.data);
     }
   },
   actions: {
     async doLogin(context) {
-      let response = (await Axios.get(`${baseUrl}?method=login&data=${JSON.stringify(context.state.user)}`)).data,
+      let response = (await Axios.get(`${baseUrl}?auth_user=${this.user.token}&method=login&data=${JSON.stringify(context.state.user)}`)).data,
         success = response.success;
       if (success) {
-        context.$cookie.set("auth_user", response.data, {
-          expires: 999,
-          domain: location.host.split(":")[0]
-        });
-        context.$router.push("../index");
         context.commit("login", response);
+        return response.data;
       } else {
-        alert(response.data.message);
+        alert(response.message);
       }
+      return success;
     },
     async getProductsAction(context) {
       (await Axios.get(baseUrl)).data.forEach(p =>

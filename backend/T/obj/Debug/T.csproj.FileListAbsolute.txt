@@ -57,6 +57,8 @@ F:\code\tyreacpasms\backend\T\obj\Debug\T.csproj.CoreCompileInputs.cache
 F:\code\tyreacpasms\backend\T\obj\Debug\T.csproj.CopyComplete
 F:\code\tyreacpasms\backend\T\obj\Debug\XiangXi.dll
 F:\code\tyreacpasms\backend\T\obj\Debug\XiangXi.pdb
+D:\code\tyreacpasms\backend\T\obj\Debug\T.csprojAssemblyReference.cache
+D:\code\tyreacpasms\backend\T\obj\Debug\T.csproj.CoreCompileInputs.cache
 D:\code\tyreacpasms\backend\T\bin\XiangXi.dll.config
 D:\code\tyreacpasms\backend\T\bin\XiangXi.dll
 D:\code\tyreacpasms\backend\T\bin\XiangXi.pdb
@@ -107,8 +109,6 @@ D:\code\tyreacpasms\backend\T\bin\zh-Hans\System.Web.Razor.resources.dll
 D:\code\tyreacpasms\backend\T\bin\zh-Hans\System.Web.WebPages.resources.dll
 D:\code\tyreacpasms\backend\T\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 D:\code\tyreacpasms\backend\T\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-D:\code\tyreacpasms\backend\T\obj\Debug\T.csprojAssemblyReference.cache
-D:\code\tyreacpasms\backend\T\obj\Debug\T.csproj.CoreCompileInputs.cache
 D:\code\tyreacpasms\backend\T\obj\Debug\T.csproj.CopyComplete
 D:\code\tyreacpasms\backend\T\obj\Debug\XiangXi.dll
 D:\code\tyreacpasms\backend\T\obj\Debug\XiangXi.pdb

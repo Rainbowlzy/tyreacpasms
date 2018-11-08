@@ -459,9 +459,7 @@
     <Compile Include="Evaluators\GetThirdMenuEvaluator.cs" />
     <Compile Include="Evaluators\GetUserRoleListByAuthEvaluator.cs" />
     <Compile Include="Evaluators\LoginEvaluator.cs" />
-    <Compile Include="Evaluators\RemoteEvaluator.cs" />
     <Compile Include="Evaluators\SaveMenuRoleDicEvaluator.cs" />
-    <Compile Include="Evaluators\SaveSYS_CodeEvaluator.cs" />
     <Compile Include="Evaluators\SaveUserRoleDicEvaluator.cs" />
     <Compile Include="Evaluators\ShowEvaluator.cs" />
     <Compile Include="Evaluators\UserInfoEvaluator.cs" />

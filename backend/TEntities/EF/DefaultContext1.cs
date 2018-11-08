@@ -18,7 +18,10 @@ namespace TEntities.EF
     {
 	
 #if DEBUG
-        public DefaultContext():base("LocalDefaultContext") { }
+        public DefaultContext():base("LocalDefaultContext") 
+		{ 
+			BuildMenu();
+		}
 #elif RELEASE
 #endif
 

@@ -3,13 +3,13 @@
 
 
 
-
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/08/2018 11:55:58
+ * 生成时间：11/08/2018 16:58:57
  * 生成版本：11/08/2018 11:49:42 
  * 作者：路正遥
  * ------------------------------------------------------------ */
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +24,8 @@ using System.Text;
 using System.Data.Entity.Migrations;
 using TEntities.EF;
 using EF.Entities;
+
+using Generator.Tools;
 
 namespace T
 {

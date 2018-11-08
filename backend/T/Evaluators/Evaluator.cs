@@ -7,6 +7,8 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using EF.Entities;
+
+using Generator.Tools;
 using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
 using Newtonsoft.Json;
 using T.Interfaces;

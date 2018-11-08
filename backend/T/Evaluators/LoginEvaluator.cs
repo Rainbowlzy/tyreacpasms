@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using EF.Entities;
 using Newtonsoft.Json;
@@ -109,16 +110,17 @@ namespace T.Evaluators
                         LRLoginTime = DateTime.Now,
                         TransactionID = Guid.NewGuid().ToString(),
                         DataLevel = user?.DataLevel??"01",
-                        Latitude = string.Empty,
-                        Longitude = string.Empty,
                         VersionNo = 0
                     });
                     ctx.SaveChanges();
                 }
-                return new CommonOutputT<string>
+
+                var metadata = File.ReadAllText(@"D:\code\tyreacpasms\backend\TEntities\sqlTT_GENERATION_FOLDER\table_schema2_636772745820254096.txt");
+                return new 
                 {
                     success = true,
                     data = token,
+                    metadata,
                     message = "登录成功"
                 };
             }

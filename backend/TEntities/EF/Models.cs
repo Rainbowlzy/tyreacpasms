@@ -61,14 +61,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -170,14 +162,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -243,14 +227,6 @@ namespace EF.Entities
         ///  数据级别
         /// </summary>
         public string DataLevel { get; set; }
-        /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
         /// <summary>
         ///  排序
         /// </summary>
@@ -318,14 +294,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -391,14 +359,6 @@ namespace EF.Entities
         ///  数据级别
         /// </summary>
         public string DataLevel { get; set; }
-        /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
         /// <summary>
         ///  排序
         /// </summary>
@@ -485,7 +445,7 @@ namespace EF.Entities
         ///  入职时间 DATETIME 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "入职时间不能为空")]
-				[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		
         public Nullable<DateTime> UITimeOfEntry { get; set; }
 			
@@ -493,7 +453,7 @@ namespace EF.Entities
         ///  离职时间 DATETIME 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "离职时间不能为空")]
-				[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		
         public Nullable<DateTime> UIDepartureTime { get; set; }
 			
@@ -552,14 +512,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -575,7 +527,7 @@ namespace EF.Entities
         ///  登录时间 DATETIME 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "登录时间不能为空")]
-				[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		
         public Nullable<DateTime> LRLoginTime { get; set; }
 	}
@@ -626,14 +578,6 @@ namespace EF.Entities
         ///  数据级别
         /// </summary>
         public string DataLevel { get; set; }
-        /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
         /// <summary>
         ///  排序
         /// </summary>
@@ -701,14 +645,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -774,14 +710,6 @@ namespace EF.Entities
         ///  数据级别
         /// </summary>
         public string DataLevel { get; set; }
-        /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
         /// <summary>
         ///  排序
         /// </summary>
@@ -877,14 +805,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -971,14 +891,6 @@ namespace EF.Entities
         ///  数据级别
         /// </summary>
         public string DataLevel { get; set; }
-        /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
         /// <summary>
         ///  排序
         /// </summary>
@@ -1102,14 +1014,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -1176,14 +1080,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -1206,7 +1102,7 @@ namespace EF.Entities
         ///  期望到达日期 DATETIME 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "期望到达日期不能为空")]
-				[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		
         public Nullable<DateTime> OExpectedArrivalDate { get; set; }
 			
@@ -1214,7 +1110,7 @@ namespace EF.Entities
         ///  提交日期 DATETIME 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "提交日期不能为空")]
-				[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		
         public Nullable<DateTime> ODateOfSubmission { get; set; }
 			
@@ -1293,14 +1189,6 @@ namespace EF.Entities
         ///  数据级别
         /// </summary>
         public string DataLevel { get; set; }
-        /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
         /// <summary>
         ///  排序
         /// </summary>
@@ -1382,14 +1270,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -1405,7 +1285,7 @@ namespace EF.Entities
         ///  到货日期 DATETIME 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "到货日期不能为空")]
-				[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		
         public Nullable<DateTime> WRDateOfArrival { get; set; }
 			
@@ -1477,14 +1357,6 @@ namespace EF.Entities
         ///  数据级别
         /// </summary>
         public string DataLevel { get; set; }
-        /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
         /// <summary>
         ///  排序
         /// </summary>
@@ -1566,14 +1438,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -1654,14 +1518,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -1712,7 +1568,7 @@ namespace EF.Entities
         ///  申请日期 DATETIME 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "申请日期不能为空")]
-				[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		
         public Nullable<DateTime> RAFApplicationDate { get; set; }
 			
@@ -1778,14 +1634,6 @@ namespace EF.Entities
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -1801,7 +1649,7 @@ namespace EF.Entities
         ///  到货日期 DATETIME 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "到货日期不能为空")]
-				[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		
         public Nullable<DateTime> RRDateOfArrival { get; set; }
 			
@@ -1859,14 +1707,6 @@ namespace EF.Entities
         ///  数据级别
         /// </summary>
         public string DataLevel { get; set; }
-        /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
         /// <summary>
         ///  排序
         /// </summary>

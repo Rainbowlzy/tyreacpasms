@@ -12,24 +12,36 @@ namespace SetData
     {
         private static void Run()
         {
-            using (var ctx = new DefaultContext())
+            try
             {
-                var transactionId = Guid.NewGuid().ToString();
-                ctx.UserInformation.AddRange(Enumerable.Range(1000, 1050).Select(i => new UserInformation
+                using (var ctx = new DefaultContext())
                 {
-                    id = i,
-                    UILoginName = i.ToString(),
-                    UICode = "123",
-                    IsDeleted = 0,
-                    TransactionID = transactionId,
-                    CreateBy = "JOB",
-                    UpdateBy = "JOB",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now
-                }));
-                ctx.SaveChanges();
+                    var transactionId = Guid.NewGuid().ToString();
+                    ctx.UserInformation.AddRange(Enumerable.Range(1000, 1050).Select(i => new UserInformation
+                    {
+                        id = i,
+                        UILoginName = i.ToString(),
+                        UICode = "123",
+                        IsDeleted = 0,
+                        TransactionID = transactionId,
+                        CreateBy = "JOB",
+                        UpdateBy = "JOB",
+                        CreateOn = DateTime.Now,
+                        UpdateOn = DateTime.Now
+                    }));
+                    ctx.SaveChanges();
+                }
             }
+            catch (System.Data.Entity.Validation.DbEntityValidationException exception)
+            {
+                Console.WriteLine(string.Join("\r\n",
+                    exception.EntityValidationErrors.SelectMany(e =>
+                        e.ValidationErrors.Select(v => $"{v.PropertyName} {v.ErrorMessage}\r\n"))));
+            }
+
+            Console.ReadLine();
         }
+
         private static void Create()
         {
 #if DEBUG

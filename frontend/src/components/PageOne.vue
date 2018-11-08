@@ -30,79 +30,83 @@
     </div>
 </template>
 <script>
-    import metadata from '@/metadata'
-    import TopBar from '@/components/TopBar.vue'
+import metadata from "@/metadata";
+import TopBar from "@/components/TopBar.vue";
 
-    export default {
-        name: 'PageList',
-        components: {
-            TopBar
-        },
-        mounted: function () {
-        },
-        methods: {
-            goBack: function () {
-                window.history.length > 1
-                        ? this.$router.go(-1)
-                        : this.$router.push('/')
-            },
-            save: function () {
-                this.$http.get("http://localhost/tyreacpasms/DefaultHandler.ashx?method=save"+this.table_name,{
-                    params:{
-                        data:JSON.stringify(this.entity)
-                    }
-                }).then(function (response) {
-                    var data = response.body;
-                    if(data && data.success) this.$router.go(-1);
-                    else if(!data) alert(data);
-                    else if(data.message) {
-                        alert(data.message);
-                    }
-                })
+export default {
+  name: "PageList",
+  components: {
+    TopBar
+  },
+  mounted: function() {},
+  methods: {
+    goBack: function() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+    },
+    save: function() {
+      this.$http
+        .get(
+          "http://localhost/tyreacpasms/DefaultHandler.ashx?method=save" +
+            this.table_name,
+          {
+            params: {
+              data: JSON.stringify(this.entity)
             }
-        },
-        data: function () {
-            var metadata2 = metadata[this.$route.params.mccaption];
-            function buildDefaultObject(){
-                var default_object = {};
-                var log = metadata2.Columns.map(function (t) {
-                    default_object[t.column_name]  = null;
-                    return default_object;
-                });
-                return default_object;
-            }
-            return Object.assign(metadata2, {
-                entity:this.$route.params.data||buildDefaultObject()
-            });
-        }
+          }
+        )
+        .then(function(response) {
+          var data = response.body;
+          if (data && data.success) this.$router.go(-1);
+          else if (!data) alert(data);
+          else if (data.message) {
+            alert(data.message);
+          }
+        });
     }
+  },
+  data: function() {
+    var metadata2 = metadata[this.$route.params.mccaption];
+    function buildDefaultObject() {
+      var default_object = {};
+      var log = metadata2.Columns.map(function(t) {
+        default_object[t.column_name] = null;
+        return default_object;
+      });
+      return default_object;
+    }
+    return Object.assign(metadata2, {
+      entity: this.$route.params.data || buildDefaultObject()
+    });
+  }
+};
 </script>
 <style scoped>
-    .am-btn {
-        margin: 0px 10px;
-    }
+.am-btn {
+  margin: 0px 10px;
+}
 
-    .page-list {
-        margin-top: 0px;
-        padding: 0px;
-    }
-    #pageList{
-        margin-top:10px;
-    }
-    .top-bar {
-        overflow: hidden;
-        background-color: lightblue;
-        background-repeat: no-repeat;
-        background-size: cover;
-        z-index: -200;
-    }
-    .table-top-buttons, .table-top-buttons>*{
-        float:left;
-    }
-    .container{
-        margin-top:10px;
-    }
-    .table-top-buttons>*{
-        margin:5px;
-    }
+.page-list {
+  margin-top: 0px;
+  padding: 0px;
+}
+#pageList {
+  margin-top: 10px;
+}
+.top-bar {
+  overflow: hidden;
+  background-color: lightblue;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -200;
+}
+.table-top-buttons,
+.table-top-buttons > * {
+  float: left;
+}
+.container {
+  margin-top: 10px;
+}
+.table-top-buttons > * {
+  margin: 5px;
+}
 </style>

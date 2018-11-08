@@ -66,42 +66,9 @@ namespace T
             response.ContentType = "application/json";
             using (IEvaluator ieval = Evaluator.Make(crequest))
             {
-                try
-                {
-                    var val = ieval.Eval(crequest);
-                    var json = val.ToJson();
-                    response.Write(json);
-                }
-                catch (DbEntityValidationException exception)
-                {
-                    crequest.context = null;
-                    response.ContentType = "text/plain";
-                    string newLine = Environment.NewLine;
-                    string message = $"{exception.Message}" +
-                                   $"\n\n" +
-#if DEBUG
-                                $"{string.Join(newLine, exception.EntityValidationErrors.SelectMany(p => p.ValidationErrors).Select(p => $"{p.PropertyName} {p.ErrorMessage}"))}" +
-                                    newLine +
-                                    $"{exception.StackTrace}" +
-#endif
-                               $"";
-                    error(message);
-                    response.Write(message);
-                }
-                catch (Exception exception)
-                {
-                    crequest.context = null;
-                    response.ContentType = "text/plain";
-                    string message = $"{exception.Message}" +
-                                   $"\n\n" +
-#if DEBUG
-                                $"{exception.StackTrace} \r\n{JsonConvert.SerializeObject(exception)}" +
-#endif
-                               $"";
-                    error(message);
-                    response.Write(message);
-                    return;
-                }
+                var val = ieval.Eval(crequest);
+                var json = JsonConvert.SerializeObject(val);
+                response.Write(json);
             }
         }
 

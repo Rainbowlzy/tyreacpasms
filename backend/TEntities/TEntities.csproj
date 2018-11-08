@@ -108,9 +108,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeTemplates\Generator.cs" />
-    <Compile Include="CodeTemplates\ObjectExtension.cs" />
-    <Compile Include="CodeTemplates\StringExtension.cs" />
+    <Compile Include="StringExtension.cs" />
     <None Include="EF\DefaultContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DefaultContext1.cs</LastGenOutput>
@@ -130,6 +128,7 @@
     <Compile Include="EF\ObjectParser.cs" />
     <Compile Include="EF\SPCall.cs" />
     <Compile Include="EF\SPCallParameter.cs" />
+    <Compile Include="ObjectExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="EF\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

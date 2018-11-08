@@ -42,3 +42,4 @@ D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CoreCompileInpu
 D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CopyComplete
 D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.dll
 D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.pdb
+D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csprojAssemblyReference.cache

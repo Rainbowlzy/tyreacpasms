@@ -76,14 +76,6 @@ var prefix = string.Concat(pascalCaseTableName.Where(c=>c>='A' && c<='Z'));
         /// </summary>
         public string DataLevel { get; set; }
         /// <summary>
-        ///  经度
-        /// </summary>
-        public string Longitude { get; set; }
-        /// <summary>
-        ///  纬度
-        /// </summary>
-        public string Latitude { get; set; }
-        /// <summary>
         ///  排序
         /// </summary>
         public int? ord { get; set; }
@@ -97,7 +89,7 @@ var prefix = string.Concat(pascalCaseTableName.Where(c=>c>='A' && c<='Z'));
 		<#
 		if(col.dbtype.ToLower()=="datetime"){
 			#>
-		[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+		//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		<#
 
 		}else if(col.dbtype.ToLower().Split('(')[0]=="nvarchar"){

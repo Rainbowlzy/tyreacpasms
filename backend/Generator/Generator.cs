@@ -7,8 +7,9 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+
+using Generator.Tools;
 using Newtonsoft.Json;
-using T.Evaluators;
 
 namespace TEntities.CodeTemplates
 {
