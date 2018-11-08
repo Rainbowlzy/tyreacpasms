@@ -50,16 +50,12 @@ F:\code\tyreacpasms\backend\SetData\bin\Debug\SetData.pdb
 F:\code\tyreacpasms\backend\SetData\bin\Debug\EntityFramework.dll
 F:\code\tyreacpasms\backend\SetData\bin\Debug\EntityFramework.SqlServer.dll
 F:\code\tyreacpasms\backend\SetData\bin\Debug\XiangXiENtities.dll
-F:\code\tyreacpasms\backend\SetData\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.dll
 F:\code\tyreacpasms\backend\SetData\bin\Debug\Newtonsoft.Json.dll
-F:\code\tyreacpasms\backend\SetData\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
 F:\code\tyreacpasms\backend\SetData\bin\Debug\XiangXiENtities.pdb
 F:\code\tyreacpasms\backend\SetData\bin\Debug\XiangXiENtities.dll.config
 F:\code\tyreacpasms\backend\SetData\bin\Debug\EntityFramework.xml
 F:\code\tyreacpasms\backend\SetData\bin\Debug\EntityFramework.SqlServer.xml
-F:\code\tyreacpasms\backend\SetData\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Validation.xml
 F:\code\tyreacpasms\backend\SetData\bin\Debug\Newtonsoft.Json.xml
-F:\code\tyreacpasms\backend\SetData\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
 F:\code\tyreacpasms\backend\SetData\bin\Debug\zh-Hans\EntityFramework.resources.dll
 F:\code\tyreacpasms\backend\SetData\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
 F:\code\tyreacpasms\backend\SetData\obj\Debug\SetData.csprojAssemblyReference.cache

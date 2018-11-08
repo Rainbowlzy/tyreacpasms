@@ -1,15 +1,19 @@
 <template>
-    <div>
-        <div class="index-page"></div>
-        <div class="col-xs-12">
-            <TopBar style="width:3000px;"></TopBar>
-        </div>
-        <div class="row">
-        </div>
+  <div>
+    
+    <div class="login-header">
+        <h1>黄河电器公司进销存管理系统</h1>
     </div>
+
+    <div class="menu-bar">
+      <TopBar></TopBar>
+    </div>
+
+  </div>
 </template>
 
 <script>
+
 import Blocks from "@/components/Blocks.vue";
 import Map from "@/components/Map.vue";
 import TopBar from "./TopBar.vue";
@@ -18,20 +22,29 @@ export default {
   name: "Index",
   components: { TopBar, Blocks, Map }
 };
+
 </script>
 
 <style scoped>
-.index-page {
-  overflow: hidden;
-  background-color: lightblue;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
+.login-header {
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: -200;
+  width: 100%;
+  background: #2c3e50;
+}
+
+.menu-bar {
+  position: fixed;
+  top: 60px;
+}
+
+.login-header > h1 {
+  height: 60px;
+  line-height: 60px;
+  color: white;
+  font-size: 3em;
+  text-shadow: 3in;
 }
 
 ul {

@@ -115,12 +115,10 @@ namespace T.Evaluators
                     ctx.SaveChanges();
                 }
 
-                var metadata = File.ReadAllText(@"D:\code\tyreacpasms\backend\TEntities\sqlTT_GENERATION_FOLDER\table_schema2_636772745820254096.txt");
                 return new 
                 {
                     success = true,
                     data = token,
-                    metadata,
                     message = "登录成功"
                 };
             }

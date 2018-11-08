@@ -22,7 +22,10 @@
 <script>
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, 
+// mapMutations, 
+// mapActions 
+} from "vuex";
 
 export default {
   name: "Login",
@@ -60,7 +63,10 @@ export default {
 .login-header > h1 {
   position: fixed;
   top: 30%;
-  left: 40%;
+  left: 38%;
+  color:white;
+  font-size: 4em;
+  text-shadow: 3in
 }
 .login-header {
   position: fixed;
