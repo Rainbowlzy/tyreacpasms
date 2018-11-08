@@ -6,113 +6,14 @@
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/07/2018 19:52:12
- * 生成版本：11/07/2018 19:51:53 
+ * 生成时间：11/08/2018 10:17:41
+ * 生成版本：11/08/2018 10:17:24 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 using System;
 
 namespace T.Evaluators 
 {
-
-    /// <summary>
-    /// 用户信息 搜索条件实体模型
-    /// </summary>
-    public class UserInformationSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-
-
-        /// <summary>
-        /// 登录名
-        /// </summary>
-        public string UILoginName { get; set; }
-
-
-
-        /// <summary>
-        /// 昵称
-        /// </summary>
-        public string UINickname { get; set; }
-
-
-
-        /// <summary>
-        /// 真实姓名
-        /// </summary>
-        public string UIRealName { get; set; }
-
-
-
-        /// <summary>
-        /// 头像
-        /// </summary>
-        public string UIHeadPortrait { get; set; }
-
-
-
-        /// <summary>
-        /// 所属部门
-        /// </summary>
-        public string UISubordinateDepartment { get; set; }
-
-
-
-        /// <summary>
-        /// 电话
-        /// </summary>
-        public string UIBooth { get; set; }
-
-
-
-        /// <summary>
-        /// 照片
-        /// </summary>
-        public string UIPhoto { get; set; }
-
-
-
-        /// <summary>
-        /// 用户类型
-        /// </summary>
-        public string UICustomerType { get; set; }
-
-
-
-        /// <summary>
-        /// 用户级别
-        /// </summary>
-        public string UIUserLevel { get; set; }
-
-
-
-        /// <summary>
-        /// 密码
-        /// </summary>
-        public string UICode { get; set; }
-
-
-
-    }
 
     /// <summary>
     /// 菜单配置 搜索条件实体模型
@@ -199,49 +100,6 @@ namespace T.Evaluators
     }
 
     /// <summary>
-    /// 角色配置 搜索条件实体模型
-    /// </summary>
-    public class RoleConfigurationSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
-        public string RCRoleName { get; set; }
-
-
-
-        /// <summary>
-        /// 所属组织
-        /// </summary>
-        public string RCAffiliatedOrganization { get; set; }
-
-
-
-    }
-
-    /// <summary>
     /// 用户角色 搜索条件实体模型
     /// </summary>
     public class UserRoleSearchModel
@@ -279,6 +137,92 @@ namespace T.Evaluators
         /// 登录名
         /// </summary>
         public string URLoginName { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 角色菜单 搜索条件实体模型
+    /// </summary>
+    public class RoleMenuSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string RMRoleName { get; set; }
+
+
+
+        /// <summary>
+        /// 菜单标题
+        /// </summary>
+        public string RMMenuTitle { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 角色配置 搜索条件实体模型
+    /// </summary>
+    public class RoleConfigurationSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string RCRoleName { get; set; }
+
+
+
+        /// <summary>
+        /// 所属组织
+        /// </summary>
+        public string RCAffiliatedOrganization { get; set; }
 
 
 
@@ -414,49 +358,6 @@ namespace T.Evaluators
         /// 值
         /// </summary>
         public string SCAccrued { get; set; }
-
-
-
-    }
-
-    /// <summary>
-    /// 角色菜单 搜索条件实体模型
-    /// </summary>
-    public class RoleMenuSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
-        public string RMRoleName { get; set; }
-
-
-
-        /// <summary>
-        /// 菜单标题
-        /// </summary>
-        public string RMMenuTitle { get; set; }
 
 
 

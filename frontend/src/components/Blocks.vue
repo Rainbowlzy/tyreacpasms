@@ -32,7 +32,7 @@
                 return '/pagelist/'+link.replace(/(\/XiangXi\/gen\/)|(List\.html)/g,'');
             },
             flush_menu: function () {
-                this.$http.get('http://122.193.9.83/XiangXi/DefaultHandler.ashx?method=GetMenuConfigurationByAuth&key=' + this.mccaption).then(function (response) {
+                this.$http.get('http://localhost/tyreacpasms/DefaultHandler.ashx?method=GetMenuConfigurationByAuth&key=' + this.mccaption).then(function (response) {
                     if (!response.data.success) alert(response.data.message);
                     else {
                         this.$data.menu_list = response.data.topmenu;

@@ -6,8 +6,8 @@
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/07/2018 19:52:08
- * 生成版本：11/07/2018 19:51:53 
+ * 生成时间：11/08/2018 10:17:39
+ * 生成版本：11/08/2018 10:17:24 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 using System;
@@ -35,59 +35,6 @@ namespace T
             using (var tx = new DefaultContext())
             {
 				if(string.IsNullOrEmpty(title)) return string.Empty;
-				
-							
-				else if (title == "UserInformation")
-				{
-					buf.AppendLine("唯一编号\t登录名\t昵称\t真实姓名\t头像\t所属部门\t电话\t照片\t用户类型\t用户级别\t密码\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (UserInformation);
-					foreach (var entity in tx.UserInformation)
-					{
-						buf.Append(entity.id);
-						buf.Append("\t");
-						
-						
-							
-						buf.Append(entity.UILoginName);buf.Append("\t");
-							
-							
-						buf.Append(entity.UINickname);buf.Append("\t");
-							
-							
-						buf.Append(entity.UIRealName);buf.Append("\t");
-							
-							
-						buf.Append(entity.UIHeadPortrait);buf.Append("\t");
-							
-							
-						buf.Append(entity.UISubordinateDepartment);buf.Append("\t");
-							
-							
-						buf.Append(entity.UIBooth);buf.Append("\t");
-							
-							
-						buf.Append(entity.UIPhoto);buf.Append("\t");
-							
-							
-						buf.Append(entity.UICustomerType);buf.Append("\t");
-							
-							
-						buf.Append(entity.UIUserLevel);buf.Append("\t");
-							
-							
-						buf.Append(entity.UICode);buf.Append("\t");
-							
-
-                        buf.Append(entity.ord); buf.Append("\t");
-                        buf.Append(entity.VersionNo); buf.Append("\t");
-                        buf.Append(entity.TransactionID); buf.Append("\t");
-                        buf.Append(entity.CreateBy); buf.Append("\t");
-                        buf.Append(entity.CreateOn); buf.Append("\t");
-                        buf.Append(entity.UpdateBy); buf.Append("\t");
-                        buf.Append(entity.UpdateOn); buf.Append("\t");
-                        buf.Append(entity.DataLevel); buf.Append("\r\n");
-					}
-				}
 				
 							
 				else if (title == "MenuConfiguration")
@@ -134,35 +81,6 @@ namespace T
 				}
 				
 							
-				else if (title == "RoleConfiguration")
-				{
-					buf.AppendLine("唯一编号\t角色名称\t所属组织\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (RoleConfiguration);
-					foreach (var entity in tx.RoleConfiguration)
-					{
-						buf.Append(entity.id);
-						buf.Append("\t");
-						
-						
-							
-						buf.Append(entity.RCRoleName);buf.Append("\t");
-							
-							
-						buf.Append(entity.RCAffiliatedOrganization);buf.Append("\t");
-							
-
-                        buf.Append(entity.ord); buf.Append("\t");
-                        buf.Append(entity.VersionNo); buf.Append("\t");
-                        buf.Append(entity.TransactionID); buf.Append("\t");
-                        buf.Append(entity.CreateBy); buf.Append("\t");
-                        buf.Append(entity.CreateOn); buf.Append("\t");
-                        buf.Append(entity.UpdateBy); buf.Append("\t");
-                        buf.Append(entity.UpdateOn); buf.Append("\t");
-                        buf.Append(entity.DataLevel); buf.Append("\r\n");
-					}
-				}
-				
-							
 				else if (title == "UserRole")
 				{
 					buf.AppendLine("唯一编号\t角色名称\t登录名\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
@@ -178,6 +96,64 @@ namespace T
 							
 							
 						buf.Append(entity.URLoginName);buf.Append("\t");
+							
+
+                        buf.Append(entity.ord); buf.Append("\t");
+                        buf.Append(entity.VersionNo); buf.Append("\t");
+                        buf.Append(entity.TransactionID); buf.Append("\t");
+                        buf.Append(entity.CreateBy); buf.Append("\t");
+                        buf.Append(entity.CreateOn); buf.Append("\t");
+                        buf.Append(entity.UpdateBy); buf.Append("\t");
+                        buf.Append(entity.UpdateOn); buf.Append("\t");
+                        buf.Append(entity.DataLevel); buf.Append("\r\n");
+					}
+				}
+				
+							
+				else if (title == "RoleMenu")
+				{
+					buf.AppendLine("唯一编号\t角色名称\t菜单标题\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					var type = typeof (RoleMenu);
+					foreach (var entity in tx.RoleMenu)
+					{
+						buf.Append(entity.id);
+						buf.Append("\t");
+						
+						
+							
+						buf.Append(entity.RMRoleName);buf.Append("\t");
+							
+							
+						buf.Append(entity.RMMenuTitle);buf.Append("\t");
+							
+
+                        buf.Append(entity.ord); buf.Append("\t");
+                        buf.Append(entity.VersionNo); buf.Append("\t");
+                        buf.Append(entity.TransactionID); buf.Append("\t");
+                        buf.Append(entity.CreateBy); buf.Append("\t");
+                        buf.Append(entity.CreateOn); buf.Append("\t");
+                        buf.Append(entity.UpdateBy); buf.Append("\t");
+                        buf.Append(entity.UpdateOn); buf.Append("\t");
+                        buf.Append(entity.DataLevel); buf.Append("\r\n");
+					}
+				}
+				
+							
+				else if (title == "RoleConfiguration")
+				{
+					buf.AppendLine("唯一编号\t角色名称\t所属组织\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					var type = typeof (RoleConfiguration);
+					foreach (var entity in tx.RoleConfiguration)
+					{
+						buf.Append(entity.id);
+						buf.Append("\t");
+						
+						
+							
+						buf.Append(entity.RCRoleName);buf.Append("\t");
+							
+							
+						buf.Append(entity.RCAffiliatedOrganization);buf.Append("\t");
 							
 
                         buf.Append(entity.ord); buf.Append("\t");
@@ -265,35 +241,6 @@ namespace T
 							
 							
 						buf.Append(entity.SCAccrued);buf.Append("\t");
-							
-
-                        buf.Append(entity.ord); buf.Append("\t");
-                        buf.Append(entity.VersionNo); buf.Append("\t");
-                        buf.Append(entity.TransactionID); buf.Append("\t");
-                        buf.Append(entity.CreateBy); buf.Append("\t");
-                        buf.Append(entity.CreateOn); buf.Append("\t");
-                        buf.Append(entity.UpdateBy); buf.Append("\t");
-                        buf.Append(entity.UpdateOn); buf.Append("\t");
-                        buf.Append(entity.DataLevel); buf.Append("\r\n");
-					}
-				}
-				
-							
-				else if (title == "RoleMenu")
-				{
-					buf.AppendLine("唯一编号\t角色名称\t菜单标题\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (RoleMenu);
-					foreach (var entity in tx.RoleMenu)
-					{
-						buf.Append(entity.id);
-						buf.Append("\t");
-						
-						
-							
-						buf.Append(entity.RMRoleName);buf.Append("\t");
-							
-							
-						buf.Append(entity.RMMenuTitle);buf.Append("\t");
 							
 
                         buf.Append(entity.ord); buf.Append("\t");
@@ -856,7 +803,7 @@ namespace T
             using (var tx = new DefaultContext())
             {
                 Dictionary<string, Dictionary<string, string>> dic = null;
-                string cacheFile = "table_mapping_file2018-11-7-19-51-53.txt";
+                string cacheFile = "table_mapping_file2018-11-8-10-17-24.txt";
                 if (File.Exists(cacheFile))
                     dic = File.ReadAllText(cacheFile).Deserialize<Dictionary<string, Dictionary<string, string>>>();
                 else
@@ -865,16 +812,16 @@ namespace T
 					dic = new Dictionary<string, Dictionary<string,string>>();
 				
 					
-					dic.Add("UserInformation", new Dictionary<string,string>{ {"UILoginName","登录名"},{"UINickname","昵称"},{"UIRealName","真实姓名"},{"UIHeadPortrait","头像"},{"UISubordinateDepartment","所属部门"},{"UIBooth","电话"},{"UIPhoto","照片"},{"UICustomerType","用户类型"},{"UIUserLevel","用户级别"},{"UICode","密码"} });
-					
-					
 					dic.Add("MenuConfiguration", new Dictionary<string,string>{ {"MCCaption","标题"},{"MCParentTitle","父级标题"},{"MCLink","链接"},{"MCMenuType","菜单类型"},{"MCSequence","顺序"},{"MCDisplayName","显示名称"},{"MCPicture","图片"} });
 					
 					
-					dic.Add("RoleConfiguration", new Dictionary<string,string>{ {"RCRoleName","角色名称"},{"RCAffiliatedOrganization","所属组织"} });
-					
-					
 					dic.Add("UserRole", new Dictionary<string,string>{ {"URRoleName","角色名称"},{"URLoginName","登录名"} });
+					
+					
+					dic.Add("RoleMenu", new Dictionary<string,string>{ {"RMRoleName","角色名称"},{"RMMenuTitle","菜单标题"} });
+					
+					
+					dic.Add("RoleConfiguration", new Dictionary<string,string>{ {"RCRoleName","角色名称"},{"RCAffiliatedOrganization","所属组织"} });
 					
 					
 					dic.Add("LogonRecord", new Dictionary<string,string>{ {"LRLoginName","登录名"},{"LRLoginTime","登录时间"} });
@@ -884,9 +831,6 @@ namespace T
 					
 					
 					dic.Add("SystemConfiguration", new Dictionary<string,string>{ {"SCKey","键"},{"SCAccrued","值"} });
-					
-					
-					dic.Add("RoleMenu", new Dictionary<string,string>{ {"RMRoleName","角色名称"},{"RMMenuTitle","菜单标题"} });
 					
 					
 					dic.Add("Staffname", new Dictionary<string,string>{ {"SJobNumber","工号"},{"SName","姓名"},{"SAffiliate","公司"},{"SDepartment","部门"},{"SPost","职位"},{"SCommonModeOfContact","联系方式"},{"SAlternateContactMode","备用联系方式"},{"STimeOfEntry","入职时间"},{"SDepartureTime","离职时间"},{"SCode","密码"} });
@@ -935,17 +879,6 @@ namespace T
                 var keypair = dic[fileType]; //commentses.ToDictionary(f => f.column_name, f => f.column_description);
                 if (string.IsNullOrEmpty(fileType)) return ;
 
-				else if (fileType == "UserInformation") ExcelHelper.ExcelToNewEntityList<UserInformation>(keypair, filePath, out errorMsg).ForEach(one=>{
-                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
-                    one.CreateOn = one.CreateOn ?? DateTime.Now;
-                    one.TransactionID = transactionId;
-                    one.UpdateOn = DateTime.Now;
-                    one.IsDeleted = 0;
-                    one.DataLevel = user?.DataLevel ?? "01";
-					tx.UserInformation.AddOrUpdate(one);
-					});
-
 				else if (fileType == "MenuConfiguration") ExcelHelper.ExcelToNewEntityList<MenuConfiguration>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
@@ -957,17 +890,6 @@ namespace T
 					tx.MenuConfiguration.AddOrUpdate(one);
 					});
 
-				else if (fileType == "RoleConfiguration") ExcelHelper.ExcelToNewEntityList<RoleConfiguration>(keypair, filePath, out errorMsg).ForEach(one=>{
-                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
-                    one.CreateOn = one.CreateOn ?? DateTime.Now;
-                    one.TransactionID = transactionId;
-                    one.UpdateOn = DateTime.Now;
-                    one.IsDeleted = 0;
-                    one.DataLevel = user?.DataLevel ?? "01";
-					tx.RoleConfiguration.AddOrUpdate(one);
-					});
-
 				else if (fileType == "UserRole") ExcelHelper.ExcelToNewEntityList<UserRole>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
@@ -977,6 +899,28 @@ namespace T
                     one.IsDeleted = 0;
                     one.DataLevel = user?.DataLevel ?? "01";
 					tx.UserRole.AddOrUpdate(one);
+					});
+
+				else if (fileType == "RoleMenu") ExcelHelper.ExcelToNewEntityList<RoleMenu>(keypair, filePath, out errorMsg).ForEach(one=>{
+                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
+                    one.CreateOn = one.CreateOn ?? DateTime.Now;
+                    one.TransactionID = transactionId;
+                    one.UpdateOn = DateTime.Now;
+                    one.IsDeleted = 0;
+                    one.DataLevel = user?.DataLevel ?? "01";
+					tx.RoleMenu.AddOrUpdate(one);
+					});
+
+				else if (fileType == "RoleConfiguration") ExcelHelper.ExcelToNewEntityList<RoleConfiguration>(keypair, filePath, out errorMsg).ForEach(one=>{
+                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
+                    one.CreateOn = one.CreateOn ?? DateTime.Now;
+                    one.TransactionID = transactionId;
+                    one.UpdateOn = DateTime.Now;
+                    one.IsDeleted = 0;
+                    one.DataLevel = user?.DataLevel ?? "01";
+					tx.RoleConfiguration.AddOrUpdate(one);
 					});
 
 				else if (fileType == "LogonRecord") ExcelHelper.ExcelToNewEntityList<LogonRecord>(keypair, filePath, out errorMsg).ForEach(one=>{
@@ -1010,17 +954,6 @@ namespace T
                     one.IsDeleted = 0;
                     one.DataLevel = user?.DataLevel ?? "01";
 					tx.SystemConfiguration.AddOrUpdate(one);
-					});
-
-				else if (fileType == "RoleMenu") ExcelHelper.ExcelToNewEntityList<RoleMenu>(keypair, filePath, out errorMsg).ForEach(one=>{
-                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
-                    one.CreateOn = one.CreateOn ?? DateTime.Now;
-                    one.TransactionID = transactionId;
-                    one.UpdateOn = DateTime.Now;
-                    one.IsDeleted = 0;
-                    one.DataLevel = user?.DataLevel ?? "01";
-					tx.RoleMenu.AddOrUpdate(one);
 					});
 
 				else if (fileType == "Staffname") ExcelHelper.ExcelToNewEntityList<Staffname>(keypair, filePath, out errorMsg).ForEach(one=>{

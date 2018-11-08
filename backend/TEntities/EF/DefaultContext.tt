@@ -46,6 +46,18 @@ modelBuilder.Entity<<#=table_name#>>().Property(p => p.id).HasDatabaseGeneratedO
             var TransactionID = Guid.NewGuid().ToString();
             var CreateBy = "Initialization Job";
             var UICode = "123";
+
+			
+		    UserInformation.AddRange(Enumerable.Range(1000, 1050).Select(i => new UserInformation
+		    {
+		        CreateBy = CreateBy,
+		        TransactionID = TransactionID,
+		        IsDeleted = 0,
+		        DataLevel = "01",
+		        CreateOn = DateTime.Now,
+		        UpdateOn = DateTime.Now,
+		        UpdateBy = CreateBy
+            }));
 			<#
 foreach(var ent in table_schema2.Values){ 
 var table_name = ent.table_name;

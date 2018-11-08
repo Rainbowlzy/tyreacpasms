@@ -35,7 +35,7 @@
                        data-page-size="8"
                        data-id-field="id"
                        data-side-pagination="server"
-                       :data-url="'http://122.193.9.83/XiangXi/DefaultHandler.ashx?method=get'+table_name+'List'"></table>
+                       :data-url="'http://localhost/tyreacpasms/DefaultHandler.ashx?method=get'+table_name+'List'"></table>
             </div>
             <div class="modal fade table_excel_modal-<#=tbl#>">
                 <div class="modal-dialog">
@@ -199,17 +199,17 @@
                 //删除
                 'click .remove': function(e, value, row, index) {
                     //前台删除
-                    $table.bootstrapTable("remove", {
+                    $("#table").bootstrapTable("remove", {
                         field: "id",
                         values: [row.id]
                     });
                     //后台删除
-                    vm.$http.get('http://122.193.9.83/XiangXi/DefaultHandler.ashx?method=delete'+table_name,{
+                    vm.$http.get('http://localhost/tyreacpasms/DefaultHandler.ashx?method=delete'+table_name,{
                         params:{
                             data:JSON.stringify(row)
                         }
                     }).then(function (response) {
-                        $table.bootstrapTable("refresh");
+                        $("#table").bootstrapTable("refresh");
                     });
                 }
             };
@@ -232,7 +232,6 @@
                     formatter: formatters.operateFormatter
                 }
             ])];
-            window.$table = $("#table");
             $("#table").bootstrapTable({
                 striped: true,
                 columns: cols

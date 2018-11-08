@@ -47,7 +47,7 @@
                         : this.$router.push('/')
             },
             save: function () {
-                this.$http.get("http://122.193.9.83/XiangXi/DefaultHandler.ashx?method=save"+this.table_name,{
+                this.$http.get("http://localhost/tyreacpasms/DefaultHandler.ashx?method=save"+this.table_name,{
                     params:{
                         data:JSON.stringify(this.entity)
                     }
