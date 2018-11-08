@@ -25,15 +25,6 @@ F:\code\XiangXi\Generator\obj\Debug\Generator.csproj.CoreCompileInputs.cache
 F:\code\XiangXi\Generator\obj\Debug\Generator.csproj.CopyComplete
 F:\code\XiangXi\Generator\obj\Debug\Generator.dll
 F:\code\XiangXi\Generator\obj\Debug\Generator.pdb
-D:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.dll
-D:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.pdb
-D:\code\tyreacpasms\backend\Generator\bin\Debug\Newtonsoft.Json.dll
-D:\code\tyreacpasms\backend\Generator\bin\Debug\Newtonsoft.Json.xml
-D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csprojAssemblyReference.cache
-D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CoreCompileInputs.cache
-D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CopyComplete
-D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.dll
-D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.pdb
 F:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.dll
 F:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.pdb
 F:\code\tyreacpasms\backend\Generator\bin\Debug\Newtonsoft.Json.dll
@@ -43,3 +34,11 @@ F:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CoreCompileInpu
 F:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CopyComplete
 F:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.dll
 F:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.pdb
+D:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.dll
+D:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.pdb
+D:\code\tyreacpasms\backend\Generator\bin\Debug\Newtonsoft.Json.dll
+D:\code\tyreacpasms\backend\Generator\bin\Debug\Newtonsoft.Json.xml
+D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CoreCompileInputs.cache
+D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CopyComplete
+D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.dll
+D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.pdb

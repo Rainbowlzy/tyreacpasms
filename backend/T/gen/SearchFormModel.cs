@@ -6,8 +6,8 @@
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/08/2018 10:17:41
- * 生成版本：11/08/2018 10:17:24 
+ * 生成时间：11/08/2018 11:51:14
+ * 生成版本：11/08/2018 11:49:42 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 using System;
@@ -100,49 +100,6 @@ namespace T.Evaluators
     }
 
     /// <summary>
-    /// 用户角色 搜索条件实体模型
-    /// </summary>
-    public class UserRoleSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
-        public string URRoleName { get; set; }
-
-
-
-        /// <summary>
-        /// 登录名
-        /// </summary>
-        public string URLoginName { get; set; }
-
-
-
-    }
-
-    /// <summary>
     /// 角色菜单 搜索条件实体模型
     /// </summary>
     public class RoleMenuSearchModel
@@ -186,6 +143,49 @@ namespace T.Evaluators
     }
 
     /// <summary>
+    /// 用户角色 搜索条件实体模型
+    /// </summary>
+    public class UserRoleSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string URRoleName { get; set; }
+
+
+
+        /// <summary>
+        /// 登录名
+        /// </summary>
+        public string URLoginName { get; set; }
+
+
+
+    }
+
+    /// <summary>
     /// 角色配置 搜索条件实体模型
     /// </summary>
     public class RoleConfigurationSearchModel
@@ -223,6 +223,145 @@ namespace T.Evaluators
         /// 所属组织
         /// </summary>
         public string RCAffiliatedOrganization { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 用户信息 搜索条件实体模型
+    /// </summary>
+    public class UserInformationSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 工号
+        /// </summary>
+        public string UIJobNumber { get; set; }
+
+
+
+        /// <summary>
+        /// 登录名
+        /// </summary>
+        public string UILoginName { get; set; }
+
+
+
+        /// <summary>
+        /// 昵称
+        /// </summary>
+        public string UINickname { get; set; }
+
+
+
+        /// <summary>
+        /// 真实姓名
+        /// </summary>
+        public string UIRealName { get; set; }
+
+
+
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string UIHeadPortrait { get; set; }
+
+
+
+        /// <summary>
+        /// 部门
+        /// </summary>
+        public string UIDepartment { get; set; }
+
+
+
+        /// <summary>
+        /// 职位
+        /// </summary>
+        public string UIPost { get; set; }
+
+
+
+        /// <summary>
+        /// 电话
+        /// </summary>
+        public string UIBooth { get; set; }
+
+
+
+        /// <summary>
+        /// 照片
+        /// </summary>
+        public string UIPhoto { get; set; }
+
+
+
+        /// <summary>
+        /// 用户类型
+        /// </summary>
+        public string UICustomerType { get; set; }
+
+
+
+        /// <summary>
+        /// 用户级别
+        /// </summary>
+        public string UIUserLevel { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始入职时间
+        /// </summary>
+        public DateTime? FromUITimeOfEntry { get; set; }
+
+        /// <summary>
+        /// 结束入职时间
+        /// </summary>
+        public DateTime? ToUITimeOfEntry { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始离职时间
+        /// </summary>
+        public DateTime? FromUIDepartureTime { get; set; }
+
+        /// <summary>
+        /// 结束离职时间
+        /// </summary>
+        public DateTime? ToUIDepartureTime { get; set; }
+
+
+
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string UICode { get; set; }
 
 
 
@@ -358,117 +497,6 @@ namespace T.Evaluators
         /// 值
         /// </summary>
         public string SCAccrued { get; set; }
-
-
-
-    }
-
-    /// <summary>
-    /// 员工 搜索条件实体模型
-    /// </summary>
-    public class StaffnameSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-
-
-        /// <summary>
-        /// 工号
-        /// </summary>
-        public string SJobNumber { get; set; }
-
-
-
-        /// <summary>
-        /// 姓名
-        /// </summary>
-        public string SName { get; set; }
-
-
-
-        /// <summary>
-        /// 公司
-        /// </summary>
-        public string SAffiliate { get; set; }
-
-
-
-        /// <summary>
-        /// 部门
-        /// </summary>
-        public string SDepartment { get; set; }
-
-
-
-        /// <summary>
-        /// 职位
-        /// </summary>
-        public string SPost { get; set; }
-
-
-
-        /// <summary>
-        /// 联系方式
-        /// </summary>
-        public string SCommonModeOfContact { get; set; }
-
-
-
-        /// <summary>
-        /// 备用联系方式
-        /// </summary>
-        public string SAlternateContactMode { get; set; }
-
-
-
-
-        /// <summary>
-        /// 开始入职时间
-        /// </summary>
-        public DateTime? FromSTimeOfEntry { get; set; }
-
-        /// <summary>
-        /// 结束入职时间
-        /// </summary>
-        public DateTime? ToSTimeOfEntry { get; set; }
-
-
-
-
-        /// <summary>
-        /// 开始离职时间
-        /// </summary>
-        public DateTime? FromSDepartureTime { get; set; }
-
-        /// <summary>
-        /// 结束离职时间
-        /// </summary>
-        public DateTime? ToSDepartureTime { get; set; }
-
-
-
-        /// <summary>
-        /// 密码
-        /// </summary>
-        public string SCode { get; set; }
 
 
 

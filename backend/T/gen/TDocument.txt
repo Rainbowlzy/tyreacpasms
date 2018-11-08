@@ -5,8 +5,8 @@
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/08/2018 10:17:41
- * 生成版本：11/08/2018 10:17:24 
+ * 生成时间：11/08/2018 11:51:14
+ * 生成版本：11/08/2018 11:49:42 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 
@@ -103,78 +103,6 @@ Git：			http://122.97.218.162:18206/summary/T.git
 
 
 -----------------------------------------------------------------------
-模块名称：		用户角色
-模块英文名称：		UserRole
-Git：			http://122.97.218.162:18206/summary/T.git
-参考页面：		http://223.112.112.26:58080/T/gen/UserRoleList.html
------------------------------------------------------------------------
-接口名称：保存用户角色接口
-接口功能：保存（新增/编辑）用户角色结果
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=SaveUserRole
-	data=JSON.stringify({
-		id : "string",
-		URRoleName : "string", //角色名称
-		URLoginName : "string", //登录名
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：删除用户角色接口
-接口功能：删除一条用户角色记录
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=DeleteUserRole
-	data=JSON.stringify({
-		id : "string",
-		URRoleName : "string", //角色名称
-		URLoginName : "string", //登录名
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：查询用户角色列表接口
-接口功能：分页查询用户角色列表
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=GetUserRoleList
-	data=JSON.stringify({
-		id : "string",
-		URRoleName : "string",//角色名称
-		URLoginName : "string",//登录名
-	})
-	search=搜索关键字
-	offset=分页页码
-	limit=每页条数
-	sort=排序字段(URRoleName,URLoginName,)
-	order=asc/desc
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息",
-		total: 条数,
-		rows: [
-		{
-			id : "string",
-			URRoleName : "string",//角色名称
-			URLoginName : "string",//登录名
-		}
-		]
-	}
-
-
-
------------------------------------------------------------------------
 模块名称：		角色菜单
 模块英文名称：		RoleMenu
 Git：			http://122.97.218.162:18206/summary/T.git
@@ -247,6 +175,78 @@ Git：			http://122.97.218.162:18206/summary/T.git
 
 
 -----------------------------------------------------------------------
+模块名称：		用户角色
+模块英文名称：		UserRole
+Git：			http://122.97.218.162:18206/summary/T.git
+参考页面：		http://223.112.112.26:58080/T/gen/UserRoleList.html
+-----------------------------------------------------------------------
+接口名称：保存用户角色接口
+接口功能：保存（新增/编辑）用户角色结果
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=SaveUserRole
+	data=JSON.stringify({
+		id : "string",
+		URRoleName : "string", //角色名称
+		URLoginName : "string", //登录名
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：删除用户角色接口
+接口功能：删除一条用户角色记录
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=DeleteUserRole
+	data=JSON.stringify({
+		id : "string",
+		URRoleName : "string", //角色名称
+		URLoginName : "string", //登录名
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：查询用户角色列表接口
+接口功能：分页查询用户角色列表
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=GetUserRoleList
+	data=JSON.stringify({
+		id : "string",
+		URRoleName : "string",//角色名称
+		URLoginName : "string",//登录名
+	})
+	search=搜索关键字
+	offset=分页页码
+	limit=每页条数
+	sort=排序字段(URRoleName,URLoginName,)
+	order=asc/desc
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息",
+		total: 条数,
+		rows: [
+		{
+			id : "string",
+			URRoleName : "string",//角色名称
+			URLoginName : "string",//登录名
+		}
+		]
+	}
+
+
+
+-----------------------------------------------------------------------
 模块名称：		角色配置
 模块英文名称：		RoleConfiguration
 Git：			http://122.97.218.162:18206/summary/T.git
@@ -312,6 +312,126 @@ Git：			http://122.97.218.162:18206/summary/T.git
 			id : "string",
 			RCRoleName : "string",//角色名称
 			RCAffiliatedOrganization : "string",//所属组织
+		}
+		]
+	}
+
+
+
+-----------------------------------------------------------------------
+模块名称：		用户信息
+模块英文名称：		UserInformation
+Git：			http://122.97.218.162:18206/summary/T.git
+参考页面：		http://223.112.112.26:58080/T/gen/UserInformationList.html
+-----------------------------------------------------------------------
+接口名称：保存用户信息接口
+接口功能：保存（新增/编辑）用户信息结果
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=SaveUserInformation
+	data=JSON.stringify({
+		id : "string",
+		UIJobNumber : "string", //工号
+		UILoginName : "string", //登录名
+		UINickname : "string", //昵称
+		UIRealName : "string", //真实姓名
+		UIHeadPortrait : "string", //头像
+		UIDepartment : "string", //部门
+		UIPost : "string", //职位
+		UIBooth : "string", //电话
+		UIPhoto : "string", //照片
+		UICustomerType : "string", //用户类型
+		UIUserLevel : "string", //用户级别
+		UITimeOfEntry : "Nullable<DateTime>", //入职时间
+		UIDepartureTime : "Nullable<DateTime>", //离职时间
+		UICode : "string", //密码
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：删除用户信息接口
+接口功能：删除一条用户信息记录
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=DeleteUserInformation
+	data=JSON.stringify({
+		id : "string",
+		UIJobNumber : "string", //工号
+		UILoginName : "string", //登录名
+		UINickname : "string", //昵称
+		UIRealName : "string", //真实姓名
+		UIHeadPortrait : "string", //头像
+		UIDepartment : "string", //部门
+		UIPost : "string", //职位
+		UIBooth : "string", //电话
+		UIPhoto : "string", //照片
+		UICustomerType : "string", //用户类型
+		UIUserLevel : "string", //用户级别
+		UITimeOfEntry : "Nullable<DateTime>", //入职时间
+		UIDepartureTime : "Nullable<DateTime>", //离职时间
+		UICode : "string", //密码
+	})
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息"
+	}
+-----------------------------------------------------------------------
+接口名称：查询用户信息列表接口
+接口功能：分页查询用户信息列表
+接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
+参数：
+	method=GetUserInformationList
+	data=JSON.stringify({
+		id : "string",
+		UIJobNumber : "string",//工号
+		UILoginName : "string",//登录名
+		UINickname : "string",//昵称
+		UIRealName : "string",//真实姓名
+		UIHeadPortrait : "string",//头像
+		UIDepartment : "string",//部门
+		UIPost : "string",//职位
+		UIBooth : "string",//电话
+		UIPhoto : "string",//照片
+		UICustomerType : "string",//用户类型
+		UIUserLevel : "string",//用户级别
+		UITimeOfEntry : "Nullable<DateTime>",//入职时间
+		UIDepartureTime : "Nullable<DateTime>",//离职时间
+		UICode : "string",//密码
+	})
+	search=搜索关键字
+	offset=分页页码
+	limit=每页条数
+	sort=排序字段(UIJobNumber,UILoginName,UINickname,UIRealName,UIHeadPortrait,UIDepartment,UIPost,UIBooth,UIPhoto,UICustomerType,UIUserLevel,UITimeOfEntry,UIDepartureTime,UICode,)
+	order=asc/desc
+
+返回结果：
+	{
+		success : true/false,
+		message : "错误消息",
+		total: 条数,
+		rows: [
+		{
+			id : "string",
+			UIJobNumber : "string",//工号
+			UILoginName : "string",//登录名
+			UINickname : "string",//昵称
+			UIRealName : "string",//真实姓名
+			UIHeadPortrait : "string",//头像
+			UIDepartment : "string",//部门
+			UIPost : "string",//职位
+			UIBooth : "string",//电话
+			UIPhoto : "string",//照片
+			UICustomerType : "string",//用户类型
+			UIUserLevel : "string",//用户级别
+			UITimeOfEntry : "Nullable<DateTime>",//入职时间
+			UIDepartureTime : "Nullable<DateTime>",//离职时间
+			UICode : "string",//密码
 		}
 		]
 	}
@@ -528,110 +648,6 @@ Git：			http://122.97.218.162:18206/summary/T.git
 			id : "string",
 			SCKey : "string",//键
 			SCAccrued : "string",//值
-		}
-		]
-	}
-
-
-
------------------------------------------------------------------------
-模块名称：		员工
-模块英文名称：		Staffname
-Git：			http://122.97.218.162:18206/summary/T.git
-参考页面：		http://223.112.112.26:58080/T/gen/StaffnameList.html
------------------------------------------------------------------------
-接口名称：保存员工接口
-接口功能：保存（新增/编辑）员工结果
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=SaveStaffname
-	data=JSON.stringify({
-		id : "string",
-		SJobNumber : "string", //工号
-		SName : "string", //姓名
-		SAffiliate : "string", //公司
-		SDepartment : "string", //部门
-		SPost : "string", //职位
-		SCommonModeOfContact : "string", //联系方式
-		SAlternateContactMode : "string", //备用联系方式
-		STimeOfEntry : "Nullable<DateTime>", //入职时间
-		SDepartureTime : "Nullable<DateTime>", //离职时间
-		SCode : "string", //密码
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：删除员工接口
-接口功能：删除一条员工记录
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=DeleteStaffname
-	data=JSON.stringify({
-		id : "string",
-		SJobNumber : "string", //工号
-		SName : "string", //姓名
-		SAffiliate : "string", //公司
-		SDepartment : "string", //部门
-		SPost : "string", //职位
-		SCommonModeOfContact : "string", //联系方式
-		SAlternateContactMode : "string", //备用联系方式
-		STimeOfEntry : "Nullable<DateTime>", //入职时间
-		SDepartureTime : "Nullable<DateTime>", //离职时间
-		SCode : "string", //密码
-	})
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息"
-	}
------------------------------------------------------------------------
-接口名称：查询员工列表接口
-接口功能：分页查询员工列表
-接口地址：[POST] http://223.112.112.26:58080/T/DefaultHandler.ashx
-参数：
-	method=GetStaffnameList
-	data=JSON.stringify({
-		id : "string",
-		SJobNumber : "string",//工号
-		SName : "string",//姓名
-		SAffiliate : "string",//公司
-		SDepartment : "string",//部门
-		SPost : "string",//职位
-		SCommonModeOfContact : "string",//联系方式
-		SAlternateContactMode : "string",//备用联系方式
-		STimeOfEntry : "Nullable<DateTime>",//入职时间
-		SDepartureTime : "Nullable<DateTime>",//离职时间
-		SCode : "string",//密码
-	})
-	search=搜索关键字
-	offset=分页页码
-	limit=每页条数
-	sort=排序字段(SJobNumber,SName,SAffiliate,SDepartment,SPost,SCommonModeOfContact,SAlternateContactMode,STimeOfEntry,SDepartureTime,SCode,)
-	order=asc/desc
-
-返回结果：
-	{
-		success : true/false,
-		message : "错误消息",
-		total: 条数,
-		rows: [
-		{
-			id : "string",
-			SJobNumber : "string",//工号
-			SName : "string",//姓名
-			SAffiliate : "string",//公司
-			SDepartment : "string",//部门
-			SPost : "string",//职位
-			SCommonModeOfContact : "string",//联系方式
-			SAlternateContactMode : "string",//备用联系方式
-			STimeOfEntry : "Nullable<DateTime>",//入职时间
-			SDepartureTime : "Nullable<DateTime>",//离职时间
-			SCode : "string",//密码
 		}
 		]
 	}

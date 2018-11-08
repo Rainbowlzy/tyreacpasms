@@ -315,15 +315,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Content>
-    <Content Include="gen\Staffname.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\StaffnameAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\StaffnameList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
     <Content Include="gen\Supplier.html">
       <DependentUpon>PageOneHTML.tt</DependentUpon>
     </Content>
@@ -358,6 +349,15 @@
       <DependentUpon>Analysis.tt</DependentUpon>
     </Content>
     <Content Include="gen\TypeOfGoodsList.html">
+      <DependentUpon>PageListHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformation.html">
+      <DependentUpon>PageOneHTML.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformationAnalysis.html">
+      <DependentUpon>Analysis.tt</DependentUpon>
+    </Content>
+    <Content Include="gen\UserInformationList.html">
       <DependentUpon>PageListHTML.tt</DependentUpon>
     </Content>
     <Content Include="gen\UserMenu.html">

@@ -1,8 +1,8 @@
   
 <!-------------------------------------------------------------------------------------------------------------------
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/08/2018 10:17:40
- * 生成版本：11/08/2018 10:17:24 
+ * 生成时间：11/08/2018 11:51:13
+ * 生成版本：11/08/2018 11:49:42 
  * 作者：路正遥
 *-------------------------------------------------------------------------------------------------------------------> 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="renderer" content="webkit"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <title>员工</title>
+    <title>用户信息</title>
     <link rel="shortcut icon" href="../assets/i/bitbug_favicon.ico" />
     <meta charset="utf-8"/>
     <link href="../assets/css/pageonecss.css" rel="stylesheet" />
@@ -36,25 +36,25 @@
     <script src="../assets/js/0-common/third-party/zeroclipboard/ZeroClipboard.js"></script>
     <script src="../assets/js/0-common/require.js"></script>
     <script src="../assets/js/0-common/app.js"></script>
-    <script src="Staffname.js"></script>
+    <script src="UserInformation.js"></script>
 </head>
 <body>
-<div  id="Staffname">
+<div  id="UserInformation">
 	<div v-if="!(request||{}).hidden_title"><page-top :has-background="true"></page-top></div>
 <div class="container">
-	<h3>员工</h3>
+	<h3>用户信息</h3>
 		<form role="form" class="col-xs-11 form-horizontal">
 
 <div class=""  style="margin-top:5px;">
 	<div class="container" style="margin-bottom: 20px;">
 			<a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
-			<button type="button" class="btn btn-info excel-import-button-Staffname"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
-			<!--<a href="/T/ExportSchema.ashx?title=Staffname" class="btn btn-primary">Excel导出</a>-->
+			<button type="button" class="btn btn-info excel-import-button-UserInformation"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
+			<!--<a href="/T/ExportSchema.ashx?title=UserInformation" class="btn btn-primary">Excel导出</a>-->
 			<button type="button" id="submit" @click="save" class="btn  btn-info"><i class="glyphicon glyphicon-circle-arrow-up"></i>提交</button>
 			<button type="button" id="submit" @click="save_as_public" class="btn  btn-info"><i class="glyphicon glyphicon-circle-arrow-up"></i>公开发布</button>
 	</div>
 
-    <div class="modal fade table_excel_modal-Staffname">
+    <div class="modal fade table_excel_modal-UserInformation">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -73,7 +73,7 @@
 					<div class="row" >						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="SJobNumber">
+                                <label class="col-sm-3 control-label" for="UIJobNumber">
 									工号
 								</label>
                                 <div class="col-sm-8">
@@ -81,44 +81,74 @@
 						<input 
 											class="form-control" 
 											type="text" 
-											id="SJobNumber" 
-											v-model="SJobNumber" 
+											id="UIJobNumber" 
+											v-model="UIJobNumber" 
 											placeholder="">                                </div>
                             </div>
                         </div>						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="SName">
-									姓名
+                                <label class="col-sm-3 control-label" for="UILoginName">
+									登录名
 								</label>
                                 <div class="col-sm-8">
 															
 						<input 
 											class="form-control" 
 											type="text" 
-											id="SName" 
-											v-model="SName" 
+											id="UILoginName" 
+											v-model="UILoginName" 
 											placeholder="">                                </div>
                             </div>
                         </div>						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="SAffiliate">
-									公司
+                                <label class="col-sm-3 control-label" for="UINickname">
+									昵称
 								</label>
                                 <div class="col-sm-8">
 															
 						<input 
 											class="form-control" 
 											type="text" 
-											id="SAffiliate" 
-											v-model="SAffiliate" 
+											id="UINickname" 
+											v-model="UINickname" 
 											placeholder="">                                </div>
                             </div>
                         </div>						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="SDepartment">
+                                <label class="col-sm-3 control-label" for="UIRealName">
+									真实姓名
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="UIRealName" 
+											v-model="UIRealName" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="UIHeadPortrait">
+									头像
+								</label>
+                                <div class="col-sm-8">
+																		
+                                <div>
+                                    <c-fileinput v-model="UIHeadPortrait"></c-fileinput>
+                                </div>
+                                <input v-model="UIHeadPortrait" class="imageURL" hidden="hidden" @change="val=>UIHeadPortrait=val"  />
+								
+									                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="UIDepartment">
 									部门
 								</label>
                                 <div class="col-sm-8">
@@ -126,14 +156,14 @@
 						<input 
 											class="form-control" 
 											type="text" 
-											id="SDepartment" 
-											v-model="SDepartment" 
+											id="UIDepartment" 
+											v-model="UIDepartment" 
 											placeholder="">                                </div>
                             </div>
                         </div>						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="SPost">
+                                <label class="col-sm-3 control-label" for="UIPost">
 									职位
 								</label>
                                 <div class="col-sm-8">
@@ -141,64 +171,94 @@
 						<input 
 											class="form-control" 
 											type="text" 
-											id="SPost" 
-											v-model="SPost" 
+											id="UIPost" 
+											v-model="UIPost" 
 											placeholder="">                                </div>
                             </div>
                         </div>						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="SCommonModeOfContact">
-									联系方式
+                                <label class="col-sm-3 control-label" for="UIBooth">
+									电话
 								</label>
                                 <div class="col-sm-8">
 															
 						<input 
 											class="form-control" 
 											type="text" 
-											id="SCommonModeOfContact" 
-											v-model="SCommonModeOfContact" 
+											id="UIBooth" 
+											v-model="UIBooth" 
 											placeholder="">                                </div>
                             </div>
                         </div>						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="SAlternateContactMode">
-									备用联系方式
+                                <label class="col-sm-3 control-label" for="UIPhoto">
+									照片
+								</label>
+                                <div class="col-sm-8">
+																		
+                                <div>
+                                    <c-fileinput v-model="UIPhoto"></c-fileinput>
+                                </div>
+                                <input v-model="UIPhoto" class="imageURL" hidden="hidden" @change="val=>UIPhoto=val"  />
+								
+									                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="UICustomerType">
+									用户类型
 								</label>
                                 <div class="col-sm-8">
 															
 						<input 
 											class="form-control" 
 											type="text" 
-											id="SAlternateContactMode" 
-											v-model="SAlternateContactMode" 
+											id="UICustomerType" 
+											v-model="UICustomerType" 
 											placeholder="">                                </div>
                             </div>
                         </div>						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="STimeOfEntry">
+                                <label class="col-sm-3 control-label" for="UIUserLevel">
+									用户级别
+								</label>
+                                <div class="col-sm-8">
+															
+						<input 
+											class="form-control" 
+											type="text" 
+											id="UIUserLevel" 
+											v-model="UIUserLevel" 
+											placeholder="">                                </div>
+                            </div>
+                        </div>						
+						<div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="UITimeOfEntry">
 									入职时间
 								</label>
                                 <div class="col-sm-8">
 									 
-									<input	size="16" id="STimeOfEntry" type="text" v-model="STimeOfEntry" @change="val=>STimeOfEntry=val"class="STimeOfEntry form_datetime form-control">                                </div>
+									<input	size="16" id="UITimeOfEntry" type="text" v-model="UITimeOfEntry" @change="val=>UITimeOfEntry=val"class="UITimeOfEntry form_datetime form-control">                                </div>
                             </div>
                         </div>						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="SDepartureTime">
+                                <label class="col-sm-3 control-label" for="UIDepartureTime">
 									离职时间
 								</label>
                                 <div class="col-sm-8">
 									 
-									<input	size="16" id="SDepartureTime" type="text" v-model="SDepartureTime" @change="val=>SDepartureTime=val"class="SDepartureTime form_datetime form-control">                                </div>
+									<input	size="16" id="UIDepartureTime" type="text" v-model="UIDepartureTime" @change="val=>UIDepartureTime=val"class="UIDepartureTime form_datetime form-control">                                </div>
                             </div>
                         </div>						
 						<div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="SCode">
+                                <label class="col-sm-3 control-label" for="UICode">
 									密码
 								</label>
                                 <div class="col-sm-8">
@@ -206,8 +266,8 @@
 						<input 
 											class="form-control" 
 											type="text" 
-											id="SCode" 
-											v-model="SCode" 
+											id="UICode" 
+											v-model="UICode" 
 											placeholder="">                                </div>
                             </div>
                         </div>					

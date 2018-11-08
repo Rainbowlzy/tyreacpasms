@@ -34,12 +34,10 @@ namespace T
             var buf = new StringBuilder();
             using (var tx = new DefaultContext())
             {
-				if(string.IsNullOrEmpty(title)) return string.Empty;
-				<#
+				if(string.IsNullOrEmpty(title)) return string.Empty;<#
 				foreach(var table in table_schema)
 				{
 							#>
-							
 				else if (title == "<#=table.Key#>")
 				{
 					buf.AppendLine("唯一编号\t<#=string.Join("\\t",table_schema2[table.Key].Columns.Select(p=>p.column_description))#>\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
@@ -47,17 +45,12 @@ namespace T
 					foreach (var entity in tx.<#=table.Key#>)
 					{
 						buf.Append(entity.id);
-						buf.Append("\t");
-						
-						<#
+						buf.Append("\t");<#
 						foreach(var col in table_schema2[table.Key].Columns){
 							#>
-							
-						buf.Append(entity.<#=col.column_name#>);buf.Append("\t");
-							<#
+						buf.Append(entity.<#=col.column_name#>);buf.Append("\t");<#
 						}
 						#>
-
                         buf.Append(entity.ord); buf.Append("\t");
                         buf.Append(entity.VersionNo); buf.Append("\t");
                         buf.Append(entity.TransactionID); buf.Append("\t");
@@ -67,9 +60,7 @@ namespace T
                         buf.Append(entity.UpdateOn); buf.Append("\t");
                         buf.Append(entity.DataLevel); buf.Append("\r\n");
 					}
-				}
-				<#
-							}#>
+				}<#}#>
             }
             return buf.ToString();
         }

@@ -1,8 +1,8 @@
 ﻿
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/08/2018 10:17:36
- * 生成版本：11/08/2018 10:17:24 
+ * 生成时间：11/08/2018 11:51:12
+ * 生成版本：11/08/2018 11:49:42 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 
@@ -359,296 +359,6 @@ namespace T.Evaluators
 
 
     /// <summary>
-    /// 【用户角色】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class UserRoleCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.UserRole.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【用户角色】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateUserRoleEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.UserRole.RemoveRange(ctx.UserRole);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【用户角色】
-    /// </summary>
-    public partial class DeleteUserRoleEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<UserRole>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "删除成功"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.UserRole.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.UserRole.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条用户角色记录";
-    }
-	
-    /// <summary>
-    /// 保存【用户角色】
-    /// </summary>
-    public partial class SaveUserRoleEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			UserRole entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<UserRole>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.UserRole.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.UserRole.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 角色名称
-				entity.URRoleName = HttpUtility.UrlDecode(entity.URRoleName);
-					// NVARCHAR(50) 登录名
-				entity.URLoginName = HttpUtility.UrlDecode(entity.URLoginName);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.UserRole.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条UserRole记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【用户角色】
-    /// </summary>
-    public partial class GetUserRoleEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new UserRole();
-        }
-        public override string Comments=> "获取空的用户角色记录";
-    }
-	
-    /// <summary>
-    /// 查询【用户角色】列表
-    /// </summary>
-    public partial class GetUserRoleListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取UserRole列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<UserRoleSearchModel>() ?? new UserRoleSearchModel();
-                var query = ctx.UserRole.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// URRoleName NVARCHAR(50) 角色名称 
-                if(!string.IsNullOrEmpty(searchModel.URRoleName)) query = query.Where(t=>t.URRoleName.Contains(searchModel.URRoleName));
-                if(sort=="URRoleName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.URRoleName):query.OrderByDescending(t=>t.URRoleName);
-                    isordered = true;
-                }
-				// URLoginName NVARCHAR(50) 登录名 
-                if(!string.IsNullOrEmpty(searchModel.URLoginName)) query = query.Where(t=>t.URLoginName.Contains(searchModel.URLoginName));
-                if(sort=="URLoginName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.URLoginName):query.OrderByDescending(t=>t.URLoginName);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.URRoleName.Contains(search)||t.URLoginName.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<UserRole>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
     /// 【角色菜单】7次查询分别得到七天内记录的条数，形成柱状图，折线图
     /// </summary>
     public partial class RoleMenuCountEvaluator : Evaluator
@@ -939,6 +649,296 @@ namespace T.Evaluators
 
 
     /// <summary>
+    /// 【用户角色】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class UserRoleCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.UserRole.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【用户角色】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateUserRoleEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.UserRole.RemoveRange(ctx.UserRole);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【用户角色】
+    /// </summary>
+    public partial class DeleteUserRoleEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<UserRole>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "删除成功"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.UserRole.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.UserRole.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条用户角色记录";
+    }
+	
+    /// <summary>
+    /// 保存【用户角色】
+    /// </summary>
+    public partial class SaveUserRoleEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			UserRole entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<UserRole>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.UserRole.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.UserRole.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 角色名称
+				entity.URRoleName = HttpUtility.UrlDecode(entity.URRoleName);
+					// NVARCHAR(50) 登录名
+				entity.URLoginName = HttpUtility.UrlDecode(entity.URLoginName);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.UserRole.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条UserRole记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【用户角色】
+    /// </summary>
+    public partial class GetUserRoleEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new UserRole();
+        }
+        public override string Comments=> "获取空的用户角色记录";
+    }
+	
+    /// <summary>
+    /// 查询【用户角色】列表
+    /// </summary>
+    public partial class GetUserRoleListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取UserRole列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<UserRoleSearchModel>() ?? new UserRoleSearchModel();
+                var query = ctx.UserRole.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// URRoleName NVARCHAR(50) 角色名称 
+                if(!string.IsNullOrEmpty(searchModel.URRoleName)) query = query.Where(t=>t.URRoleName.Contains(searchModel.URRoleName));
+                if(sort=="URRoleName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.URRoleName):query.OrderByDescending(t=>t.URRoleName);
+                    isordered = true;
+                }
+				// URLoginName NVARCHAR(50) 登录名 
+                if(!string.IsNullOrEmpty(searchModel.URLoginName)) query = query.Where(t=>t.URLoginName.Contains(searchModel.URLoginName));
+                if(sort=="URLoginName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.URLoginName):query.OrderByDescending(t=>t.URLoginName);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.URRoleName.Contains(search)||t.URLoginName.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<UserRole>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
     /// 【角色配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图
     /// </summary>
     public partial class RoleConfigurationCountEvaluator : Evaluator
@@ -1220,6 +1220,402 @@ namespace T.Evaluators
                 var total = query.Count();
                 var sql = query.ToString();
                 return new CommonOutputList<RoleConfiguration>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【用户信息】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class UserInformationCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.UserInformation.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【用户信息】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateUserInformationEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.UserInformation.RemoveRange(ctx.UserInformation);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【用户信息】
+    /// </summary>
+    public partial class DeleteUserInformationEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<UserInformation>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "删除成功"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.UserInformation.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.UserInformation.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条用户信息记录";
+    }
+	
+    /// <summary>
+    /// 保存【用户信息】
+    /// </summary>
+    public partial class SaveUserInformationEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			UserInformation entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<UserInformation>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.UserInformation.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.UserInformation.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 工号
+				entity.UIJobNumber = HttpUtility.UrlDecode(entity.UIJobNumber);
+					// NVARCHAR(50) 登录名
+				entity.UILoginName = HttpUtility.UrlDecode(entity.UILoginName);
+					// NVARCHAR(50) 昵称
+				entity.UINickname = HttpUtility.UrlDecode(entity.UINickname);
+					// NVARCHAR(50) 真实姓名
+				entity.UIRealName = HttpUtility.UrlDecode(entity.UIRealName);
+					// NVARCHAR(4000) 头像
+				entity.UIHeadPortrait = HttpUtility.UrlDecode(entity.UIHeadPortrait);
+					// NVARCHAR(50) 部门
+				entity.UIDepartment = HttpUtility.UrlDecode(entity.UIDepartment);
+					// NVARCHAR(50) 职位
+				entity.UIPost = HttpUtility.UrlDecode(entity.UIPost);
+					// NVARCHAR(50) 电话
+				entity.UIBooth = HttpUtility.UrlDecode(entity.UIBooth);
+					// NVARCHAR(4000) 照片
+				entity.UIPhoto = HttpUtility.UrlDecode(entity.UIPhoto);
+					// NVARCHAR(50) 用户类型
+				entity.UICustomerType = HttpUtility.UrlDecode(entity.UICustomerType);
+					// NVARCHAR(50) 用户级别
+				entity.UIUserLevel = HttpUtility.UrlDecode(entity.UIUserLevel);
+					// NVARCHAR(50) 密码
+				entity.UICode = HttpUtility.UrlDecode(entity.UICode);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.UserInformation.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条UserInformation记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【用户信息】
+    /// </summary>
+    public partial class GetUserInformationEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new UserInformation();
+        }
+        public override string Comments=> "获取空的用户信息记录";
+    }
+	
+    /// <summary>
+    /// 查询【用户信息】列表
+    /// </summary>
+    public partial class GetUserInformationListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取UserInformation列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<UserInformationSearchModel>() ?? new UserInformationSearchModel();
+                var query = ctx.UserInformation.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// UIJobNumber NVARCHAR(50) 工号 
+                if(!string.IsNullOrEmpty(searchModel.UIJobNumber)) query = query.Where(t=>t.UIJobNumber.Contains(searchModel.UIJobNumber));
+                if(sort=="UIJobNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UIJobNumber):query.OrderByDescending(t=>t.UIJobNumber);
+                    isordered = true;
+                }
+				// UILoginName NVARCHAR(50) 登录名 
+                if(!string.IsNullOrEmpty(searchModel.UILoginName)) query = query.Where(t=>t.UILoginName.Contains(searchModel.UILoginName));
+                if(sort=="UILoginName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UILoginName):query.OrderByDescending(t=>t.UILoginName);
+                    isordered = true;
+                }
+				// UINickname NVARCHAR(50) 昵称 
+                if(!string.IsNullOrEmpty(searchModel.UINickname)) query = query.Where(t=>t.UINickname.Contains(searchModel.UINickname));
+                if(sort=="UINickname")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UINickname):query.OrderByDescending(t=>t.UINickname);
+                    isordered = true;
+                }
+				// UIRealName NVARCHAR(50) 真实姓名 
+                if(!string.IsNullOrEmpty(searchModel.UIRealName)) query = query.Where(t=>t.UIRealName.Contains(searchModel.UIRealName));
+                if(sort=="UIRealName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UIRealName):query.OrderByDescending(t=>t.UIRealName);
+                    isordered = true;
+                }
+				// UIHeadPortrait NVARCHAR(4000) 头像 
+                if(!string.IsNullOrEmpty(searchModel.UIHeadPortrait)) query = query.Where(t=>t.UIHeadPortrait.Contains(searchModel.UIHeadPortrait));
+                if(sort=="UIHeadPortrait")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UIHeadPortrait):query.OrderByDescending(t=>t.UIHeadPortrait);
+                    isordered = true;
+                }
+				// UIDepartment NVARCHAR(50) 部门 
+                if(!string.IsNullOrEmpty(searchModel.UIDepartment)) query = query.Where(t=>t.UIDepartment.Contains(searchModel.UIDepartment));
+                if(sort=="UIDepartment")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UIDepartment):query.OrderByDescending(t=>t.UIDepartment);
+                    isordered = true;
+                }
+				// UIPost NVARCHAR(50) 职位 
+                if(!string.IsNullOrEmpty(searchModel.UIPost)) query = query.Where(t=>t.UIPost.Contains(searchModel.UIPost));
+                if(sort=="UIPost")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UIPost):query.OrderByDescending(t=>t.UIPost);
+                    isordered = true;
+                }
+				// UIBooth NVARCHAR(50) 电话 
+                if(!string.IsNullOrEmpty(searchModel.UIBooth)) query = query.Where(t=>t.UIBooth.Contains(searchModel.UIBooth));
+                if(sort=="UIBooth")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UIBooth):query.OrderByDescending(t=>t.UIBooth);
+                    isordered = true;
+                }
+				// UIPhoto NVARCHAR(4000) 照片 
+                if(!string.IsNullOrEmpty(searchModel.UIPhoto)) query = query.Where(t=>t.UIPhoto.Contains(searchModel.UIPhoto));
+                if(sort=="UIPhoto")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UIPhoto):query.OrderByDescending(t=>t.UIPhoto);
+                    isordered = true;
+                }
+				// UICustomerType NVARCHAR(50) 用户类型 
+                if(!string.IsNullOrEmpty(searchModel.UICustomerType)) query = query.Where(t=>t.UICustomerType.Contains(searchModel.UICustomerType));
+                if(sort=="UICustomerType")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UICustomerType):query.OrderByDescending(t=>t.UICustomerType);
+                    isordered = true;
+                }
+				// UIUserLevel NVARCHAR(50) 用户级别 
+                if(!string.IsNullOrEmpty(searchModel.UIUserLevel)) query = query.Where(t=>t.UIUserLevel.Contains(searchModel.UIUserLevel));
+                if(sort=="UIUserLevel")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UIUserLevel):query.OrderByDescending(t=>t.UIUserLevel);
+                    isordered = true;
+                }
+				// UITimeOfEntry DATETIME 入职时间 
+                if(searchModel.FromUITimeOfEntry!=null) query = query.Where(t=>t.UITimeOfEntry>=searchModel.FromUITimeOfEntry);
+                if(searchModel.ToUITimeOfEntry!=null) query = query.Where(t=>t.UITimeOfEntry<=searchModel.ToUITimeOfEntry);
+                if(sort=="UITimeOfEntry")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UITimeOfEntry):query.OrderByDescending(t=>t.UITimeOfEntry);
+                    isordered = true;
+                }
+				// UIDepartureTime DATETIME 离职时间 
+                if(searchModel.FromUIDepartureTime!=null) query = query.Where(t=>t.UIDepartureTime>=searchModel.FromUIDepartureTime);
+                if(searchModel.ToUIDepartureTime!=null) query = query.Where(t=>t.UIDepartureTime<=searchModel.ToUIDepartureTime);
+                if(sort=="UIDepartureTime")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UIDepartureTime):query.OrderByDescending(t=>t.UIDepartureTime);
+                    isordered = true;
+                }
+				// UICode NVARCHAR(50) 密码 
+                if(!string.IsNullOrEmpty(searchModel.UICode)) query = query.Where(t=>t.UICode.Contains(searchModel.UICode));
+                if(sort=="UICode")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UICode):query.OrderByDescending(t=>t.UICode);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.UIJobNumber.Contains(search)||t.UILoginName.Contains(search)||t.UINickname.Contains(search)||t.UIRealName.Contains(search)||t.UIHeadPortrait.Contains(search)||t.UIDepartment.Contains(search)||t.UIPost.Contains(search)||t.UIBooth.Contains(search)||t.UIPhoto.Contains(search)||t.UICustomerType.Contains(search)||t.UIUserLevel.Contains(search)||t.UICode.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<UserInformation>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };
@@ -2089,366 +2485,6 @@ namespace T.Evaluators
                 var total = query.Count();
                 var sql = query.ToString();
                 return new CommonOutputList<SystemConfiguration>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【员工】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class StaffnameCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.Staffname.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【员工】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateStaffnameEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.Staffname.RemoveRange(ctx.Staffname);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【员工】
-    /// </summary>
-    public partial class DeleteStaffnameEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<Staffname>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "删除成功"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.Staffname.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.Staffname.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条员工记录";
-    }
-	
-    /// <summary>
-    /// 保存【员工】
-    /// </summary>
-    public partial class SaveStaffnameEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			Staffname entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<Staffname>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.Staffname.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.Staffname.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 工号
-				entity.SJobNumber = HttpUtility.UrlDecode(entity.SJobNumber);
-					// NVARCHAR(50) 姓名
-				entity.SName = HttpUtility.UrlDecode(entity.SName);
-					// NVARCHAR(50) 公司
-				entity.SAffiliate = HttpUtility.UrlDecode(entity.SAffiliate);
-					// NVARCHAR(50) 部门
-				entity.SDepartment = HttpUtility.UrlDecode(entity.SDepartment);
-					// NVARCHAR(50) 职位
-				entity.SPost = HttpUtility.UrlDecode(entity.SPost);
-					// NVARCHAR(50) 联系方式
-				entity.SCommonModeOfContact = HttpUtility.UrlDecode(entity.SCommonModeOfContact);
-					// NVARCHAR(50) 备用联系方式
-				entity.SAlternateContactMode = HttpUtility.UrlDecode(entity.SAlternateContactMode);
-					// NVARCHAR(50) 密码
-				entity.SCode = HttpUtility.UrlDecode(entity.SCode);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.Staffname.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条Staffname记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【员工】
-    /// </summary>
-    public partial class GetStaffnameEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new Staffname();
-        }
-        public override string Comments=> "获取空的员工记录";
-    }
-	
-    /// <summary>
-    /// 查询【员工】列表
-    /// </summary>
-    public partial class GetStaffnameListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取Staffname列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<StaffnameSearchModel>() ?? new StaffnameSearchModel();
-                var query = ctx.Staffname.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// SJobNumber NVARCHAR(50) 工号 
-                if(!string.IsNullOrEmpty(searchModel.SJobNumber)) query = query.Where(t=>t.SJobNumber.Contains(searchModel.SJobNumber));
-                if(sort=="SJobNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SJobNumber):query.OrderByDescending(t=>t.SJobNumber);
-                    isordered = true;
-                }
-				// SName NVARCHAR(50) 姓名 
-                if(!string.IsNullOrEmpty(searchModel.SName)) query = query.Where(t=>t.SName.Contains(searchModel.SName));
-                if(sort=="SName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SName):query.OrderByDescending(t=>t.SName);
-                    isordered = true;
-                }
-				// SAffiliate NVARCHAR(50) 公司 
-                if(!string.IsNullOrEmpty(searchModel.SAffiliate)) query = query.Where(t=>t.SAffiliate.Contains(searchModel.SAffiliate));
-                if(sort=="SAffiliate")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SAffiliate):query.OrderByDescending(t=>t.SAffiliate);
-                    isordered = true;
-                }
-				// SDepartment NVARCHAR(50) 部门 
-                if(!string.IsNullOrEmpty(searchModel.SDepartment)) query = query.Where(t=>t.SDepartment.Contains(searchModel.SDepartment));
-                if(sort=="SDepartment")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SDepartment):query.OrderByDescending(t=>t.SDepartment);
-                    isordered = true;
-                }
-				// SPost NVARCHAR(50) 职位 
-                if(!string.IsNullOrEmpty(searchModel.SPost)) query = query.Where(t=>t.SPost.Contains(searchModel.SPost));
-                if(sort=="SPost")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SPost):query.OrderByDescending(t=>t.SPost);
-                    isordered = true;
-                }
-				// SCommonModeOfContact NVARCHAR(50) 联系方式 
-                if(!string.IsNullOrEmpty(searchModel.SCommonModeOfContact)) query = query.Where(t=>t.SCommonModeOfContact.Contains(searchModel.SCommonModeOfContact));
-                if(sort=="SCommonModeOfContact")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SCommonModeOfContact):query.OrderByDescending(t=>t.SCommonModeOfContact);
-                    isordered = true;
-                }
-				// SAlternateContactMode NVARCHAR(50) 备用联系方式 
-                if(!string.IsNullOrEmpty(searchModel.SAlternateContactMode)) query = query.Where(t=>t.SAlternateContactMode.Contains(searchModel.SAlternateContactMode));
-                if(sort=="SAlternateContactMode")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SAlternateContactMode):query.OrderByDescending(t=>t.SAlternateContactMode);
-                    isordered = true;
-                }
-				// STimeOfEntry DATETIME 入职时间 
-                if(searchModel.FromSTimeOfEntry!=null) query = query.Where(t=>t.STimeOfEntry>=searchModel.FromSTimeOfEntry);
-                if(searchModel.ToSTimeOfEntry!=null) query = query.Where(t=>t.STimeOfEntry<=searchModel.ToSTimeOfEntry);
-                if(sort=="STimeOfEntry")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.STimeOfEntry):query.OrderByDescending(t=>t.STimeOfEntry);
-                    isordered = true;
-                }
-				// SDepartureTime DATETIME 离职时间 
-                if(searchModel.FromSDepartureTime!=null) query = query.Where(t=>t.SDepartureTime>=searchModel.FromSDepartureTime);
-                if(searchModel.ToSDepartureTime!=null) query = query.Where(t=>t.SDepartureTime<=searchModel.ToSDepartureTime);
-                if(sort=="SDepartureTime")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SDepartureTime):query.OrderByDescending(t=>t.SDepartureTime);
-                    isordered = true;
-                }
-				// SCode NVARCHAR(50) 密码 
-                if(!string.IsNullOrEmpty(searchModel.SCode)) query = query.Where(t=>t.SCode.Contains(searchModel.SCode));
-                if(sort=="SCode")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SCode):query.OrderByDescending(t=>t.SCode);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.SJobNumber.Contains(search)||t.SName.Contains(search)||t.SAffiliate.Contains(search)||t.SDepartment.Contains(search)||t.SPost.Contains(search)||t.SCommonModeOfContact.Contains(search)||t.SAlternateContactMode.Contains(search)||t.SCode.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<Staffname>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };

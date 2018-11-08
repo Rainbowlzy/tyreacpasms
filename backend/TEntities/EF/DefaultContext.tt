@@ -46,10 +46,13 @@ modelBuilder.Entity<<#=table_name#>>().Property(p => p.id).HasDatabaseGeneratedO
             var TransactionID = Guid.NewGuid().ToString();
             var CreateBy = "Initialization Job";
             var UICode = "123";
-
 			
+			if(!UserInformation.Any())
 		    UserInformation.AddRange(Enumerable.Range(1000, 1050).Select(i => new UserInformation
-		    {
+            {
+                UIJobNumber = i.ToString(),
+                UILoginName = i.ToString(),
+                UICode = i.ToString(),
 		        CreateBy = CreateBy,
 		        TransactionID = TransactionID,
 		        IsDeleted = 0,

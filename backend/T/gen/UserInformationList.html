@@ -1,8 +1,8 @@
   
 <!-------------------------------------------------------------------------------------------------------------------
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/08/2018 10:17:40
- * 生成版本：11/08/2018 10:17:24 
+ * 生成时间：11/08/2018 11:51:13
+ * 生成版本：11/08/2018 11:49:42 
  * 作者：路正遥
 *-------------------------------------------------------------------------------------------------------------------> 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="renderer" content="webkit" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>员工</title>
+    <title>用户信息</title>
     <meta charset="utf-8" />
 	
     <link href="../assets/css/0-common/bootstrap.min.css" rel="stylesheet">
@@ -42,12 +42,12 @@
     <link rel="shortcut icon" href="../assets/i/bitbug_favicon.ico" />
     <link href="../assets/css/0-common/common.css" rel="stylesheet" />
     <script src="../assets/js/0-common/app.js"></script>
-    <script src="StaffnameList.js"></script>
+    <script src="UserInformationList.js"></script>
     <link href="../assets/css/pageonecss.css" rel="stylesheet" />
     <link href="../assets/css/2-index/business.css" rel="stylesheet" />
 </head>
 <body>
-	<div id="cnavStaffname">
+	<div id="cnavUserInformation">
 	<div v-if="!(request||{}).hidden_title"><page-top :has-background="true" :nav-list="nav_list"></page-top></div>
     <div class="container">
 		<div id="myAlert" class="alert alert-warning" style="display:none;">
@@ -63,16 +63,16 @@
 			</ol>
 		</div>
 		<div class="row">
-			<div style="float:left;margin-top:5px;" id="buttonStaffname">
-				<a href="#"><h3>员工</h3></a>
+			<div style="float:left;margin-top:5px;" id="buttonUserInformation">
+				<a href="#"><h3>用户信息</h3></a>
 				<a href="javascript:history.go(-1)" id="table-back" class="btn btn-success"><i class="glyphicon glyphicon-menu-left"></i>返回</a>
 				<!--<button id="table-remove" type="button" class="btn btn-danger" disabled="disabled"><i class="glyphicon glyphicon-remove"></i>删除</button>-->
-				<a href="/T/gen/Staffname.html" id="table-add" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>新增</a>
-				<button type="button" class="btn btn-info excel-import-button-Staffname"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
-				<!--<a href="/T/ExportSchema.ashx?title=Staffname" class="btn btn-primary">Excel导出</a>-->
+				<a href="/T/gen/UserInformation.html" id="table-add" type="button" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>新增</a>
+				<button type="button" class="btn btn-info excel-import-button-UserInformation"><i class="glyphicon glyphicon-cloud-upload"></i>Excel导入</button>
+				<!--<a href="/T/ExportSchema.ashx?title=UserInformation" class="btn btn-primary">Excel导出</a>-->
 			</div>
 		</div>
-        <table id="tableStaffname"
+        <table id="tableUserInformation"
                 data-search="true"
                 data-show-refresh="true"
                 data-show-columns="true"
@@ -85,7 +85,7 @@
 					
 
 					
-    <div class="modal fade table_excel_modal-Staffname">
+    <div class="modal fade table_excel_modal-UserInformation">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
