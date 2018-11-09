@@ -19,25 +19,6 @@ export default {
 </script>
 
 <style scoped>
-.login-header {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  background: #2c3e50;
-}
-
-.menu-bar {
-}
-
-.login-header > h1 {
-  height: 60px;
-  line-height: 60px;
-  color: white;
-  font-size: 3em;
-  text-shadow: 3in;
-}
-
 ul {
   list-style-type: none;
 }

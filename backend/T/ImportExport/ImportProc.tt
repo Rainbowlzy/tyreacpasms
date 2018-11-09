@@ -94,7 +94,7 @@ namespace T
 				{
 					#>
 					
-					dic.Add("<#=table.Key#>", new Dictionary<string,string>{ <#=string.Join(",",table_schema2[table.Key].Columns[table.Key].Select(p=>"{\""+p.column_name+"\",\""+p.column_description+"\"}"))#> });
+					dic.Add("<#=table.Key#>", new Dictionary<string,string>{ <#=string.Join(",",table_schema2[table.Key].Columns.Select(p=>"{\""+p.column_name+"\",\""+p.column_description+"\"}"))#> });
 					<#
 				}#>
 
@@ -104,7 +104,6 @@ namespace T
 				var transactionId = Guid.NewGuid().ToString();
                 var keypair = dic[fileType]; //commentses.ToDictionary(f => f.column_name, f => f.column_description);
                 if (string.IsNullOrEmpty(fileType)) return ;<#
-					//http://localhost/TNewService/Service.svc/GET?data={method:%27VTest%27}
 					foreach(var table in table_schema2)
 					{
 					#>
