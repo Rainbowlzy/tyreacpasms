@@ -23,8 +23,8 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import { mapState, 
-// mapMutations, 
-// mapActions 
+mapMutations, 
+mapActions 
 } from "vuex";
 
 export default {
@@ -34,22 +34,21 @@ export default {
   },
   methods: {
     login: function() {
-      this.$http
-        .get("http://localhost/tyreacpasms/DefaultHandler.ashx", {
-          params: {
+      this.$http.get("http://localhost/tyreacpasms/DefaultHandler.ashx", {params: {
             method: "login",
             data: JSON.stringify(this.user)
-          }
-        })
+          }})
         .then(function(response) {
-          if (!response.data.success) alert(response.data.message);
-          else {
-            this.$cookie.set("auth_user", response.data.data, {
+          if (!response.data.success) {
+            // alert(response.data.message);
+            return;
+          }
+          this.$store.state.user.token = response.data.data;
+            this.$cookie.set("auth_user", this.$store.state.user.token, {
               expires: 999,
               domain: location.host.split(":")[0]
             });
             this.$router.push("../index");
-          }
         });
     }
   }

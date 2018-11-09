@@ -14,7 +14,13 @@ import TopBar from "./TopBar.vue";
 
 export default {
   name: "Index",
-  components: { TopBar, Blocks, Map }
+  components: { TopBar, Blocks, Map },
+  mounted(){
+    this.$cookie.set("auth_user", this.$store.state.user.token, {
+      expires: 999,
+      domain: location.host.split(":")[0]
+    });
+  }
 };
 </script>
 

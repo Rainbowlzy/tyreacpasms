@@ -1,4 +1,4 @@
-﻿namespace TEntities.CodeTemplates
+﻿namespace Generator
 {
     /// <summary>
     /// 表结构

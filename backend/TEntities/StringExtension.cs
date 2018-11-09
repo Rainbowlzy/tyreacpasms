@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace Generator.Tools
+namespace TENtities
 {
     public static class StringExtension
     {

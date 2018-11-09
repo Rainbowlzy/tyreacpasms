@@ -16,7 +16,7 @@ namespace T
             response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
             response.ContentType = "application/vnd.ms-excel";
             response.AppendHeader("Content-Disposition", "attachment; filename="+ fileName + ".xls");
-            response.Write(ImportProc.ExporTEntities(title));
+            response.Write(ImportProc.ExportEntities(title));
             response.Flush();
             response.End();
 

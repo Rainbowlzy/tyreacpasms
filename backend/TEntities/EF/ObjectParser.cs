@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
 
-namespace TEntities1.EF
+namespace TENtities.EF
 {
     public class ObjectParser
     {

@@ -1,6 +1,4 @@
-using System.Runtime.Serialization;
-
-namespace T
+namespace T.Models
 {
     public class CommonOutputT<T>
     {

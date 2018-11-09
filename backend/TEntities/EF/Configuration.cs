@@ -1,7 +1,7 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Migrations;
+﻿using System.Data.Entity.Migrations;
+using TEntities.EF;
 
-namespace TEntities.EF
+namespace TENtities.EF
 {
     public class Configuration: DbMigrationsConfiguration<DefaultContext>
     {

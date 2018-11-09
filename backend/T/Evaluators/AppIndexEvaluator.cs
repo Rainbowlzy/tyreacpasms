@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using T.Models;
-using TEntities.EF;
 
 namespace T.Evaluators
 {

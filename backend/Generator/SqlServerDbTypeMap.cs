@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TEntities.CodeTemplates
+namespace Generator
 {
     /// <summary>
     /// SqlServerDbTypeMap.MapCsharpType(dbtype)

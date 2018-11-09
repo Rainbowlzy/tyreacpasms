@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using TEntities.EF;
 
 namespace T.Models
 {

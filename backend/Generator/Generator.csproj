@@ -57,12 +57,14 @@
     <Compile Include="DefaultResponse.cs" />
     <Compile Include="DropdownDef.cs" />
     <Compile Include="Generator.cs" />
+    <Compile Include="GeneratorContext.cs" />
     <Compile Include="MenuConfigurationTT.cs" />
     <Compile Include="Tools\ObjectExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerDbTypeMap.cs" />
     <Compile Include="Tools\StringExtension.cs" />
     <Compile Include="SYS_Code.cs" />
+    <Compile Include="TypePattern.cs" />
     <Compile Include="V_Column.cs" />
     <Compile Include="V_Table_Comments.cs" />
     <Compile Include="V_Table_Comments2.cs" />

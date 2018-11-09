@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using EF.Entities;
-
-using Generator.Tools;
-using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
 using Newtonsoft.Json;
 using T.Interfaces;
 using T.Models;
 using TEntities.EF;
+using TENtities;
+using TENtities.EF;
 
 namespace T.Evaluators
 {

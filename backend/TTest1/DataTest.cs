@@ -1,20 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Migrations;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
-using EF.Entities;
-using T;
-using T.Evaluators;
-using T.Models;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TEntities.EF;
+using TENtities.EF;
 
 namespace TTests1
 {

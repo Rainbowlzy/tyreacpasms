@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace T.Evaluators
+namespace TENtities.EF
 {
     public class SPCallParameter
     {

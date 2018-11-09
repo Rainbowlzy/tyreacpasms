@@ -1,12 +1,11 @@
 ﻿
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/09/2018 22:46:32
- * 生成版本：11/08/2018 11:49:42 
+ * 生成时间：11/10/2018 00:43:59
+ * 生成版本：11/08/2018 23:49:44 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 
-using TEntities.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +16,19 @@ using System.Data.Entity.Migrations;
 using static System.Data.Objects.EntityFunctions;
 using static System.DateTime;
 using static System.Linq.Enumerable;
-using EF.Entities;
-using Generator.Tools;
 using Validation = Microsoft.Practices.EnterpriseLibrary.Validation.Validation;
 using ValidationResult = Microsoft.Practices.EnterpriseLibrary.Validation.ValidationResult;
+using TENtities.EF;
+using TENtities;
+using TEntities.EF;
 
 namespace T.Evaluators
 {
 
     /// <summary>
-    /// 【角色配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// 【角色菜单】7次查询分别得到七天内记录的条数，形成柱状图，折线图
     /// </summary>
-    public partial class RoleConfigurationCountEvaluator : Evaluator
+    public partial class RoleMenuCountEvaluator : Evaluator
     {
         protected override object Evaluate(CommonRequest request)
         {
@@ -36,7 +36,7 @@ namespace T.Evaluators
             {
                 var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
                 var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.RoleConfiguration.Count(m => m.CreateOn==p)).ToList();
+                var list = dates.Select(p => ctx.RoleMenu.Count(m => m.CreateOn==p)).ToList();
                 return new
                 {
                     sum = list.Sum(),
@@ -45,15 +45,15 @@ namespace T.Evaluators
                 };
             }
         }
-        public override string Comments=> "【角色配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+        public override string Comments=> "【角色菜单】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
     }
-	public partial class TruncateRoleConfigurationEvaluator : Evaluator
+	public partial class TruncateRoleMenuEvaluator : Evaluator
 	{
         protected override object Evaluate(CommonRequest request)
 		{
             using (var ctx = new DefaultContext())
 			{
-                ctx.RoleConfiguration.RemoveRange(ctx.RoleConfiguration);
+                ctx.RoleMenu.RemoveRange(ctx.RoleMenu);
 				ctx.SaveChanges();
 			}
 			return new
@@ -64,13 +64,13 @@ namespace T.Evaluators
 		}
 	}
     /// <summary>
-    /// 删除【角色配置】
+    /// 删除【角色菜单】
     /// </summary>
-    public partial class DeleteRoleConfigurationEvaluator : Evaluator
+    public partial class DeleteRoleMenuEvaluator : Evaluator
     {
         protected override object Evaluate(CommonRequest request)
         {
-            var data = JsonConvert.DeserializeObject<RoleConfiguration>(HttpUtility.UrlDecode(request.data));
+            var data = JsonConvert.DeserializeObject<RoleMenu>(HttpUtility.UrlDecode(request.data));
             if (data == null)
                 return new CommonOutputT<string>
                 {
@@ -79,7 +79,7 @@ namespace T.Evaluators
                 };
             using (var ctx = new DefaultContext())
             {
-                var one = ctx.RoleConfiguration.Find(data.id);
+                var one = ctx.RoleMenu.Find(data.id);
 				if(one==null){
 					return new CommonOutputT<string>
 					{
@@ -88,7 +88,7 @@ namespace T.Evaluators
 					};
 				}
                 one.IsDeleted = 1;
-				ctx.RoleConfiguration.AddOrUpdate(one);
+				ctx.RoleMenu.AddOrUpdate(one);
 				ctx.SaveChanges();
 				return new CommonOutputT<string>
 				{
@@ -98,13 +98,13 @@ namespace T.Evaluators
             }
 			
         }
-        public override string Comments=> "删除一条角色配置记录";
+        public override string Comments=> "删除一条角色菜单记录";
     }
 	
     /// <summary>
-    /// 保存【角色配置】
+    /// 保存【角色菜单】
     /// </summary>
-    public partial class SaveRoleConfigurationEvaluator : Evaluator
+    public partial class SaveRoleMenuEvaluator : Evaluator
     {
         protected override object Evaluate(CommonRequest request)
         {
@@ -126,10 +126,10 @@ namespace T.Evaluators
                     message = "缺少参数"
                 };
             }
-			RoleConfiguration entity = null;
+			RoleMenu entity = null;
 			try
 			{
-				entity = JsonConvert.DeserializeObject<RoleConfiguration>(HttpUtility.UrlDecode(s));
+				entity = JsonConvert.DeserializeObject<RoleMenu>(HttpUtility.UrlDecode(s));
 			}
 			catch(Exception exception)
 			{
@@ -176,7 +176,7 @@ namespace T.Evaluators
                 var isnew = entity.TransactionID == null;
                 if (!isnew)
                 {
-                    var one = ctx.RoleConfiguration.FirstOrDefault(p=>p.id==entity.id);
+                    var one = ctx.RoleMenu.FirstOrDefault(p=>p.id==entity.id);
                     if(one==null) return new
                     {
                         success = false,
@@ -189,7 +189,7 @@ namespace T.Evaluators
                     };
                     one.VersionNo++;
                     one.TransactionID = transactionId;
-					ctx.RoleConfiguration.AddOrUpdate(one);
+					ctx.RoleMenu.AddOrUpdate(one);
 					try
 					{
 						ctx.SaveChanges();
@@ -209,9 +209,9 @@ namespace T.Evaluators
 				
 
 								// NVARCHAR(50) 角色名称
-				entity.RCRoleName = HttpUtility.UrlDecode(entity.RCRoleName);
-					// NVARCHAR(50) 所属组织
-				entity.RCAffiliatedOrganization = HttpUtility.UrlDecode(entity.RCAffiliatedOrganization);
+				entity.RMRoleName = HttpUtility.UrlDecode(entity.RMRoleName);
+					// NVARCHAR(50) 菜单标题
+				entity.RMMenuTitle = HttpUtility.UrlDecode(entity.RMMenuTitle);
 	
                 entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
                 entity.UpdateBy = user?.UILoginName ?? "未登录用户";
@@ -221,7 +221,7 @@ namespace T.Evaluators
                 entity.IsDeleted = 0;
 	            entity.VersionNo = entity.VersionNo ?? 0;
                 entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.RoleConfiguration.AddOrUpdate(entity);
+				ctx.RoleMenu.AddOrUpdate(entity);
 				try
 				{
 					ctx.SaveChanges();
@@ -243,34 +243,34 @@ namespace T.Evaluators
                 };
             }
         }
-        public override string Comments=> "保存一条RoleConfiguration记录";
+        public override string Comments=> "保存一条RoleMenu记录";
     }
 	
     /// <summary>
-    /// 查询空的【角色配置】
+    /// 查询空的【角色菜单】
     /// </summary>
-    public partial class GetRoleConfigurationEmptyEvaluator:Evaluator
+    public partial class GetRoleMenuEmptyEvaluator:Evaluator
     {
         protected override object Evaluate(CommonRequest request)
         {
-            return new RoleConfiguration();
+            return new RoleMenu();
         }
-        public override string Comments=> "获取空的角色配置记录";
+        public override string Comments=> "获取空的角色菜单记录";
     }
 	
     /// <summary>
-    /// 查询【角色配置】列表
+    /// 查询【角色菜单】列表
     /// </summary>
-    public partial class GetRoleConfigurationListEvaluator : Evaluator
+    public partial class GetRoleMenuListEvaluator : Evaluator
     {
-        public override string Comments=> "获取RoleConfiguration列表 ";
+        public override string Comments=> "获取RoleMenu列表 ";
         protected override object Evaluate(CommonRequest request)
         {
             using (var ctx = new DefaultContext())
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<RoleConfigurationSearchModel>() ?? new RoleConfigurationSearchModel();
-                var query = ctx.RoleConfiguration.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<RoleMenuSearchModel>() ?? new RoleMenuSearchModel();
+                var query = ctx.RoleMenu.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -279,22 +279,22 @@ namespace T.Evaluators
                 var search = searchModel.SearchKey ?? @params["search"];
                 var sort = searchModel.Sort ?? @params["sort"];
 				var order = @params["order"];
-				// RCRoleName NVARCHAR(50) 角色名称 
-                if(!string.IsNullOrEmpty(searchModel.RCRoleName)) query = query.Where(t=>t.RCRoleName.Contains(searchModel.RCRoleName));
-                if(sort=="RCRoleName")
+				// RMRoleName NVARCHAR(50) 角色名称 
+                if(!string.IsNullOrEmpty(searchModel.RMRoleName)) query = query.Where(t=>t.RMRoleName.Contains(searchModel.RMRoleName));
+                if(sort=="RMRoleName")
                 {
-					query = order=="asc"?query.OrderBy(t=>t.RCRoleName):query.OrderByDescending(t=>t.RCRoleName);
+					query = order=="asc"?query.OrderBy(t=>t.RMRoleName):query.OrderByDescending(t=>t.RMRoleName);
                     isordered = true;
                 }
-				// RCAffiliatedOrganization NVARCHAR(50) 所属组织 
-                if(!string.IsNullOrEmpty(searchModel.RCAffiliatedOrganization)) query = query.Where(t=>t.RCAffiliatedOrganization.Contains(searchModel.RCAffiliatedOrganization));
-                if(sort=="RCAffiliatedOrganization")
+				// RMMenuTitle NVARCHAR(50) 菜单标题 
+                if(!string.IsNullOrEmpty(searchModel.RMMenuTitle)) query = query.Where(t=>t.RMMenuTitle.Contains(searchModel.RMMenuTitle));
+                if(sort=="RMMenuTitle")
                 {
-					query = order=="asc"?query.OrderBy(t=>t.RCAffiliatedOrganization):query.OrderByDescending(t=>t.RCAffiliatedOrganization);
+					query = order=="asc"?query.OrderBy(t=>t.RMMenuTitle):query.OrderByDescending(t=>t.RMMenuTitle);
                     isordered = true;
                 }
 				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.RCRoleName.Contains(search)||t.RCAffiliatedOrganization.Contains(search));
+					query = query.Where(t=>t.id!=-1||t.RMRoleName.Contains(search)||t.RMMenuTitle.Contains(search));
 				}
                 if(sort=="ord")
                 {
@@ -306,297 +306,7 @@ namespace T.Evaluators
                 var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
                 var total = query.Count();
                 var sql = query.ToString();
-                return new CommonOutputList<RoleConfiguration>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【用户菜单】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class UserMenuCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.UserMenu.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【用户菜单】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateUserMenuEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.UserMenu.RemoveRange(ctx.UserMenu);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【用户菜单】
-    /// </summary>
-    public partial class DeleteUserMenuEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<UserMenu>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "删除成功"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.UserMenu.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.UserMenu.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条用户菜单记录";
-    }
-	
-    /// <summary>
-    /// 保存【用户菜单】
-    /// </summary>
-    public partial class SaveUserMenuEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			UserMenu entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<UserMenu>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.UserMenu.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.UserMenu.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 登录名
-				entity.UMLoginName = HttpUtility.UrlDecode(entity.UMLoginName);
-					// NVARCHAR(50) 标题
-				entity.UMCaption = HttpUtility.UrlDecode(entity.UMCaption);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.UserMenu.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条UserMenu记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【用户菜单】
-    /// </summary>
-    public partial class GetUserMenuEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new UserMenu();
-        }
-        public override string Comments=> "获取空的用户菜单记录";
-    }
-	
-    /// <summary>
-    /// 查询【用户菜单】列表
-    /// </summary>
-    public partial class GetUserMenuListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取UserMenu列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<UserMenuSearchModel>() ?? new UserMenuSearchModel();
-                var query = ctx.UserMenu.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// UMLoginName NVARCHAR(50) 登录名 
-                if(!string.IsNullOrEmpty(searchModel.UMLoginName)) query = query.Where(t=>t.UMLoginName.Contains(searchModel.UMLoginName));
-                if(sort=="UMLoginName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.UMLoginName):query.OrderByDescending(t=>t.UMLoginName);
-                    isordered = true;
-                }
-				// UMCaption NVARCHAR(50) 标题 
-                if(!string.IsNullOrEmpty(searchModel.UMCaption)) query = query.Where(t=>t.UMCaption.Contains(searchModel.UMCaption));
-                if(sort=="UMCaption")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.UMCaption):query.OrderByDescending(t=>t.UMCaption);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.UMLoginName.Contains(search)||t.UMCaption.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<UserMenu>
+                return new CommonOutputList<RoleMenu>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };
@@ -850,7 +560,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<UserRoleSearchModel>() ?? new UserRoleSearchModel();
-                var query = ctx.UserRole.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.UserRole.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -887,6 +597,630 @@ namespace T.Evaluators
                 var total = query.Count();
                 var sql = query.ToString();
                 return new CommonOutputList<UserRole>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【菜单配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class MenuConfigurationCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.MenuConfiguration.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【菜单配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateMenuConfigurationEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.MenuConfiguration.RemoveRange(ctx.MenuConfiguration);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【菜单配置】
+    /// </summary>
+    public partial class DeleteMenuConfigurationEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<MenuConfiguration>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "删除成功"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.MenuConfiguration.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.MenuConfiguration.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条菜单配置记录";
+    }
+	
+    /// <summary>
+    /// 保存【菜单配置】
+    /// </summary>
+    public partial class SaveMenuConfigurationEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			MenuConfiguration entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<MenuConfiguration>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.MenuConfiguration.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.MenuConfiguration.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 标题
+				entity.MCCaption = HttpUtility.UrlDecode(entity.MCCaption);
+					// NVARCHAR(50) 父级标题
+				entity.MCParentTitle = HttpUtility.UrlDecode(entity.MCParentTitle);
+					// NVARCHAR(50) 链接
+				entity.MCLink = HttpUtility.UrlDecode(entity.MCLink);
+					// NVARCHAR(50) 菜单类型
+				entity.MCMenuType = HttpUtility.UrlDecode(entity.MCMenuType);
+					// NVARCHAR(50) 显示名称
+				entity.MCDisplayName = HttpUtility.UrlDecode(entity.MCDisplayName);
+					// NVARCHAR(50) 图片
+				entity.MCPicture = HttpUtility.UrlDecode(entity.MCPicture);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.MenuConfiguration.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条MenuConfiguration记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【菜单配置】
+    /// </summary>
+    public partial class GetMenuConfigurationEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new MenuConfiguration();
+        }
+        public override string Comments=> "获取空的菜单配置记录";
+    }
+	
+    /// <summary>
+    /// 查询【菜单配置】列表
+    /// </summary>
+    public partial class GetMenuConfigurationListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取MenuConfiguration列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<MenuConfigurationSearchModel>() ?? new MenuConfigurationSearchModel();
+                var query = ctx.MenuConfiguration.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// MCCaption NVARCHAR(50) 标题 
+                if(!string.IsNullOrEmpty(searchModel.MCCaption)) query = query.Where(t=>t.MCCaption.Contains(searchModel.MCCaption));
+                if(sort=="MCCaption")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.MCCaption):query.OrderByDescending(t=>t.MCCaption);
+                    isordered = true;
+                }
+				// MCParentTitle NVARCHAR(50) 父级标题 
+                if(!string.IsNullOrEmpty(searchModel.MCParentTitle)) query = query.Where(t=>t.MCParentTitle.Contains(searchModel.MCParentTitle));
+                if(sort=="MCParentTitle")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.MCParentTitle):query.OrderByDescending(t=>t.MCParentTitle);
+                    isordered = true;
+                }
+				// MCLink NVARCHAR(50) 链接 
+                if(!string.IsNullOrEmpty(searchModel.MCLink)) query = query.Where(t=>t.MCLink.Contains(searchModel.MCLink));
+                if(sort=="MCLink")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.MCLink):query.OrderByDescending(t=>t.MCLink);
+                    isordered = true;
+                }
+				// MCMenuType NVARCHAR(50) 菜单类型 
+                if(!string.IsNullOrEmpty(searchModel.MCMenuType)) query = query.Where(t=>t.MCMenuType.Contains(searchModel.MCMenuType));
+                if(sort=="MCMenuType")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.MCMenuType):query.OrderByDescending(t=>t.MCMenuType);
+                    isordered = true;
+                }
+				// MCSequence INT 顺序 
+                if(searchModel.MinMCSequence!=null) query = query.Where(t=>t.MCSequence>=searchModel.MinMCSequence);
+                if(searchModel.MaxMCSequence!=null) query = query.Where(t=>t.MCSequence<=searchModel.MaxMCSequence);
+                if(sort=="MCSequence")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.MCSequence):query.OrderByDescending(t=>t.MCSequence);
+                    isordered = true;
+                }
+				// MCDisplayName NVARCHAR(50) 显示名称 
+                if(!string.IsNullOrEmpty(searchModel.MCDisplayName)) query = query.Where(t=>t.MCDisplayName.Contains(searchModel.MCDisplayName));
+                if(sort=="MCDisplayName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.MCDisplayName):query.OrderByDescending(t=>t.MCDisplayName);
+                    isordered = true;
+                }
+				// MCPicture NVARCHAR(50) 图片 
+                if(!string.IsNullOrEmpty(searchModel.MCPicture)) query = query.Where(t=>t.MCPicture.Contains(searchModel.MCPicture));
+                if(sort=="MCPicture")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.MCPicture):query.OrderByDescending(t=>t.MCPicture);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.MCCaption.Contains(search)||t.MCParentTitle.Contains(search)||t.MCLink.Contains(search)||t.MCMenuType.Contains(search)||t.MCDisplayName.Contains(search)||t.MCPicture.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<MenuConfiguration>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【角色配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class RoleConfigurationCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.RoleConfiguration.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【角色配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateRoleConfigurationEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.RoleConfiguration.RemoveRange(ctx.RoleConfiguration);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【角色配置】
+    /// </summary>
+    public partial class DeleteRoleConfigurationEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<RoleConfiguration>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "删除成功"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.RoleConfiguration.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.RoleConfiguration.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条角色配置记录";
+    }
+	
+    /// <summary>
+    /// 保存【角色配置】
+    /// </summary>
+    public partial class SaveRoleConfigurationEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			RoleConfiguration entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<RoleConfiguration>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.RoleConfiguration.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.RoleConfiguration.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 角色名称
+				entity.RCRoleName = HttpUtility.UrlDecode(entity.RCRoleName);
+					// NVARCHAR(50) 所属组织
+				entity.RCAffiliatedOrganization = HttpUtility.UrlDecode(entity.RCAffiliatedOrganization);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.RoleConfiguration.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条RoleConfiguration记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【角色配置】
+    /// </summary>
+    public partial class GetRoleConfigurationEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new RoleConfiguration();
+        }
+        public override string Comments=> "获取空的角色配置记录";
+    }
+	
+    /// <summary>
+    /// 查询【角色配置】列表
+    /// </summary>
+    public partial class GetRoleConfigurationListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取RoleConfiguration列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<RoleConfigurationSearchModel>() ?? new RoleConfigurationSearchModel();
+                var query = ctx.RoleConfiguration.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// RCRoleName NVARCHAR(50) 角色名称 
+                if(!string.IsNullOrEmpty(searchModel.RCRoleName)) query = query.Where(t=>t.RCRoleName.Contains(searchModel.RCRoleName));
+                if(sort=="RCRoleName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RCRoleName):query.OrderByDescending(t=>t.RCRoleName);
+                    isordered = true;
+                }
+				// RCAffiliatedOrganization NVARCHAR(50) 所属组织 
+                if(!string.IsNullOrEmpty(searchModel.RCAffiliatedOrganization)) query = query.Where(t=>t.RCAffiliatedOrganization.Contains(searchModel.RCAffiliatedOrganization));
+                if(sort=="RCAffiliatedOrganization")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RCAffiliatedOrganization):query.OrderByDescending(t=>t.RCAffiliatedOrganization);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.RCRoleName.Contains(search)||t.RCAffiliatedOrganization.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<RoleConfiguration>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };
@@ -1160,7 +1494,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<UserInformationSearchModel>() ?? new UserInformationSearchModel();
-                var query = ctx.UserInformation.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.UserInformation.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -1283,630 +1617,6 @@ namespace T.Evaluators
                 var total = query.Count();
                 var sql = query.ToString();
                 return new CommonOutputList<UserInformation>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【菜单配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class MenuConfigurationCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.MenuConfiguration.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【菜单配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateMenuConfigurationEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.MenuConfiguration.RemoveRange(ctx.MenuConfiguration);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【菜单配置】
-    /// </summary>
-    public partial class DeleteMenuConfigurationEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<MenuConfiguration>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "删除成功"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.MenuConfiguration.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.MenuConfiguration.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条菜单配置记录";
-    }
-	
-    /// <summary>
-    /// 保存【菜单配置】
-    /// </summary>
-    public partial class SaveMenuConfigurationEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			MenuConfiguration entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<MenuConfiguration>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.MenuConfiguration.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.MenuConfiguration.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 标题
-				entity.MCCaption = HttpUtility.UrlDecode(entity.MCCaption);
-					// NVARCHAR(50) 父级标题
-				entity.MCParentTitle = HttpUtility.UrlDecode(entity.MCParentTitle);
-					// NVARCHAR(50) 链接
-				entity.MCLink = HttpUtility.UrlDecode(entity.MCLink);
-					// NVARCHAR(50) 菜单类型
-				entity.MCMenuType = HttpUtility.UrlDecode(entity.MCMenuType);
-					// NVARCHAR(50) 显示名称
-				entity.MCDisplayName = HttpUtility.UrlDecode(entity.MCDisplayName);
-					// NVARCHAR(50) 图片
-				entity.MCPicture = HttpUtility.UrlDecode(entity.MCPicture);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.MenuConfiguration.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条MenuConfiguration记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【菜单配置】
-    /// </summary>
-    public partial class GetMenuConfigurationEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new MenuConfiguration();
-        }
-        public override string Comments=> "获取空的菜单配置记录";
-    }
-	
-    /// <summary>
-    /// 查询【菜单配置】列表
-    /// </summary>
-    public partial class GetMenuConfigurationListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取MenuConfiguration列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<MenuConfigurationSearchModel>() ?? new MenuConfigurationSearchModel();
-                var query = ctx.MenuConfiguration.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// MCCaption NVARCHAR(50) 标题 
-                if(!string.IsNullOrEmpty(searchModel.MCCaption)) query = query.Where(t=>t.MCCaption.Contains(searchModel.MCCaption));
-                if(sort=="MCCaption")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.MCCaption):query.OrderByDescending(t=>t.MCCaption);
-                    isordered = true;
-                }
-				// MCParentTitle NVARCHAR(50) 父级标题 
-                if(!string.IsNullOrEmpty(searchModel.MCParentTitle)) query = query.Where(t=>t.MCParentTitle.Contains(searchModel.MCParentTitle));
-                if(sort=="MCParentTitle")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.MCParentTitle):query.OrderByDescending(t=>t.MCParentTitle);
-                    isordered = true;
-                }
-				// MCLink NVARCHAR(50) 链接 
-                if(!string.IsNullOrEmpty(searchModel.MCLink)) query = query.Where(t=>t.MCLink.Contains(searchModel.MCLink));
-                if(sort=="MCLink")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.MCLink):query.OrderByDescending(t=>t.MCLink);
-                    isordered = true;
-                }
-				// MCMenuType NVARCHAR(50) 菜单类型 
-                if(!string.IsNullOrEmpty(searchModel.MCMenuType)) query = query.Where(t=>t.MCMenuType.Contains(searchModel.MCMenuType));
-                if(sort=="MCMenuType")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.MCMenuType):query.OrderByDescending(t=>t.MCMenuType);
-                    isordered = true;
-                }
-				// MCSequence INT 顺序 
-                if(searchModel.MinMCSequence!=null) query = query.Where(t=>t.MCSequence>=searchModel.MinMCSequence);
-                if(searchModel.MaxMCSequence!=null) query = query.Where(t=>t.MCSequence<=searchModel.MaxMCSequence);
-                if(sort=="MCSequence")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.MCSequence):query.OrderByDescending(t=>t.MCSequence);
-                    isordered = true;
-                }
-				// MCDisplayName NVARCHAR(50) 显示名称 
-                if(!string.IsNullOrEmpty(searchModel.MCDisplayName)) query = query.Where(t=>t.MCDisplayName.Contains(searchModel.MCDisplayName));
-                if(sort=="MCDisplayName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.MCDisplayName):query.OrderByDescending(t=>t.MCDisplayName);
-                    isordered = true;
-                }
-				// MCPicture NVARCHAR(50) 图片 
-                if(!string.IsNullOrEmpty(searchModel.MCPicture)) query = query.Where(t=>t.MCPicture.Contains(searchModel.MCPicture));
-                if(sort=="MCPicture")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.MCPicture):query.OrderByDescending(t=>t.MCPicture);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.MCCaption.Contains(search)||t.MCParentTitle.Contains(search)||t.MCLink.Contains(search)||t.MCMenuType.Contains(search)||t.MCDisplayName.Contains(search)||t.MCPicture.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<MenuConfiguration>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【角色菜单】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class RoleMenuCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.RoleMenu.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【角色菜单】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateRoleMenuEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.RoleMenu.RemoveRange(ctx.RoleMenu);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【角色菜单】
-    /// </summary>
-    public partial class DeleteRoleMenuEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<RoleMenu>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "删除成功"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.RoleMenu.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.RoleMenu.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条角色菜单记录";
-    }
-	
-    /// <summary>
-    /// 保存【角色菜单】
-    /// </summary>
-    public partial class SaveRoleMenuEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			RoleMenu entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<RoleMenu>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.RoleMenu.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.RoleMenu.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 角色名称
-				entity.RMRoleName = HttpUtility.UrlDecode(entity.RMRoleName);
-					// NVARCHAR(50) 菜单标题
-				entity.RMMenuTitle = HttpUtility.UrlDecode(entity.RMMenuTitle);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.RoleMenu.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条RoleMenu记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【角色菜单】
-    /// </summary>
-    public partial class GetRoleMenuEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new RoleMenu();
-        }
-        public override string Comments=> "获取空的角色菜单记录";
-    }
-	
-    /// <summary>
-    /// 查询【角色菜单】列表
-    /// </summary>
-    public partial class GetRoleMenuListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取RoleMenu列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<RoleMenuSearchModel>() ?? new RoleMenuSearchModel();
-                var query = ctx.RoleMenu.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// RMRoleName NVARCHAR(50) 角色名称 
-                if(!string.IsNullOrEmpty(searchModel.RMRoleName)) query = query.Where(t=>t.RMRoleName.Contains(searchModel.RMRoleName));
-                if(sort=="RMRoleName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RMRoleName):query.OrderByDescending(t=>t.RMRoleName);
-                    isordered = true;
-                }
-				// RMMenuTitle NVARCHAR(50) 菜单标题 
-                if(!string.IsNullOrEmpty(searchModel.RMMenuTitle)) query = query.Where(t=>t.RMMenuTitle.Contains(searchModel.RMMenuTitle));
-                if(sort=="RMMenuTitle")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RMMenuTitle):query.OrderByDescending(t=>t.RMMenuTitle);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.RMRoleName.Contains(search)||t.RMMenuTitle.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<RoleMenu>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };
@@ -2158,7 +1868,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<LogonRecordSearchModel>() ?? new LogonRecordSearchModel();
-                var query = ctx.LogonRecord.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.LogonRecord.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -2196,6 +1906,296 @@ namespace T.Evaluators
                 var total = query.Count();
                 var sql = query.ToString();
                 return new CommonOutputList<LogonRecord>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【用户菜单】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class UserMenuCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.UserMenu.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【用户菜单】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateUserMenuEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.UserMenu.RemoveRange(ctx.UserMenu);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【用户菜单】
+    /// </summary>
+    public partial class DeleteUserMenuEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<UserMenu>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "删除成功"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.UserMenu.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.UserMenu.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条用户菜单记录";
+    }
+	
+    /// <summary>
+    /// 保存【用户菜单】
+    /// </summary>
+    public partial class SaveUserMenuEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			UserMenu entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<UserMenu>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.UserMenu.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.UserMenu.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 登录名
+				entity.UMLoginName = HttpUtility.UrlDecode(entity.UMLoginName);
+					// NVARCHAR(50) 标题
+				entity.UMCaption = HttpUtility.UrlDecode(entity.UMCaption);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.UserMenu.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条UserMenu记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【用户菜单】
+    /// </summary>
+    public partial class GetUserMenuEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new UserMenu();
+        }
+        public override string Comments=> "获取空的用户菜单记录";
+    }
+	
+    /// <summary>
+    /// 查询【用户菜单】列表
+    /// </summary>
+    public partial class GetUserMenuListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取UserMenu列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<UserMenuSearchModel>() ?? new UserMenuSearchModel();
+                var query = ctx.UserMenu.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// UMLoginName NVARCHAR(50) 登录名 
+                if(!string.IsNullOrEmpty(searchModel.UMLoginName)) query = query.Where(t=>t.UMLoginName.Contains(searchModel.UMLoginName));
+                if(sort=="UMLoginName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UMLoginName):query.OrderByDescending(t=>t.UMLoginName);
+                    isordered = true;
+                }
+				// UMCaption NVARCHAR(50) 标题 
+                if(!string.IsNullOrEmpty(searchModel.UMCaption)) query = query.Where(t=>t.UMCaption.Contains(searchModel.UMCaption));
+                if(sort=="UMCaption")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.UMCaption):query.OrderByDescending(t=>t.UMCaption);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.UMLoginName.Contains(search)||t.UMCaption.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<UserMenu>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };
@@ -2449,7 +2449,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<SystemConfigurationSearchModel>() ?? new SystemConfigurationSearchModel();
-                var query = ctx.SystemConfiguration.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.SystemConfiguration.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -2747,7 +2747,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<CustomertypeSearchModel>() ?? new CustomertypeSearchModel();
-                var query = ctx.Customertype.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.Customertype.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -3071,7 +3071,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<SupplierSearchModel>() ?? new SupplierSearchModel();
-                var query = ctx.Supplier.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.Supplier.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -3398,7 +3398,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<TypeOfGoodsSearchModel>() ?? new TypeOfGoodsSearchModel();
-                var query = ctx.TypeOfGoods.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.TypeOfGoods.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -3744,7 +3744,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<SupplyChannelSearchModel>() ?? new SupplyChannelSearchModel();
-                var query = ctx.SupplyChannel.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.SupplyChannel.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -4042,7 +4042,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<OrderSearchModel>() ?? new OrderSearchModel();
-                var query = ctx.Order.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.Order.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -4380,7 +4380,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<OrderDetailsSearchModel>() ?? new OrderDetailsSearchModel();
-                var query = ctx.OrderDetails.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.OrderDetails.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -4688,7 +4688,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<WarehousingRecordSearchModel>() ?? new WarehousingRecordSearchModel();
-                var query = ctx.WarehousingRecord.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.WarehousingRecord.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -5004,7 +5004,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<WarehouseSearchModel>() ?? new WarehouseSearchModel();
-                var query = ctx.Warehouse.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.Warehouse.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -5312,7 +5312,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<GoodsShelvesSearchModel>() ?? new GoodsShelvesSearchModel();
-                var query = ctx.GoodsShelves.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.GoodsShelves.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -5628,7 +5628,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<ReplenishmentApplicationFormSearchModel>() ?? new ReplenishmentApplicationFormSearchModel();
-                var query = ctx.ReplenishmentApplicationForm.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.ReplenishmentApplicationForm.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -5968,7 +5968,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<ReplenishmentRecordSearchModel>() ?? new ReplenishmentRecordSearchModel();
-                var query = ctx.ReplenishmentRecord.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.ReplenishmentRecord.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
@@ -6280,7 +6280,7 @@ namespace T.Evaluators
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<SalesRecordSearchModel>() ?? new SalesRecordSearchModel();
-                var query = ctx.SalesRecord.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.SalesRecord.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;

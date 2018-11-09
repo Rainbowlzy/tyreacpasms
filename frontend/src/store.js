@@ -4,6 +4,7 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 const baseUrl = "http://localhost/tyreacpasms/DefaultHandler.ashx";
+
 export default new Vuex.Store({
   //   strict: true,
   state: {
@@ -26,7 +27,7 @@ export default new Vuex.Store({
         context.commit("login", response);
         return response.data;
       } else {
-        alert(response.message);
+        // alert(response.message);
       }
       return success;
     },

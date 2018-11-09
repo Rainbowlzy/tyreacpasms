@@ -1,7 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ include file="..\CodeTemplates\Manager.ttinclude"#>  
 <#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
-<#@ import namespace="TEntities.CodeTemplates" #>
 
 <#@ output extension=".cs" #>
 using System;
@@ -14,7 +13,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Migrations;
 using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
-using EF.Entities;
+using TENtities.EF;
 
 namespace TEntities.EF
 {
@@ -64,6 +63,22 @@ modelBuilder.Entity<<#=table_name#>>().Property(p => p.id).HasDatabaseGeneratedO
 		        UpdateOn = DateTime.Now,
 		        UpdateBy = CreateBy
             }));
+			MenuConfiguration.RemoveRange(MenuConfiguration);
+			RoleMenu.RemoveRange(RoleMenu);
+			UserRole.RemoveRange(UserRole);
+            SaveChanges();
+			UserRole.Add(new UserRole
+			{
+				URLoginName = "1200",
+				URRoleName = "超级管理员",
+				CreateBy = CreateBy,
+				TransactionID = TransactionID,
+				IsDeleted = 0,
+				DataLevel = "01",
+				CreateOn = DateTime.Now,
+				UpdateOn = DateTime.Now,
+				UpdateBy = CreateBy
+			});
 			<#
 foreach(var ent in table_schema2.Values){ 
 var table_name = ent.table_name;
@@ -72,24 +87,24 @@ var table = ent;
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "<#=table.table_name_ch#>"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "<#=table.table_name_ch#>",
-					MCLink = "/T/gen/<#=table_name#>List.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "<#=table.table_name_ch#>",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "<#=table.table_name_ch#>统计",
-					MCLink = "/T/gen/<#=table_name#>Analysis.html",
+					MCDisplayName = "<#=table.table_name_ch#>",
+					MCCaption = "<#=table.table_name_ch#>",
+					MCLink = "/pagelist/<#=table_name#>",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,

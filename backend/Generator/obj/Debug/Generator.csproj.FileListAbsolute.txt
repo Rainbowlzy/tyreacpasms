@@ -50,3 +50,10 @@ D:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.xml
 D:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.SqlServer.xml
 D:\code\tyreacpasms\backend\Generator\bin\Debug\zh-Hans\EntityFramework.resources.dll
 D:\code\tyreacpasms\backend\Generator\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+F:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.dll.config
+F:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.dll
+F:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.SqlServer.dll
+F:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.xml
+F:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.SqlServer.xml
+F:\code\tyreacpasms\backend\Generator\bin\Debug\zh-Hans\EntityFramework.resources.dll
+F:\code\tyreacpasms\backend\Generator\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll

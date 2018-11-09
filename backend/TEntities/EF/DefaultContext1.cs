@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Migrations;
 using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
-using EF.Entities;
+using TENtities.EF;
 
 namespace TEntities.EF
 {
@@ -28,13 +28,13 @@ namespace TEntities.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 			
-			modelBuilder.Entity<RoleConfiguration>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<UserMenu>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<UserRole>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<UserInformation>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<MenuConfiguration>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<RoleMenu>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<UserRole>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<MenuConfiguration>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<RoleConfiguration>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<UserInformation>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<LogonRecord>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<UserMenu>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<SystemConfiguration>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<Customertype>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<Supplier>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
@@ -71,207 +71,43 @@ namespace TEntities.EF
 		        UpdateOn = DateTime.Now,
 		        UpdateBy = CreateBy
             }));
+			MenuConfiguration.RemoveRange(MenuConfiguration);
+			RoleMenu.RemoveRange(RoleMenu);
+			UserRole.RemoveRange(UserRole);
+            SaveChanges();
+			UserRole.Add(new UserRole
+			{
+				URLoginName = "1200",
+				URRoleName = "超级管理员",
+				CreateBy = CreateBy,
+				TransactionID = TransactionID,
+				IsDeleted = 0,
+				DataLevel = "01",
+				CreateOn = DateTime.Now,
+				UpdateOn = DateTime.Now,
+				UpdateBy = CreateBy
+			});
 			
-			if (!MenuConfiguration.Any(t => t.MCCaption == "角色配置"))
-			{
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "角色配置",
-					MCLink = "/T/gen/RoleConfigurationList.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "角色配置统计",
-					MCLink = "/T/gen/RoleConfigurationAnalysis.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var roleconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "角色配置");
-			if(roleconfiguration!=null)
-			{
-				roleconfiguration.MCLink = "/T/gen/RoleConfigurationList.html";
-				MenuConfiguration.AddOrUpdate(roleconfiguration);
-			}
-
-			if (!MenuConfiguration.Any(t => t.MCCaption == "用户菜单"))
-			{
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "用户菜单",
-					MCLink = "/T/gen/UserMenuList.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "用户菜单统计",
-					MCLink = "/T/gen/UserMenuAnalysis.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var usermenu = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "用户菜单");
-			if(usermenu!=null)
-			{
-				usermenu.MCLink = "/T/gen/UserMenuList.html";
-				MenuConfiguration.AddOrUpdate(usermenu);
-			}
-
-			if (!MenuConfiguration.Any(t => t.MCCaption == "用户角色"))
-			{
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "用户角色",
-					MCLink = "/T/gen/UserRoleList.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "用户角色统计",
-					MCLink = "/T/gen/UserRoleAnalysis.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var userrole = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "用户角色");
-			if(userrole!=null)
-			{
-				userrole.MCLink = "/T/gen/UserRoleList.html";
-				MenuConfiguration.AddOrUpdate(userrole);
-			}
-
-			if (!MenuConfiguration.Any(t => t.MCCaption == "用户信息"))
-			{
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "用户信息",
-					MCLink = "/T/gen/UserInformationList.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "用户信息统计",
-					MCLink = "/T/gen/UserInformationAnalysis.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var userinformation = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "用户信息");
-			if(userinformation!=null)
-			{
-				userinformation.MCLink = "/T/gen/UserInformationList.html";
-				MenuConfiguration.AddOrUpdate(userinformation);
-			}
-
-			if (!MenuConfiguration.Any(t => t.MCCaption == "菜单配置"))
-			{
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "菜单配置",
-					MCLink = "/T/gen/MenuConfigurationList.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					
-					MCCaption = "菜单配置统计",
-					MCLink = "/T/gen/MenuConfigurationAnalysis.html",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var menuconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "菜单配置");
-			if(menuconfiguration!=null)
-			{
-				menuconfiguration.MCLink = "/T/gen/MenuConfigurationList.html";
-				MenuConfiguration.AddOrUpdate(menuconfiguration);
-			}
-
 			if (!MenuConfiguration.Any(t => t.MCCaption == "角色菜单"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "角色菜单",
-					MCLink = "/T/gen/RoleMenuList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "角色菜单",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "角色菜单统计",
-					MCLink = "/T/gen/RoleMenuAnalysis.html",
+					MCDisplayName = "角色菜单",
+					MCCaption = "角色菜单",
+					MCLink = "/pagelist/RoleMenu",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -288,13 +124,26 @@ namespace TEntities.EF
 				MenuConfiguration.AddOrUpdate(rolemenu);
 			}
 
-			if (!MenuConfiguration.Any(t => t.MCCaption == "登录记录"))
+			if (!MenuConfiguration.Any(t => t.MCCaption == "用户角色"))
 			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "用户角色",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "登录记录",
-					MCLink = "/T/gen/LogonRecordList.html",
+					MCDisplayName = "用户角色",
+					MCCaption = "用户角色",
+					MCLink = "/pagelist/UserRole",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -303,11 +152,142 @@ namespace TEntities.EF
                     UpdateOn = DateTime.Now,
                     UpdateBy = CreateBy
 				});
+			}
+			var userrole = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "用户角色");
+			if(userrole!=null)
+			{
+				userrole.MCLink = "/T/gen/UserRoleList.html";
+				MenuConfiguration.AddOrUpdate(userrole);
+			}
+
+			if (!MenuConfiguration.Any(t => t.MCCaption == "菜单配置"))
+			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "菜单配置",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "登录记录统计",
-					MCLink = "/T/gen/LogonRecordAnalysis.html",
+					MCDisplayName = "菜单配置",
+					MCCaption = "菜单配置",
+					MCLink = "/pagelist/MenuConfiguration",
+					MCParentTitle = "后台首页",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+			}
+			var menuconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "菜单配置");
+			if(menuconfiguration!=null)
+			{
+				menuconfiguration.MCLink = "/T/gen/MenuConfigurationList.html";
+				MenuConfiguration.AddOrUpdate(menuconfiguration);
+			}
+
+			if (!MenuConfiguration.Any(t => t.MCCaption == "角色配置"))
+			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "角色配置",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
+				MenuConfiguration.Add(new MenuConfiguration
+				{
+					MCDisplayName = "角色配置",
+					MCCaption = "角色配置",
+					MCLink = "/pagelist/RoleConfiguration",
+					MCParentTitle = "后台首页",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+			}
+			var roleconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "角色配置");
+			if(roleconfiguration!=null)
+			{
+				roleconfiguration.MCLink = "/T/gen/RoleConfigurationList.html";
+				MenuConfiguration.AddOrUpdate(roleconfiguration);
+			}
+
+			if (!MenuConfiguration.Any(t => t.MCCaption == "用户信息"))
+			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "用户信息",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
+				MenuConfiguration.Add(new MenuConfiguration
+				{
+					MCDisplayName = "用户信息",
+					MCCaption = "用户信息",
+					MCLink = "/pagelist/UserInformation",
+					MCParentTitle = "后台首页",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+			}
+			var userinformation = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "用户信息");
+			if(userinformation!=null)
+			{
+				userinformation.MCLink = "/T/gen/UserInformationList.html";
+				MenuConfiguration.AddOrUpdate(userinformation);
+			}
+
+			if (!MenuConfiguration.Any(t => t.MCCaption == "登录记录"))
+			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "登录记录",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
+				MenuConfiguration.Add(new MenuConfiguration
+				{
+					MCDisplayName = "登录记录",
+					MCCaption = "登录记录",
+					MCLink = "/pagelist/LogonRecord",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -324,13 +304,26 @@ namespace TEntities.EF
 				MenuConfiguration.AddOrUpdate(logonrecord);
 			}
 
-			if (!MenuConfiguration.Any(t => t.MCCaption == "系统配置"))
+			if (!MenuConfiguration.Any(t => t.MCCaption == "用户菜单"))
 			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "用户菜单",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "系统配置",
-					MCLink = "/T/gen/SystemConfigurationList.html",
+					MCDisplayName = "用户菜单",
+					MCCaption = "用户菜单",
+					MCLink = "/pagelist/UserMenu",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -339,11 +332,34 @@ namespace TEntities.EF
                     UpdateOn = DateTime.Now,
                     UpdateBy = CreateBy
 				});
+			}
+			var usermenu = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "用户菜单");
+			if(usermenu!=null)
+			{
+				usermenu.MCLink = "/T/gen/UserMenuList.html";
+				MenuConfiguration.AddOrUpdate(usermenu);
+			}
+
+			if (!MenuConfiguration.Any(t => t.MCCaption == "系统配置"))
+			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "系统配置",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "系统配置统计",
-					MCLink = "/T/gen/SystemConfigurationAnalysis.html",
+					MCDisplayName = "系统配置",
+					MCCaption = "系统配置",
+					MCLink = "/pagelist/SystemConfiguration",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -362,24 +378,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "客户"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "客户",
-					MCLink = "/T/gen/CustomertypeList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "客户",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "客户统计",
-					MCLink = "/T/gen/CustomertypeAnalysis.html",
+					MCDisplayName = "客户",
+					MCCaption = "客户",
+					MCLink = "/pagelist/Customertype",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -398,24 +414,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "供应商"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "供应商",
-					MCLink = "/T/gen/SupplierList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "供应商",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "供应商统计",
-					MCLink = "/T/gen/SupplierAnalysis.html",
+					MCDisplayName = "供应商",
+					MCCaption = "供应商",
+					MCLink = "/pagelist/Supplier",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -434,24 +450,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "货物种类"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "货物种类",
-					MCLink = "/T/gen/TypeOfGoodsList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "货物种类",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "货物种类统计",
-					MCLink = "/T/gen/TypeOfGoodsAnalysis.html",
+					MCDisplayName = "货物种类",
+					MCCaption = "货物种类",
+					MCLink = "/pagelist/TypeOfGoods",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -470,24 +486,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "供货渠道"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "供货渠道",
-					MCLink = "/T/gen/SupplyChannelList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "供货渠道",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "供货渠道统计",
-					MCLink = "/T/gen/SupplyChannelAnalysis.html",
+					MCDisplayName = "供货渠道",
+					MCCaption = "供货渠道",
+					MCLink = "/pagelist/SupplyChannel",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -506,24 +522,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "订单"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "订单",
-					MCLink = "/T/gen/OrderList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "订单",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "订单统计",
-					MCLink = "/T/gen/OrderAnalysis.html",
+					MCDisplayName = "订单",
+					MCCaption = "订单",
+					MCLink = "/pagelist/Order",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -542,24 +558,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "订单明细"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "订单明细",
-					MCLink = "/T/gen/OrderDetailsList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "订单明细",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "订单明细统计",
-					MCLink = "/T/gen/OrderDetailsAnalysis.html",
+					MCDisplayName = "订单明细",
+					MCCaption = "订单明细",
+					MCLink = "/pagelist/OrderDetails",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -578,24 +594,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "入库记录"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "入库记录",
-					MCLink = "/T/gen/WarehousingRecordList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "入库记录",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "入库记录统计",
-					MCLink = "/T/gen/WarehousingRecordAnalysis.html",
+					MCDisplayName = "入库记录",
+					MCCaption = "入库记录",
+					MCLink = "/pagelist/WarehousingRecord",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -614,24 +630,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "仓库"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "仓库",
-					MCLink = "/T/gen/WarehouseList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "仓库",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "仓库统计",
-					MCLink = "/T/gen/WarehouseAnalysis.html",
+					MCDisplayName = "仓库",
+					MCCaption = "仓库",
+					MCLink = "/pagelist/Warehouse",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -650,24 +666,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "货架"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "货架",
-					MCLink = "/T/gen/GoodsShelvesList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "货架",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "货架统计",
-					MCLink = "/T/gen/GoodsShelvesAnalysis.html",
+					MCDisplayName = "货架",
+					MCCaption = "货架",
+					MCLink = "/pagelist/GoodsShelves",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -686,24 +702,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "补货申请单"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "补货申请单",
-					MCLink = "/T/gen/ReplenishmentApplicationFormList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "补货申请单",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "补货申请单统计",
-					MCLink = "/T/gen/ReplenishmentApplicationFormAnalysis.html",
+					MCDisplayName = "补货申请单",
+					MCCaption = "补货申请单",
+					MCLink = "/pagelist/ReplenishmentApplicationForm",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -722,24 +738,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "补货记录"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "补货记录",
-					MCLink = "/T/gen/ReplenishmentRecordList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "补货记录",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "补货记录统计",
-					MCLink = "/T/gen/ReplenishmentRecordAnalysis.html",
+					MCDisplayName = "补货记录",
+					MCCaption = "补货记录",
+					MCLink = "/pagelist/ReplenishmentRecord",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -758,24 +774,24 @@ namespace TEntities.EF
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "销售记录"))
 			{
-				MenuConfiguration.Add(new MenuConfiguration
+				RoleMenu.Add(new RoleMenu
 				{
-					
-					MCCaption = "销售记录",
-					MCLink = "/T/gen/SalesRecordList.html",
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "销售记录",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
 					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					
-					MCCaption = "销售记录统计",
-					MCLink = "/T/gen/SalesRecordAnalysis.html",
+					MCDisplayName = "销售记录",
+					MCCaption = "销售记录",
+					MCLink = "/pagelist/SalesRecord",
+					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -797,14 +813,9 @@ namespace TEntities.EF
 		}
 
         /// <summary>
-        ///  角色配置 
+        ///  角色菜单 
         /// </summary>
-        public virtual DbSet<RoleConfiguration> RoleConfiguration { get; set; }
-
-        /// <summary>
-        ///  用户菜单 
-        /// </summary>
-        public virtual DbSet<UserMenu> UserMenu { get; set; }
+        public virtual DbSet<RoleMenu> RoleMenu { get; set; }
 
         /// <summary>
         ///  用户角色 
@@ -812,24 +823,29 @@ namespace TEntities.EF
         public virtual DbSet<UserRole> UserRole { get; set; }
 
         /// <summary>
-        ///  用户信息 
-        /// </summary>
-        public virtual DbSet<UserInformation> UserInformation { get; set; }
-
-        /// <summary>
         ///  菜单配置 
         /// </summary>
         public virtual DbSet<MenuConfiguration> MenuConfiguration { get; set; }
 
         /// <summary>
-        ///  角色菜单 
+        ///  角色配置 
         /// </summary>
-        public virtual DbSet<RoleMenu> RoleMenu { get; set; }
+        public virtual DbSet<RoleConfiguration> RoleConfiguration { get; set; }
+
+        /// <summary>
+        ///  用户信息 
+        /// </summary>
+        public virtual DbSet<UserInformation> UserInformation { get; set; }
 
         /// <summary>
         ///  登录记录 
         /// </summary>
         public virtual DbSet<LogonRecord> LogonRecord { get; set; }
+
+        /// <summary>
+        ///  用户菜单 
+        /// </summary>
+        public virtual DbSet<UserMenu> UserMenu { get; set; }
 
         /// <summary>
         ///  系统配置 

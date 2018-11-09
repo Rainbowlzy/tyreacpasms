@@ -1,6 +1,6 @@
-﻿namespace TEntities.CodeTemplates
+﻿namespace Generator
 {
-    public partial class V_Table_Comments
+    public partial class VTableComments
     {
         /// <summary>
         /// 

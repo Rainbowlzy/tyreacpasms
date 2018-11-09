@@ -1,7 +1,6 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
 <#@ include file="..\..\TEntities\CodeTemplates\Manager.ttinclude"#>
 <#@ output extension=".cs" #>
-<#@ import namespace="TEntities.CodeTemplates" #>
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
  * 生成时间：<#=DateTime.Now#>
@@ -9,7 +8,6 @@
  * 作者：路正遥
  * ------------------------------------------------------------ */
 
-using TEntities.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +18,10 @@ using System.Data.Entity.Migrations;
 using static System.Data.Objects.EntityFunctions;
 using static System.DateTime;
 using static System.Linq.Enumerable;
-using EF.Entities;
 using Validation = Microsoft.Practices.EnterpriseLibrary.Validation.Validation;
 using ValidationResult = Microsoft.Practices.EnterpriseLibrary.Validation.ValidationResult;
+using TENtities.EF;
+using TENtities;
 
 namespace T.Evaluators
 {
@@ -285,7 +284,7 @@ foreach(var col in table.Columns.Where(p=>p.dbtype.Contains("NVARCHAR"))){
             {
 				var datalevel = CurrentUserInformation?.DataLevel;
                 var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<<#=table_name#>SearchModel>() ?? new <#=table_name#>SearchModel();
-                var query = ctx.<#=table_name#>.Where(t=>t.IsDeleted==0 && t.DataLevel.StartsWith(datalevel));
+                var query = ctx.<#=table_name#>.Where(t=>t.IsDeleted==0);
                 var @params = request.context.Request.Params;
                 searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;

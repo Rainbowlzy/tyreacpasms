@@ -16,13 +16,8 @@ using System.Web;
 using System.IO;
 using System.ServiceModel;
 using System.ServiceModel.Web;
-using T.Evaluators;
-
-using T.Models;
 using System.Text;
 using System.Data.Entity.Migrations;
-using TENtities.EF;
-using TENtities.EF.NewEntities;
 
 namespace T
 {
@@ -109,7 +104,6 @@ namespace T
 					#>
 
 				else if (fileType == "<#=table.Key#>") ExcelHelper.ExcelToNewEntityList<<#=table.Key#>>(keypair, filePath, out errorMsg).ForEach(one=>{
-				one.id = one.id ?? Guid.NewGuid().ToString();
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
                     one.CreateOn = one.CreateOn ?? DateTime.Now;

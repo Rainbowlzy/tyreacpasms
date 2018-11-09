@@ -5,7 +5,7 @@
              v-show="categories && categories.length>0">
             <div v-for="category in categories" style="margin: 20px 20px;" :key="category.id">
                 <a href="javascript:void(0)" @click="toggle(category)">
-                    <div><img :src="'http://122.193.9.83/'+category.data.MCPicture" width="32"></div>
+                    <div><img :src="'http://localhost/'+category.data.MCPicture" width="32"></div>
                     <div>
                         <span style="color:#000" class="map_span">
                             <!--{{category.title}}-->
@@ -155,7 +155,7 @@
                 secondmenu: [],
                 thirdmenu: [],
                 map:null,
-                svcHeader: 'http://122.193.9.83',
+                svcHeader: 'http://localhost',
                 imglist: '../../public/i/emptyimage/1.png,../../public/i/emptyimage/11.png,../../public/i/emptyimage/111.png,../../public/i/emptyimage/123.png,../../public/i/emptyimage/12312315.png,../../public/i/emptyimage/2.png,../../public/i/emptyimage/22 (2).png,../../public/i/emptyimage/22.png,../../public/i/emptyimage/222 (2).png,../../public/i/emptyimage/222.png,../../public/i/emptyimage/2231.png,../../public/i/emptyimage/256.png,../../public/i/emptyimage/3.png,../../public/i/emptyimage/33 (2).png,../../public/i/emptyimage/33.png,../../public/i/emptyimage/44.png,../../public/i/emptyimage/45463.png,../../public/i/emptyimage/45465.png,../../public/i/emptyimage/5456.png,../../public/i/emptyimage/55.png,../../public/i/emptyimage/78.png,../../public/i/emptyimage/78423.png,../../public/i/emptyimage/888.png,../../public/i/emptyimage/895.png,../../public/i/emptyimage/denglurizhi.png,../../public/i/emptyimage/list.txt,../../public/i/emptyimage/tu (2).png,../../public/i/emptyimage/tu.png,../../public/i/emptyimage/tutututu.png,../../public/i/emptyimage/tututuu.png,../../public/i/emptyimage/组1拷贝19.png'.split(","),
                 colorlist: "CCDB4C#A8B81F#739DFB#5381E7#BB8BC6#A077A9#FB9A73#E87C51#E2767D#D83D47#5F9FC9#4B83A7#82DC66#54B935#5F9FC9#4B83A7#D04AD5#BB28C0#CCDB4C#A8B81F#739DFB#5381E7#BB8BC6#A077A9#FB9A73#E87C51#E2767D#D83D47#5F9FC9#4B83A7#82DC66#54B935#5F9FC9#4B83A7#D04AD5#BB28C0".split('#').reverse()
             }
@@ -202,70 +202,70 @@
                 var options = {
                     全部: {
                         method: "MapQueryPopulation",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/renkou.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/renkou.png",
                         page: "../2_map/inner_population.html"
                     },
                     党员: {
                         method: "MapQueryPartyMember",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/dangyuan.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/dangyuan.png",
                         page: "../2_map/inner_population.html"
                     },
                     老年人: {
                         method: "MapQueryOldMann",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/laonian.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/laonian.png",
                         page: "../2_map/inner_population.html"
                     },
                     残疾人: {
                         method: "MapQueryDisabledMan",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/canji.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/canji.png",
                         page: "../2_map/inner_population.html"
                     },
                     民兵: {
                         method: "MapQueryMilitia",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/minbing.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/minbing.png",
                         page: "../2_map/inner_population.html"
                     },
                     干部: {
                         method: "MapQueryCadre",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/ganbu.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/ganbu.png",
                         page: "../2_map/inner_population.html"
                     },
                     厂房: {
                         params: {BIndustrialParkName: label},
                         method: "MapQueryBuilding",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/cangf.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/cangf.png",
                         page: "../2_map/inner_building.html"
                     },
                     观山工业园: {
                         params: {BIndustrialParkName: label},
                         method: "MapQueryBuilding",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/cangf.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/cangf.png",
                         page: "../2_map/inner_building.html"
                     },
                     横泾工业园二期: {
                         params: {BIndustrialParkName: label},
                         summary: '<pre><span>横泾工业园二期</span></pre></pre><pre>2012年6月1日收购，占地90亩，一期建筑面积3.2万平方米，二期建筑面积2.9万平方米，总面积6.1万平方米，总投资约为1.25亿元。</pre>',
                         method: "MapQueryBuilding",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/cangf.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/cangf.png",
                         page: "../2_map/inner_building.html"
                     },
                     横泾工业园一期: {
                         params: {BIndustrialParkName: label},
                         summary: '<pre><span>横泾工业园一期</span></pre></pre><pre>2012年6月1日收购，占地90亩，一期建筑面积3.2万平方米，二期建筑面积2.9万平方米，总面积6.1万平方米，总投资约为1.25亿元。</pre>',
                         method: "MapQueryBuilding",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/cangf.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/cangf.png",
                         page: "../2_map/inner_building.html"
                     },
                     马舍工业园: {
                         params: {BIndustrialParkName: label},
                         method: "MapQueryBuilding",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/cangf.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/cangf.png",
                         page: "../2_map/inner_building.html"
                     },
                     摄像头: {
                         // method: "MapQueryCamera", icon: "../../public/i/mapicon/jiank.png", page: "/XiangXi/2_map/RTSP.aspx"
                         method: "MapQueryNewCamera",
-                        icon: "http://122.193.9.83/XiangXi/assets/i/mapicon/jiank.png",
+                        icon: "http://localhost/XiangXi/assets/i/mapicon/jiank.png",
                         page: "../2_map/hls.html"
                     }
                 };
@@ -336,12 +336,12 @@
                         marker.on('click', function () {
                             var markerTitle = this.getTitle();
                             var position = this.getPosition();
-                            var ifurl = 'http://122.193.9.83/XiangXi/gen/'+option.page + '?url=&VPBIAddress=' + markerTitle + '&address=' + markerTitle + '&position=' + position;
+                            var ifurl = 'http://localhost/XiangXi/gen/'+option.page + '?url=&VPBIAddress=' + markerTitle + '&address=' + markerTitle + '&position=' + position;
 
                             var width = "1000";
                             var height = "800";
                             if (this.ent && this.ent[0]) {
-                                ifurl =  'http://122.193.9.83/XiangXi/gen/'+option.page + '?url=' + this.ent[0].url
+                                ifurl =  'http://localhost/XiangXi/gen/'+option.page + '?url=' + this.ent[0].url
                             }
                             this.openWindow('<iframe frameborder="0" src=' + ifurl + ' width=' + width + ' height=' + height + '></iframe>');
                         });

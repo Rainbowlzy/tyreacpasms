@@ -21,6 +21,7 @@
 <script>
 import router from "@/router";
 import TopBar from "./TopBar.vue";
+
 export default {
   name: "Index",
   components: { TopBar },
@@ -42,10 +43,11 @@ export default {
         "http://localhost/tyreacpasms/DefaultHandler.ashx?method=GetMenuConfigurationByAuth"
       )
       .then(function(response) {
-        if (!response.data.success) alert(response.data.message);
-        else {
-          this.$data.menu_list = response.data.topmenu;
+        if (!response.data.success) {
+          // alert(response.data.message);
+          return;
         }
+        this.$data.menu_list = response.data.topmenu;
       });
   }
 };

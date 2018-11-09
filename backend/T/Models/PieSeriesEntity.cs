@@ -1,4 +1,4 @@
-﻿namespace T
+﻿namespace T.Models
 {
     public class PieSeriesEntity
     {

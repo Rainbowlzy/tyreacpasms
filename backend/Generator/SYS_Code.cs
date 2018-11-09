@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TEntities.CodeTemplates
+namespace Generator
 {
     public partial class SYS_Code
     {

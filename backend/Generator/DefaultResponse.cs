@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TEntities.CodeTemplates
+namespace Generator
 {
     public class DefaultResponse<T>
     {

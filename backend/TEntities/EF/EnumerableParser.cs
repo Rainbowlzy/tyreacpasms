@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TEntities1.EF
+namespace TENtities.EF
 {
     public class EnumerableParser
     {

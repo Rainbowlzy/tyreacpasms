@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using TEntities.CodeTemplates;
 
 namespace Generator
 {
     [Table("TableSchema")]
-    public class VTableComments2 : V_Table_Comments, ICloneable
+    public class VTableComments2 : VTableComments, ICloneable
     {
         [Key] public int Id { get; set; }
         public List<V_Column> Columns { get; set; }

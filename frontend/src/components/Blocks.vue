@@ -25,8 +25,8 @@
                 var len = colorlist.length;
                 var idx = (parseInt(rd + rd % 2) % len);
                 return menu.MCPicture
-                        ? ('http://122.193.9.83/' + menu.MCPicture)
-                        : 'http://122.193.9.83/XiangXi/ImageHandler.ashx?label=' + menu.MCCaption + '&bgcolor1=' + colorlist[idx+1] + '&bgcolor2=' + colorlist[idx] + '&width=200&height=200&icon=' + menu.MCCaption + '.png&shape=trirect&fontSize=16&noshadow=noshadow'
+                        ? ('http://localhost/' + menu.MCPicture)
+                        : 'http://localhost/tyreacpasms/ImageHandler.ashx?label=' + menu.MCCaption + '&bgcolor1=' + colorlist[idx+1] + '&bgcolor2=' + colorlist[idx] + '&width=200&height=200&icon=' + menu.MCCaption + '.png&shape=trirect&fontSize=16&noshadow=noshadow'
             },
             parseLink:function(link){
                 return '/pagelist/'+link.replace(/(\/XiangXi\/gen\/)|(List\.html)/g,'');
