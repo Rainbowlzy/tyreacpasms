@@ -124,7 +124,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DefaultContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\IEnumerableParser.cs" />
+    <Compile Include="EF\EnumerableParser.cs" />
     <Compile Include="EF\ObjectParser.cs" />
     <Compile Include="EF\SPCall.cs" />
     <Compile Include="EF\SPCallParameter.cs" />

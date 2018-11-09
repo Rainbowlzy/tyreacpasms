@@ -17,10 +17,8 @@
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating"#>
 <#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
 <# 
-var g = new TEntities.CodeTemplates.Generator(@"D:\code\tyreacpasms\backend\TEntities\sql\domain.txt");
+var g = new Generator.Generator(@"D:\code\tyreacpasms\backend\TEntities\sql\domain.txt");
 var table_schema2 = g.table_schema2;
-var dropdowns = g.dropdowns;
-var table_schema = g.table_schema;
 #>
 <#+
 // Manager class records the various blocks so it can split them up

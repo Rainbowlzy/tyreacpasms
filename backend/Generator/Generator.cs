@@ -1,56 +1,94 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.Entity;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.Entity.Migrations;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-
 using Generator.Tools;
 using Newtonsoft.Json;
+using TEntities.CodeTemplates;
+using static System.Text.RegularExpressions.Regex;
 
-namespace TEntities.CodeTemplates
+namespace Generator
 {
+    public class TypePattern
+    {
+        [Key] public int Id { get; set; }
+        public string DbType { get; set; }
+        public int Length { get; set; }
+        public string RegexPattern { get; set; }
+    }
+
+    public class GeneratorContext : DbContext
+    {
+        private class Configuration : DbMigrationsConfiguration<GeneratorContext>
+        {
+            public Configuration()
+            {
+                AutomaticMigrationsEnabled = true;
+                AutomaticMigrationDataLossAllowed = true;
+            }
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TypePattern>().Property(p => p.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<GeneratorContext, Configuration>());
+        }
+
+        public GeneratorContext() : base("server=.;database=GeneratorDB;integrated security=true;")
+        {
+        }
+
+        public DbSet<VTableComments2> TableSchema { get; set; }
+        public DbSet<TypePattern> TypePatterns { get; set; }
+    }
+
     public class Generator
     {
-        //private const string DOMAIN_FILE_PATH = @"E:\code\T\TEntities\sql\domain.txt";
-        private string TT_GENERATION_FOLDER = @"TT_GENERATION_FOLDER\";
+        private readonly string _ttGenerationFolder = @"TT_GENERATION_FOLDER\";
+
         public DateTime DomainVersionTime { get; set; }
 
         public Generator(string DOMAIN_FILE_PATH)
         {
-            if (!File.Exists(DOMAIN_FILE_PATH)) throw new FileNotFoundException(DOMAIN_FILE_PATH);
-            TT_GENERATION_FOLDER = Directory.GetParent(DOMAIN_FILE_PATH).FullName + TT_GENERATION_FOLDER;
-            if (!Directory.Exists(TT_GENERATION_FOLDER)) Directory.CreateDirectory(TT_GENERATION_FOLDER);
-            var input = File.ReadAllText(DOMAIN_FILE_PATH);
+            InitLocalDB();
 
+            if (!File.Exists(DOMAIN_FILE_PATH)) throw new FileNotFoundException(DOMAIN_FILE_PATH);
+            _ttGenerationFolder = Directory.GetParent(DOMAIN_FILE_PATH).FullName + _ttGenerationFolder;
+            if (!Directory.Exists(_ttGenerationFolder)) Directory.CreateDirectory(_ttGenerationFolder);
+            var input = File.ReadAllText(DOMAIN_FILE_PATH);
             DomainVersionTime = File.GetLastWriteTime(DOMAIN_FILE_PATH);
-            var cacheDropdowns = $"{TT_GENERATION_FOLDER}dropdowns_{File.GetLastWriteTime(DOMAIN_FILE_PATH).Ticks}.txt";
-            var cache_table_schema =
-                $"{TT_GENERATION_FOLDER}table_schema_{File.GetLastWriteTime(DOMAIN_FILE_PATH).Ticks}.txt";
+
             var cache_table_schema2 =
-                $"{TT_GENERATION_FOLDER}table_schema2_{File.GetLastWriteTime(DOMAIN_FILE_PATH).Ticks}.txt";
+                $"{_ttGenerationFolder}table_schema2_{DomainVersionTime:s}.txt";
 
             if (File.Exists(cache_table_schema2))
             {
-                table_schema = File.ReadAllText(cache_table_schema)
-                    .Deserialize<Dictionary<string, List<V_Table_Comments>>>();
-                dropdowns = File.ReadAllText(cacheDropdowns).Deserialize<List<DropdownDef>>();
                 table_schema2 = File.ReadAllText(cache_table_schema2)
-                    .Deserialize<Dictionary<string, V_Table_Comments2>>();
+                    .Deserialize<Dictionary<string, VTableComments2>>();
                 return;
             }
 
             var lines = input.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim());
 
-            foreach (var line in lines.Where(s => !string.IsNullOrEmpty(s)
-                                                  && s.IndexOf("=>", StringComparison.Ordinal) != -1)
+            var enumerable = lines as string[] ?? lines.ToArray();
+            foreach (var line in enumerable.Where(s => !string.IsNullOrEmpty(s)
+                                                       && s.IndexOf("=>", StringComparison.Ordinal) != -1)
                 .AsParallel().Cast<string>())
             {
                 var fieldName = line.Substring(line.IndexOf(".", StringComparison.Ordinal) + 1,
-                    line.IndexOf("=>", StringComparison.Ordinal) - line.IndexOf(".") - 1).Trim();
+                        line.IndexOf("=>", StringComparison.Ordinal) - line.IndexOf(".", StringComparison.Ordinal) - 1)
+                    .Trim();
                 var fieldNameEn = PascalCase(fieldName).Trim();
                 var tableName = line.Substring(0, line.IndexOf(".", StringComparison.Ordinal)).Trim();
                 var tableNameEn = PascalCase(line.Substring(0, line.IndexOf(".", StringComparison.Ordinal)));
@@ -61,70 +99,29 @@ namespace TEntities.CodeTemplates
                     tableNameEn = tableNameEn,
                     fieldName = fieldName,
                     fieldNameEn = prefix + fieldNameEn,
-                    vals = Regex
-                        .Matches(
+                    vals = Matches(
                             line.Substring(line.IndexOf("=>", StringComparison.Ordinal),
                                 line.LastIndexOf("=>", StringComparison.Ordinal) -
                                 line.IndexOf("=>", StringComparison.Ordinal)), @"\w+\d*").Cast<Match>()
                         .Select(p => p.Value).ToList(),
-                    buttons = Regex.Matches(line.Substring(line.LastIndexOf("=>", StringComparison.Ordinal)), @"\w+\d*")
+                    buttons = Matches(line.Substring(line.LastIndexOf("=>", StringComparison.Ordinal)), @"\w+\d*")
                         .Cast<Match>().Select(p => p.Value).ToList(),
                 };
                 dropdowns.Add(dd);
             }
 
-            foreach (var line in lines.Where(s => !string.IsNullOrEmpty(s)
-                                                  && s.IndexOf("->", StringComparison.Ordinal) != -1)
+            foreach (var line in enumerable.Where(s => !string.IsNullOrEmpty(s)
+                                                       && s.IndexOf("->", StringComparison.Ordinal) != -1)
                 .AsParallel().Cast<string>())
             {
                 var rawChTableName = line.Substring(0, line.IndexOf("->", StringComparison.Ordinal));
                 var pascalEnTableName = PascalCase(rawChTableName);
                 var textFields = line.Substring(line.IndexOf("->", StringComparison.Ordinal) + 2);
-                var fields = new HashSet<string>(textFields.Split(new[] { '，', '\t' }, StringSplitOptions.RemoveEmptyEntries)).ToList();
+                var fields =
+                    new HashSet<string>(textFields.Split(new[] {'，', '\t'}, StringSplitOptions.RemoveEmptyEntries))
+                        .ToList();
                 var prefix = string.Concat(pascalEnTableName.Where(c => c >= 'A' && c <= 'Z'));
-
-                if (table_schema_ch.ContainsKey(rawChTableName))
-                {
-                    table_schema_ch[rawChTableName] = fields;
-                }
-                else
-                {
-                    table_schema_ch.Add(rawChTableName, fields);
-                }
-
-                if (table_schema_en.ContainsKey(pascalEnTableName))
-                {
-                    table_schema_en[pascalEnTableName] = fields;
-                }
-                else
-                {
-                    table_schema_en.Add(pascalEnTableName, fields);
-                }
-
-                var fs = fields.Select(field =>
-                {
-                    string regularColumnName = prefix + PascalCase(field);
-                    string dbType = ParseType(field);
-                    return new V_Table_Comments
-                    {
-                        table_name = pascalEnTableName,
-                        table_name_ch = rawChTableName,
-                        table_name_en = pascalEnTableName,
-                        column_name = regularColumnName,
-                        column_description = field,
-                        dbtype = dbType
-                    };
-                }).ToList();
-                if (table_schema.ContainsKey(pascalEnTableName))
-                {
-                    table_schema[pascalEnTableName] = fs;
-                }
-                else
-                {
-                    table_schema.Add(pascalEnTableName, fs);
-                }
-
-                var table = new V_Table_Comments2
+                var table = new VTableComments2
                 {
                     table_name = pascalEnTableName,
                     table_name_ch = rawChTableName,
@@ -143,13 +140,13 @@ namespace TEntities.CodeTemplates
                         };
                     }).ToList()
                 };
-                if (table_schema2.ContainsKey(pascalEnTableName))
+                if (!table_schema2.ContainsKey(pascalEnTableName))
                 {
-                    table_schema2[pascalEnTableName] = table;
+                    table_schema2.Add(pascalEnTableName, table);
                 }
                 else
                 {
-                    table_schema2.Add(pascalEnTableName, table);
+                    table_schema2[pascalEnTableName] = table;
                 }
             }
 
@@ -160,58 +157,105 @@ namespace TEntities.CodeTemplates
                     var column_en_name = k.pascal_column_name;
                     var key = column_en_name;
                     var column_name_chs = k.column_description.Trim('@');
-                    t.debug = column_name_chs;
                     var tbl = table_schema2.Values.FirstOrDefault(q => q.table_name_ch == column_name_chs);
                     if (tbl != null)
                     {
-                        if (tbl.Children == null) tbl.Children = new List<V_Table_Comments2>();
-                        tbl.Children.Add((V_Table_Comments2) t.Clone());
-                        t.Parent = (V_Table_Comments2) tbl.Clone();
+                        if (tbl.Children == null) tbl.Children = new List<VTableComments2>();
+                        tbl.Children.Add((VTableComments2) t.Clone());
+                        t.Parent = (VTableComments2) tbl.Clone();
                     }
                 }
             }
 
             File.WriteAllText(cache_table_schema2, table_schema2.ToJson());
-            File.WriteAllText(cacheDropdowns, dropdowns.ToJson());
-            File.WriteAllText(cache_table_schema, table_schema.ToJson());
         }
 
-        public List<DropdownDef> dropdowns { get; set; } = new List<DropdownDef>();
-
-        public Dictionary<string, List<V_Table_Comments>> table_schema { get; set; } =
-            new Dictionary<string, List<V_Table_Comments>>();
-
-        public Dictionary<string, V_Table_Comments2> table_schema2 { get; set; } =
-            new Dictionary<string, V_Table_Comments2>();
-
-        public Dictionary<string, List<string>> table_schema_ch { get; set; } = new Dictionary<string, List<string>>();
-
-        public Dictionary<string, List<string>> table_schema_en { get; set; } = new Dictionary<string, List<string>>();
-
-
-        public string ParseType(string field)
+        private static void InitLocalDB()
         {
-            const string nvarcharFields = "图片，照片，上传，摘要，备注，报告，头像，内容，标题，地址，企业名称，身份证，链接，理由，原因，说明";
-            const string intFields = "年龄，顺序，排序";
-            const string decimalFields = "小数";
-            const string realFields = "面积";
-            const string moneyFields = "金额，月租金，年租金";
-            const string textFields = "备注，内容，正文";
-            const string datetimeFields = "时间，日期";
-            if (datetimeFields.Split(new[] {'，'}, StringSplitOptions.RemoveEmptyEntries)
-                .Any(s => field.IndexOf(s, StringComparison.Ordinal) != -1)) return "DATETIME";
-            if (realFields.Split(new[] {'，'}, StringSplitOptions.RemoveEmptyEntries)
-                .Any(s => field.IndexOf(s, StringComparison.Ordinal) != -1)) return "REAL";
-            if (intFields.Split(new[] {'，'}, StringSplitOptions.RemoveEmptyEntries)
-                .Any(s => field.IndexOf(s, StringComparison.Ordinal) != -1)) return "INT";
-            if (moneyFields.Split(new[] {'，'}, StringSplitOptions.RemoveEmptyEntries).Any(s => field.IndexOf(s, StringComparison.Ordinal) != -1))
-                return "MONEY";
-            //if (decimalFields.Split(new []{ '，' }, StringSplitOptions.RemoveEmptyEntries).Any(s => field.IndexOf(s) != -1)) return "DECIMAL(18,18)";
-            if (textFields.Split(new[] {'，'}, StringSplitOptions.RemoveEmptyEntries).Any(s => field.IndexOf(s, StringComparison.Ordinal) != -1))
-                return "NVARCHAR(4000)";
-            if (nvarcharFields.Split(new[] {'，'}, StringSplitOptions.RemoveEmptyEntries)
-                .Any(s => field.IndexOf(s, StringComparison.Ordinal) != -1)) return "NVARCHAR(4000)";
-            return "NVARCHAR(50)";
+            try
+            {
+                using (var ctx = new GeneratorContext())
+                {
+                    if (ctx.TypePatterns.Any()) return;
+                    ctx.TypePatterns.AddRange(DefaultTypePatterns());
+
+
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("本地数据库初始化失败", e);
+            }
+        }
+
+        /// <summary>
+        /// 默认类型模式
+        /// </summary>
+        /// <returns></returns>
+        private static TypePattern[] DefaultTypePatterns()
+        {
+            return new[]
+            {
+                new TypePattern
+                {
+                    Length = 50,
+                    RegexPattern =
+                        @"(图片)|(照片)|(上传)|(摘要)|(备注)|(报告)|(头像)|(内容)|(标题)|(地址)|(企业名称)|(身份证)|(链接)|(理由)|(原因)|(说明)",
+                    DbType = "NVARCHAR"
+                },
+                new TypePattern
+                {
+                    RegexPattern = @"(是否)|(开关)", DbType = "BIT"
+                },
+                new TypePattern
+                {
+                    RegexPattern = @"(金额)|(\w*租金)", DbType = "CURRENCY"
+                },
+                new TypePattern
+                {
+                    RegexPattern = @"(时间)|(日期)", DbType = "DATETIME"
+                },
+                new TypePattern
+                {
+                    RegexPattern = @"(小数)|(金额)|(\w*租金)|(面积)", DbType = "DECIMAL"
+                },
+                new TypePattern
+                {
+                    RegexPattern = @"(id)|(年龄)|(顺序)|(排序)", DbType = "INT"
+                },
+                new TypePattern
+                {
+                    Length = 4000, RegexPattern = @"(备注)|(内容)|(正文)", DbType = "TEXT"
+                },
+
+            };
+        }
+
+        private List<DropdownDef> dropdowns { get; set; } = new List<DropdownDef>();
+
+        public Dictionary<string, VTableComments2> table_schema2 { get; set; } =
+            new Dictionary<string, VTableComments2>();
+
+        private string ParseType(string field)
+        {
+            var mapping = new
+            {
+                nvarchar = @"(图片)|(照片)|(上传)|(摘要)|(备注)|(报告)|(头像)|(内容)|(标题)|(地址)|(企业名称)|(身份证)|(链接)|(理由)|(原因)|(说明)",
+                @int = @"(id)|(年龄)|(顺序)|(排序)",
+                @decimal = @"小数",
+                @real = @"面积",
+                money = @"(金额)|(\w*租金)",
+                text = @"(备注)|(内容)|(正文)",
+                datetime = @"(时间)|(日期)"
+            };
+            return IsMatch(field, mapping.nvarchar) ? "NVARCHAR(50)" :
+                IsMatch(field, mapping.@int) ? "INT" :
+                IsMatch(field, mapping.@decimal) ? "DECIMAL" :
+                IsMatch(field, mapping.real) ? "REAL" :
+                IsMatch(field, mapping.money) ? "MONEY" :
+                IsMatch(field, mapping.text) ? "TEXT" :
+                IsMatch(field, mapping.datetime) ? "DATETIME" : "NVARCHAR(50)";
         }
 
         private static readonly string nottranslate = "PM2.5，PM10，SO2，NO2，O3，CO";
@@ -228,17 +272,17 @@ namespace TEntities.CodeTemplates
             return request.GetResponse() as HttpWebResponse;
         }
 
-        public string CamelCase(string key)
+        private string CamelCase(string key)
         {
-            if (nottranslate.IndexOf(key) != -1) return key;
-            return HttpGet(string.Format("http://localhost/Translator/api/CamelCase?key={0}", key)).Trim('"');
+            if (nottranslate.IndexOf(key, StringComparison.Ordinal) != -1) return key;
+            return HttpGet($"http://localhost/Translator/api/CamelCase?key={key}").Trim('"');
         }
 
-        public string PascalCase(string key)
+        private string PascalCase(string key)
         {
             key = key?.Trim("@,?.|\\/".ToCharArray());
-            if (nottranslate.IndexOf(key) != -1) return key;
-            return HttpGet(string.Format("http://localhost/Translator/api/PascalCase?key={0}", key))
+            if (nottranslate.IndexOf(key, StringComparison.Ordinal) != -1) return key;
+            return HttpGet($"http://localhost/Translator/api/PascalCase?key={key}")
                 .Trim('"', '.', '-', '+', ',', '\'', '?', '(', ')')
                 .Replace("'", string.Empty)
                 .Replace('(', '\0')

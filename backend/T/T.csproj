@@ -171,251 +171,17 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EvaluatorGen.cs</LastGenOutput>
     </Content>
-    <Content Include="gen\Analysis.html">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\Analysis.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Analysis.html</LastGenOutput>
-    </Content>
-    <Content Include="gen\Customertype.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\CustomertypeAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\CustomertypeList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\DongShan1.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DongShan.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\GoodsShelves.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\GoodsShelvesAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\GoodsShelvesList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\ImportProc.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ImportProc.svc.cs</LastGenOutput>
-    </Content>
-    <Content Include="gen\LogonRecord.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\LogonRecordAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\LogonRecordList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\MenuConfiguration.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\MenuConfigurationAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\MenuConfigurationList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\Order.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\OrderAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\OrderDetails.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\OrderDetailsAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\OrderDetailsList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\OrderList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\PageListHTML.html">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\PageOneHTML.html">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\PageOneHTML.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PageOneHTML.html</LastGenOutput>
-    </Content>
-    <Content Include="gen\ReplenishmentApplicationForm.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\ReplenishmentApplicationFormAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\ReplenishmentApplicationFormList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\ReplenishmentRecord.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\ReplenishmentRecordAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\ReplenishmentRecordList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\RoleConfiguration.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\RoleConfigurationAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\RoleConfigurationList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\RoleMenu.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\RoleMenuAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\RoleMenuList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SalesRecord.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SalesRecordAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SalesRecordList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SearchFormModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SearchFormModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="gen\DongShan.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DongShan1.txt</LastGenOutput>
-    </Content>
-    <Content Include="gen\DongShan.txt">
-      <DependentUpon>DongShan.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
-    <Content Include="gen\Supplier.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SupplierAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SupplierList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SupplyChannel.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SupplyChannelAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SupplyChannelList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SystemConfiguration.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SystemConfigurationAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\SystemConfigurationList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\TypeOfGoods.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\TypeOfGoodsAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\TypeOfGoodsList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\UserInformation.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\UserInformationAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\UserInformationList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\UserMenu.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\UserMenuAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\UserMenuList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\UserRole.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\UserRoleAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\UserRoleList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\TDocument.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TDocument.txt</LastGenOutput>
-    </Content>
-    <Content Include="gen\TDocument.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TDocument.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\PageListHTML.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PageListHTML.html</LastGenOutput>
-    </Content>
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="gen\Warehouse.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\WarehouseAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\WarehouseList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\WarehousingRecord.html">
-      <DependentUpon>PageOneHTML.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\WarehousingRecordAnalysis.html">
-      <DependentUpon>Analysis.tt</DependentUpon>
-    </Content>
-    <Content Include="gen\WarehousingRecordList.html">
-      <DependentUpon>PageListHTML.tt</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <Content Include="Models\SearchFormModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SearchFormModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -430,12 +196,7 @@
     <Compile Include="Evaluators\CacheOptionsAttribute.cs" />
     <Compile Include="Evaluators\CommonOutputList.cs" />
     <Compile Include="Controllers\CommonOutputT.cs" />
-    <Compile Include="gen\ImportProc.svc.cs">
-      <DependentUpon>ImportProc.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="gen\SearchFormModel.cs">
+    <Compile Include="Models\SearchFormModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchFormModel.tt</DependentUpon>
@@ -498,13 +259,6 @@
     <Content Include="Handler1.ashx" />
     <Content Include="Version.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\VideoPointBitInformations\Create.cshtml" />
-    <Content Include="Views\VideoPointBitInformations\Delete.cshtml" />
-    <Content Include="Views\VideoPointBitInformations\Details.cshtml" />
-    <Content Include="Views\VideoPointBitInformations\Edit.cshtml" />
-    <Content Include="Views\VideoPointBitInformations\Index.cshtml" />
     <Content Include="ViewPage1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

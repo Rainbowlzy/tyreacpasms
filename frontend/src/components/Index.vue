@@ -1,10 +1,5 @@
 <template>
   <div>
-    
-    <div class="login-header">
-        <h1>黄河电器公司进销存管理系统</h1>
-    </div>
-
     <div class="menu-bar">
       <TopBar></TopBar>
     </div>
@@ -13,7 +8,6 @@
 </template>
 
 <script>
-
 import Blocks from "@/components/Blocks.vue";
 import Map from "@/components/Map.vue";
 import TopBar from "./TopBar.vue";
@@ -22,7 +16,6 @@ export default {
   name: "Index",
   components: { TopBar, Blocks, Map }
 };
-
 </script>
 
 <style scoped>
@@ -35,8 +28,6 @@ export default {
 }
 
 .menu-bar {
-  position: fixed;
-  top: 60px;
 }
 
 .login-header > h1 {

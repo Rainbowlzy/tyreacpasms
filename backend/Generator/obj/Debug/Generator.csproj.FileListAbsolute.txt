@@ -43,3 +43,10 @@ D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csproj.CopyComplete
 D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.dll
 D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.pdb
 D:\code\tyreacpasms\backend\Generator\obj\Debug\Generator.csprojAssemblyReference.cache
+D:\code\tyreacpasms\backend\Generator\bin\Debug\Generator.dll.config
+D:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.dll
+D:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.SqlServer.dll
+D:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.xml
+D:\code\tyreacpasms\backend\Generator\bin\Debug\EntityFramework.SqlServer.xml
+D:\code\tyreacpasms\backend\Generator\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\code\tyreacpasms\backend\Generator\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll

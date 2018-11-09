@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using TEntities.CodeTemplates;
 
-namespace TEntities.CodeTemplates
+namespace Generator
 {
-    public class V_Table_Comments2 : V_Table_Comments, ICloneable
+    [Table("TableSchema")]
+    public class VTableComments2 : V_Table_Comments, ICloneable
     {
-        public string debug;
+        [Key] public int Id { get; set; }
         public List<V_Column> Columns { get; set; }
-        public List<V_Table_Comments2> Children { get; internal set; }
-        public V_Table_Comments2 Parent { get; set; }
+        public virtual List<VTableComments2> Children { get; internal set; }
+        public VTableComments2 Parent { get; set; }
 
         public object Clone()
         {
-            return new V_Table_Comments2
+            return new VTableComments2
             {
-                debug = debug,
                 Columns = Columns,
                 table_name = table_name,
                 table_name_ch = table_name_ch,

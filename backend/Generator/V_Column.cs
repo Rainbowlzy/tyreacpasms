@@ -1,7 +1,11 @@
-﻿namespace TEntities.CodeTemplates
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Generator
 {
     public class V_Column
     {
+        [Key]
+        public int Id { get; set; }
         /// <summary>
         /// 
         /// </summary>
