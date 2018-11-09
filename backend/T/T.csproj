@@ -178,6 +178,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <Content Include="ImportExport\ImportProc.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ImportProc.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\SearchFormModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SearchFormModel.cs</LastGenOutput>
@@ -195,7 +199,12 @@
     <Compile Include="Evaluators\GetCurrentUserInformationEvaluator.cs" />
     <Compile Include="Evaluators\CacheOptionsAttribute.cs" />
     <Compile Include="Evaluators\CommonOutputList.cs" />
-    <Compile Include="Controllers\CommonOutputT.cs" />
+    <Compile Include="ImportExport\ImportProc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportProc.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CommonOutputT.cs" />
     <Compile Include="Models\SearchFormModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

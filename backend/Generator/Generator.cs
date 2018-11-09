@@ -70,7 +70,7 @@ namespace Generator
             DomainVersionTime = File.GetLastWriteTime(DOMAIN_FILE_PATH);
 
             var cache_table_schema2 =
-                $"{_ttGenerationFolder}table_schema2_{DomainVersionTime:s}.txt";
+                $"{_ttGenerationFolder}table_schema2_{DomainVersionTime.ToString("s").Replace("T","").Replace("-","").Replace(":","")}.txt";
 
             if (File.Exists(cache_table_schema2))
             {
