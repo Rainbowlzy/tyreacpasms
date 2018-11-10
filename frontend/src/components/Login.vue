@@ -22,10 +22,7 @@
 <script>
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import { mapState, 
-mapMutations, 
-mapActions 
-} from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "Login",
@@ -34,21 +31,24 @@ export default {
   },
   methods: {
     login: function() {
-      this.$http.get("http://localhost/tyreacpasms/DefaultHandler.ashx", {params: {
+      this.$http
+        .get("http://localhost/tyreacpasms/DefaultHandler.ashx", {
+          params: {
             method: "login",
             data: JSON.stringify(this.user)
-          }})
+          }
+        })
         .then(function(response) {
           if (!response.data.success) {
             // alert(response.data.message);
             return;
           }
           this.$store.state.user.token = response.data.data;
-            this.$cookie.set("auth_user", this.$store.state.user.token, {
-              expires: 999,
-              domain: location.host.split(":")[0]
-            });
-            this.$router.push("../index");
+          this.$cookie.set("auth_user", this.$store.state.user.token, {
+            expires: 999,
+            domain: location.host.split(":")[0]
+          });
+          this.$router.push("../index");
         });
     }
   }
@@ -58,29 +58,29 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
-
 .login-header > h1 {
   position: fixed;
   top: 30%;
   left: 38%;
-  color:white;
+  color: white;
   font-size: 4em;
-  text-shadow: 3in
+  text-shadow: 3in;
 }
 .login-header {
   position: fixed;
-  top:0px;left:0px;
-  height:70%;width:100%;
-  background: #42B983;
+  top: 0px;
+  left: 0px;
+  height: 70%;
+  width: 100%;
+  background: #2c3e50;
 }
 .container {
   position: fixed;
   left: 30%;
   top: 80%;
 }
-label{
-  height:30px;
+label {
+  height: 30px;
   line-height: 30px;
 }
-
 </style>
