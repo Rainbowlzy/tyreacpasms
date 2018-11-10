@@ -1,7 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ include file="..\CodeTemplates\Manager.ttinclude"#>  
 <#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
-<#@ import namespace="TEntities.CodeTemplates" #>
 
 <#@ output extension=".cs" #>
 using System;
@@ -99,7 +98,7 @@ var prefix = string.Concat(pascalCaseTableName.Where(c=>c>='A' && c<='Z'));
 		}
 			#>
 
-        public <#=SqlServerDbTypeMap.MapCsharpType(col.dbtype.Split('(')[0])#> <#=col.column_name#> { get; set; }
+        public <#=Generator.SqlServerDbTypeMap.MapCsharpType(col.dbtype.Split('(')[0])#> <#=col.column_name#> { get; set; }
 <#		}
 			if(table.Children!=null)
             foreach(var child in table.Children){#>

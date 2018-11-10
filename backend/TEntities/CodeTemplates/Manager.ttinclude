@@ -17,7 +17,7 @@
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating"#>
 <#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
 <# 
-var g = new Generator.Generator(@"f:\code\tyreacpasms\backend\TEntities\sql\domain.txt");
+var g = new Generator.Generator(@"D:\code\tyreacpasms\backend\TEntities\sql\domain.txt");
 var table_schema2 = g.table_schema2;
 #>
 <#+

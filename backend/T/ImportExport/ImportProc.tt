@@ -18,6 +18,11 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Data.Entity.Migrations;
+using T.Evaluators;
+using TEntities.EF;
+using TENtities;
+using TENtities.EF;
+using EF.Entities;
 
 namespace T
 {

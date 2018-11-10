@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity.Migrations;
+using EF.Entities;
 using Newtonsoft.Json;
 using T.Models;
 using TEntities.EF;

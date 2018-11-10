@@ -1,8 +1,8 @@
 ﻿
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/10/2018 00:43:59
- * 生成版本：11/08/2018 23:49:44 
+ * 生成时间：11/11/2018 01:07:04
+ * 生成版本：11/10/2018 13:57:48 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 
@@ -20,8 +20,8 @@ using Validation = Microsoft.Practices.EnterpriseLibrary.Validation.Validation;
 using ValidationResult = Microsoft.Practices.EnterpriseLibrary.Validation.ValidationResult;
 using TENtities.EF;
 using TENtities;
+using EF.Entities;
 using TEntities.EF;
-
 namespace T.Evaluators
 {
 
@@ -307,6 +307,296 @@ namespace T.Evaluators
                 var total = query.Count();
                 var sql = query.ToString();
                 return new CommonOutputList<RoleMenu>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【角色配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class RoleConfigurationCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.RoleConfiguration.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【角色配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateRoleConfigurationEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.RoleConfiguration.RemoveRange(ctx.RoleConfiguration);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【角色配置】
+    /// </summary>
+    public partial class DeleteRoleConfigurationEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<RoleConfiguration>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "删除成功"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.RoleConfiguration.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.RoleConfiguration.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条角色配置记录";
+    }
+	
+    /// <summary>
+    /// 保存【角色配置】
+    /// </summary>
+    public partial class SaveRoleConfigurationEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			RoleConfiguration entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<RoleConfiguration>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.RoleConfiguration.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.RoleConfiguration.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 角色名称
+				entity.RCRoleName = HttpUtility.UrlDecode(entity.RCRoleName);
+					// NVARCHAR(50) 所属组织
+				entity.RCAffiliatedOrganization = HttpUtility.UrlDecode(entity.RCAffiliatedOrganization);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.RoleConfiguration.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条RoleConfiguration记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【角色配置】
+    /// </summary>
+    public partial class GetRoleConfigurationEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new RoleConfiguration();
+        }
+        public override string Comments=> "获取空的角色配置记录";
+    }
+	
+    /// <summary>
+    /// 查询【角色配置】列表
+    /// </summary>
+    public partial class GetRoleConfigurationListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取RoleConfiguration列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<RoleConfigurationSearchModel>() ?? new RoleConfigurationSearchModel();
+                var query = ctx.RoleConfiguration.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// RCRoleName NVARCHAR(50) 角色名称 
+                if(!string.IsNullOrEmpty(searchModel.RCRoleName)) query = query.Where(t=>t.RCRoleName.Contains(searchModel.RCRoleName));
+                if(sort=="RCRoleName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RCRoleName):query.OrderByDescending(t=>t.RCRoleName);
+                    isordered = true;
+                }
+				// RCAffiliatedOrganization NVARCHAR(50) 所属组织 
+                if(!string.IsNullOrEmpty(searchModel.RCAffiliatedOrganization)) query = query.Where(t=>t.RCAffiliatedOrganization.Contains(searchModel.RCAffiliatedOrganization));
+                if(sort=="RCAffiliatedOrganization")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RCAffiliatedOrganization):query.OrderByDescending(t=>t.RCAffiliatedOrganization);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.RCRoleName.Contains(search)||t.RCAffiliatedOrganization.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<RoleConfiguration>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };
@@ -931,296 +1221,6 @@ namespace T.Evaluators
                 var total = query.Count();
                 var sql = query.ToString();
                 return new CommonOutputList<MenuConfiguration>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【角色配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class RoleConfigurationCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.RoleConfiguration.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【角色配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateRoleConfigurationEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.RoleConfiguration.RemoveRange(ctx.RoleConfiguration);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【角色配置】
-    /// </summary>
-    public partial class DeleteRoleConfigurationEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<RoleConfiguration>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "删除成功"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.RoleConfiguration.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.RoleConfiguration.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条角色配置记录";
-    }
-	
-    /// <summary>
-    /// 保存【角色配置】
-    /// </summary>
-    public partial class SaveRoleConfigurationEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			RoleConfiguration entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<RoleConfiguration>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.RoleConfiguration.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.RoleConfiguration.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 角色名称
-				entity.RCRoleName = HttpUtility.UrlDecode(entity.RCRoleName);
-					// NVARCHAR(50) 所属组织
-				entity.RCAffiliatedOrganization = HttpUtility.UrlDecode(entity.RCAffiliatedOrganization);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.RoleConfiguration.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条RoleConfiguration记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【角色配置】
-    /// </summary>
-    public partial class GetRoleConfigurationEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new RoleConfiguration();
-        }
-        public override string Comments=> "获取空的角色配置记录";
-    }
-	
-    /// <summary>
-    /// 查询【角色配置】列表
-    /// </summary>
-    public partial class GetRoleConfigurationListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取RoleConfiguration列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<RoleConfigurationSearchModel>() ?? new RoleConfigurationSearchModel();
-                var query = ctx.RoleConfiguration.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// RCRoleName NVARCHAR(50) 角色名称 
-                if(!string.IsNullOrEmpty(searchModel.RCRoleName)) query = query.Where(t=>t.RCRoleName.Contains(searchModel.RCRoleName));
-                if(sort=="RCRoleName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RCRoleName):query.OrderByDescending(t=>t.RCRoleName);
-                    isordered = true;
-                }
-				// RCAffiliatedOrganization NVARCHAR(50) 所属组织 
-                if(!string.IsNullOrEmpty(searchModel.RCAffiliatedOrganization)) query = query.Where(t=>t.RCAffiliatedOrganization.Contains(searchModel.RCAffiliatedOrganization));
-                if(sort=="RCAffiliatedOrganization")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RCAffiliatedOrganization):query.OrderByDescending(t=>t.RCAffiliatedOrganization);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.RCRoleName.Contains(search)||t.RCAffiliatedOrganization.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<RoleConfiguration>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };
@@ -5249,7 +5249,7 @@ namespace T.Evaluators
 								// NVARCHAR(50) 货架编号
 				entity.GSShelfNumber = HttpUtility.UrlDecode(entity.GSShelfNumber);
 					// NVARCHAR(50) 容积 
-				entity.GSVolume = HttpUtility.UrlDecode(entity.GSVolume);
+				entity.GS = HttpUtility.UrlDecode(entity.GS);
 					// NVARCHAR(50) 位置
 				entity.GSLocation = HttpUtility.UrlDecode(entity.GSLocation);
 					// NVARCHAR(50) 负责人工号
@@ -5328,11 +5328,11 @@ namespace T.Evaluators
 					query = order=="asc"?query.OrderBy(t=>t.GSShelfNumber):query.OrderByDescending(t=>t.GSShelfNumber);
                     isordered = true;
                 }
-				// GSVolume NVARCHAR(50) 容积  
-                if(!string.IsNullOrEmpty(searchModel.GSVolume)) query = query.Where(t=>t.GSVolume.Contains(searchModel.GSVolume));
-                if(sort=="GSVolume")
+				// GS NVARCHAR(50) 容积  
+                if(!string.IsNullOrEmpty(searchModel.GS)) query = query.Where(t=>t.GS.Contains(searchModel.GS));
+                if(sort=="GS")
                 {
-					query = order=="asc"?query.OrderBy(t=>t.GSVolume):query.OrderByDescending(t=>t.GSVolume);
+					query = order=="asc"?query.OrderBy(t=>t.GS):query.OrderByDescending(t=>t.GS);
                     isordered = true;
                 }
 				// GSLocation NVARCHAR(50) 位置 
@@ -5350,7 +5350,7 @@ namespace T.Evaluators
                     isordered = true;
                 }
 				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.GSShelfNumber.Contains(search)||t.GSVolume.Contains(search)||t.GSLocation.Contains(search)||t.GSResponsibleForManualNumber.Contains(search));
+					query = query.Where(t=>t.id!=-1||t.GSShelfNumber.Contains(search)||t.GS.Contains(search)||t.GSLocation.Contains(search)||t.GSResponsibleForManualNumber.Contains(search));
 				}
                 if(sort=="ord")
                 {

@@ -127,6 +127,12 @@ namespace Generator
                     }
                 }
             }
+            using (var ctx = new GeneratorContext())
+            {
+                if (ctx.TableSchema.Any()) return;
+                ctx.TableSchema.AddRange(table_schema2.Values.ToList());
+                ctx.SaveChanges();
+            }
 
             File.WriteAllText(cache_table_schema2, table_schema2.ToJson());
         }
@@ -139,8 +145,6 @@ namespace Generator
                 {
                     if (ctx.TypePatterns.Any()) return;
                     ctx.TypePatterns.AddRange(DefaultTypePatterns());
-
-
                     ctx.SaveChanges();
                 }
             }

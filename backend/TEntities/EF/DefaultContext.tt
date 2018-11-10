@@ -14,6 +14,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Migrations;
 using Microsoft.Practices.EnterpriseLibrary.Validation.Validators;
 using TENtities.EF;
+using EF.Entities;
 
 namespace TEntities.EF
 {
