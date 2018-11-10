@@ -12,6 +12,8 @@
             <li v-for="menu in menu_list" :key="menu.id"
                 :class="$route.params.mccaption===menu.MCCaption?'menu-item-selected':'menu-item'">
                 <router-link :to="menu.MCLink">{{menu.MCDisplayName}}</router-link>
+                <!-- <a :href="menu.MCLink">{{menu.MCDisplayName}}</a> -->
+                <!-- <a href="#" @click="goto(menu)">{{menu.MCDisplayName}}</a> -->
             </li>
         </ul>
         <div style="height:120px; width:100%; display:block;"></div>
@@ -32,6 +34,10 @@ export default {
     };
   },
   methods: {
+    goto(menu) {
+      this.$router.push(menu.MCLink);
+      this.$router.go(0);
+    },
     exit: function() {
       this.$cookie.delete("auth_user");
       router.push("/login");

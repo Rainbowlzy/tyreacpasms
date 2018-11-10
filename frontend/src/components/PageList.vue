@@ -10,7 +10,8 @@
                     <b-table hover 
                     id="my-table"
                     :per-page="5" 
-                    :items="myProviderCallback" :fields="fields">
+                    v-model="items" 
+                    :fields="fields">
             <template slot="操作" slot-scope="row">
                 <b-button size="sm" @click.stop="edit(row)" class="mr-2">
                     编辑
@@ -153,20 +154,27 @@ export default {
       let vm = this,
         caption = this.$route.params.mccaption,
         token = this.$store.state.user.token,
-        params = '?page=' + ctx.currentPage + '&size=' + ctx.perPage
+        params = "?page=" + ctx.currentPage + "&size=" + ctx.perPage;
 
-  vm.$http.get(`http://localhost/tyreacpasms/DefaultHandler.ashx?method=get${caption}list&${token}&offset=${ctx.currentPage}&limit=${ctx.perPage}`).then((data) => {
-    // Pluck the array of items off our axios response
-    let items = data.data.rows
-    // Provide the array of items to the callabck
-    callback(items)
-  }).catch(error => {
-    callback([])
-  })
+      vm.$http
+        .get(
+          `http://localhost/tyreacpasms/DefaultHandler.ashx?method=get${caption}list&${token}&offset=${
+            ctx.currentPage
+          }&limit=${ctx.perPage}`
+        )
+        .then(data => {
+          // Pluck the array of items off our axios response
+          let items = data.data.rows;
+          // Provide the array of items to the callabck
+          callback(items);
+        })
+        .catch(error => {
+          callback([]);
+        });
 
-  // Must return null or undefined to signal b-table that callback is being used
-  return null
-},
+      // Must return null or undefined to signal b-table that callback is being used
+      return null;
+    },
     myProvider(ctx) {
       let vm = this,
         caption = this.$route.params.mccaption,
@@ -176,15 +184,15 @@ export default {
         );
       return promise
         .then(data => {
-vm.$data.items = data.data.rows;
+          vm.$data.items = data.data.rows;
           return data.data.rows;
         })
         .catch(error => {
           return [];
         });
     },
-    reload(){
-      
+    reload() {
+      console.log("reload");
       let caption = this.$route.params.mccaption,
         fields = [
           ...metadata[caption].Columns.map(col => ({
@@ -194,32 +202,34 @@ vm.$data.items = data.data.rows;
           })),
           "操作"
         ];
-        this.$data.fields = fields;
-        this.$data.metadata = metadata[caption];
-              this.$cookie.set("auth_user", this.$store.state.user.token, {
-                expires: 999,
-                domain: location.host.split(":")[0]
-              });
-        this.$root.$emit('bv::refresh::table', 'my-table');
+      this.$data.fields = fields;
+      this.$data.metadata = metadata[caption];
+      this.$cookie.set("auth_user", this.$store.state.user.token, {
+        expires: 999,
+        domain: location.host.split(":")[0]
+      });
+      this.$root.$emit("bv::refresh::table", "my-table");
     }
   },
   data() {
     return {
-      fields:[],
+      fields: [],
       current: null,
       metadata: {},
-      items:[]
+      items: []
     };
   },
-  mounted(){
+  mounted() {
+    console.log("mounted");
+    this.reload();
+  },
+  watch: {
+    $route() {
+      this.pjtid = this.$route.params.mccaption;
+    },
+    pjtid() {
       this.reload();
-  },watch: {
-      $route(){
-        this.pjtid = this.$route.params.mccaption
-      },
-      pjtid() {
-        this.reload();
-      },
-},
+    }
+  }
 };
 </script>
