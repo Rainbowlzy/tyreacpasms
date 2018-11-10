@@ -23,7 +23,7 @@ namespace TEntities.EF
 #if DEBUG
         public DefaultContext():base("LocalDefaultContext") 
 		{ 
-			BuildMenu();
+			// BuildMenu();
 		}
 #elif RELEASE
 #endif
@@ -117,7 +117,7 @@ var table = ent;
 			var <#=table.table_name_en.ToLower()#> = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "<#=table.table_name_ch#>");
 			if(<#=table.table_name_en.ToLower()#>!=null)
 			{
-				<#=table.table_name_en.ToLower()#>.MCLink = "/T/gen/<#=table_name#>List.html";
+				<#=table.table_name_en.ToLower()#>.MCLink = "/pagelist/<#=table_name#>List.html";
 				MenuConfiguration.AddOrUpdate(<#=table.table_name_en.ToLower()#>);
 			}
 <#}

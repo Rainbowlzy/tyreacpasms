@@ -20,7 +20,7 @@ namespace TEntities.EF
 #if DEBUG
         public DefaultContext():base("LocalDefaultContext") 
 		{ 
-			BuildMenu();
+			// BuildMenu();
 		}
 #elif RELEASE
 #endif
@@ -120,7 +120,7 @@ namespace TEntities.EF
 			var rolemenu = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "角色菜单");
 			if(rolemenu!=null)
 			{
-				rolemenu.MCLink = "/T/gen/RoleMenuList.html";
+				rolemenu.MCLink = "/pagelist/RoleMenuList.html";
 				MenuConfiguration.AddOrUpdate(rolemenu);
 			}
 
@@ -156,7 +156,7 @@ namespace TEntities.EF
 			var userrole = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "用户角色");
 			if(userrole!=null)
 			{
-				userrole.MCLink = "/T/gen/UserRoleList.html";
+				userrole.MCLink = "/pagelist/UserRoleList.html";
 				MenuConfiguration.AddOrUpdate(userrole);
 			}
 
@@ -192,7 +192,7 @@ namespace TEntities.EF
 			var menuconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "菜单配置");
 			if(menuconfiguration!=null)
 			{
-				menuconfiguration.MCLink = "/T/gen/MenuConfigurationList.html";
+				menuconfiguration.MCLink = "/pagelist/MenuConfigurationList.html";
 				MenuConfiguration.AddOrUpdate(menuconfiguration);
 			}
 
@@ -228,7 +228,7 @@ namespace TEntities.EF
 			var roleconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "角色配置");
 			if(roleconfiguration!=null)
 			{
-				roleconfiguration.MCLink = "/T/gen/RoleConfigurationList.html";
+				roleconfiguration.MCLink = "/pagelist/RoleConfigurationList.html";
 				MenuConfiguration.AddOrUpdate(roleconfiguration);
 			}
 
@@ -264,7 +264,7 @@ namespace TEntities.EF
 			var userinformation = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "用户信息");
 			if(userinformation!=null)
 			{
-				userinformation.MCLink = "/T/gen/UserInformationList.html";
+				userinformation.MCLink = "/pagelist/UserInformationList.html";
 				MenuConfiguration.AddOrUpdate(userinformation);
 			}
 
@@ -300,7 +300,7 @@ namespace TEntities.EF
 			var logonrecord = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "登录记录");
 			if(logonrecord!=null)
 			{
-				logonrecord.MCLink = "/T/gen/LogonRecordList.html";
+				logonrecord.MCLink = "/pagelist/LogonRecordList.html";
 				MenuConfiguration.AddOrUpdate(logonrecord);
 			}
 
@@ -336,7 +336,7 @@ namespace TEntities.EF
 			var usermenu = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "用户菜单");
 			if(usermenu!=null)
 			{
-				usermenu.MCLink = "/T/gen/UserMenuList.html";
+				usermenu.MCLink = "/pagelist/UserMenuList.html";
 				MenuConfiguration.AddOrUpdate(usermenu);
 			}
 
@@ -372,7 +372,7 @@ namespace TEntities.EF
 			var systemconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "系统配置");
 			if(systemconfiguration!=null)
 			{
-				systemconfiguration.MCLink = "/T/gen/SystemConfigurationList.html";
+				systemconfiguration.MCLink = "/pagelist/SystemConfigurationList.html";
 				MenuConfiguration.AddOrUpdate(systemconfiguration);
 			}
 
@@ -408,7 +408,7 @@ namespace TEntities.EF
 			var customertype = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "客户");
 			if(customertype!=null)
 			{
-				customertype.MCLink = "/T/gen/CustomertypeList.html";
+				customertype.MCLink = "/pagelist/CustomertypeList.html";
 				MenuConfiguration.AddOrUpdate(customertype);
 			}
 
@@ -444,7 +444,7 @@ namespace TEntities.EF
 			var supplier = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "供应商");
 			if(supplier!=null)
 			{
-				supplier.MCLink = "/T/gen/SupplierList.html";
+				supplier.MCLink = "/pagelist/SupplierList.html";
 				MenuConfiguration.AddOrUpdate(supplier);
 			}
 
@@ -480,7 +480,7 @@ namespace TEntities.EF
 			var typeofgoods = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "货物种类");
 			if(typeofgoods!=null)
 			{
-				typeofgoods.MCLink = "/T/gen/TypeOfGoodsList.html";
+				typeofgoods.MCLink = "/pagelist/TypeOfGoodsList.html";
 				MenuConfiguration.AddOrUpdate(typeofgoods);
 			}
 
@@ -516,7 +516,7 @@ namespace TEntities.EF
 			var supplychannel = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "供货渠道");
 			if(supplychannel!=null)
 			{
-				supplychannel.MCLink = "/T/gen/SupplyChannelList.html";
+				supplychannel.MCLink = "/pagelist/SupplyChannelList.html";
 				MenuConfiguration.AddOrUpdate(supplychannel);
 			}
 
@@ -552,7 +552,7 @@ namespace TEntities.EF
 			var order = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "订单");
 			if(order!=null)
 			{
-				order.MCLink = "/T/gen/OrderList.html";
+				order.MCLink = "/pagelist/OrderList.html";
 				MenuConfiguration.AddOrUpdate(order);
 			}
 
@@ -588,7 +588,7 @@ namespace TEntities.EF
 			var orderdetails = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "订单明细");
 			if(orderdetails!=null)
 			{
-				orderdetails.MCLink = "/T/gen/OrderDetailsList.html";
+				orderdetails.MCLink = "/pagelist/OrderDetailsList.html";
 				MenuConfiguration.AddOrUpdate(orderdetails);
 			}
 
@@ -624,7 +624,7 @@ namespace TEntities.EF
 			var warehousingrecord = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "入库记录");
 			if(warehousingrecord!=null)
 			{
-				warehousingrecord.MCLink = "/T/gen/WarehousingRecordList.html";
+				warehousingrecord.MCLink = "/pagelist/WarehousingRecordList.html";
 				MenuConfiguration.AddOrUpdate(warehousingrecord);
 			}
 
@@ -660,7 +660,7 @@ namespace TEntities.EF
 			var warehouse = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "仓库");
 			if(warehouse!=null)
 			{
-				warehouse.MCLink = "/T/gen/WarehouseList.html";
+				warehouse.MCLink = "/pagelist/WarehouseList.html";
 				MenuConfiguration.AddOrUpdate(warehouse);
 			}
 
@@ -696,7 +696,7 @@ namespace TEntities.EF
 			var goodsshelves = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "货架");
 			if(goodsshelves!=null)
 			{
-				goodsshelves.MCLink = "/T/gen/GoodsShelvesList.html";
+				goodsshelves.MCLink = "/pagelist/GoodsShelvesList.html";
 				MenuConfiguration.AddOrUpdate(goodsshelves);
 			}
 
@@ -732,7 +732,7 @@ namespace TEntities.EF
 			var replenishmentapplicationform = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "补货申请单");
 			if(replenishmentapplicationform!=null)
 			{
-				replenishmentapplicationform.MCLink = "/T/gen/ReplenishmentApplicationFormList.html";
+				replenishmentapplicationform.MCLink = "/pagelist/ReplenishmentApplicationFormList.html";
 				MenuConfiguration.AddOrUpdate(replenishmentapplicationform);
 			}
 
@@ -768,7 +768,7 @@ namespace TEntities.EF
 			var replenishmentrecord = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "补货记录");
 			if(replenishmentrecord!=null)
 			{
-				replenishmentrecord.MCLink = "/T/gen/ReplenishmentRecordList.html";
+				replenishmentrecord.MCLink = "/pagelist/ReplenishmentRecordList.html";
 				MenuConfiguration.AddOrUpdate(replenishmentrecord);
 			}
 
@@ -804,7 +804,7 @@ namespace TEntities.EF
 			var salesrecord = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "销售记录");
 			if(salesrecord!=null)
 			{
-				salesrecord.MCLink = "/T/gen/SalesRecordList.html";
+				salesrecord.MCLink = "/pagelist/SalesRecordList.html";
 				MenuConfiguration.AddOrUpdate(salesrecord);
 			}
             

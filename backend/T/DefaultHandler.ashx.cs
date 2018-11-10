@@ -47,7 +47,7 @@ namespace T
                 context = context
             };
 
-            response.AddHeader("Access-Control-Allow-Origin", "*");
+//            response.AddHeader("Access-Control-Allow-Origin", "http://localhost:8080");
             var validationResults = Validation.Validate(crequest);
             foreach (ValidationResult result in validationResults)
             {
@@ -77,7 +77,7 @@ namespace T
             {
                 File.WriteAllText($"{@"D:\errors\"}{DateTime.Now.Ticks}.log", message);
                 var address = new MailAddress(MANAGER_EMAIL_ADDRESS, "路正遥", Encoding.UTF8);
-                var mail = new MailMessage(MANAGER_EMAIL_ADDRESS, MANAGER_EMAIL_ADDRESS, "香溪系统线上异常", message);
+                var mail = new MailMessage(MANAGER_EMAIL_ADDRESS, MANAGER_EMAIL_ADDRESS, "系统线上异常", message);
                 var client = new SmtpClient("smtp.qq.com", 993);
                 client.ClientCertificates.Add(new System.Security.Cryptography.X509Certificates.X509Certificate());
                 client.Credentials = new NetworkCredential("user", "password");

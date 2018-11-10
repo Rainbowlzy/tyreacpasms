@@ -4,9 +4,12 @@
     <div class="row" style="position:fixed; top:120px; width:100%;">
       <div class="container-fluid">
           <div class="col-xs-10">
+            <div class="row">
+              <b-button>新增</b-button>
+            </div>
                     <b-table hover :items="myProvider" :fields="fields">
             <template slot="操作" slot-scope="row">
-                <b-button size="sm" @click.stop="edit(row)" class="mr-2" data-target="#myModal"  data-toggle="modal" >
+                <b-button size="sm" @click.stop="edit(row)" class="mr-2">
                     编辑
                 </b-button>
                 <b-button size="sm" @click.stop="del(row)" class="mr-2">
@@ -21,6 +24,31 @@
     ref="editmodal"
     :no-fade="true" size="lg" 
     hide-footer :title="'编辑'+table_name_ch">
+      <div class="d-block text-center">
+        <h3>编辑{{table_name_ch}}</h3>
+      </div>
+      {{current}}
+       <b-form @submit="onSubmit" @reset="onReset" v-if="current!==null">
+        <b-form-group :id="'label'+col.column_name" v-for="col in columns" :key="col.id"
+                      :label="col.column_description"
+                      :label-for="col.column_name"
+                      :description="col.column_description">
+          <b-form-input 
+                        type="text"
+                        v-model="current.item[col.column_name]"
+                        required
+                        :placeholder="'请输入'+col.column_description">
+          </b-form-input>
+        </b-form-group>
+      <b-button type="submit" variant="primary" @click="save">Submit</b-button>
+    </b-form>
+    </b-modal>
+
+    
+    <b-modal 
+    ref="newmodal"
+    :no-fade="true" size="lg" 
+    hide-footer :title="'新增'+table_name_ch">
       <div class="d-block text-center">
         <h3>编辑{{table_name_ch}}</h3>
       </div>

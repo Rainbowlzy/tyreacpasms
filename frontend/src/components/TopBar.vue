@@ -7,12 +7,12 @@
             <li class="menu-item-selected">
                 <router-link to="/index">首页</router-link>
             </li>
-            <li v-for="menu in menu_list" :key="menu.id"
-                :class="$route.params.mccaption===menu.MCCaption?'menu-item-selected':'menu-item'">
-                <router-link :to="'/business/'+menu.MCCaption">{{menu.MCDisplayName}}</router-link>
-            </li>
             <li class="menu-item"><a href="#" @click="exit">退出</a></li>
             <li class="menu-item"><router-link to="/pagelist/MenuConfiguration">测试列表</router-link></li>
+            <li v-for="menu in menu_list" :key="menu.id"
+                :class="$route.params.mccaption===menu.MCCaption?'menu-item-selected':'menu-item'">
+                <router-link :to="menu.MCLink">{{menu.MCDisplayName}}</router-link>
+            </li>
         </ul>
         <div style="height:120px; width:100%; display:block;"></div>
     </div>
