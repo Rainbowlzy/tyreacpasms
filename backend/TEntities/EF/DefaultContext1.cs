@@ -29,10 +29,10 @@ namespace TEntities.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 			
-			modelBuilder.Entity<RoleMenu>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<RoleConfiguration>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<UserRole>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<MenuConfiguration>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<RoleMenu>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<UserRole>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<RoleConfiguration>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<UserInformation>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<LogonRecord>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<UserMenu>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
@@ -89,6 +89,42 @@ namespace TEntities.EF
 				UpdateBy = CreateBy
 			});
 			
+			if (!MenuConfiguration.Any(t => t.MCCaption == "菜单配置"))
+			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "菜单配置",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
+				MenuConfiguration.Add(new MenuConfiguration
+				{
+					MCDisplayName = "菜单配置",
+					MCCaption = "菜单配置",
+					MCLink = "/pagelist/MenuConfiguration",
+					MCParentTitle = "后台首页",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+			}
+			var menuconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "菜单配置");
+			if(menuconfiguration!=null)
+			{
+				menuconfiguration.MCLink = "/pagelist/MenuConfigurationList.html";
+				MenuConfiguration.AddOrUpdate(menuconfiguration);
+			}
+
 			if (!MenuConfiguration.Any(t => t.MCCaption == "角色菜单"))
 			{
 				RoleMenu.Add(new RoleMenu
@@ -123,42 +159,6 @@ namespace TEntities.EF
 			{
 				rolemenu.MCLink = "/pagelist/RoleMenuList.html";
 				MenuConfiguration.AddOrUpdate(rolemenu);
-			}
-
-			if (!MenuConfiguration.Any(t => t.MCCaption == "角色配置"))
-			{
-				RoleMenu.Add(new RoleMenu
-				{
-					RMRoleName = "超级管理员",
-					RMMenuTitle = "角色配置",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-					CreateOn = DateTime.Now,
-					UpdateOn = DateTime.Now,
-					UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					MCDisplayName = "角色配置",
-					MCCaption = "角色配置",
-					MCLink = "/pagelist/RoleConfiguration",
-					MCParentTitle = "后台首页",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var roleconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "角色配置");
-			if(roleconfiguration!=null)
-			{
-				roleconfiguration.MCLink = "/pagelist/RoleConfigurationList.html";
-				MenuConfiguration.AddOrUpdate(roleconfiguration);
 			}
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "用户角色"))
@@ -197,12 +197,12 @@ namespace TEntities.EF
 				MenuConfiguration.AddOrUpdate(userrole);
 			}
 
-			if (!MenuConfiguration.Any(t => t.MCCaption == "菜单配置"))
+			if (!MenuConfiguration.Any(t => t.MCCaption == "角色配置"))
 			{
 				RoleMenu.Add(new RoleMenu
 				{
 					RMRoleName = "超级管理员",
-					RMMenuTitle = "菜单配置",
+					RMMenuTitle = "角色配置",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -213,9 +213,9 @@ namespace TEntities.EF
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					MCDisplayName = "菜单配置",
-					MCCaption = "菜单配置",
-					MCLink = "/pagelist/MenuConfiguration",
+					MCDisplayName = "角色配置",
+					MCCaption = "角色配置",
+					MCLink = "/pagelist/RoleConfiguration",
 					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
@@ -226,11 +226,11 @@ namespace TEntities.EF
                     UpdateBy = CreateBy
 				});
 			}
-			var menuconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "菜单配置");
-			if(menuconfiguration!=null)
+			var roleconfiguration = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "角色配置");
+			if(roleconfiguration!=null)
 			{
-				menuconfiguration.MCLink = "/pagelist/MenuConfigurationList.html";
-				MenuConfiguration.AddOrUpdate(menuconfiguration);
+				roleconfiguration.MCLink = "/pagelist/RoleConfigurationList.html";
+				MenuConfiguration.AddOrUpdate(roleconfiguration);
 			}
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "用户信息"))
@@ -814,14 +814,14 @@ namespace TEntities.EF
 		}
 
         /// <summary>
+        ///  菜单配置 
+        /// </summary>
+        public virtual DbSet<MenuConfiguration> MenuConfiguration { get; set; }
+
+        /// <summary>
         ///  角色菜单 
         /// </summary>
         public virtual DbSet<RoleMenu> RoleMenu { get; set; }
-
-        /// <summary>
-        ///  角色配置 
-        /// </summary>
-        public virtual DbSet<RoleConfiguration> RoleConfiguration { get; set; }
 
         /// <summary>
         ///  用户角色 
@@ -829,9 +829,9 @@ namespace TEntities.EF
         public virtual DbSet<UserRole> UserRole { get; set; }
 
         /// <summary>
-        ///  菜单配置 
+        ///  角色配置 
         /// </summary>
-        public virtual DbSet<MenuConfiguration> MenuConfiguration { get; set; }
+        public virtual DbSet<RoleConfiguration> RoleConfiguration { get; set; }
 
         /// <summary>
         ///  用户信息 

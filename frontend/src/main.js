@@ -24,8 +24,9 @@ Vue.use(VueCookie);
 Vue.use(VueRouter);
 Vue.use(Vuex);
 
-Vue.config.productionTip = false;
+Vue.http.options.emulateJSON = true;
 
+Vue.config.productionTip = false;
 Vue.http.interceptors.push((request, next) => {
   request.credentials = true;
   next();

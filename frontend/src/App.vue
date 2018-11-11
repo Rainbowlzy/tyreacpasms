@@ -12,6 +12,7 @@ export default {
   name: "App",
   store,
   mounted: function() {
+    console.log('App mounted');
     if (
       !this.$cookie.get("auth_user") &&
       location.href.indexOf("/login") === -1
@@ -25,11 +26,4 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 </style>

@@ -11,7 +11,7 @@
             <li class="menu-item"><router-link to="/pagelist/MenuConfiguration">测试列表</router-link></li>
             <li v-for="menu in menu_list" :key="menu.id"
                 :class="$route.params.mccaption===menu.MCCaption?'menu-item-selected':'menu-item'">
-                <router-link :to="menu.MCLink">{{menu.MCDisplayName}}</router-link>
+                <router-link :to="`${menu.MCLink}`">{{menu.MCDisplayName}}</router-link>
                 <!-- <a :href="menu.MCLink">{{menu.MCDisplayName}}</a> -->
                 <!-- <a href="#" @click="goto(menu)">{{menu.MCDisplayName}}</a> -->
             </li>
@@ -104,5 +104,6 @@ export default {
   color: white;
   font-size: 3em;
   text-shadow: 3in;
+  text-align: center;
 }
 </style>

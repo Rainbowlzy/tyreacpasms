@@ -16,204 +16,6 @@ namespace EF.Entities
 {
 	
     /// <summary>
-    ///  角色菜单 
-    /// </summary>
-	[Table("RoleMenu")]
-    public class RoleMenu 
-    {
-			        
-        /// <summary>
-        ///  RoleMenu编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  角色名称 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "角色名称不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string RMRoleName { get; set; }
-			
-        /// <summary>
-        ///  菜单标题 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "菜单标题不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string RMMenuTitle { get; set; }
-	}
-
-	
-    /// <summary>
-    ///  角色配置 
-    /// </summary>
-	[Table("RoleConfiguration")]
-    public class RoleConfiguration 
-    {
-			        
-        /// <summary>
-        ///  RoleConfiguration编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  角色名称 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "角色名称不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string RCRoleName { get; set; }
-			
-        /// <summary>
-        ///  所属组织 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "所属组织不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string RCAffiliatedOrganization { get; set; }
-	}
-
-	
-    /// <summary>
-    ///  用户角色 
-    /// </summary>
-	[Table("UserRole")]
-    public class UserRole 
-    {
-			        
-        /// <summary>
-        ///  UserRole编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  角色名称 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "角色名称不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string URRoleName { get; set; }
-			
-        /// <summary>
-        ///  登录名 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "登录名不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string URLoginName { get; set; }
-	}
-
-	
-    /// <summary>
     ///  菜单配置 
     /// </summary>
 	[Table("MenuConfiguration")]
@@ -311,6 +113,204 @@ namespace EF.Entities
 		// [NotNullValidator(MessageTemplate = "图片不能为空")]
 		/* [StringLengthValidator(0,50)] */
         public string MCPicture { get; set; }
+	}
+
+	
+    /// <summary>
+    ///  角色菜单 
+    /// </summary>
+	[Table("RoleMenu")]
+    public class RoleMenu 
+    {
+			        
+        /// <summary>
+        ///  RoleMenu编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+			
+        /// <summary>
+        ///  角色名称 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "角色名称不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string RMRoleName { get; set; }
+			
+        /// <summary>
+        ///  菜单标题 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "菜单标题不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string RMMenuTitle { get; set; }
+	}
+
+	
+    /// <summary>
+    ///  用户角色 
+    /// </summary>
+	[Table("UserRole")]
+    public class UserRole 
+    {
+			        
+        /// <summary>
+        ///  UserRole编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+			
+        /// <summary>
+        ///  角色名称 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "角色名称不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string URRoleName { get; set; }
+			
+        /// <summary>
+        ///  登录名 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "登录名不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string URLoginName { get; set; }
+	}
+
+	
+    /// <summary>
+    ///  角色配置 
+    /// </summary>
+	[Table("RoleConfiguration")]
+    public class RoleConfiguration 
+    {
+			        
+        /// <summary>
+        ///  RoleConfiguration编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+			
+        /// <summary>
+        ///  角色名称 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "角色名称不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string RCRoleName { get; set; }
+			
+        /// <summary>
+        ///  所属组织 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "所属组织不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string RCAffiliatedOrganization { get; set; }
 	}
 
 	
@@ -1454,7 +1454,7 @@ namespace EF.Entities
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "容积 不能为空")]
 		/* [StringLengthValidator(0,50)] */
-        public string GS { get; set; }
+        public string GSVolume { get; set; }
 			
         /// <summary>
         ///  位置 NVARCHAR(50) 50

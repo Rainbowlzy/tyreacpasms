@@ -46,6 +46,7 @@ namespace T
                 data = data ?? qdata ?? "",
                 context = context
             };
+            response.Cookies.Add(new HttpCookie("auth_user", auth));
 
 //            response.AddHeader("Access-Control-Allow-Origin", "http://localhost:8080");
             var validationResults = Validation.Validate(crequest);

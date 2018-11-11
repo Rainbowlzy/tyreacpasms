@@ -86,7 +86,7 @@ foreach(var table_name in table_schema2.Keys){
                 return new CommonOutputT<string>
                 {
                     success = false,
-                    message = "删除成功"
+                    message = "参数错误"
                 };
             using (var ctx = new DefaultContext())
             {
