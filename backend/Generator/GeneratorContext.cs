@@ -27,6 +27,7 @@ namespace Generator
         }
 
         public DbSet<VTableComments2> TableSchema { get; set; }
+        public DbSet<V_Column> V_Column { get; set; }
         public DbSet<TypePattern> TypePatterns { get; set; }
     }
 }

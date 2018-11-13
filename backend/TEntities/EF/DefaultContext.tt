@@ -53,7 +53,7 @@ modelBuilder.Entity<<#=table_name#>>().Property(p => p.id).HasDatabaseGeneratedO
 			if(!UserInformation.Any())
 		    UserInformation.AddRange(Enumerable.Range(1000, 1050).Select(i => new UserInformation
             {
-                UIJobNumber = i.ToString(),
+                UIJobNumber = i,
                 UILoginName = i.ToString(),
                 UICode = i.ToString(),
 		        CreateBy = CreateBy,

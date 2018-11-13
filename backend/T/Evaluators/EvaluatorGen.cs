@@ -1,8 +1,8 @@
 ﻿
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/11/2018 23:47:30
- * 生成版本：11/11/2018 03:02:13 
+ * 生成时间：11/12/2018 18:00:07
+ * 生成版本：11/12/2018 18:00:02 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 
@@ -24,6 +24,3439 @@ using EF.Entities;
 using TEntities.EF;
 namespace T.Evaluators
 {
+
+    /// <summary>
+    /// 【供应商】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class SupplierCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.Supplier.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【供应商】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateSupplierEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.Supplier.RemoveRange(ctx.Supplier);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【供应商】
+    /// </summary>
+    public partial class DeleteSupplierEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<Supplier>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.Supplier.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.Supplier.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条供应商记录";
+    }
+	
+    /// <summary>
+    /// 保存【供应商】
+    /// </summary>
+    public partial class SaveSupplierEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			Supplier entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<Supplier>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.Supplier.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.Supplier.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 供应商名称
+				entity.SSupplierName = HttpUtility.UrlDecode(entity.SSupplierName);
+					// NVARCHAR(50) 联系方式
+				entity.SCommonModeOfContact = HttpUtility.UrlDecode(entity.SCommonModeOfContact);
+					// NVARCHAR(50) 办公地点
+				entity.SOfficeLocation = HttpUtility.UrlDecode(entity.SOfficeLocation);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.Supplier.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条Supplier记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【供应商】
+    /// </summary>
+    public partial class GetSupplierEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new Supplier();
+        }
+        public override string Comments=> "获取空的供应商记录";
+    }
+	
+    /// <summary>
+    /// 查询【供应商】列表
+    /// </summary>
+    public partial class GetSupplierListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取Supplier列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<SupplierSearchModel>() ?? new SupplierSearchModel();
+                var query = ctx.Supplier.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// SSupplierNumber INT 供应商编号 
+                if(searchModel.MinSSupplierNumber!=null) query = query.Where(t=>t.SSupplierNumber>=searchModel.MinSSupplierNumber);
+                if(searchModel.MaxSSupplierNumber!=null) query = query.Where(t=>t.SSupplierNumber<=searchModel.MaxSSupplierNumber);
+                if(sort=="SSupplierNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SSupplierNumber):query.OrderByDescending(t=>t.SSupplierNumber);
+                    isordered = true;
+                }
+				// SSupplierName NVARCHAR(50) 供应商名称 
+                if(!string.IsNullOrEmpty(searchModel.SSupplierName)) query = query.Where(t=>t.SSupplierName.Contains(searchModel.SSupplierName));
+                if(sort=="SSupplierName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SSupplierName):query.OrderByDescending(t=>t.SSupplierName);
+                    isordered = true;
+                }
+				// SCommonModeOfContact NVARCHAR(50) 联系方式 
+                if(!string.IsNullOrEmpty(searchModel.SCommonModeOfContact)) query = query.Where(t=>t.SCommonModeOfContact.Contains(searchModel.SCommonModeOfContact));
+                if(sort=="SCommonModeOfContact")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SCommonModeOfContact):query.OrderByDescending(t=>t.SCommonModeOfContact);
+                    isordered = true;
+                }
+				// SOfficeLocation NVARCHAR(50) 办公地点 
+                if(!string.IsNullOrEmpty(searchModel.SOfficeLocation)) query = query.Where(t=>t.SOfficeLocation.Contains(searchModel.SOfficeLocation));
+                if(sort=="SOfficeLocation")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SOfficeLocation):query.OrderByDescending(t=>t.SOfficeLocation);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.SSupplierName.Contains(search)||t.SCommonModeOfContact.Contains(search)||t.SOfficeLocation.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<Supplier>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【仓库】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class WarehouseCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.Warehouse.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【仓库】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateWarehouseEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.Warehouse.RemoveRange(ctx.Warehouse);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【仓库】
+    /// </summary>
+    public partial class DeleteWarehouseEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<Warehouse>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.Warehouse.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.Warehouse.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条仓库记录";
+    }
+	
+    /// <summary>
+    /// 保存【仓库】
+    /// </summary>
+    public partial class SaveWarehouseEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			Warehouse entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<Warehouse>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.Warehouse.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.Warehouse.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 容量
+				entity.WCapacity = HttpUtility.UrlDecode(entity.WCapacity);
+					// NVARCHAR(50) 地点
+				entity.WLocality = HttpUtility.UrlDecode(entity.WLocality);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.Warehouse.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条Warehouse记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【仓库】
+    /// </summary>
+    public partial class GetWarehouseEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new Warehouse();
+        }
+        public override string Comments=> "获取空的仓库记录";
+    }
+	
+    /// <summary>
+    /// 查询【仓库】列表
+    /// </summary>
+    public partial class GetWarehouseListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取Warehouse列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<WarehouseSearchModel>() ?? new WarehouseSearchModel();
+                var query = ctx.Warehouse.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// WWarehouseNumber INT 仓库编号 
+                if(searchModel.MinWWarehouseNumber!=null) query = query.Where(t=>t.WWarehouseNumber>=searchModel.MinWWarehouseNumber);
+                if(searchModel.MaxWWarehouseNumber!=null) query = query.Where(t=>t.WWarehouseNumber<=searchModel.MaxWWarehouseNumber);
+                if(sort=="WWarehouseNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WWarehouseNumber):query.OrderByDescending(t=>t.WWarehouseNumber);
+                    isordered = true;
+                }
+				// WCapacity NVARCHAR(50) 容量 
+                if(!string.IsNullOrEmpty(searchModel.WCapacity)) query = query.Where(t=>t.WCapacity.Contains(searchModel.WCapacity));
+                if(sort=="WCapacity")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WCapacity):query.OrderByDescending(t=>t.WCapacity);
+                    isordered = true;
+                }
+				// WLocality NVARCHAR(50) 地点 
+                if(!string.IsNullOrEmpty(searchModel.WLocality)) query = query.Where(t=>t.WLocality.Contains(searchModel.WLocality));
+                if(sort=="WLocality")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WLocality):query.OrderByDescending(t=>t.WLocality);
+                    isordered = true;
+                }
+				// WResponsibleForManualNumber INT 负责人工号 
+                if(searchModel.MinWResponsibleForManualNumber!=null) query = query.Where(t=>t.WResponsibleForManualNumber>=searchModel.MinWResponsibleForManualNumber);
+                if(searchModel.MaxWResponsibleForManualNumber!=null) query = query.Where(t=>t.WResponsibleForManualNumber<=searchModel.MaxWResponsibleForManualNumber);
+                if(sort=="WResponsibleForManualNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WResponsibleForManualNumber):query.OrderByDescending(t=>t.WResponsibleForManualNumber);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.WCapacity.Contains(search)||t.WLocality.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<Warehouse>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【客户】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class CustomertypeCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.Customertype.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【客户】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateCustomertypeEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.Customertype.RemoveRange(ctx.Customertype);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【客户】
+    /// </summary>
+    public partial class DeleteCustomertypeEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<Customertype>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.Customertype.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.Customertype.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条客户记录";
+    }
+	
+    /// <summary>
+    /// 保存【客户】
+    /// </summary>
+    public partial class SaveCustomertypeEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			Customertype entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<Customertype>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.Customertype.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.Customertype.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 姓名
+				entity.CName = HttpUtility.UrlDecode(entity.CName);
+					// NVARCHAR(50) 联系方式
+				entity.CCommonModeOfContact = HttpUtility.UrlDecode(entity.CCommonModeOfContact);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.Customertype.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条Customertype记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【客户】
+    /// </summary>
+    public partial class GetCustomertypeEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new Customertype();
+        }
+        public override string Comments=> "获取空的客户记录";
+    }
+	
+    /// <summary>
+    /// 查询【客户】列表
+    /// </summary>
+    public partial class GetCustomertypeListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取Customertype列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<CustomertypeSearchModel>() ?? new CustomertypeSearchModel();
+                var query = ctx.Customertype.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// CCustomerNumber INT 客户编号 
+                if(searchModel.MinCCustomerNumber!=null) query = query.Where(t=>t.CCustomerNumber>=searchModel.MinCCustomerNumber);
+                if(searchModel.MaxCCustomerNumber!=null) query = query.Where(t=>t.CCustomerNumber<=searchModel.MaxCCustomerNumber);
+                if(sort=="CCustomerNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CCustomerNumber):query.OrderByDescending(t=>t.CCustomerNumber);
+                    isordered = true;
+                }
+				// CName NVARCHAR(50) 姓名 
+                if(!string.IsNullOrEmpty(searchModel.CName)) query = query.Where(t=>t.CName.Contains(searchModel.CName));
+                if(sort=="CName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CName):query.OrderByDescending(t=>t.CName);
+                    isordered = true;
+                }
+				// CCommonModeOfContact NVARCHAR(50) 联系方式 
+                if(!string.IsNullOrEmpty(searchModel.CCommonModeOfContact)) query = query.Where(t=>t.CCommonModeOfContact.Contains(searchModel.CCommonModeOfContact));
+                if(sort=="CCommonModeOfContact")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CCommonModeOfContact):query.OrderByDescending(t=>t.CCommonModeOfContact);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.CName.Contains(search)||t.CCommonModeOfContact.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<Customertype>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【货物】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class CargoCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.Cargo.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【货物】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateCargoEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.Cargo.RemoveRange(ctx.Cargo);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【货物】
+    /// </summary>
+    public partial class DeleteCargoEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<Cargo>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.Cargo.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.Cargo.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条货物记录";
+    }
+	
+    /// <summary>
+    /// 保存【货物】
+    /// </summary>
+    public partial class SaveCargoEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			Cargo entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<Cargo>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.Cargo.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.Cargo.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 货物名称
+				entity.CNameOfGoods = HttpUtility.UrlDecode(entity.CNameOfGoods);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.Cargo.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条Cargo记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【货物】
+    /// </summary>
+    public partial class GetCargoEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new Cargo();
+        }
+        public override string Comments=> "获取空的货物记录";
+    }
+	
+    /// <summary>
+    /// 查询【货物】列表
+    /// </summary>
+    public partial class GetCargoListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取Cargo列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<CargoSearchModel>() ?? new CargoSearchModel();
+                var query = ctx.Cargo.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// CCargoNumber INT 货物编号 
+                if(searchModel.MinCCargoNumber!=null) query = query.Where(t=>t.CCargoNumber>=searchModel.MinCCargoNumber);
+                if(searchModel.MaxCCargoNumber!=null) query = query.Where(t=>t.CCargoNumber<=searchModel.MaxCCargoNumber);
+                if(sort=="CCargoNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CCargoNumber):query.OrderByDescending(t=>t.CCargoNumber);
+                    isordered = true;
+                }
+				// CNameOfGoods NVARCHAR(50) 货物名称 
+                if(!string.IsNullOrEmpty(searchModel.CNameOfGoods)) query = query.Where(t=>t.CNameOfGoods.Contains(searchModel.CNameOfGoods));
+                if(sort=="CNameOfGoods")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CNameOfGoods):query.OrderByDescending(t=>t.CNameOfGoods);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.CNameOfGoods.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<Cargo>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【货架】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class GoodsShelvesCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.GoodsShelves.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【货架】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateGoodsShelvesEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.GoodsShelves.RemoveRange(ctx.GoodsShelves);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【货架】
+    /// </summary>
+    public partial class DeleteGoodsShelvesEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<GoodsShelves>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.GoodsShelves.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.GoodsShelves.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条货架记录";
+    }
+	
+    /// <summary>
+    /// 保存【货架】
+    /// </summary>
+    public partial class SaveGoodsShelvesEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			GoodsShelves entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<GoodsShelves>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.GoodsShelves.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.GoodsShelves.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 容量
+				entity.GSCapacity = HttpUtility.UrlDecode(entity.GSCapacity);
+					// NVARCHAR(50) 地点
+				entity.GSLocality = HttpUtility.UrlDecode(entity.GSLocality);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.GoodsShelves.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条GoodsShelves记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【货架】
+    /// </summary>
+    public partial class GetGoodsShelvesEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new GoodsShelves();
+        }
+        public override string Comments=> "获取空的货架记录";
+    }
+	
+    /// <summary>
+    /// 查询【货架】列表
+    /// </summary>
+    public partial class GetGoodsShelvesListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取GoodsShelves列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<GoodsShelvesSearchModel>() ?? new GoodsShelvesSearchModel();
+                var query = ctx.GoodsShelves.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// GSShelfNumber INT 货架编号 
+                if(searchModel.MinGSShelfNumber!=null) query = query.Where(t=>t.GSShelfNumber>=searchModel.MinGSShelfNumber);
+                if(searchModel.MaxGSShelfNumber!=null) query = query.Where(t=>t.GSShelfNumber<=searchModel.MaxGSShelfNumber);
+                if(sort=="GSShelfNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.GSShelfNumber):query.OrderByDescending(t=>t.GSShelfNumber);
+                    isordered = true;
+                }
+				// GSCapacity NVARCHAR(50) 容量 
+                if(!string.IsNullOrEmpty(searchModel.GSCapacity)) query = query.Where(t=>t.GSCapacity.Contains(searchModel.GSCapacity));
+                if(sort=="GSCapacity")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.GSCapacity):query.OrderByDescending(t=>t.GSCapacity);
+                    isordered = true;
+                }
+				// GSLocality NVARCHAR(50) 地点 
+                if(!string.IsNullOrEmpty(searchModel.GSLocality)) query = query.Where(t=>t.GSLocality.Contains(searchModel.GSLocality));
+                if(sort=="GSLocality")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.GSLocality):query.OrderByDescending(t=>t.GSLocality);
+                    isordered = true;
+                }
+				// GSResponsibleForManualNumber INT 负责人工号 
+                if(searchModel.MinGSResponsibleForManualNumber!=null) query = query.Where(t=>t.GSResponsibleForManualNumber>=searchModel.MinGSResponsibleForManualNumber);
+                if(searchModel.MaxGSResponsibleForManualNumber!=null) query = query.Where(t=>t.GSResponsibleForManualNumber<=searchModel.MaxGSResponsibleForManualNumber);
+                if(sort=="GSResponsibleForManualNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.GSResponsibleForManualNumber):query.OrderByDescending(t=>t.GSResponsibleForManualNumber);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.GSCapacity.Contains(search)||t.GSLocality.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<GoodsShelves>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【员工】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class StaffnameCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.Staffname.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【员工】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateStaffnameEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.Staffname.RemoveRange(ctx.Staffname);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【员工】
+    /// </summary>
+    public partial class DeleteStaffnameEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<Staffname>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.Staffname.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.Staffname.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条员工记录";
+    }
+	
+    /// <summary>
+    /// 保存【员工】
+    /// </summary>
+    public partial class SaveStaffnameEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			Staffname entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<Staffname>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.Staffname.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.Staffname.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 姓名
+				entity.SName = HttpUtility.UrlDecode(entity.SName);
+					// NVARCHAR(50) 学历
+				entity.SEducation = HttpUtility.UrlDecode(entity.SEducation);
+					// NVARCHAR(50) 联系方式
+				entity.SCommonModeOfContact = HttpUtility.UrlDecode(entity.SCommonModeOfContact);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.Staffname.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条Staffname记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【员工】
+    /// </summary>
+    public partial class GetStaffnameEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new Staffname();
+        }
+        public override string Comments=> "获取空的员工记录";
+    }
+	
+    /// <summary>
+    /// 查询【员工】列表
+    /// </summary>
+    public partial class GetStaffnameListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取Staffname列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<StaffnameSearchModel>() ?? new StaffnameSearchModel();
+                var query = ctx.Staffname.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// SJobNumber INT 工号 
+                if(searchModel.MinSJobNumber!=null) query = query.Where(t=>t.SJobNumber>=searchModel.MinSJobNumber);
+                if(searchModel.MaxSJobNumber!=null) query = query.Where(t=>t.SJobNumber<=searchModel.MaxSJobNumber);
+                if(sort=="SJobNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SJobNumber):query.OrderByDescending(t=>t.SJobNumber);
+                    isordered = true;
+                }
+				// SName NVARCHAR(50) 姓名 
+                if(!string.IsNullOrEmpty(searchModel.SName)) query = query.Where(t=>t.SName.Contains(searchModel.SName));
+                if(sort=="SName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SName):query.OrderByDescending(t=>t.SName);
+                    isordered = true;
+                }
+				// SEducation NVARCHAR(50) 学历 
+                if(!string.IsNullOrEmpty(searchModel.SEducation)) query = query.Where(t=>t.SEducation.Contains(searchModel.SEducation));
+                if(sort=="SEducation")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SEducation):query.OrderByDescending(t=>t.SEducation);
+                    isordered = true;
+                }
+				// SCommonModeOfContact NVARCHAR(50) 联系方式 
+                if(!string.IsNullOrEmpty(searchModel.SCommonModeOfContact)) query = query.Where(t=>t.SCommonModeOfContact.Contains(searchModel.SCommonModeOfContact));
+                if(sort=="SCommonModeOfContact")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SCommonModeOfContact):query.OrderByDescending(t=>t.SCommonModeOfContact);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.SName.Contains(search)||t.SEducation.Contains(search)||t.SCommonModeOfContact.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<Staffname>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【采购】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class ProcureCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.Procure.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【采购】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateProcureEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.Procure.RemoveRange(ctx.Procure);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【采购】
+    /// </summary>
+    public partial class DeleteProcureEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<Procure>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.Procure.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.Procure.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条采购记录";
+    }
+	
+    /// <summary>
+    /// 保存【采购】
+    /// </summary>
+    public partial class SaveProcureEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			Procure entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<Procure>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.Procure.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.Procure.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 数量
+				entity.PAmount = HttpUtility.UrlDecode(entity.PAmount);
+					// NVARCHAR(50) 价格
+				entity.PPrice = HttpUtility.UrlDecode(entity.PPrice);
+					// NVARCHAR(50) 备注
+				entity.PRemarks = HttpUtility.UrlDecode(entity.PRemarks);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.Procure.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条Procure记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【采购】
+    /// </summary>
+    public partial class GetProcureEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new Procure();
+        }
+        public override string Comments=> "获取空的采购记录";
+    }
+	
+    /// <summary>
+    /// 查询【采购】列表
+    /// </summary>
+    public partial class GetProcureListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取Procure列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<ProcureSearchModel>() ?? new ProcureSearchModel();
+                var query = ctx.Procure.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// PSupplierNumber INT 供应商编号 
+                if(searchModel.MinPSupplierNumber!=null) query = query.Where(t=>t.PSupplierNumber>=searchModel.MinPSupplierNumber);
+                if(searchModel.MaxPSupplierNumber!=null) query = query.Where(t=>t.PSupplierNumber<=searchModel.MaxPSupplierNumber);
+                if(sort=="PSupplierNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.PSupplierNumber):query.OrderByDescending(t=>t.PSupplierNumber);
+                    isordered = true;
+                }
+				// PCargoNumber INT 货物编号 
+                if(searchModel.MinPCargoNumber!=null) query = query.Where(t=>t.PCargoNumber>=searchModel.MinPCargoNumber);
+                if(searchModel.MaxPCargoNumber!=null) query = query.Where(t=>t.PCargoNumber<=searchModel.MaxPCargoNumber);
+                if(sort=="PCargoNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.PCargoNumber):query.OrderByDescending(t=>t.PCargoNumber);
+                    isordered = true;
+                }
+				// PPurchasingStaffNumber INT 采购员工号 
+                if(searchModel.MinPPurchasingStaffNumber!=null) query = query.Where(t=>t.PPurchasingStaffNumber>=searchModel.MinPPurchasingStaffNumber);
+                if(searchModel.MaxPPurchasingStaffNumber!=null) query = query.Where(t=>t.PPurchasingStaffNumber<=searchModel.MaxPPurchasingStaffNumber);
+                if(sort=="PPurchasingStaffNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.PPurchasingStaffNumber):query.OrderByDescending(t=>t.PPurchasingStaffNumber);
+                    isordered = true;
+                }
+				// PDate DATETIME 日期 
+                if(searchModel.FromPDate!=null) query = query.Where(t=>t.PDate>=searchModel.FromPDate);
+                if(searchModel.ToPDate!=null) query = query.Where(t=>t.PDate<=searchModel.ToPDate);
+                if(sort=="PDate")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.PDate):query.OrderByDescending(t=>t.PDate);
+                    isordered = true;
+                }
+				// PAmount NVARCHAR(50) 数量 
+                if(!string.IsNullOrEmpty(searchModel.PAmount)) query = query.Where(t=>t.PAmount.Contains(searchModel.PAmount));
+                if(sort=="PAmount")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.PAmount):query.OrderByDescending(t=>t.PAmount);
+                    isordered = true;
+                }
+				// PPrice NVARCHAR(50) 价格 
+                if(!string.IsNullOrEmpty(searchModel.PPrice)) query = query.Where(t=>t.PPrice.Contains(searchModel.PPrice));
+                if(sort=="PPrice")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.PPrice):query.OrderByDescending(t=>t.PPrice);
+                    isordered = true;
+                }
+				// PRemarks NVARCHAR(50) 备注 
+                if(!string.IsNullOrEmpty(searchModel.PRemarks)) query = query.Where(t=>t.PRemarks.Contains(searchModel.PRemarks));
+                if(sort=="PRemarks")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.PRemarks):query.OrderByDescending(t=>t.PRemarks);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.PAmount.Contains(search)||t.PPrice.Contains(search)||t.PRemarks.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<Procure>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【销售】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class SalesCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.Sales.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【销售】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateSalesEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.Sales.RemoveRange(ctx.Sales);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【销售】
+    /// </summary>
+    public partial class DeleteSalesEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<Sales>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.Sales.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.Sales.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条销售记录";
+    }
+	
+    /// <summary>
+    /// 保存【销售】
+    /// </summary>
+    public partial class SaveSalesEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			Sales entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<Sales>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.Sales.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.Sales.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 数量
+				entity.SAmount = HttpUtility.UrlDecode(entity.SAmount);
+					// NVARCHAR(50) 价格
+				entity.SPrice = HttpUtility.UrlDecode(entity.SPrice);
+					// NVARCHAR(50) 备注
+				entity.SRemarks = HttpUtility.UrlDecode(entity.SRemarks);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.Sales.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条Sales记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【销售】
+    /// </summary>
+    public partial class GetSalesEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new Sales();
+        }
+        public override string Comments=> "获取空的销售记录";
+    }
+	
+    /// <summary>
+    /// 查询【销售】列表
+    /// </summary>
+    public partial class GetSalesListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取Sales列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<SalesSearchModel>() ?? new SalesSearchModel();
+                var query = ctx.Sales.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// SCargoNumber INT 货物编号 
+                if(searchModel.MinSCargoNumber!=null) query = query.Where(t=>t.SCargoNumber>=searchModel.MinSCargoNumber);
+                if(searchModel.MaxSCargoNumber!=null) query = query.Where(t=>t.SCargoNumber<=searchModel.MaxSCargoNumber);
+                if(sort=="SCargoNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SCargoNumber):query.OrderByDescending(t=>t.SCargoNumber);
+                    isordered = true;
+                }
+				// SCustomerNumber INT 客户编号 
+                if(searchModel.MinSCustomerNumber!=null) query = query.Where(t=>t.SCustomerNumber>=searchModel.MinSCustomerNumber);
+                if(searchModel.MaxSCustomerNumber!=null) query = query.Where(t=>t.SCustomerNumber<=searchModel.MaxSCustomerNumber);
+                if(sort=="SCustomerNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SCustomerNumber):query.OrderByDescending(t=>t.SCustomerNumber);
+                    isordered = true;
+                }
+				// SSalesStaffNumber INT 销售员工号 
+                if(searchModel.MinSSalesStaffNumber!=null) query = query.Where(t=>t.SSalesStaffNumber>=searchModel.MinSSalesStaffNumber);
+                if(searchModel.MaxSSalesStaffNumber!=null) query = query.Where(t=>t.SSalesStaffNumber<=searchModel.MaxSSalesStaffNumber);
+                if(sort=="SSalesStaffNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SSalesStaffNumber):query.OrderByDescending(t=>t.SSalesStaffNumber);
+                    isordered = true;
+                }
+				// SDate DATETIME 日期 
+                if(searchModel.FromSDate!=null) query = query.Where(t=>t.SDate>=searchModel.FromSDate);
+                if(searchModel.ToSDate!=null) query = query.Where(t=>t.SDate<=searchModel.ToSDate);
+                if(sort=="SDate")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SDate):query.OrderByDescending(t=>t.SDate);
+                    isordered = true;
+                }
+				// SAmount NVARCHAR(50) 数量 
+                if(!string.IsNullOrEmpty(searchModel.SAmount)) query = query.Where(t=>t.SAmount.Contains(searchModel.SAmount));
+                if(sort=="SAmount")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SAmount):query.OrderByDescending(t=>t.SAmount);
+                    isordered = true;
+                }
+				// SPrice NVARCHAR(50) 价格 
+                if(!string.IsNullOrEmpty(searchModel.SPrice)) query = query.Where(t=>t.SPrice.Contains(searchModel.SPrice));
+                if(sort=="SPrice")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SPrice):query.OrderByDescending(t=>t.SPrice);
+                    isordered = true;
+                }
+				// SRemarks NVARCHAR(50) 备注 
+                if(!string.IsNullOrEmpty(searchModel.SRemarks)) query = query.Where(t=>t.SRemarks.Contains(searchModel.SRemarks));
+                if(sort=="SRemarks")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.SRemarks):query.OrderByDescending(t=>t.SRemarks);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.SAmount.Contains(search)||t.SPrice.Contains(search)||t.SRemarks.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<Sales>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【供应】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class FurnishCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.Furnish.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【供应】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateFurnishEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.Furnish.RemoveRange(ctx.Furnish);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【供应】
+    /// </summary>
+    public partial class DeleteFurnishEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<Furnish>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.Furnish.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.Furnish.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条供应记录";
+    }
+	
+    /// <summary>
+    /// 保存【供应】
+    /// </summary>
+    public partial class SaveFurnishEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			Furnish entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<Furnish>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.Furnish.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.Furnish.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 数量
+				entity.FAmount = HttpUtility.UrlDecode(entity.FAmount);
+					// NVARCHAR(50) 备注
+				entity.FRemarks = HttpUtility.UrlDecode(entity.FRemarks);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.Furnish.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条Furnish记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【供应】
+    /// </summary>
+    public partial class GetFurnishEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new Furnish();
+        }
+        public override string Comments=> "获取空的供应记录";
+    }
+	
+    /// <summary>
+    /// 查询【供应】列表
+    /// </summary>
+    public partial class GetFurnishListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取Furnish列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<FurnishSearchModel>() ?? new FurnishSearchModel();
+                var query = ctx.Furnish.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// FSupplierNumber INT 供应商编号 
+                if(searchModel.MinFSupplierNumber!=null) query = query.Where(t=>t.FSupplierNumber>=searchModel.MinFSupplierNumber);
+                if(searchModel.MaxFSupplierNumber!=null) query = query.Where(t=>t.FSupplierNumber<=searchModel.MaxFSupplierNumber);
+                if(sort=="FSupplierNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.FSupplierNumber):query.OrderByDescending(t=>t.FSupplierNumber);
+                    isordered = true;
+                }
+				// FCargoNumber INT 货物编号 
+                if(searchModel.MinFCargoNumber!=null) query = query.Where(t=>t.FCargoNumber>=searchModel.MinFCargoNumber);
+                if(searchModel.MaxFCargoNumber!=null) query = query.Where(t=>t.FCargoNumber<=searchModel.MaxFCargoNumber);
+                if(sort=="FCargoNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.FCargoNumber):query.OrderByDescending(t=>t.FCargoNumber);
+                    isordered = true;
+                }
+				// FDate DATETIME 日期 
+                if(searchModel.FromFDate!=null) query = query.Where(t=>t.FDate>=searchModel.FromFDate);
+                if(searchModel.ToFDate!=null) query = query.Where(t=>t.FDate<=searchModel.ToFDate);
+                if(sort=="FDate")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.FDate):query.OrderByDescending(t=>t.FDate);
+                    isordered = true;
+                }
+				// FAmount NVARCHAR(50) 数量 
+                if(!string.IsNullOrEmpty(searchModel.FAmount)) query = query.Where(t=>t.FAmount.Contains(searchModel.FAmount));
+                if(sort=="FAmount")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.FAmount):query.OrderByDescending(t=>t.FAmount);
+                    isordered = true;
+                }
+				// FRemarks NVARCHAR(50) 备注 
+                if(!string.IsNullOrEmpty(searchModel.FRemarks)) query = query.Where(t=>t.FRemarks.Contains(searchModel.FRemarks));
+                if(sort=="FRemarks")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.FRemarks):query.OrderByDescending(t=>t.FRemarks);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.FAmount.Contains(search)||t.FRemarks.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<Furnish>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【入库】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class WarehousingRecordCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.WarehousingRecord.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【入库】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateWarehousingRecordEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.WarehousingRecord.RemoveRange(ctx.WarehousingRecord);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【入库】
+    /// </summary>
+    public partial class DeleteWarehousingRecordEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<WarehousingRecord>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.WarehousingRecord.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.WarehousingRecord.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条入库记录";
+    }
+	
+    /// <summary>
+    /// 保存【入库】
+    /// </summary>
+    public partial class SaveWarehousingRecordEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			WarehousingRecord entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<WarehousingRecord>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.WarehousingRecord.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.WarehousingRecord.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 数量
+				entity.WRAmount = HttpUtility.UrlDecode(entity.WRAmount);
+					// NVARCHAR(50) 备注
+				entity.WRRemarks = HttpUtility.UrlDecode(entity.WRRemarks);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.WarehousingRecord.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条WarehousingRecord记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【入库】
+    /// </summary>
+    public partial class GetWarehousingRecordEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new WarehousingRecord();
+        }
+        public override string Comments=> "获取空的入库记录";
+    }
+	
+    /// <summary>
+    /// 查询【入库】列表
+    /// </summary>
+    public partial class GetWarehousingRecordListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取WarehousingRecord列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<WarehousingRecordSearchModel>() ?? new WarehousingRecordSearchModel();
+                var query = ctx.WarehousingRecord.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// WRWarehouseNumber INT 仓库编号 
+                if(searchModel.MinWRWarehouseNumber!=null) query = query.Where(t=>t.WRWarehouseNumber>=searchModel.MinWRWarehouseNumber);
+                if(searchModel.MaxWRWarehouseNumber!=null) query = query.Where(t=>t.WRWarehouseNumber<=searchModel.MaxWRWarehouseNumber);
+                if(sort=="WRWarehouseNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WRWarehouseNumber):query.OrderByDescending(t=>t.WRWarehouseNumber);
+                    isordered = true;
+                }
+				// WRCargoNumber INT 货物编号 
+                if(searchModel.MinWRCargoNumber!=null) query = query.Where(t=>t.WRCargoNumber>=searchModel.MinWRCargoNumber);
+                if(searchModel.MaxWRCargoNumber!=null) query = query.Where(t=>t.WRCargoNumber<=searchModel.MaxWRCargoNumber);
+                if(sort=="WRCargoNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WRCargoNumber):query.OrderByDescending(t=>t.WRCargoNumber);
+                    isordered = true;
+                }
+				// WRWarehouseManagementStaffNumber INT 仓库管理员工号 
+                if(searchModel.MinWRWarehouseManagementStaffNumber!=null) query = query.Where(t=>t.WRWarehouseManagementStaffNumber>=searchModel.MinWRWarehouseManagementStaffNumber);
+                if(searchModel.MaxWRWarehouseManagementStaffNumber!=null) query = query.Where(t=>t.WRWarehouseManagementStaffNumber<=searchModel.MaxWRWarehouseManagementStaffNumber);
+                if(sort=="WRWarehouseManagementStaffNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WRWarehouseManagementStaffNumber):query.OrderByDescending(t=>t.WRWarehouseManagementStaffNumber);
+                    isordered = true;
+                }
+				// WRDate DATETIME 日期 
+                if(searchModel.FromWRDate!=null) query = query.Where(t=>t.WRDate>=searchModel.FromWRDate);
+                if(searchModel.ToWRDate!=null) query = query.Where(t=>t.WRDate<=searchModel.ToWRDate);
+                if(sort=="WRDate")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WRDate):query.OrderByDescending(t=>t.WRDate);
+                    isordered = true;
+                }
+				// WRAmount NVARCHAR(50) 数量 
+                if(!string.IsNullOrEmpty(searchModel.WRAmount)) query = query.Where(t=>t.WRAmount.Contains(searchModel.WRAmount));
+                if(sort=="WRAmount")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WRAmount):query.OrderByDescending(t=>t.WRAmount);
+                    isordered = true;
+                }
+				// WRRemarks NVARCHAR(50) 备注 
+                if(!string.IsNullOrEmpty(searchModel.WRRemarks)) query = query.Where(t=>t.WRRemarks.Contains(searchModel.WRRemarks));
+                if(sort=="WRRemarks")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.WRRemarks):query.OrderByDescending(t=>t.WRRemarks);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.WRAmount.Contains(search)||t.WRRemarks.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<WarehousingRecord>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【补货】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class ReplenishmentApplicationFormCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.ReplenishmentApplicationForm.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【补货】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateReplenishmentApplicationFormEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.ReplenishmentApplicationForm.RemoveRange(ctx.ReplenishmentApplicationForm);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【补货】
+    /// </summary>
+    public partial class DeleteReplenishmentApplicationFormEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<ReplenishmentApplicationForm>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.ReplenishmentApplicationForm.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.ReplenishmentApplicationForm.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条补货记录";
+    }
+	
+    /// <summary>
+    /// 保存【补货】
+    /// </summary>
+    public partial class SaveReplenishmentApplicationFormEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			ReplenishmentApplicationForm entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<ReplenishmentApplicationForm>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.ReplenishmentApplicationForm.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.ReplenishmentApplicationForm.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 数量
+				entity.RAFAmount = HttpUtility.UrlDecode(entity.RAFAmount);
+					// NVARCHAR(50) 备注
+				entity.RAFRemarks = HttpUtility.UrlDecode(entity.RAFRemarks);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.ReplenishmentApplicationForm.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条ReplenishmentApplicationForm记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【补货】
+    /// </summary>
+    public partial class GetReplenishmentApplicationFormEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new ReplenishmentApplicationForm();
+        }
+        public override string Comments=> "获取空的补货记录";
+    }
+	
+    /// <summary>
+    /// 查询【补货】列表
+    /// </summary>
+    public partial class GetReplenishmentApplicationFormListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取ReplenishmentApplicationForm列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<ReplenishmentApplicationFormSearchModel>() ?? new ReplenishmentApplicationFormSearchModel();
+                var query = ctx.ReplenishmentApplicationForm.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = searchModel.SearchKey ?? @params["search"];
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// RAFShelfNumber INT 货架编号 
+                if(searchModel.MinRAFShelfNumber!=null) query = query.Where(t=>t.RAFShelfNumber>=searchModel.MinRAFShelfNumber);
+                if(searchModel.MaxRAFShelfNumber!=null) query = query.Where(t=>t.RAFShelfNumber<=searchModel.MaxRAFShelfNumber);
+                if(sort=="RAFShelfNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RAFShelfNumber):query.OrderByDescending(t=>t.RAFShelfNumber);
+                    isordered = true;
+                }
+				// RAFCargoNumber INT 货物编号 
+                if(searchModel.MinRAFCargoNumber!=null) query = query.Where(t=>t.RAFCargoNumber>=searchModel.MinRAFCargoNumber);
+                if(searchModel.MaxRAFCargoNumber!=null) query = query.Where(t=>t.RAFCargoNumber<=searchModel.MaxRAFCargoNumber);
+                if(sort=="RAFCargoNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RAFCargoNumber):query.OrderByDescending(t=>t.RAFCargoNumber);
+                    isordered = true;
+                }
+				// RAFWarehouseManagementStaffNumber INT 仓库管理员工号 
+                if(searchModel.MinRAFWarehouseManagementStaffNumber!=null) query = query.Where(t=>t.RAFWarehouseManagementStaffNumber>=searchModel.MinRAFWarehouseManagementStaffNumber);
+                if(searchModel.MaxRAFWarehouseManagementStaffNumber!=null) query = query.Where(t=>t.RAFWarehouseManagementStaffNumber<=searchModel.MaxRAFWarehouseManagementStaffNumber);
+                if(sort=="RAFWarehouseManagementStaffNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RAFWarehouseManagementStaffNumber):query.OrderByDescending(t=>t.RAFWarehouseManagementStaffNumber);
+                    isordered = true;
+                }
+				// RAFDate DATETIME 日期 
+                if(searchModel.FromRAFDate!=null) query = query.Where(t=>t.RAFDate>=searchModel.FromRAFDate);
+                if(searchModel.ToRAFDate!=null) query = query.Where(t=>t.RAFDate<=searchModel.ToRAFDate);
+                if(sort=="RAFDate")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RAFDate):query.OrderByDescending(t=>t.RAFDate);
+                    isordered = true;
+                }
+				// RAFAmount NVARCHAR(50) 数量 
+                if(!string.IsNullOrEmpty(searchModel.RAFAmount)) query = query.Where(t=>t.RAFAmount.Contains(searchModel.RAFAmount));
+                if(sort=="RAFAmount")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RAFAmount):query.OrderByDescending(t=>t.RAFAmount);
+                    isordered = true;
+                }
+				// RAFRemarks NVARCHAR(50) 备注 
+                if(!string.IsNullOrEmpty(searchModel.RAFRemarks)) query = query.Where(t=>t.RAFRemarks.Contains(searchModel.RAFRemarks));
+                if(sort=="RAFRemarks")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.RAFRemarks):query.OrderByDescending(t=>t.RAFRemarks);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.id!=-1||t.RAFAmount.Contains(search)||t.RAFRemarks.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<ReplenishmentApplicationForm>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
 
     /// <summary>
     /// 【菜单配置】7次查询分别得到七天内记录的条数，形成柱状图，折线图
@@ -1412,9 +4845,7 @@ namespace T.Evaluators
                 }
 				
 
-								// NVARCHAR(50) 工号
-				entity.UIJobNumber = HttpUtility.UrlDecode(entity.UIJobNumber);
-					// NVARCHAR(50) 登录名
+								// NVARCHAR(50) 登录名
 				entity.UILoginName = HttpUtility.UrlDecode(entity.UILoginName);
 					// NVARCHAR(50) 昵称
 				entity.UINickname = HttpUtility.UrlDecode(entity.UINickname);
@@ -1503,8 +4934,9 @@ namespace T.Evaluators
                 var search = searchModel.SearchKey ?? @params["search"];
                 var sort = searchModel.Sort ?? @params["sort"];
 				var order = @params["order"];
-				// UIJobNumber NVARCHAR(50) 工号 
-                if(!string.IsNullOrEmpty(searchModel.UIJobNumber)) query = query.Where(t=>t.UIJobNumber.Contains(searchModel.UIJobNumber));
+				// UIJobNumber INT 工号 
+                if(searchModel.MinUIJobNumber!=null) query = query.Where(t=>t.UIJobNumber>=searchModel.MinUIJobNumber);
+                if(searchModel.MaxUIJobNumber!=null) query = query.Where(t=>t.UIJobNumber<=searchModel.MaxUIJobNumber);
                 if(sort=="UIJobNumber")
                 {
 					query = order=="asc"?query.OrderBy(t=>t.UIJobNumber):query.OrderByDescending(t=>t.UIJobNumber);
@@ -1604,7 +5036,7 @@ namespace T.Evaluators
                     isordered = true;
                 }
 				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.UIJobNumber.Contains(search)||t.UILoginName.Contains(search)||t.UINickname.Contains(search)||t.UIRealName.Contains(search)||t.UIHeadPortrait.Contains(search)||t.UIDepartment.Contains(search)||t.UIPost.Contains(search)||t.UIBooth.Contains(search)||t.UIPhoto.Contains(search)||t.UICustomerType.Contains(search)||t.UIUserLevel.Contains(search)||t.UICode.Contains(search));
+					query = query.Where(t=>t.id!=-1||t.UILoginName.Contains(search)||t.UINickname.Contains(search)||t.UIRealName.Contains(search)||t.UIHeadPortrait.Contains(search)||t.UIDepartment.Contains(search)||t.UIPost.Contains(search)||t.UIBooth.Contains(search)||t.UIPhoto.Contains(search)||t.UICustomerType.Contains(search)||t.UIUserLevel.Contains(search)||t.UICode.Contains(search));
 				}
                 if(sort=="ord")
                 {
@@ -2486,3886 +5918,6 @@ namespace T.Evaluators
                 var total = query.Count();
                 var sql = query.ToString();
                 return new CommonOutputList<SystemConfiguration>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【客户】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class CustomertypeCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.Customertype.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【客户】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateCustomertypeEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.Customertype.RemoveRange(ctx.Customertype);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【客户】
-    /// </summary>
-    public partial class DeleteCustomertypeEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<Customertype>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.Customertype.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.Customertype.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条客户记录";
-    }
-	
-    /// <summary>
-    /// 保存【客户】
-    /// </summary>
-    public partial class SaveCustomertypeEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			Customertype entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<Customertype>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.Customertype.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.Customertype.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 客户编号
-				entity.CCustomerNumber = HttpUtility.UrlDecode(entity.CCustomerNumber);
-					// NVARCHAR(50) 姓名
-				entity.CName = HttpUtility.UrlDecode(entity.CName);
-					// NVARCHAR(50) 性别
-				entity.CChairperson = HttpUtility.UrlDecode(entity.CChairperson);
-					// NVARCHAR(50) 称呼
-				entity.CCall = HttpUtility.UrlDecode(entity.CCall);
-					// NVARCHAR(50) 联系方式
-				entity.CCommonModeOfContact = HttpUtility.UrlDecode(entity.CCommonModeOfContact);
-					// NVARCHAR(50) 地址
-				entity.CAddress = HttpUtility.UrlDecode(entity.CAddress);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.Customertype.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条Customertype记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【客户】
-    /// </summary>
-    public partial class GetCustomertypeEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new Customertype();
-        }
-        public override string Comments=> "获取空的客户记录";
-    }
-	
-    /// <summary>
-    /// 查询【客户】列表
-    /// </summary>
-    public partial class GetCustomertypeListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取Customertype列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<CustomertypeSearchModel>() ?? new CustomertypeSearchModel();
-                var query = ctx.Customertype.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// CCustomerNumber NVARCHAR(50) 客户编号 
-                if(!string.IsNullOrEmpty(searchModel.CCustomerNumber)) query = query.Where(t=>t.CCustomerNumber.Contains(searchModel.CCustomerNumber));
-                if(sort=="CCustomerNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.CCustomerNumber):query.OrderByDescending(t=>t.CCustomerNumber);
-                    isordered = true;
-                }
-				// CName NVARCHAR(50) 姓名 
-                if(!string.IsNullOrEmpty(searchModel.CName)) query = query.Where(t=>t.CName.Contains(searchModel.CName));
-                if(sort=="CName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.CName):query.OrderByDescending(t=>t.CName);
-                    isordered = true;
-                }
-				// CChairperson NVARCHAR(50) 性别 
-                if(!string.IsNullOrEmpty(searchModel.CChairperson)) query = query.Where(t=>t.CChairperson.Contains(searchModel.CChairperson));
-                if(sort=="CChairperson")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.CChairperson):query.OrderByDescending(t=>t.CChairperson);
-                    isordered = true;
-                }
-				// CCall NVARCHAR(50) 称呼 
-                if(!string.IsNullOrEmpty(searchModel.CCall)) query = query.Where(t=>t.CCall.Contains(searchModel.CCall));
-                if(sort=="CCall")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.CCall):query.OrderByDescending(t=>t.CCall);
-                    isordered = true;
-                }
-				// CCommonModeOfContact NVARCHAR(50) 联系方式 
-                if(!string.IsNullOrEmpty(searchModel.CCommonModeOfContact)) query = query.Where(t=>t.CCommonModeOfContact.Contains(searchModel.CCommonModeOfContact));
-                if(sort=="CCommonModeOfContact")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.CCommonModeOfContact):query.OrderByDescending(t=>t.CCommonModeOfContact);
-                    isordered = true;
-                }
-				// CAddress NVARCHAR(50) 地址 
-                if(!string.IsNullOrEmpty(searchModel.CAddress)) query = query.Where(t=>t.CAddress.Contains(searchModel.CAddress));
-                if(sort=="CAddress")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.CAddress):query.OrderByDescending(t=>t.CAddress);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.CCustomerNumber.Contains(search)||t.CName.Contains(search)||t.CChairperson.Contains(search)||t.CCall.Contains(search)||t.CCommonModeOfContact.Contains(search)||t.CAddress.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<Customertype>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【供应商】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class SupplierCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.Supplier.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【供应商】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateSupplierEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.Supplier.RemoveRange(ctx.Supplier);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【供应商】
-    /// </summary>
-    public partial class DeleteSupplierEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<Supplier>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.Supplier.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.Supplier.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条供应商记录";
-    }
-	
-    /// <summary>
-    /// 保存【供应商】
-    /// </summary>
-    public partial class SaveSupplierEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			Supplier entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<Supplier>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.Supplier.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.Supplier.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 供应商编号
-				entity.SSupplierNumber = HttpUtility.UrlDecode(entity.SSupplierNumber);
-					// NVARCHAR(50) 供应商名称
-				entity.SSupplierName = HttpUtility.UrlDecode(entity.SSupplierName);
-					// NVARCHAR(50) 联系方式
-				entity.SCommonModeOfContact = HttpUtility.UrlDecode(entity.SCommonModeOfContact);
-					// NVARCHAR(50) 办公地点
-				entity.SOfficeLocation = HttpUtility.UrlDecode(entity.SOfficeLocation);
-					// NVARCHAR(50) 经营范围
-				entity.SScopeOfOperation = HttpUtility.UrlDecode(entity.SScopeOfOperation);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.Supplier.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条Supplier记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【供应商】
-    /// </summary>
-    public partial class GetSupplierEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new Supplier();
-        }
-        public override string Comments=> "获取空的供应商记录";
-    }
-	
-    /// <summary>
-    /// 查询【供应商】列表
-    /// </summary>
-    public partial class GetSupplierListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取Supplier列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<SupplierSearchModel>() ?? new SupplierSearchModel();
-                var query = ctx.Supplier.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// SSupplierNumber NVARCHAR(50) 供应商编号 
-                if(!string.IsNullOrEmpty(searchModel.SSupplierNumber)) query = query.Where(t=>t.SSupplierNumber.Contains(searchModel.SSupplierNumber));
-                if(sort=="SSupplierNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SSupplierNumber):query.OrderByDescending(t=>t.SSupplierNumber);
-                    isordered = true;
-                }
-				// SSupplierName NVARCHAR(50) 供应商名称 
-                if(!string.IsNullOrEmpty(searchModel.SSupplierName)) query = query.Where(t=>t.SSupplierName.Contains(searchModel.SSupplierName));
-                if(sort=="SSupplierName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SSupplierName):query.OrderByDescending(t=>t.SSupplierName);
-                    isordered = true;
-                }
-				// SCommonModeOfContact NVARCHAR(50) 联系方式 
-                if(!string.IsNullOrEmpty(searchModel.SCommonModeOfContact)) query = query.Where(t=>t.SCommonModeOfContact.Contains(searchModel.SCommonModeOfContact));
-                if(sort=="SCommonModeOfContact")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SCommonModeOfContact):query.OrderByDescending(t=>t.SCommonModeOfContact);
-                    isordered = true;
-                }
-				// SOfficeLocation NVARCHAR(50) 办公地点 
-                if(!string.IsNullOrEmpty(searchModel.SOfficeLocation)) query = query.Where(t=>t.SOfficeLocation.Contains(searchModel.SOfficeLocation));
-                if(sort=="SOfficeLocation")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SOfficeLocation):query.OrderByDescending(t=>t.SOfficeLocation);
-                    isordered = true;
-                }
-				// SScopeOfOperation NVARCHAR(50) 经营范围 
-                if(!string.IsNullOrEmpty(searchModel.SScopeOfOperation)) query = query.Where(t=>t.SScopeOfOperation.Contains(searchModel.SScopeOfOperation));
-                if(sort=="SScopeOfOperation")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SScopeOfOperation):query.OrderByDescending(t=>t.SScopeOfOperation);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.SSupplierNumber.Contains(search)||t.SSupplierName.Contains(search)||t.SCommonModeOfContact.Contains(search)||t.SOfficeLocation.Contains(search)||t.SScopeOfOperation.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<Supplier>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【货物种类】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class TypeOfGoodsCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.TypeOfGoods.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【货物种类】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateTypeOfGoodsEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.TypeOfGoods.RemoveRange(ctx.TypeOfGoods);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【货物种类】
-    /// </summary>
-    public partial class DeleteTypeOfGoodsEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<TypeOfGoods>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.TypeOfGoods.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.TypeOfGoods.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条货物种类记录";
-    }
-	
-    /// <summary>
-    /// 保存【货物种类】
-    /// </summary>
-    public partial class SaveTypeOfGoodsEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			TypeOfGoods entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<TypeOfGoods>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.TypeOfGoods.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.TypeOfGoods.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 货品种类编号
-				entity.TOGCategoryNumberOfGoods = HttpUtility.UrlDecode(entity.TOGCategoryNumberOfGoods);
-					// NVARCHAR(50) 货物名称
-				entity.TOGNameOfGoods = HttpUtility.UrlDecode(entity.TOGNameOfGoods);
-					// NVARCHAR(50) 货物类别
-				entity.TOGCategoryOfGoods = HttpUtility.UrlDecode(entity.TOGCategoryOfGoods);
-					// NVARCHAR(50) 货物子类别
-				entity.TOGCargoSubcategory = HttpUtility.UrlDecode(entity.TOGCargoSubcategory);
-					// NVARCHAR(50) 体积
-				entity.TOGBulk = HttpUtility.UrlDecode(entity.TOGBulk);
-					// NVARCHAR(50) 颜色
-				entity.TOGColor = HttpUtility.UrlDecode(entity.TOGColor);
-					// NVARCHAR(50) 型号
-				entity.TOGModel = HttpUtility.UrlDecode(entity.TOGModel);
-					// NVARCHAR(50) 别称
-				entity.TOGAlias = HttpUtility.UrlDecode(entity.TOGAlias);
-					// NVARCHAR(50) 采购单价
-				entity.TOGPurchaseUnitPrice = HttpUtility.UrlDecode(entity.TOGPurchaseUnitPrice);
-					// NVARCHAR(50) 销售单价
-				entity.TOGSalesUnitPrice = HttpUtility.UrlDecode(entity.TOGSalesUnitPrice);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.TypeOfGoods.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条TypeOfGoods记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【货物种类】
-    /// </summary>
-    public partial class GetTypeOfGoodsEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new TypeOfGoods();
-        }
-        public override string Comments=> "获取空的货物种类记录";
-    }
-	
-    /// <summary>
-    /// 查询【货物种类】列表
-    /// </summary>
-    public partial class GetTypeOfGoodsListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取TypeOfGoods列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<TypeOfGoodsSearchModel>() ?? new TypeOfGoodsSearchModel();
-                var query = ctx.TypeOfGoods.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// TOGCategoryNumberOfGoods NVARCHAR(50) 货品种类编号 
-                if(!string.IsNullOrEmpty(searchModel.TOGCategoryNumberOfGoods)) query = query.Where(t=>t.TOGCategoryNumberOfGoods.Contains(searchModel.TOGCategoryNumberOfGoods));
-                if(sort=="TOGCategoryNumberOfGoods")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGCategoryNumberOfGoods):query.OrderByDescending(t=>t.TOGCategoryNumberOfGoods);
-                    isordered = true;
-                }
-				// TOGNameOfGoods NVARCHAR(50) 货物名称 
-                if(!string.IsNullOrEmpty(searchModel.TOGNameOfGoods)) query = query.Where(t=>t.TOGNameOfGoods.Contains(searchModel.TOGNameOfGoods));
-                if(sort=="TOGNameOfGoods")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGNameOfGoods):query.OrderByDescending(t=>t.TOGNameOfGoods);
-                    isordered = true;
-                }
-				// TOGCategoryOfGoods NVARCHAR(50) 货物类别 
-                if(!string.IsNullOrEmpty(searchModel.TOGCategoryOfGoods)) query = query.Where(t=>t.TOGCategoryOfGoods.Contains(searchModel.TOGCategoryOfGoods));
-                if(sort=="TOGCategoryOfGoods")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGCategoryOfGoods):query.OrderByDescending(t=>t.TOGCategoryOfGoods);
-                    isordered = true;
-                }
-				// TOGCargoSubcategory NVARCHAR(50) 货物子类别 
-                if(!string.IsNullOrEmpty(searchModel.TOGCargoSubcategory)) query = query.Where(t=>t.TOGCargoSubcategory.Contains(searchModel.TOGCargoSubcategory));
-                if(sort=="TOGCargoSubcategory")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGCargoSubcategory):query.OrderByDescending(t=>t.TOGCargoSubcategory);
-                    isordered = true;
-                }
-				// TOGBulk NVARCHAR(50) 体积 
-                if(!string.IsNullOrEmpty(searchModel.TOGBulk)) query = query.Where(t=>t.TOGBulk.Contains(searchModel.TOGBulk));
-                if(sort=="TOGBulk")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGBulk):query.OrderByDescending(t=>t.TOGBulk);
-                    isordered = true;
-                }
-				// TOGColor NVARCHAR(50) 颜色 
-                if(!string.IsNullOrEmpty(searchModel.TOGColor)) query = query.Where(t=>t.TOGColor.Contains(searchModel.TOGColor));
-                if(sort=="TOGColor")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGColor):query.OrderByDescending(t=>t.TOGColor);
-                    isordered = true;
-                }
-				// TOGModel NVARCHAR(50) 型号 
-                if(!string.IsNullOrEmpty(searchModel.TOGModel)) query = query.Where(t=>t.TOGModel.Contains(searchModel.TOGModel));
-                if(sort=="TOGModel")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGModel):query.OrderByDescending(t=>t.TOGModel);
-                    isordered = true;
-                }
-				// TOGAlias NVARCHAR(50) 别称 
-                if(!string.IsNullOrEmpty(searchModel.TOGAlias)) query = query.Where(t=>t.TOGAlias.Contains(searchModel.TOGAlias));
-                if(sort=="TOGAlias")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGAlias):query.OrderByDescending(t=>t.TOGAlias);
-                    isordered = true;
-                }
-				// TOGPurchaseUnitPrice NVARCHAR(50) 采购单价 
-                if(!string.IsNullOrEmpty(searchModel.TOGPurchaseUnitPrice)) query = query.Where(t=>t.TOGPurchaseUnitPrice.Contains(searchModel.TOGPurchaseUnitPrice));
-                if(sort=="TOGPurchaseUnitPrice")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGPurchaseUnitPrice):query.OrderByDescending(t=>t.TOGPurchaseUnitPrice);
-                    isordered = true;
-                }
-				// TOGSalesUnitPrice NVARCHAR(50) 销售单价 
-                if(!string.IsNullOrEmpty(searchModel.TOGSalesUnitPrice)) query = query.Where(t=>t.TOGSalesUnitPrice.Contains(searchModel.TOGSalesUnitPrice));
-                if(sort=="TOGSalesUnitPrice")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.TOGSalesUnitPrice):query.OrderByDescending(t=>t.TOGSalesUnitPrice);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.TOGCategoryNumberOfGoods.Contains(search)||t.TOGNameOfGoods.Contains(search)||t.TOGCategoryOfGoods.Contains(search)||t.TOGCargoSubcategory.Contains(search)||t.TOGBulk.Contains(search)||t.TOGColor.Contains(search)||t.TOGModel.Contains(search)||t.TOGAlias.Contains(search)||t.TOGPurchaseUnitPrice.Contains(search)||t.TOGSalesUnitPrice.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<TypeOfGoods>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【供货渠道】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class SupplyChannelCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.SupplyChannel.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【供货渠道】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateSupplyChannelEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.SupplyChannel.RemoveRange(ctx.SupplyChannel);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【供货渠道】
-    /// </summary>
-    public partial class DeleteSupplyChannelEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<SupplyChannel>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.SupplyChannel.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.SupplyChannel.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条供货渠道记录";
-    }
-	
-    /// <summary>
-    /// 保存【供货渠道】
-    /// </summary>
-    public partial class SaveSupplyChannelEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			SupplyChannel entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<SupplyChannel>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.SupplyChannel.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.SupplyChannel.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 供应商
-				entity.SCSupplier = HttpUtility.UrlDecode(entity.SCSupplier);
-					// NVARCHAR(50) 货物种类
-				entity.SCTypeOfGoods = HttpUtility.UrlDecode(entity.SCTypeOfGoods);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.SupplyChannel.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条SupplyChannel记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【供货渠道】
-    /// </summary>
-    public partial class GetSupplyChannelEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new SupplyChannel();
-        }
-        public override string Comments=> "获取空的供货渠道记录";
-    }
-	
-    /// <summary>
-    /// 查询【供货渠道】列表
-    /// </summary>
-    public partial class GetSupplyChannelListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取SupplyChannel列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<SupplyChannelSearchModel>() ?? new SupplyChannelSearchModel();
-                var query = ctx.SupplyChannel.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// SCSupplier NVARCHAR(50) 供应商 
-                if(!string.IsNullOrEmpty(searchModel.SCSupplier)) query = query.Where(t=>t.SCSupplier.Contains(searchModel.SCSupplier));
-                if(sort=="SCSupplier")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SCSupplier):query.OrderByDescending(t=>t.SCSupplier);
-                    isordered = true;
-                }
-				// SCTypeOfGoods NVARCHAR(50) 货物种类 
-                if(!string.IsNullOrEmpty(searchModel.SCTypeOfGoods)) query = query.Where(t=>t.SCTypeOfGoods.Contains(searchModel.SCTypeOfGoods));
-                if(sort=="SCTypeOfGoods")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SCTypeOfGoods):query.OrderByDescending(t=>t.SCTypeOfGoods);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.SCSupplier.Contains(search)||t.SCTypeOfGoods.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<SupplyChannel>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【订单】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class OrderCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.Order.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【订单】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateOrderEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.Order.RemoveRange(ctx.Order);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【订单】
-    /// </summary>
-    public partial class DeleteOrderEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<Order>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.Order.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.Order.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条订单记录";
-    }
-	
-    /// <summary>
-    /// 保存【订单】
-    /// </summary>
-    public partial class SaveOrderEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			Order entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<Order>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.Order.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.Order.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 订单编号
-				entity.OOrderNumber = HttpUtility.UrlDecode(entity.OOrderNumber);
-					// NVARCHAR(50) 供应商编号
-				entity.OSupplierNumber = HttpUtility.UrlDecode(entity.OSupplierNumber);
-					// NVARCHAR(50) 提交人
-				entity.OSubmitter = HttpUtility.UrlDecode(entity.OSubmitter);
-					// NVARCHAR(50) 提交人联系方式
-				entity.OAuthorsContactInformation = HttpUtility.UrlDecode(entity.OAuthorsContactInformation);
-					// NVARCHAR(50) 订单状态
-				entity.OOrderStatus = HttpUtility.UrlDecode(entity.OOrderStatus);
-					// NVARCHAR(50) 备注
-				entity.ORemarks = HttpUtility.UrlDecode(entity.ORemarks);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.Order.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条Order记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【订单】
-    /// </summary>
-    public partial class GetOrderEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new Order();
-        }
-        public override string Comments=> "获取空的订单记录";
-    }
-	
-    /// <summary>
-    /// 查询【订单】列表
-    /// </summary>
-    public partial class GetOrderListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取Order列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<OrderSearchModel>() ?? new OrderSearchModel();
-                var query = ctx.Order.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// OOrderNumber NVARCHAR(50) 订单编号 
-                if(!string.IsNullOrEmpty(searchModel.OOrderNumber)) query = query.Where(t=>t.OOrderNumber.Contains(searchModel.OOrderNumber));
-                if(sort=="OOrderNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.OOrderNumber):query.OrderByDescending(t=>t.OOrderNumber);
-                    isordered = true;
-                }
-				// OSupplierNumber NVARCHAR(50) 供应商编号 
-                if(!string.IsNullOrEmpty(searchModel.OSupplierNumber)) query = query.Where(t=>t.OSupplierNumber.Contains(searchModel.OSupplierNumber));
-                if(sort=="OSupplierNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.OSupplierNumber):query.OrderByDescending(t=>t.OSupplierNumber);
-                    isordered = true;
-                }
-				// OExpectedArrivalDate DATETIME 期望到达日期 
-                if(searchModel.FromOExpectedArrivalDate!=null) query = query.Where(t=>t.OExpectedArrivalDate>=searchModel.FromOExpectedArrivalDate);
-                if(searchModel.ToOExpectedArrivalDate!=null) query = query.Where(t=>t.OExpectedArrivalDate<=searchModel.ToOExpectedArrivalDate);
-                if(sort=="OExpectedArrivalDate")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.OExpectedArrivalDate):query.OrderByDescending(t=>t.OExpectedArrivalDate);
-                    isordered = true;
-                }
-				// ODateOfSubmission DATETIME 提交日期 
-                if(searchModel.FromODateOfSubmission!=null) query = query.Where(t=>t.ODateOfSubmission>=searchModel.FromODateOfSubmission);
-                if(searchModel.ToODateOfSubmission!=null) query = query.Where(t=>t.ODateOfSubmission<=searchModel.ToODateOfSubmission);
-                if(sort=="ODateOfSubmission")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ODateOfSubmission):query.OrderByDescending(t=>t.ODateOfSubmission);
-                    isordered = true;
-                }
-				// OSubmitter NVARCHAR(50) 提交人 
-                if(!string.IsNullOrEmpty(searchModel.OSubmitter)) query = query.Where(t=>t.OSubmitter.Contains(searchModel.OSubmitter));
-                if(sort=="OSubmitter")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.OSubmitter):query.OrderByDescending(t=>t.OSubmitter);
-                    isordered = true;
-                }
-				// OAuthorsContactInformation NVARCHAR(50) 提交人联系方式 
-                if(!string.IsNullOrEmpty(searchModel.OAuthorsContactInformation)) query = query.Where(t=>t.OAuthorsContactInformation.Contains(searchModel.OAuthorsContactInformation));
-                if(sort=="OAuthorsContactInformation")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.OAuthorsContactInformation):query.OrderByDescending(t=>t.OAuthorsContactInformation);
-                    isordered = true;
-                }
-				// OOrderStatus NVARCHAR(50) 订单状态 
-                if(!string.IsNullOrEmpty(searchModel.OOrderStatus)) query = query.Where(t=>t.OOrderStatus.Contains(searchModel.OOrderStatus));
-                if(sort=="OOrderStatus")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.OOrderStatus):query.OrderByDescending(t=>t.OOrderStatus);
-                    isordered = true;
-                }
-				// ORemarks NVARCHAR(50) 备注 
-                if(!string.IsNullOrEmpty(searchModel.ORemarks)) query = query.Where(t=>t.ORemarks.Contains(searchModel.ORemarks));
-                if(sort=="ORemarks")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ORemarks):query.OrderByDescending(t=>t.ORemarks);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.OOrderNumber.Contains(search)||t.OSupplierNumber.Contains(search)||t.OSubmitter.Contains(search)||t.OAuthorsContactInformation.Contains(search)||t.OOrderStatus.Contains(search)||t.ORemarks.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<Order>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【订单明细】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class OrderDetailsCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.OrderDetails.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【订单明细】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateOrderDetailsEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.OrderDetails.RemoveRange(ctx.OrderDetails);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【订单明细】
-    /// </summary>
-    public partial class DeleteOrderDetailsEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<OrderDetails>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.OrderDetails.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.OrderDetails.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条订单明细记录";
-    }
-	
-    /// <summary>
-    /// 保存【订单明细】
-    /// </summary>
-    public partial class SaveOrderDetailsEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			OrderDetails entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<OrderDetails>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.OrderDetails.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.OrderDetails.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 订单编号
-				entity.ODOrderNumber = HttpUtility.UrlDecode(entity.ODOrderNumber);
-					// NVARCHAR(50) 货物种类
-				entity.ODTypeOfGoods = HttpUtility.UrlDecode(entity.ODTypeOfGoods);
-					// NVARCHAR(50) 货物数量
-				entity.ODQuantityOfGoods = HttpUtility.UrlDecode(entity.ODQuantityOfGoods);
-					// NVARCHAR(50) 采购单价
-				entity.ODPurchaseUnitPrice = HttpUtility.UrlDecode(entity.ODPurchaseUnitPrice);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.OrderDetails.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条OrderDetails记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【订单明细】
-    /// </summary>
-    public partial class GetOrderDetailsEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new OrderDetails();
-        }
-        public override string Comments=> "获取空的订单明细记录";
-    }
-	
-    /// <summary>
-    /// 查询【订单明细】列表
-    /// </summary>
-    public partial class GetOrderDetailsListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取OrderDetails列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<OrderDetailsSearchModel>() ?? new OrderDetailsSearchModel();
-                var query = ctx.OrderDetails.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// ODOrderNumber NVARCHAR(50) 订单编号 
-                if(!string.IsNullOrEmpty(searchModel.ODOrderNumber)) query = query.Where(t=>t.ODOrderNumber.Contains(searchModel.ODOrderNumber));
-                if(sort=="ODOrderNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ODOrderNumber):query.OrderByDescending(t=>t.ODOrderNumber);
-                    isordered = true;
-                }
-				// ODTypeOfGoods NVARCHAR(50) 货物种类 
-                if(!string.IsNullOrEmpty(searchModel.ODTypeOfGoods)) query = query.Where(t=>t.ODTypeOfGoods.Contains(searchModel.ODTypeOfGoods));
-                if(sort=="ODTypeOfGoods")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ODTypeOfGoods):query.OrderByDescending(t=>t.ODTypeOfGoods);
-                    isordered = true;
-                }
-				// ODQuantityOfGoods NVARCHAR(50) 货物数量 
-                if(!string.IsNullOrEmpty(searchModel.ODQuantityOfGoods)) query = query.Where(t=>t.ODQuantityOfGoods.Contains(searchModel.ODQuantityOfGoods));
-                if(sort=="ODQuantityOfGoods")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ODQuantityOfGoods):query.OrderByDescending(t=>t.ODQuantityOfGoods);
-                    isordered = true;
-                }
-				// ODPurchaseUnitPrice NVARCHAR(50) 采购单价 
-                if(!string.IsNullOrEmpty(searchModel.ODPurchaseUnitPrice)) query = query.Where(t=>t.ODPurchaseUnitPrice.Contains(searchModel.ODPurchaseUnitPrice));
-                if(sort=="ODPurchaseUnitPrice")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ODPurchaseUnitPrice):query.OrderByDescending(t=>t.ODPurchaseUnitPrice);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.ODOrderNumber.Contains(search)||t.ODTypeOfGoods.Contains(search)||t.ODQuantityOfGoods.Contains(search)||t.ODPurchaseUnitPrice.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<OrderDetails>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【入库记录】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class WarehousingRecordCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.WarehousingRecord.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【入库记录】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateWarehousingRecordEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.WarehousingRecord.RemoveRange(ctx.WarehousingRecord);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【入库记录】
-    /// </summary>
-    public partial class DeleteWarehousingRecordEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<WarehousingRecord>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.WarehousingRecord.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.WarehousingRecord.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条入库记录记录";
-    }
-	
-    /// <summary>
-    /// 保存【入库记录】
-    /// </summary>
-    public partial class SaveWarehousingRecordEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			WarehousingRecord entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<WarehousingRecord>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.WarehousingRecord.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.WarehousingRecord.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 订单编号
-				entity.WROrderNumber = HttpUtility.UrlDecode(entity.WROrderNumber);
-					// NVARCHAR(50) 经办人
-				entity.WRAgent = HttpUtility.UrlDecode(entity.WRAgent);
-					// NVARCHAR(50) 经办人联系方式
-				entity.WROperatorContact = HttpUtility.UrlDecode(entity.WROperatorContact);
-					// NVARCHAR(50) 备注
-				entity.WRRemarks = HttpUtility.UrlDecode(entity.WRRemarks);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.WarehousingRecord.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条WarehousingRecord记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【入库记录】
-    /// </summary>
-    public partial class GetWarehousingRecordEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new WarehousingRecord();
-        }
-        public override string Comments=> "获取空的入库记录记录";
-    }
-	
-    /// <summary>
-    /// 查询【入库记录】列表
-    /// </summary>
-    public partial class GetWarehousingRecordListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取WarehousingRecord列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<WarehousingRecordSearchModel>() ?? new WarehousingRecordSearchModel();
-                var query = ctx.WarehousingRecord.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// WROrderNumber NVARCHAR(50) 订单编号 
-                if(!string.IsNullOrEmpty(searchModel.WROrderNumber)) query = query.Where(t=>t.WROrderNumber.Contains(searchModel.WROrderNumber));
-                if(sort=="WROrderNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.WROrderNumber):query.OrderByDescending(t=>t.WROrderNumber);
-                    isordered = true;
-                }
-				// WRDateOfArrival DATETIME 到货日期 
-                if(searchModel.FromWRDateOfArrival!=null) query = query.Where(t=>t.WRDateOfArrival>=searchModel.FromWRDateOfArrival);
-                if(searchModel.ToWRDateOfArrival!=null) query = query.Where(t=>t.WRDateOfArrival<=searchModel.ToWRDateOfArrival);
-                if(sort=="WRDateOfArrival")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.WRDateOfArrival):query.OrderByDescending(t=>t.WRDateOfArrival);
-                    isordered = true;
-                }
-				// WRAgent NVARCHAR(50) 经办人 
-                if(!string.IsNullOrEmpty(searchModel.WRAgent)) query = query.Where(t=>t.WRAgent.Contains(searchModel.WRAgent));
-                if(sort=="WRAgent")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.WRAgent):query.OrderByDescending(t=>t.WRAgent);
-                    isordered = true;
-                }
-				// WROperatorContact NVARCHAR(50) 经办人联系方式 
-                if(!string.IsNullOrEmpty(searchModel.WROperatorContact)) query = query.Where(t=>t.WROperatorContact.Contains(searchModel.WROperatorContact));
-                if(sort=="WROperatorContact")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.WROperatorContact):query.OrderByDescending(t=>t.WROperatorContact);
-                    isordered = true;
-                }
-				// WRRemarks NVARCHAR(50) 备注 
-                if(!string.IsNullOrEmpty(searchModel.WRRemarks)) query = query.Where(t=>t.WRRemarks.Contains(searchModel.WRRemarks));
-                if(sort=="WRRemarks")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.WRRemarks):query.OrderByDescending(t=>t.WRRemarks);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.WROrderNumber.Contains(search)||t.WRAgent.Contains(search)||t.WROperatorContact.Contains(search)||t.WRRemarks.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<WarehousingRecord>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【仓库】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class WarehouseCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.Warehouse.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【仓库】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateWarehouseEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.Warehouse.RemoveRange(ctx.Warehouse);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【仓库】
-    /// </summary>
-    public partial class DeleteWarehouseEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<Warehouse>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.Warehouse.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.Warehouse.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条仓库记录";
-    }
-	
-    /// <summary>
-    /// 保存【仓库】
-    /// </summary>
-    public partial class SaveWarehouseEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			Warehouse entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<Warehouse>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.Warehouse.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.Warehouse.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 仓库编号
-				entity.WWarehouseNumber = HttpUtility.UrlDecode(entity.WWarehouseNumber);
-					// NVARCHAR(50) 容积
-				entity.WCapacity = HttpUtility.UrlDecode(entity.WCapacity);
-					// NVARCHAR(50) 位置
-				entity.WLocation = HttpUtility.UrlDecode(entity.WLocation);
-					// NVARCHAR(50) 负责人工号
-				entity.WResponsibleForManualNumber = HttpUtility.UrlDecode(entity.WResponsibleForManualNumber);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.Warehouse.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条Warehouse记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【仓库】
-    /// </summary>
-    public partial class GetWarehouseEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new Warehouse();
-        }
-        public override string Comments=> "获取空的仓库记录";
-    }
-	
-    /// <summary>
-    /// 查询【仓库】列表
-    /// </summary>
-    public partial class GetWarehouseListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取Warehouse列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<WarehouseSearchModel>() ?? new WarehouseSearchModel();
-                var query = ctx.Warehouse.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// WWarehouseNumber NVARCHAR(50) 仓库编号 
-                if(!string.IsNullOrEmpty(searchModel.WWarehouseNumber)) query = query.Where(t=>t.WWarehouseNumber.Contains(searchModel.WWarehouseNumber));
-                if(sort=="WWarehouseNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.WWarehouseNumber):query.OrderByDescending(t=>t.WWarehouseNumber);
-                    isordered = true;
-                }
-				// WCapacity NVARCHAR(50) 容积 
-                if(!string.IsNullOrEmpty(searchModel.WCapacity)) query = query.Where(t=>t.WCapacity.Contains(searchModel.WCapacity));
-                if(sort=="WCapacity")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.WCapacity):query.OrderByDescending(t=>t.WCapacity);
-                    isordered = true;
-                }
-				// WLocation NVARCHAR(50) 位置 
-                if(!string.IsNullOrEmpty(searchModel.WLocation)) query = query.Where(t=>t.WLocation.Contains(searchModel.WLocation));
-                if(sort=="WLocation")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.WLocation):query.OrderByDescending(t=>t.WLocation);
-                    isordered = true;
-                }
-				// WResponsibleForManualNumber NVARCHAR(50) 负责人工号 
-                if(!string.IsNullOrEmpty(searchModel.WResponsibleForManualNumber)) query = query.Where(t=>t.WResponsibleForManualNumber.Contains(searchModel.WResponsibleForManualNumber));
-                if(sort=="WResponsibleForManualNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.WResponsibleForManualNumber):query.OrderByDescending(t=>t.WResponsibleForManualNumber);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.WWarehouseNumber.Contains(search)||t.WCapacity.Contains(search)||t.WLocation.Contains(search)||t.WResponsibleForManualNumber.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<Warehouse>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【货架】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class GoodsShelvesCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.GoodsShelves.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【货架】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateGoodsShelvesEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.GoodsShelves.RemoveRange(ctx.GoodsShelves);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【货架】
-    /// </summary>
-    public partial class DeleteGoodsShelvesEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<GoodsShelves>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.GoodsShelves.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.GoodsShelves.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条货架记录";
-    }
-	
-    /// <summary>
-    /// 保存【货架】
-    /// </summary>
-    public partial class SaveGoodsShelvesEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			GoodsShelves entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<GoodsShelves>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.GoodsShelves.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.GoodsShelves.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 货架编号
-				entity.GSShelfNumber = HttpUtility.UrlDecode(entity.GSShelfNumber);
-					// NVARCHAR(50) 容积 
-				entity.GSVolume = HttpUtility.UrlDecode(entity.GSVolume);
-					// NVARCHAR(50) 位置
-				entity.GSLocation = HttpUtility.UrlDecode(entity.GSLocation);
-					// NVARCHAR(50) 负责人工号
-				entity.GSResponsibleForManualNumber = HttpUtility.UrlDecode(entity.GSResponsibleForManualNumber);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.GoodsShelves.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条GoodsShelves记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【货架】
-    /// </summary>
-    public partial class GetGoodsShelvesEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new GoodsShelves();
-        }
-        public override string Comments=> "获取空的货架记录";
-    }
-	
-    /// <summary>
-    /// 查询【货架】列表
-    /// </summary>
-    public partial class GetGoodsShelvesListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取GoodsShelves列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<GoodsShelvesSearchModel>() ?? new GoodsShelvesSearchModel();
-                var query = ctx.GoodsShelves.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// GSShelfNumber NVARCHAR(50) 货架编号 
-                if(!string.IsNullOrEmpty(searchModel.GSShelfNumber)) query = query.Where(t=>t.GSShelfNumber.Contains(searchModel.GSShelfNumber));
-                if(sort=="GSShelfNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.GSShelfNumber):query.OrderByDescending(t=>t.GSShelfNumber);
-                    isordered = true;
-                }
-				// GSVolume NVARCHAR(50) 容积  
-                if(!string.IsNullOrEmpty(searchModel.GSVolume)) query = query.Where(t=>t.GSVolume.Contains(searchModel.GSVolume));
-                if(sort=="GSVolume")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.GSVolume):query.OrderByDescending(t=>t.GSVolume);
-                    isordered = true;
-                }
-				// GSLocation NVARCHAR(50) 位置 
-                if(!string.IsNullOrEmpty(searchModel.GSLocation)) query = query.Where(t=>t.GSLocation.Contains(searchModel.GSLocation));
-                if(sort=="GSLocation")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.GSLocation):query.OrderByDescending(t=>t.GSLocation);
-                    isordered = true;
-                }
-				// GSResponsibleForManualNumber NVARCHAR(50) 负责人工号 
-                if(!string.IsNullOrEmpty(searchModel.GSResponsibleForManualNumber)) query = query.Where(t=>t.GSResponsibleForManualNumber.Contains(searchModel.GSResponsibleForManualNumber));
-                if(sort=="GSResponsibleForManualNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.GSResponsibleForManualNumber):query.OrderByDescending(t=>t.GSResponsibleForManualNumber);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.GSShelfNumber.Contains(search)||t.GSVolume.Contains(search)||t.GSLocation.Contains(search)||t.GSResponsibleForManualNumber.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<GoodsShelves>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【补货申请单】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class ReplenishmentApplicationFormCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.ReplenishmentApplicationForm.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【补货申请单】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateReplenishmentApplicationFormEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.ReplenishmentApplicationForm.RemoveRange(ctx.ReplenishmentApplicationForm);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【补货申请单】
-    /// </summary>
-    public partial class DeleteReplenishmentApplicationFormEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<ReplenishmentApplicationForm>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.ReplenishmentApplicationForm.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.ReplenishmentApplicationForm.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条补货申请单记录";
-    }
-	
-    /// <summary>
-    /// 保存【补货申请单】
-    /// </summary>
-    public partial class SaveReplenishmentApplicationFormEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			ReplenishmentApplicationForm entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<ReplenishmentApplicationForm>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.ReplenishmentApplicationForm.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.ReplenishmentApplicationForm.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 申请单编号
-				entity.RAFApplicationNumber = HttpUtility.UrlDecode(entity.RAFApplicationNumber);
-					// NVARCHAR(50) 货架编号
-				entity.RAFShelfNumber = HttpUtility.UrlDecode(entity.RAFShelfNumber);
-					// NVARCHAR(50) 仓库编号
-				entity.RAFWarehouseNumber = HttpUtility.UrlDecode(entity.RAFWarehouseNumber);
-					// NVARCHAR(50) 申请人工号
-				entity.RAFApplicationManualNumber = HttpUtility.UrlDecode(entity.RAFApplicationManualNumber);
-					// NVARCHAR(50) 货品种类编号
-				entity.RAFCategoryNumberOfGoods = HttpUtility.UrlDecode(entity.RAFCategoryNumberOfGoods);
-					// NVARCHAR(50) 货品数量
-				entity.RAFQuantityOfGoods = HttpUtility.UrlDecode(entity.RAFQuantityOfGoods);
-					// NVARCHAR(50) 申请单状态
-				entity.RAFApplicationStatus = HttpUtility.UrlDecode(entity.RAFApplicationStatus);
-					// NVARCHAR(50) 备注
-				entity.RAFRemarks = HttpUtility.UrlDecode(entity.RAFRemarks);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.ReplenishmentApplicationForm.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条ReplenishmentApplicationForm记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【补货申请单】
-    /// </summary>
-    public partial class GetReplenishmentApplicationFormEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new ReplenishmentApplicationForm();
-        }
-        public override string Comments=> "获取空的补货申请单记录";
-    }
-	
-    /// <summary>
-    /// 查询【补货申请单】列表
-    /// </summary>
-    public partial class GetReplenishmentApplicationFormListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取ReplenishmentApplicationForm列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<ReplenishmentApplicationFormSearchModel>() ?? new ReplenishmentApplicationFormSearchModel();
-                var query = ctx.ReplenishmentApplicationForm.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// RAFApplicationNumber NVARCHAR(50) 申请单编号 
-                if(!string.IsNullOrEmpty(searchModel.RAFApplicationNumber)) query = query.Where(t=>t.RAFApplicationNumber.Contains(searchModel.RAFApplicationNumber));
-                if(sort=="RAFApplicationNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RAFApplicationNumber):query.OrderByDescending(t=>t.RAFApplicationNumber);
-                    isordered = true;
-                }
-				// RAFShelfNumber NVARCHAR(50) 货架编号 
-                if(!string.IsNullOrEmpty(searchModel.RAFShelfNumber)) query = query.Where(t=>t.RAFShelfNumber.Contains(searchModel.RAFShelfNumber));
-                if(sort=="RAFShelfNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RAFShelfNumber):query.OrderByDescending(t=>t.RAFShelfNumber);
-                    isordered = true;
-                }
-				// RAFWarehouseNumber NVARCHAR(50) 仓库编号 
-                if(!string.IsNullOrEmpty(searchModel.RAFWarehouseNumber)) query = query.Where(t=>t.RAFWarehouseNumber.Contains(searchModel.RAFWarehouseNumber));
-                if(sort=="RAFWarehouseNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RAFWarehouseNumber):query.OrderByDescending(t=>t.RAFWarehouseNumber);
-                    isordered = true;
-                }
-				// RAFApplicationManualNumber NVARCHAR(50) 申请人工号 
-                if(!string.IsNullOrEmpty(searchModel.RAFApplicationManualNumber)) query = query.Where(t=>t.RAFApplicationManualNumber.Contains(searchModel.RAFApplicationManualNumber));
-                if(sort=="RAFApplicationManualNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RAFApplicationManualNumber):query.OrderByDescending(t=>t.RAFApplicationManualNumber);
-                    isordered = true;
-                }
-				// RAFCategoryNumberOfGoods NVARCHAR(50) 货品种类编号 
-                if(!string.IsNullOrEmpty(searchModel.RAFCategoryNumberOfGoods)) query = query.Where(t=>t.RAFCategoryNumberOfGoods.Contains(searchModel.RAFCategoryNumberOfGoods));
-                if(sort=="RAFCategoryNumberOfGoods")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RAFCategoryNumberOfGoods):query.OrderByDescending(t=>t.RAFCategoryNumberOfGoods);
-                    isordered = true;
-                }
-				// RAFQuantityOfGoods NVARCHAR(50) 货品数量 
-                if(!string.IsNullOrEmpty(searchModel.RAFQuantityOfGoods)) query = query.Where(t=>t.RAFQuantityOfGoods.Contains(searchModel.RAFQuantityOfGoods));
-                if(sort=="RAFQuantityOfGoods")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RAFQuantityOfGoods):query.OrderByDescending(t=>t.RAFQuantityOfGoods);
-                    isordered = true;
-                }
-				// RAFApplicationDate DATETIME 申请日期 
-                if(searchModel.FromRAFApplicationDate!=null) query = query.Where(t=>t.RAFApplicationDate>=searchModel.FromRAFApplicationDate);
-                if(searchModel.ToRAFApplicationDate!=null) query = query.Where(t=>t.RAFApplicationDate<=searchModel.ToRAFApplicationDate);
-                if(sort=="RAFApplicationDate")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RAFApplicationDate):query.OrderByDescending(t=>t.RAFApplicationDate);
-                    isordered = true;
-                }
-				// RAFApplicationStatus NVARCHAR(50) 申请单状态 
-                if(!string.IsNullOrEmpty(searchModel.RAFApplicationStatus)) query = query.Where(t=>t.RAFApplicationStatus.Contains(searchModel.RAFApplicationStatus));
-                if(sort=="RAFApplicationStatus")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RAFApplicationStatus):query.OrderByDescending(t=>t.RAFApplicationStatus);
-                    isordered = true;
-                }
-				// RAFRemarks NVARCHAR(50) 备注 
-                if(!string.IsNullOrEmpty(searchModel.RAFRemarks)) query = query.Where(t=>t.RAFRemarks.Contains(searchModel.RAFRemarks));
-                if(sort=="RAFRemarks")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RAFRemarks):query.OrderByDescending(t=>t.RAFRemarks);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.RAFApplicationNumber.Contains(search)||t.RAFShelfNumber.Contains(search)||t.RAFWarehouseNumber.Contains(search)||t.RAFApplicationManualNumber.Contains(search)||t.RAFCategoryNumberOfGoods.Contains(search)||t.RAFQuantityOfGoods.Contains(search)||t.RAFApplicationStatus.Contains(search)||t.RAFRemarks.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<ReplenishmentApplicationForm>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【补货记录】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class ReplenishmentRecordCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.ReplenishmentRecord.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【补货记录】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateReplenishmentRecordEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.ReplenishmentRecord.RemoveRange(ctx.ReplenishmentRecord);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【补货记录】
-    /// </summary>
-    public partial class DeleteReplenishmentRecordEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<ReplenishmentRecord>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.ReplenishmentRecord.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.ReplenishmentRecord.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条补货记录记录";
-    }
-	
-    /// <summary>
-    /// 保存【补货记录】
-    /// </summary>
-    public partial class SaveReplenishmentRecordEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			ReplenishmentRecord entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<ReplenishmentRecord>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.ReplenishmentRecord.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.ReplenishmentRecord.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 申请单编号
-				entity.RRApplicationNumber = HttpUtility.UrlDecode(entity.RRApplicationNumber);
-					// NVARCHAR(50) 备注
-				entity.RRRemarks = HttpUtility.UrlDecode(entity.RRRemarks);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.ReplenishmentRecord.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条ReplenishmentRecord记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【补货记录】
-    /// </summary>
-    public partial class GetReplenishmentRecordEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new ReplenishmentRecord();
-        }
-        public override string Comments=> "获取空的补货记录记录";
-    }
-	
-    /// <summary>
-    /// 查询【补货记录】列表
-    /// </summary>
-    public partial class GetReplenishmentRecordListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取ReplenishmentRecord列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<ReplenishmentRecordSearchModel>() ?? new ReplenishmentRecordSearchModel();
-                var query = ctx.ReplenishmentRecord.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// RRApplicationNumber NVARCHAR(50) 申请单编号 
-                if(!string.IsNullOrEmpty(searchModel.RRApplicationNumber)) query = query.Where(t=>t.RRApplicationNumber.Contains(searchModel.RRApplicationNumber));
-                if(sort=="RRApplicationNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RRApplicationNumber):query.OrderByDescending(t=>t.RRApplicationNumber);
-                    isordered = true;
-                }
-				// RRDateOfArrival DATETIME 到货日期 
-                if(searchModel.FromRRDateOfArrival!=null) query = query.Where(t=>t.RRDateOfArrival>=searchModel.FromRRDateOfArrival);
-                if(searchModel.ToRRDateOfArrival!=null) query = query.Where(t=>t.RRDateOfArrival<=searchModel.ToRRDateOfArrival);
-                if(sort=="RRDateOfArrival")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RRDateOfArrival):query.OrderByDescending(t=>t.RRDateOfArrival);
-                    isordered = true;
-                }
-				// RRRemarks NVARCHAR(50) 备注 
-                if(!string.IsNullOrEmpty(searchModel.RRRemarks)) query = query.Where(t=>t.RRRemarks.Contains(searchModel.RRRemarks));
-                if(sort=="RRRemarks")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.RRRemarks):query.OrderByDescending(t=>t.RRRemarks);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.RRApplicationNumber.Contains(search)||t.RRRemarks.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<ReplenishmentRecord>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// 【销售记录】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class SalesRecordCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.SalesRecord.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【销售记录】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateSalesRecordEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.SalesRecord.RemoveRange(ctx.SalesRecord);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【销售记录】
-    /// </summary>
-    public partial class DeleteSalesRecordEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<SalesRecord>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.SalesRecord.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.SalesRecord.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条销售记录记录";
-    }
-	
-    /// <summary>
-    /// 保存【销售记录】
-    /// </summary>
-    public partial class SaveSalesRecordEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			SalesRecord entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<SalesRecord>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.SalesRecord.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.SalesRecord.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 销售批次号
-				entity.SRSalesLotNumber = HttpUtility.UrlDecode(entity.SRSalesLotNumber);
-					// NVARCHAR(50) 货物种类
-				entity.SRTypeOfGoods = HttpUtility.UrlDecode(entity.SRTypeOfGoods);
-					// NVARCHAR(50) 数量
-				entity.SRAmount = HttpUtility.UrlDecode(entity.SRAmount);
-					// NVARCHAR(50) 单价
-				entity.SRUnitPrice = HttpUtility.UrlDecode(entity.SRUnitPrice);
-					// NVARCHAR(50) 销售工号
-				entity.SRSalesNumber = HttpUtility.UrlDecode(entity.SRSalesNumber);
-					// NVARCHAR(50) 发票编号
-				entity.SRInvoiceNumber = HttpUtility.UrlDecode(entity.SRInvoiceNumber);
-					// NVARCHAR(50) 发票抬头
-				entity.SRInvoicesAreRaised = HttpUtility.UrlDecode(entity.SRInvoicesAreRaised);
-					// NVARCHAR(50) 税号
-				entity.SRDutyParagraph = HttpUtility.UrlDecode(entity.SRDutyParagraph);
-					// NVARCHAR(50) 备注
-				entity.SRRemarks = HttpUtility.UrlDecode(entity.SRRemarks);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.SalesRecord.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条SalesRecord记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【销售记录】
-    /// </summary>
-    public partial class GetSalesRecordEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new SalesRecord();
-        }
-        public override string Comments=> "获取空的销售记录记录";
-    }
-	
-    /// <summary>
-    /// 查询【销售记录】列表
-    /// </summary>
-    public partial class GetSalesRecordListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取SalesRecord列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<SalesRecordSearchModel>() ?? new SalesRecordSearchModel();
-                var query = ctx.SalesRecord.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// SRSalesLotNumber NVARCHAR(50) 销售批次号 
-                if(!string.IsNullOrEmpty(searchModel.SRSalesLotNumber)) query = query.Where(t=>t.SRSalesLotNumber.Contains(searchModel.SRSalesLotNumber));
-                if(sort=="SRSalesLotNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SRSalesLotNumber):query.OrderByDescending(t=>t.SRSalesLotNumber);
-                    isordered = true;
-                }
-				// SRTypeOfGoods NVARCHAR(50) 货物种类 
-                if(!string.IsNullOrEmpty(searchModel.SRTypeOfGoods)) query = query.Where(t=>t.SRTypeOfGoods.Contains(searchModel.SRTypeOfGoods));
-                if(sort=="SRTypeOfGoods")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SRTypeOfGoods):query.OrderByDescending(t=>t.SRTypeOfGoods);
-                    isordered = true;
-                }
-				// SRAmount NVARCHAR(50) 数量 
-                if(!string.IsNullOrEmpty(searchModel.SRAmount)) query = query.Where(t=>t.SRAmount.Contains(searchModel.SRAmount));
-                if(sort=="SRAmount")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SRAmount):query.OrderByDescending(t=>t.SRAmount);
-                    isordered = true;
-                }
-				// SRUnitPrice NVARCHAR(50) 单价 
-                if(!string.IsNullOrEmpty(searchModel.SRUnitPrice)) query = query.Where(t=>t.SRUnitPrice.Contains(searchModel.SRUnitPrice));
-                if(sort=="SRUnitPrice")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SRUnitPrice):query.OrderByDescending(t=>t.SRUnitPrice);
-                    isordered = true;
-                }
-				// SRSalesNumber NVARCHAR(50) 销售工号 
-                if(!string.IsNullOrEmpty(searchModel.SRSalesNumber)) query = query.Where(t=>t.SRSalesNumber.Contains(searchModel.SRSalesNumber));
-                if(sort=="SRSalesNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SRSalesNumber):query.OrderByDescending(t=>t.SRSalesNumber);
-                    isordered = true;
-                }
-				// SRInvoiceNumber NVARCHAR(50) 发票编号 
-                if(!string.IsNullOrEmpty(searchModel.SRInvoiceNumber)) query = query.Where(t=>t.SRInvoiceNumber.Contains(searchModel.SRInvoiceNumber));
-                if(sort=="SRInvoiceNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SRInvoiceNumber):query.OrderByDescending(t=>t.SRInvoiceNumber);
-                    isordered = true;
-                }
-				// SRInvoicesAreRaised NVARCHAR(50) 发票抬头 
-                if(!string.IsNullOrEmpty(searchModel.SRInvoicesAreRaised)) query = query.Where(t=>t.SRInvoicesAreRaised.Contains(searchModel.SRInvoicesAreRaised));
-                if(sort=="SRInvoicesAreRaised")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SRInvoicesAreRaised):query.OrderByDescending(t=>t.SRInvoicesAreRaised);
-                    isordered = true;
-                }
-				// SRDutyParagraph NVARCHAR(50) 税号 
-                if(!string.IsNullOrEmpty(searchModel.SRDutyParagraph)) query = query.Where(t=>t.SRDutyParagraph.Contains(searchModel.SRDutyParagraph));
-                if(sort=="SRDutyParagraph")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SRDutyParagraph):query.OrderByDescending(t=>t.SRDutyParagraph);
-                    isordered = true;
-                }
-				// SRRemarks NVARCHAR(50) 备注 
-                if(!string.IsNullOrEmpty(searchModel.SRRemarks)) query = query.Where(t=>t.SRRemarks.Contains(searchModel.SRRemarks));
-                if(sort=="SRRemarks")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.SRRemarks):query.OrderByDescending(t=>t.SRRemarks);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1||t.SRSalesLotNumber.Contains(search)||t.SRTypeOfGoods.Contains(search)||t.SRAmount.Contains(search)||t.SRUnitPrice.Contains(search)||t.SRSalesNumber.Contains(search)||t.SRInvoiceNumber.Contains(search)||t.SRInvoicesAreRaised.Contains(search)||t.SRDutyParagraph.Contains(search)||t.SRRemarks.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<SalesRecord>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };

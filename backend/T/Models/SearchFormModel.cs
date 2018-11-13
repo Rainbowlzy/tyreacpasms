@@ -1,438 +1,19 @@
 ﻿
 
+
+
+
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/11/2018 23:47:31
- * 生成版本：11/11/2018 03:02:13 
+ * 生成时间：11/12/2018 18:00:09
+ * 生成版本：11/12/2018 18:00:02 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 using System;
 
 namespace T.Evaluators 
 {
-    /// <summary>
-    /// 菜单配置 搜索条件实体模型
-    /// </summary>
-    public class MenuConfigurationSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
 
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string MCCaption { get; set; }
-        /// <summary>
-        /// 父级标题
-        /// </summary>
-        public string MCParentTitle { get; set; }
-        /// <summary>
-        /// 链接
-        /// </summary>
-        public string MCLink { get; set; }
-        /// <summary>
-        /// 菜单类型
-        /// </summary>
-        public string MCMenuType { get; set; }
-
-        /// <summary>
-        /// 最小顺序
-        /// </summary>
-        public int? MinMCSequence { get; set; }
-
-        /// <summary>
-        /// 最大顺序
-        /// </summary>
-        public int? MaxMCSequence { get; set; }
-        /// <summary>
-        /// 显示名称
-        /// </summary>
-        public string MCDisplayName { get; set; }
-        /// <summary>
-        /// 图片
-        /// </summary>
-        public string MCPicture { get; set; }
-
-    }
-    /// <summary>
-    /// 角色菜单 搜索条件实体模型
-    /// </summary>
-    public class RoleMenuSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
-        public string RMRoleName { get; set; }
-        /// <summary>
-        /// 菜单标题
-        /// </summary>
-        public string RMMenuTitle { get; set; }
-
-    }
-    /// <summary>
-    /// 用户角色 搜索条件实体模型
-    /// </summary>
-    public class UserRoleSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
-        public string URRoleName { get; set; }
-        /// <summary>
-        /// 登录名
-        /// </summary>
-        public string URLoginName { get; set; }
-
-    }
-    /// <summary>
-    /// 角色配置 搜索条件实体模型
-    /// </summary>
-    public class RoleConfigurationSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 角色名称
-        /// </summary>
-        public string RCRoleName { get; set; }
-        /// <summary>
-        /// 所属组织
-        /// </summary>
-        public string RCAffiliatedOrganization { get; set; }
-
-    }
-    /// <summary>
-    /// 用户信息 搜索条件实体模型
-    /// </summary>
-    public class UserInformationSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 工号
-        /// </summary>
-        public string UIJobNumber { get; set; }
-        /// <summary>
-        /// 登录名
-        /// </summary>
-        public string UILoginName { get; set; }
-        /// <summary>
-        /// 昵称
-        /// </summary>
-        public string UINickname { get; set; }
-        /// <summary>
-        /// 真实姓名
-        /// </summary>
-        public string UIRealName { get; set; }
-        /// <summary>
-        /// 头像
-        /// </summary>
-        public string UIHeadPortrait { get; set; }
-        /// <summary>
-        /// 部门
-        /// </summary>
-        public string UIDepartment { get; set; }
-        /// <summary>
-        /// 职位
-        /// </summary>
-        public string UIPost { get; set; }
-        /// <summary>
-        /// 电话
-        /// </summary>
-        public string UIBooth { get; set; }
-        /// <summary>
-        /// 照片
-        /// </summary>
-        public string UIPhoto { get; set; }
-        /// <summary>
-        /// 用户类型
-        /// </summary>
-        public string UICustomerType { get; set; }
-        /// <summary>
-        /// 用户级别
-        /// </summary>
-        public string UIUserLevel { get; set; }
-
-        /// <summary>
-        /// 开始入职时间
-        /// </summary>
-        public DateTime? FromUITimeOfEntry { get; set; }
-
-        /// <summary>
-        /// 结束入职时间
-        /// </summary>
-        public DateTime? ToUITimeOfEntry { get; set; }
-
-        /// <summary>
-        /// 开始离职时间
-        /// </summary>
-        public DateTime? FromUIDepartureTime { get; set; }
-
-        /// <summary>
-        /// 结束离职时间
-        /// </summary>
-        public DateTime? ToUIDepartureTime { get; set; }
-        /// <summary>
-        /// 密码
-        /// </summary>
-        public string UICode { get; set; }
-
-    }
-    /// <summary>
-    /// 登录记录 搜索条件实体模型
-    /// </summary>
-    public class LogonRecordSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 登录名
-        /// </summary>
-        public string LRLoginName { get; set; }
-
-        /// <summary>
-        /// 开始登录时间
-        /// </summary>
-        public DateTime? FromLRLoginTime { get; set; }
-
-        /// <summary>
-        /// 结束登录时间
-        /// </summary>
-        public DateTime? ToLRLoginTime { get; set; }
-
-    }
-    /// <summary>
-    /// 用户菜单 搜索条件实体模型
-    /// </summary>
-    public class UserMenuSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 登录名
-        /// </summary>
-        public string UMLoginName { get; set; }
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string UMCaption { get; set; }
-
-    }
-    /// <summary>
-    /// 系统配置 搜索条件实体模型
-    /// </summary>
-    public class SystemConfigurationSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 键
-        /// </summary>
-        public string SCKey { get; set; }
-        /// <summary>
-        /// 值
-        /// </summary>
-        public string SCAccrued { get; set; }
-
-    }
-    /// <summary>
-    /// 客户 搜索条件实体模型
-    /// </summary>
-    public class CustomertypeSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 客户编号
-        /// </summary>
-        public string CCustomerNumber { get; set; }
-        /// <summary>
-        /// 姓名
-        /// </summary>
-        public string CName { get; set; }
-        /// <summary>
-        /// 性别
-        /// </summary>
-        public string CChairperson { get; set; }
-        /// <summary>
-        /// 称呼
-        /// </summary>
-        public string CCall { get; set; }
-        /// <summary>
-        /// 联系方式
-        /// </summary>
-        public string CCommonModeOfContact { get; set; }
-        /// <summary>
-        /// 地址
-        /// </summary>
-        public string CAddress { get; set; }
-
-    }
     /// <summary>
     /// 供应商 搜索条件实体模型
     /// </summary>
@@ -458,297 +39,44 @@ namespace T.Evaluators
         /// </summary>
 		public string Sort { get; set; }
 
+
+
+
         /// <summary>
-        /// 供应商编号
+        /// 最小供应商编号
         /// </summary>
-        public string SSupplierNumber { get; set; }
+        public int? MinSSupplierNumber { get; set; }
+
+        /// <summary>
+        /// 最大供应商编号
+        /// </summary>
+        public int? MaxSSupplierNumber { get; set; }
+
+
+
         /// <summary>
         /// 供应商名称
         /// </summary>
         public string SSupplierName { get; set; }
+
+
+
         /// <summary>
         /// 联系方式
         /// </summary>
         public string SCommonModeOfContact { get; set; }
+
+
+
         /// <summary>
         /// 办公地点
         /// </summary>
         public string SOfficeLocation { get; set; }
-        /// <summary>
-        /// 经营范围
-        /// </summary>
-        public string SScopeOfOperation { get; set; }
+
+
 
     }
-    /// <summary>
-    /// 货物种类 搜索条件实体模型
-    /// </summary>
-    public class TypeOfGoodsSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
 
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 货品种类编号
-        /// </summary>
-        public string TOGCategoryNumberOfGoods { get; set; }
-        /// <summary>
-        /// 货物名称
-        /// </summary>
-        public string TOGNameOfGoods { get; set; }
-        /// <summary>
-        /// 货物类别
-        /// </summary>
-        public string TOGCategoryOfGoods { get; set; }
-        /// <summary>
-        /// 货物子类别
-        /// </summary>
-        public string TOGCargoSubcategory { get; set; }
-        /// <summary>
-        /// 体积
-        /// </summary>
-        public string TOGBulk { get; set; }
-        /// <summary>
-        /// 颜色
-        /// </summary>
-        public string TOGColor { get; set; }
-        /// <summary>
-        /// 型号
-        /// </summary>
-        public string TOGModel { get; set; }
-        /// <summary>
-        /// 别称
-        /// </summary>
-        public string TOGAlias { get; set; }
-        /// <summary>
-        /// 采购单价
-        /// </summary>
-        public string TOGPurchaseUnitPrice { get; set; }
-        /// <summary>
-        /// 销售单价
-        /// </summary>
-        public string TOGSalesUnitPrice { get; set; }
-
-    }
-    /// <summary>
-    /// 供货渠道 搜索条件实体模型
-    /// </summary>
-    public class SupplyChannelSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 供应商
-        /// </summary>
-        public string SCSupplier { get; set; }
-        /// <summary>
-        /// 货物种类
-        /// </summary>
-        public string SCTypeOfGoods { get; set; }
-
-    }
-    /// <summary>
-    /// 订单 搜索条件实体模型
-    /// </summary>
-    public class OrderSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 订单编号
-        /// </summary>
-        public string OOrderNumber { get; set; }
-        /// <summary>
-        /// 供应商编号
-        /// </summary>
-        public string OSupplierNumber { get; set; }
-
-        /// <summary>
-        /// 开始期望到达日期
-        /// </summary>
-        public DateTime? FromOExpectedArrivalDate { get; set; }
-
-        /// <summary>
-        /// 结束期望到达日期
-        /// </summary>
-        public DateTime? ToOExpectedArrivalDate { get; set; }
-
-        /// <summary>
-        /// 开始提交日期
-        /// </summary>
-        public DateTime? FromODateOfSubmission { get; set; }
-
-        /// <summary>
-        /// 结束提交日期
-        /// </summary>
-        public DateTime? ToODateOfSubmission { get; set; }
-        /// <summary>
-        /// 提交人
-        /// </summary>
-        public string OSubmitter { get; set; }
-        /// <summary>
-        /// 提交人联系方式
-        /// </summary>
-        public string OAuthorsContactInformation { get; set; }
-        /// <summary>
-        /// 订单状态
-        /// </summary>
-        public string OOrderStatus { get; set; }
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string ORemarks { get; set; }
-
-    }
-    /// <summary>
-    /// 订单明细 搜索条件实体模型
-    /// </summary>
-    public class OrderDetailsSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 订单编号
-        /// </summary>
-        public string ODOrderNumber { get; set; }
-        /// <summary>
-        /// 货物种类
-        /// </summary>
-        public string ODTypeOfGoods { get; set; }
-        /// <summary>
-        /// 货物数量
-        /// </summary>
-        public string ODQuantityOfGoods { get; set; }
-        /// <summary>
-        /// 采购单价
-        /// </summary>
-        public string ODPurchaseUnitPrice { get; set; }
-
-    }
-    /// <summary>
-    /// 入库记录 搜索条件实体模型
-    /// </summary>
-    public class WarehousingRecordSearchModel
-    {
-        /// <summary>
-        /// 每页记录数量
-        /// </summary>
-		public int PageSize { get; set; } = 5;
-		
-        /// <summary>
-        /// 页码
-        /// </summary>
-		public int PageIndex { get; set; } = 0;
-		
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-		public string SearchKey { get; set; }
-
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-		public string Sort { get; set; }
-
-        /// <summary>
-        /// 订单编号
-        /// </summary>
-        public string WROrderNumber { get; set; }
-
-        /// <summary>
-        /// 开始到货日期
-        /// </summary>
-        public DateTime? FromWRDateOfArrival { get; set; }
-
-        /// <summary>
-        /// 结束到货日期
-        /// </summary>
-        public DateTime? ToWRDateOfArrival { get; set; }
-        /// <summary>
-        /// 经办人
-        /// </summary>
-        public string WRAgent { get; set; }
-        /// <summary>
-        /// 经办人联系方式
-        /// </summary>
-        public string WROperatorContact { get; set; }
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string WRRemarks { get; set; }
-
-    }
     /// <summary>
     /// 仓库 搜索条件实体模型
     /// </summary>
@@ -774,24 +102,155 @@ namespace T.Evaluators
         /// </summary>
 		public string Sort { get; set; }
 
+
+
+
         /// <summary>
-        /// 仓库编号
+        /// 最小仓库编号
         /// </summary>
-        public string WWarehouseNumber { get; set; }
+        public int? MinWWarehouseNumber { get; set; }
+
         /// <summary>
-        /// 容积
+        /// 最大仓库编号
+        /// </summary>
+        public int? MaxWWarehouseNumber { get; set; }
+
+
+
+        /// <summary>
+        /// 容量
         /// </summary>
         public string WCapacity { get; set; }
+
+
+
         /// <summary>
-        /// 位置
+        /// 地点
         /// </summary>
-        public string WLocation { get; set; }
+        public string WLocality { get; set; }
+
+
+
+
         /// <summary>
-        /// 负责人工号
+        /// 最小负责人工号
         /// </summary>
-        public string WResponsibleForManualNumber { get; set; }
+        public int? MinWResponsibleForManualNumber { get; set; }
+
+        /// <summary>
+        /// 最大负责人工号
+        /// </summary>
+        public int? MaxWResponsibleForManualNumber { get; set; }
+
+
 
     }
+
+    /// <summary>
+    /// 客户 搜索条件实体模型
+    /// </summary>
+    public class CustomertypeSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小客户编号
+        /// </summary>
+        public int? MinCCustomerNumber { get; set; }
+
+        /// <summary>
+        /// 最大客户编号
+        /// </summary>
+        public int? MaxCCustomerNumber { get; set; }
+
+
+
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        public string CName { get; set; }
+
+
+
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string CCommonModeOfContact { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 货物 搜索条件实体模型
+    /// </summary>
+    public class CargoSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小货物编号
+        /// </summary>
+        public int? MinCCargoNumber { get; set; }
+
+        /// <summary>
+        /// 最大货物编号
+        /// </summary>
+        public int? MaxCCargoNumber { get; set; }
+
+
+
+        /// <summary>
+        /// 货物名称
+        /// </summary>
+        public string CNameOfGoods { get; set; }
+
+
+
+    }
+
     /// <summary>
     /// 货架 搜索条件实体模型
     /// </summary>
@@ -817,26 +276,496 @@ namespace T.Evaluators
         /// </summary>
 		public string Sort { get; set; }
 
+
+
+
         /// <summary>
-        /// 货架编号
+        /// 最小货架编号
         /// </summary>
-        public string GSShelfNumber { get; set; }
+        public int? MinGSShelfNumber { get; set; }
+
         /// <summary>
-        /// 容积 
+        /// 最大货架编号
         /// </summary>
-        public string GSVolume { get; set; }
+        public int? MaxGSShelfNumber { get; set; }
+
+
+
         /// <summary>
-        /// 位置
+        /// 容量
         /// </summary>
-        public string GSLocation { get; set; }
+        public string GSCapacity { get; set; }
+
+
+
         /// <summary>
-        /// 负责人工号
+        /// 地点
         /// </summary>
-        public string GSResponsibleForManualNumber { get; set; }
+        public string GSLocality { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小负责人工号
+        /// </summary>
+        public int? MinGSResponsibleForManualNumber { get; set; }
+
+        /// <summary>
+        /// 最大负责人工号
+        /// </summary>
+        public int? MaxGSResponsibleForManualNumber { get; set; }
+
+
 
     }
+
     /// <summary>
-    /// 补货申请单 搜索条件实体模型
+    /// 员工 搜索条件实体模型
+    /// </summary>
+    public class StaffnameSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小工号
+        /// </summary>
+        public int? MinSJobNumber { get; set; }
+
+        /// <summary>
+        /// 最大工号
+        /// </summary>
+        public int? MaxSJobNumber { get; set; }
+
+
+
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        public string SName { get; set; }
+
+
+
+        /// <summary>
+        /// 学历
+        /// </summary>
+        public string SEducation { get; set; }
+
+
+
+        /// <summary>
+        /// 联系方式
+        /// </summary>
+        public string SCommonModeOfContact { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 采购 搜索条件实体模型
+    /// </summary>
+    public class ProcureSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小供应商编号
+        /// </summary>
+        public int? MinPSupplierNumber { get; set; }
+
+        /// <summary>
+        /// 最大供应商编号
+        /// </summary>
+        public int? MaxPSupplierNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小货物编号
+        /// </summary>
+        public int? MinPCargoNumber { get; set; }
+
+        /// <summary>
+        /// 最大货物编号
+        /// </summary>
+        public int? MaxPCargoNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小采购员工号
+        /// </summary>
+        public int? MinPPurchasingStaffNumber { get; set; }
+
+        /// <summary>
+        /// 最大采购员工号
+        /// </summary>
+        public int? MaxPPurchasingStaffNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        public DateTime? FromPDate { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        public DateTime? ToPDate { get; set; }
+
+
+
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public string PAmount { get; set; }
+
+
+
+        /// <summary>
+        /// 价格
+        /// </summary>
+        public string PPrice { get; set; }
+
+
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string PRemarks { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 销售 搜索条件实体模型
+    /// </summary>
+    public class SalesSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小货物编号
+        /// </summary>
+        public int? MinSCargoNumber { get; set; }
+
+        /// <summary>
+        /// 最大货物编号
+        /// </summary>
+        public int? MaxSCargoNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小客户编号
+        /// </summary>
+        public int? MinSCustomerNumber { get; set; }
+
+        /// <summary>
+        /// 最大客户编号
+        /// </summary>
+        public int? MaxSCustomerNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小销售员工号
+        /// </summary>
+        public int? MinSSalesStaffNumber { get; set; }
+
+        /// <summary>
+        /// 最大销售员工号
+        /// </summary>
+        public int? MaxSSalesStaffNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        public DateTime? FromSDate { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        public DateTime? ToSDate { get; set; }
+
+
+
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public string SAmount { get; set; }
+
+
+
+        /// <summary>
+        /// 价格
+        /// </summary>
+        public string SPrice { get; set; }
+
+
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string SRemarks { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 供应 搜索条件实体模型
+    /// </summary>
+    public class FurnishSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小供应商编号
+        /// </summary>
+        public int? MinFSupplierNumber { get; set; }
+
+        /// <summary>
+        /// 最大供应商编号
+        /// </summary>
+        public int? MaxFSupplierNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小货物编号
+        /// </summary>
+        public int? MinFCargoNumber { get; set; }
+
+        /// <summary>
+        /// 最大货物编号
+        /// </summary>
+        public int? MaxFCargoNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        public DateTime? FromFDate { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        public DateTime? ToFDate { get; set; }
+
+
+
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public string FAmount { get; set; }
+
+
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string FRemarks { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 入库 搜索条件实体模型
+    /// </summary>
+    public class WarehousingRecordSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小仓库编号
+        /// </summary>
+        public int? MinWRWarehouseNumber { get; set; }
+
+        /// <summary>
+        /// 最大仓库编号
+        /// </summary>
+        public int? MaxWRWarehouseNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小货物编号
+        /// </summary>
+        public int? MinWRCargoNumber { get; set; }
+
+        /// <summary>
+        /// 最大货物编号
+        /// </summary>
+        public int? MaxWRCargoNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小仓库管理员工号
+        /// </summary>
+        public int? MinWRWarehouseManagementStaffNumber { get; set; }
+
+        /// <summary>
+        /// 最大仓库管理员工号
+        /// </summary>
+        public int? MaxWRWarehouseManagementStaffNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        public DateTime? FromWRDate { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        public DateTime? ToWRDate { get; set; }
+
+
+
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public string WRAmount { get; set; }
+
+
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string WRRemarks { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 补货 搜索条件实体模型
     /// </summary>
     public class ReplenishmentApplicationFormSearchModel
     {
@@ -860,54 +789,80 @@ namespace T.Evaluators
         /// </summary>
 		public string Sort { get; set; }
 
-        /// <summary>
-        /// 申请单编号
-        /// </summary>
-        public string RAFApplicationNumber { get; set; }
-        /// <summary>
-        /// 货架编号
-        /// </summary>
-        public string RAFShelfNumber { get; set; }
-        /// <summary>
-        /// 仓库编号
-        /// </summary>
-        public string RAFWarehouseNumber { get; set; }
-        /// <summary>
-        /// 申请人工号
-        /// </summary>
-        public string RAFApplicationManualNumber { get; set; }
-        /// <summary>
-        /// 货品种类编号
-        /// </summary>
-        public string RAFCategoryNumberOfGoods { get; set; }
-        /// <summary>
-        /// 货品数量
-        /// </summary>
-        public string RAFQuantityOfGoods { get; set; }
+
+
 
         /// <summary>
-        /// 开始申请日期
+        /// 最小货架编号
         /// </summary>
-        public DateTime? FromRAFApplicationDate { get; set; }
+        public int? MinRAFShelfNumber { get; set; }
 
         /// <summary>
-        /// 结束申请日期
+        /// 最大货架编号
         /// </summary>
-        public DateTime? ToRAFApplicationDate { get; set; }
+        public int? MaxRAFShelfNumber { get; set; }
+
+
+
+
         /// <summary>
-        /// 申请单状态
+        /// 最小货物编号
         /// </summary>
-        public string RAFApplicationStatus { get; set; }
+        public int? MinRAFCargoNumber { get; set; }
+
+        /// <summary>
+        /// 最大货物编号
+        /// </summary>
+        public int? MaxRAFCargoNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小仓库管理员工号
+        /// </summary>
+        public int? MinRAFWarehouseManagementStaffNumber { get; set; }
+
+        /// <summary>
+        /// 最大仓库管理员工号
+        /// </summary>
+        public int? MaxRAFWarehouseManagementStaffNumber { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始日期
+        /// </summary>
+        public DateTime? FromRAFDate { get; set; }
+
+        /// <summary>
+        /// 结束日期
+        /// </summary>
+        public DateTime? ToRAFDate { get; set; }
+
+
+
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public string RAFAmount { get; set; }
+
+
+
         /// <summary>
         /// 备注
         /// </summary>
         public string RAFRemarks { get; set; }
 
+
+
     }
+
     /// <summary>
-    /// 补货记录 搜索条件实体模型
+    /// 菜单配置 搜索条件实体模型
     /// </summary>
-    public class ReplenishmentRecordSearchModel
+    public class MenuConfigurationSearchModel
     {
         /// <summary>
         /// 每页记录数量
@@ -929,30 +884,69 @@ namespace T.Evaluators
         /// </summary>
 		public string Sort { get; set; }
 
-        /// <summary>
-        /// 申请单编号
-        /// </summary>
-        public string RRApplicationNumber { get; set; }
+
 
         /// <summary>
-        /// 开始到货日期
+        /// 标题
         /// </summary>
-        public DateTime? FromRRDateOfArrival { get; set; }
+        public string MCCaption { get; set; }
+
+
 
         /// <summary>
-        /// 结束到货日期
+        /// 父级标题
         /// </summary>
-        public DateTime? ToRRDateOfArrival { get; set; }
+        public string MCParentTitle { get; set; }
+
+
+
         /// <summary>
-        /// 备注
+        /// 链接
         /// </summary>
-        public string RRRemarks { get; set; }
+        public string MCLink { get; set; }
+
+
+
+        /// <summary>
+        /// 菜单类型
+        /// </summary>
+        public string MCMenuType { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小顺序
+        /// </summary>
+        public int? MinMCSequence { get; set; }
+
+        /// <summary>
+        /// 最大顺序
+        /// </summary>
+        public int? MaxMCSequence { get; set; }
+
+
+
+        /// <summary>
+        /// 显示名称
+        /// </summary>
+        public string MCDisplayName { get; set; }
+
+
+
+        /// <summary>
+        /// 图片
+        /// </summary>
+        public string MCPicture { get; set; }
+
+
 
     }
+
     /// <summary>
-    /// 销售记录 搜索条件实体模型
+    /// 角色菜单 搜索条件实体模型
     /// </summary>
-    public class SalesRecordSearchModel
+    public class RoleMenuSearchModel
     {
         /// <summary>
         /// 每页记录数量
@@ -974,42 +968,388 @@ namespace T.Evaluators
         /// </summary>
 		public string Sort { get; set; }
 
+
+
         /// <summary>
-        /// 销售批次号
+        /// 角色名称
         /// </summary>
-        public string SRSalesLotNumber { get; set; }
+        public string RMRoleName { get; set; }
+
+
+
         /// <summary>
-        /// 货物种类
+        /// 菜单标题
         /// </summary>
-        public string SRTypeOfGoods { get; set; }
-        /// <summary>
-        /// 数量
-        /// </summary>
-        public string SRAmount { get; set; }
-        /// <summary>
-        /// 单价
-        /// </summary>
-        public string SRUnitPrice { get; set; }
-        /// <summary>
-        /// 销售工号
-        /// </summary>
-        public string SRSalesNumber { get; set; }
-        /// <summary>
-        /// 发票编号
-        /// </summary>
-        public string SRInvoiceNumber { get; set; }
-        /// <summary>
-        /// 发票抬头
-        /// </summary>
-        public string SRInvoicesAreRaised { get; set; }
-        /// <summary>
-        /// 税号
-        /// </summary>
-        public string SRDutyParagraph { get; set; }
-        /// <summary>
-        /// 备注
-        /// </summary>
-        public string SRRemarks { get; set; }
+        public string RMMenuTitle { get; set; }
+
+
 
     }
+
+    /// <summary>
+    /// 用户角色 搜索条件实体模型
+    /// </summary>
+    public class UserRoleSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string URRoleName { get; set; }
+
+
+
+        /// <summary>
+        /// 登录名
+        /// </summary>
+        public string URLoginName { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 角色配置 搜索条件实体模型
+    /// </summary>
+    public class RoleConfigurationSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string RCRoleName { get; set; }
+
+
+
+        /// <summary>
+        /// 所属组织
+        /// </summary>
+        public string RCAffiliatedOrganization { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 用户信息 搜索条件实体模型
+    /// </summary>
+    public class UserInformationSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+
+        /// <summary>
+        /// 最小工号
+        /// </summary>
+        public int? MinUIJobNumber { get; set; }
+
+        /// <summary>
+        /// 最大工号
+        /// </summary>
+        public int? MaxUIJobNumber { get; set; }
+
+
+
+        /// <summary>
+        /// 登录名
+        /// </summary>
+        public string UILoginName { get; set; }
+
+
+
+        /// <summary>
+        /// 昵称
+        /// </summary>
+        public string UINickname { get; set; }
+
+
+
+        /// <summary>
+        /// 真实姓名
+        /// </summary>
+        public string UIRealName { get; set; }
+
+
+
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string UIHeadPortrait { get; set; }
+
+
+
+        /// <summary>
+        /// 部门
+        /// </summary>
+        public string UIDepartment { get; set; }
+
+
+
+        /// <summary>
+        /// 职位
+        /// </summary>
+        public string UIPost { get; set; }
+
+
+
+        /// <summary>
+        /// 电话
+        /// </summary>
+        public string UIBooth { get; set; }
+
+
+
+        /// <summary>
+        /// 照片
+        /// </summary>
+        public string UIPhoto { get; set; }
+
+
+
+        /// <summary>
+        /// 用户类型
+        /// </summary>
+        public string UICustomerType { get; set; }
+
+
+
+        /// <summary>
+        /// 用户级别
+        /// </summary>
+        public string UIUserLevel { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始入职时间
+        /// </summary>
+        public DateTime? FromUITimeOfEntry { get; set; }
+
+        /// <summary>
+        /// 结束入职时间
+        /// </summary>
+        public DateTime? ToUITimeOfEntry { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始离职时间
+        /// </summary>
+        public DateTime? FromUIDepartureTime { get; set; }
+
+        /// <summary>
+        /// 结束离职时间
+        /// </summary>
+        public DateTime? ToUIDepartureTime { get; set; }
+
+
+
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string UICode { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 登录记录 搜索条件实体模型
+    /// </summary>
+    public class LogonRecordSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 登录名
+        /// </summary>
+        public string LRLoginName { get; set; }
+
+
+
+
+        /// <summary>
+        /// 开始登录时间
+        /// </summary>
+        public DateTime? FromLRLoginTime { get; set; }
+
+        /// <summary>
+        /// 结束登录时间
+        /// </summary>
+        public DateTime? ToLRLoginTime { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 用户菜单 搜索条件实体模型
+    /// </summary>
+    public class UserMenuSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 登录名
+        /// </summary>
+        public string UMLoginName { get; set; }
+
+
+
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string UMCaption { get; set; }
+
+
+
+    }
+
+    /// <summary>
+    /// 系统配置 搜索条件实体模型
+    /// </summary>
+    public class SystemConfigurationSearchModel
+    {
+        /// <summary>
+        /// 每页记录数量
+        /// </summary>
+		public int PageSize { get; set; } = 5;
+		
+        /// <summary>
+        /// 页码
+        /// </summary>
+		public int PageIndex { get; set; } = 0;
+		
+        /// <summary>
+        /// 搜索关键字
+        /// </summary>
+		public string SearchKey { get; set; }
+
+        /// <summary>
+        /// 排序字段
+        /// </summary>
+		public string Sort { get; set; }
+
+
+
+        /// <summary>
+        /// 键
+        /// </summary>
+        public string SCKey { get; set; }
+
+
+
+        /// <summary>
+        /// 值
+        /// </summary>
+        public string SCAccrued { get; set; }
+
+
+
+    }
+
 }

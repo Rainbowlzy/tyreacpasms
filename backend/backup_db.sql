@@ -5,7 +5,7 @@ SELECT  @total = COUNT(1)
 FROM    sys.databases
 WHERE name NOT IN('tempdb','master','model','msdb');
 
-DECLARE c_cursor CURSOR GLOBAL FOR SELECT 'backup database ['+name+'] to disk=''E:\db_back\'+name+'_'+REPLACE(SYSTEM_USER,'\','_')+'_'+convert(varchar, getdate(), 112)+'.bak''' FROM sys.databases WHERE name NOT IN('tempdb','master','model','msdb');
+DECLARE c_cursor CURSOR GLOBAL FOR SELECT 'backup database ['+name+'] to disk=''D:\db_back\'+name+'_'+REPLACE(SYSTEM_USER,'\','_')+'_'+convert(varchar, getdate(), 112)+'.bak''' FROM sys.databases WHERE name NOT IN('tempdb','master','model','msdb');
 
 OPEN c_cursor
 

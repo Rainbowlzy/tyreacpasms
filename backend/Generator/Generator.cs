@@ -129,7 +129,12 @@ namespace Generator
             }
             using (var ctx = new GeneratorContext())
             {
-                if (ctx.TableSchema.Any()) return;
+                if (ctx.TableSchema.Any())
+                {
+                    ctx.V_Column.RemoveRange(ctx.V_Column);
+                    ctx.TableSchema.RemoveRange(ctx.TableSchema);
+                    ctx.SaveChanges();
+                }
                 ctx.TableSchema.AddRange(table_schema2.Values.ToList());
                 ctx.SaveChanges();
             }
@@ -207,7 +212,7 @@ namespace Generator
             var mapping = new
             {
                 nvarchar = @"(图片)|(照片)|(上传)|(摘要)|(备注)|(报告)|(头像)|(内容)|(标题)|(地址)|(企业名称)|(身份证)|(链接)|(理由)|(原因)|(说明)",
-                @int = @"(id)|(年龄)|(顺序)|(排序)",
+                @int = @"(id)|(年龄)|(顺序)|(排序)|(工号)|(编号)",
                 @decimal = @"小数",
                 @real = @"面积",
                 money = @"(金额)|(\w*租金)",
