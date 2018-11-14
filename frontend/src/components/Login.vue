@@ -59,7 +59,7 @@ export default {
     login: function() {
       let vm = this;
       this.$http
-        .get("http://localhost/tyreacpasms/DefaultHandler.ashx", {
+        .get("http://122.193.9.83/tyreacpasms/DefaultHandler.ashx", {
           params: {
             method: "login",
             data: JSON.stringify(this.user)

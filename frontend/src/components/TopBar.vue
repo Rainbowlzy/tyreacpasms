@@ -45,7 +45,7 @@ export default {
   mounted: function() {
     this.$http
       .get(
-        "http://localhost/tyreacpasms/DefaultHandler.ashx?method=GetMenuConfigurationByAuth"
+        "http://122.193.9.83/tyreacpasms/DefaultHandler.ashx?method=GetMenuConfigurationByAuth"
       )
       .then(function(response) {
         if (!response.data.success) {

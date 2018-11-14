@@ -417,7 +417,7 @@ namespace T.Evaluators
         protected object Redirect(string method)
         {
             Request.method = method;
-            var evaluator = Make(Request);
+            var evaluator = Build(Request);
             return evaluator.Eval(Request);
         }
 
@@ -431,7 +431,7 @@ namespace T.Evaluators
 
         public static UserInformation GetUser(string auth_user)
         {
-            return (Make(new CommonRequest
+            return (Build(new CommonRequest
             {
                 method = nameof(GetUserInformationListEvaluator),
                 auth = auth_user,
@@ -443,7 +443,7 @@ namespace T.Evaluators
         /// </summary>
         /// <param name="request">待处理数据</param>
         /// <returns>处理机</returns>
-        public static IEvaluator Make(CommonRequest request)
+        public static IEvaluator Build(CommonRequest request)
         {
             var method = request.method.ToLower().Trim();
             if (string.IsNullOrEmpty(method))

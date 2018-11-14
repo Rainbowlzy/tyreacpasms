@@ -19,6 +19,7 @@
                         </b-input-group-append>
                     </b-input-group>
                 </b-form-group>
+                <h4 class="col-xs-6" style="line-height:30px;height:30px;">共找到 {{total}} 条记录，当前第 {{pageIndex}} 页，每页 {{pageSize>total?total:pageSize}} 条</h4>
             </div>
             <b-table ref="myTable" @filtered="onFiltered" :filter="filter" hover striped id="my-table" :per-page="pageSize" :current-page="pageIndex" :items="myProviderCallback" :fields="fields">
                 <template slot="操作" slot-scope="row">
@@ -37,10 +38,20 @@
             </b-row>
         </div>
     </div>
+
     <b-modal ref="editmodal" id="editmodal" :no-fade="true" size="lg" hide-footer :title="'编辑'+table_name_ch">
-        <b-form @submit="onSubmit" @reset="onReset" v-if="current!==null">
+        <b-form @submit="onSubmitEdit" @reset="onReset" v-if="current!==null">
             <b-form-group v-for="col in columns" :key="col.id" :id="'label'+col.column_name" :label="col.column_description" :label-for="col.column_name">
                 <b-form-input type="text" v-model="current.item[col.column_name]" :placeholder="'请输入'+col.column_description">
+                </b-form-input>
+            </b-form-group>
+            <b-button type="submit" variant="primary">保存</b-button>
+        </b-form>
+    </b-modal>
+    <b-modal ref="newmodal" id="newmodal" :no-fade="true" size="lg" hide-footer :title="'新增'+table_name_ch">
+        <b-form @submit="onSubmitNew" @reset="onReset">
+            <b-form-group :id="'label'+col.column_name+'new'" v-for="col in columns" :key="col.id" :label="col.column_description" :label-for="'new'+col.column_name">
+                <b-form-input :id="'new'+col.column_name" v-model="newOne[col.column_name]" type="text" :placeholder="'请输入'+col.column_description">
                 </b-form-input>
             </b-form-group>
             <b-button type="submit" variant="primary">保存</b-button>
@@ -53,15 +64,7 @@
         <b-btn v-b-modal.delconfirm variant="outline-primary">撤销</b-btn>
     </b-modal>
 
-    <b-modal ref="newmodal" id="newmodal" :no-fade="true" size="lg" hide-footer :title="'新增'+table_name_ch">
-        <b-form @submit="onSubmit" @reset="onReset">
-            <b-form-group :id="'label'+col.column_name+'new'" v-for="col in columns" :key="col.id" :label="col.column_description" :label-for="'new'+col.column_name">
-                <b-form-input :id="'new'+col.column_name" v-model="newOne[col.column_name]" type="text" :placeholder="'请输入'+col.column_description">
-                </b-form-input>
-            </b-form-group>
-            <b-button type="submit" variant="primary">保存</b-button>
-        </b-form>
-    </b-modal>
+
 </div>
 </template>
 
@@ -120,13 +123,41 @@ export default {
             this.totalRows = filteredItems.length;
             this.currentPage = 1;
         },
-        onSubmit(evt) {
+        onSubmitNew(evt) {
+            let vm = this,
+                caption = vm.$route.params.mccaption;
+            evt.preventDefault();
+            if (this.$data.currentOne) {
+                Axios({
+                    url: `http://122.193.9.83/tyreacpasms/DefaultHandler.ashx`,
+                    params: {
+                        method: `save${caption}`,
+                        data: encodeURIComponent(JSON.stringify(this.$data.currentOne))
+                    },
+                    credentials: true
+                }).then(data => {
+                    let resp = data.data,
+                        {
+                            success,
+                            message
+                        } = resp;
+                    if (!success) {
+                        vm.error(message);
+                    } else {
+                        vm.success("保存成功");
+                        vm.$refs.myTable.refresh();
+                        vm.$refs.newmodal.hide();
+                    }
+                });
+            }
+        },
+        onSubmitEdit(evt) {
             let vm = this,
                 caption = vm.$route.params.mccaption;
             evt.preventDefault();
             if (this.$data.current) {
                 Axios({
-                    url: `http://localhost/tyreacpasms/DefaultHandler.ashx`,
+                    url: `http://122.193.9.83/tyreacpasms/DefaultHandler.ashx`,
                     params: {
                         method: `save${caption}`,
                         data: encodeURIComponent(JSON.stringify(this.$data.current.item))
@@ -146,29 +177,7 @@ export default {
                         vm.$refs.editmodal.hide();
                     }
                 });
-            } else if (this.$data.currentOne) {
-                Axios({
-                    url: `http://localhost/tyreacpasms/DefaultHandler.ashx`,
-                    params: {
-                        method: `save${caption}`,
-                        data: encodeURIComponent(JSON.stringify(this.$data.currentOne))
-                    },
-                    credentials: true
-                }).then(data => {
-                    let resp = data.data,
-                        {
-                            success,
-                            message
-                        } = resp;
-                    if (!success) {
-                        vm.error(message);
-                    } else {
-                        vm.success("保存成功");
-                        vm.$refs.myTable.refresh();
-                        vm.$refs.editmodal.hide();
-                    }
-                });
-            }
+            } 
         },
         onReset(evt) {
             // evt.preventDefault();
@@ -199,7 +208,7 @@ export default {
                 ),
                 token = this.$store.state.user.token;
             Axios({
-                    url: `http://localhost/tyreacpasms/DefaultHandler.ashx`,
+                    url: `http://122.193.9.83/tyreacpasms/DefaultHandler.ashx`,
                     params: {
                         method: `delete${caption}`,
                         data: data_to_post
@@ -231,7 +240,7 @@ export default {
                 caption = this.$route.params.mccaption,
                 token = this.$store.state.user.token,
                 result = Axios({
-                    url: `http://localhost/tyreacpasms/DefaultHandler.ashx`,
+                    url: `http://122.193.9.83/tyreacpasms/DefaultHandler.ashx`,
                     params: {
                         method: `get${caption}list`,
                         auth_user: token,

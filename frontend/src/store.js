@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import Axios from "axios";
 
 Vue.use(Vuex);
-const baseUrl = "http://localhost/tyreacpasms/DefaultHandler.ashx";
+const baseUrl = "http://122.193.9.83/tyreacpasms/DefaultHandler.ashx";
 
 export default new Vuex.Store({
   //   strict: true,

@@ -25,14 +25,14 @@
                 var len = colorlist.length;
                 var idx = (parseInt(rd + rd % 2) % len);
                 return menu.MCPicture
-                        ? ('http://localhost/' + menu.MCPicture)
-                        : 'http://localhost/tyreacpasms/ImageHandler.ashx?label=' + menu.MCCaption + '&bgcolor1=' + colorlist[idx+1] + '&bgcolor2=' + colorlist[idx] + '&width=200&height=200&icon=' + menu.MCCaption + '.png&shape=trirect&fontSize=16&noshadow=noshadow'
+                        ? ('http://122.193.9.83/' + menu.MCPicture)
+                        : 'http://122.193.9.83/tyreacpasms/ImageHandler.ashx?label=' + menu.MCCaption + '&bgcolor1=' + colorlist[idx+1] + '&bgcolor2=' + colorlist[idx] + '&width=200&height=200&icon=' + menu.MCCaption + '.png&shape=trirect&fontSize=16&noshadow=noshadow'
             },
             parseLink:function(link){
                 return '/pagelist/'+link.replace(/(\/XiangXi\/gen\/)|(List\.html)/g,'');
             },
             flush_menu: function () {
-                this.$http.get('http://localhost/tyreacpasms/DefaultHandler.ashx?method=GetMenuConfigurationByAuth&key=' + this.mccaption).then(function (response) {
+                this.$http.get('http://122.193.9.83/tyreacpasms/DefaultHandler.ashx?method=GetMenuConfigurationByAuth&key=' + this.mccaption).then(function (response) {
                     if (!response.data.success) alert(response.data.message);
                     else {
                         this.$data.menu_list = response.data.topmenu;

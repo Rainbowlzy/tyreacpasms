@@ -46,7 +46,7 @@ export default {
     save: function() {
       this.$http
         .get(
-          "http://localhost/tyreacpasms/DefaultHandler.ashx?method=save" +
+          "http://122.193.9.83/tyreacpasms/DefaultHandler.ashx?method=save" +
             this.table_name,
           {
             params: {

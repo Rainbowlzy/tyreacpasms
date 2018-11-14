@@ -22,7 +22,7 @@ namespace T
                 var request = context.Request;
                 var auth_user = request.Params["auth_user"] ?? "非登录用户";
                 if (!string.IsNullOrEmpty(auth_user)) auth_user = auth_user.Split(',').FirstOrDefault();
-                var evaluator = Evaluator.Make(new CommonRequest
+                var evaluator = Evaluator.Build(new CommonRequest
                 {
                     auth = auth_user,
                     method = nameof(GetMenuConfigurationByAuthEvaluator)

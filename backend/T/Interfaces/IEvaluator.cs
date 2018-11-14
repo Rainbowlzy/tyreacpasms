@@ -3,7 +3,7 @@ using T.Models;
 
 namespace T.Interfaces
 {
-    public interface IEvaluator:IDisposable
+    public interface IEvaluator : IDisposable
     {
         /// <summary>
         /// 求值函数
