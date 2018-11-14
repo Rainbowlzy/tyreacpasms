@@ -12,7 +12,6 @@ export default {
   name: "App",
   store,
   mounted: function() {
-    console.log('App mounted');
     if (
       !this.$cookie.get("auth_user") &&
       location.href.indexOf("/login") === -1

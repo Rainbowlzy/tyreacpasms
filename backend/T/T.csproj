@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XiangXi</RootNamespace>
-    <AssemblyName>XiangXi</AssemblyName>
+    <RootNamespace>T</RootNamespace>
+    <AssemblyName>T</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -204,7 +204,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ImportProc.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ECharts\Bar\EChartsBarModel.cs" />
     <Compile Include="Models\CommonOutputT.cs" />
+    <Compile Include="Models\ECharts\Pie\EChartsPieModel.cs" />
     <Compile Include="Models\SearchFormModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -2,9 +2,6 @@ D:\code\tyreacpasms\backend\XiangXi\obj\Debug\T.csprojAssemblyReference.cache
 D:\code\tyreacpasms\backend\XiangXi\obj\Debug\T.csproj.CoreCompileInputs.cache
 D:\code\tyreacpasms\backend\XiangXi\obj\Debug\XiangXi.dll
 D:\code\tyreacpasms\backend\XiangXi\obj\Debug\XiangXi.pdb
-F:\code\tyreacpasms\backend\T\bin\XiangXi.dll.config
-F:\code\tyreacpasms\backend\T\bin\XiangXi.dll
-F:\code\tyreacpasms\backend\T\bin\XiangXi.pdb
 F:\code\tyreacpasms\backend\T\bin\EntityFramework.dll
 F:\code\tyreacpasms\backend\T\bin\EntityFramework.SqlServer.dll
 F:\code\tyreacpasms\backend\T\bin\ICSharpCode.SharpZipLib.dll
@@ -26,9 +23,6 @@ F:\code\tyreacpasms\backend\T\bin\System.Web.Razor.dll
 F:\code\tyreacpasms\backend\T\bin\System.Web.WebPages.Deployment.dll
 F:\code\tyreacpasms\backend\T\bin\System.Web.WebPages.dll
 F:\code\tyreacpasms\backend\T\bin\System.Web.WebPages.Razor.dll
-F:\code\tyreacpasms\backend\T\bin\XiangXiENtities.dll
-F:\code\tyreacpasms\backend\T\bin\XiangXiENtities.pdb
-F:\code\tyreacpasms\backend\T\bin\XiangXiENtities.dll.config
 F:\code\tyreacpasms\backend\T\bin\EntityFramework.xml
 F:\code\tyreacpasms\backend\T\bin\EntityFramework.SqlServer.xml
 F:\code\tyreacpasms\backend\T\bin\Microsoft.Owin.xml
@@ -55,8 +49,6 @@ F:\code\tyreacpasms\backend\T\bin\zh-Hans\System.Web.WebPages.Razor.resources.dl
 F:\code\tyreacpasms\backend\T\obj\Debug\T.csprojAssemblyReference.cache
 F:\code\tyreacpasms\backend\T\obj\Debug\T.csproj.CoreCompileInputs.cache
 F:\code\tyreacpasms\backend\T\obj\Debug\T.csproj.CopyComplete
-F:\code\tyreacpasms\backend\T\obj\Debug\XiangXi.dll
-F:\code\tyreacpasms\backend\T\obj\Debug\XiangXi.pdb
 D:\code\tyreacpasms\backend\T\obj\Debug\T.csprojAssemblyReference.cache
 D:\code\tyreacpasms\backend\T\obj\Debug\T.csproj.CoreCompileInputs.cache
 D:\code\tyreacpasms\backend\T\bin\XiangXi.dll.config
@@ -112,3 +104,11 @@ D:\code\tyreacpasms\backend\T\bin\zh-Hans\System.Web.WebPages.Razor.resources.dl
 D:\code\tyreacpasms\backend\T\obj\Debug\T.csproj.CopyComplete
 D:\code\tyreacpasms\backend\T\obj\Debug\XiangXi.dll
 D:\code\tyreacpasms\backend\T\obj\Debug\XiangXi.pdb
+F:\code\tyreacpasms\backend\T\bin\T.dll.config
+F:\code\tyreacpasms\backend\T\bin\T.dll
+F:\code\tyreacpasms\backend\T\bin\T.pdb
+F:\code\tyreacpasms\backend\T\bin\TEntities.dll
+F:\code\tyreacpasms\backend\T\bin\TEntities.pdb
+F:\code\tyreacpasms\backend\T\bin\TEntities.dll.config
+F:\code\tyreacpasms\backend\T\obj\Debug\T.dll
+F:\code\tyreacpasms\backend\T\obj\Debug\T.pdb

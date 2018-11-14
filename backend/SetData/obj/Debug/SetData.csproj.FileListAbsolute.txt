@@ -49,10 +49,7 @@ F:\code\tyreacpasms\backend\SetData\bin\Debug\SetData.exe
 F:\code\tyreacpasms\backend\SetData\bin\Debug\SetData.pdb
 F:\code\tyreacpasms\backend\SetData\bin\Debug\EntityFramework.dll
 F:\code\tyreacpasms\backend\SetData\bin\Debug\EntityFramework.SqlServer.dll
-F:\code\tyreacpasms\backend\SetData\bin\Debug\XiangXiENtities.dll
 F:\code\tyreacpasms\backend\SetData\bin\Debug\Newtonsoft.Json.dll
-F:\code\tyreacpasms\backend\SetData\bin\Debug\XiangXiENtities.pdb
-F:\code\tyreacpasms\backend\SetData\bin\Debug\XiangXiENtities.dll.config
 F:\code\tyreacpasms\backend\SetData\bin\Debug\EntityFramework.xml
 F:\code\tyreacpasms\backend\SetData\bin\Debug\EntityFramework.SqlServer.xml
 F:\code\tyreacpasms\backend\SetData\bin\Debug\Newtonsoft.Json.xml
@@ -82,3 +79,6 @@ D:\code\tyreacpasms\backend\SetData\obj\Debug\SetData.exe
 D:\code\tyreacpasms\backend\SetData\obj\Debug\SetData.pdb
 D:\code\tyreacpasms\backend\SetData\bin\Debug\Newtonsoft.Json.dll
 D:\code\tyreacpasms\backend\SetData\bin\Debug\Newtonsoft.Json.xml
+F:\code\tyreacpasms\backend\SetData\bin\Debug\TEntities.dll
+F:\code\tyreacpasms\backend\SetData\bin\Debug\TEntities.pdb
+F:\code\tyreacpasms\backend\SetData\bin\Debug\TEntities.dll.config

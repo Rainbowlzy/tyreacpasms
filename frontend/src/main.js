@@ -8,6 +8,7 @@ import BootstrapVue from 'bootstrap-vue'
 import Vuex from 'vuex'
 import store from './store'
 
+
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 Vue.use(VueCookie);
@@ -15,6 +16,7 @@ Vue.use(VueRouter);
 Vue.use(Vuex);
 
 Vue.http.options.emulateJSON = true;
+Vue.config.productionTip = false;
 
 Vue.config.productionTip = false;
 Vue.http.interceptors.push((request, next) => {

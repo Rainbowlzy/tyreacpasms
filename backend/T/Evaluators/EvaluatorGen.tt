@@ -22,8 +22,8 @@ using Validation = Microsoft.Practices.EnterpriseLibrary.Validation.Validation;
 using ValidationResult = Microsoft.Practices.EnterpriseLibrary.Validation.ValidationResult;
 using TENtities.EF;
 using TENtities;
-using EF.Entities;
 using TEntities.EF;
+
 namespace T.Evaluators
 {
 <# 

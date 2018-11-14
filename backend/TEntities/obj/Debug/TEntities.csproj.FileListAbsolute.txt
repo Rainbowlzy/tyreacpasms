@@ -29,9 +29,6 @@ D:\code\tyreacpasms\backend\XiangXiENtities\obj\Debug\TEntities.csproj.CoreCompi
 D:\code\tyreacpasms\backend\XiangXiENtities\obj\Debug\TEntities.csproj.CopyComplete
 D:\code\tyreacpasms\backend\XiangXiENtities\obj\Debug\XiangXiENtities.dll
 D:\code\tyreacpasms\backend\XiangXiENtities\obj\Debug\XiangXiENtities.pdb
-F:\code\tyreacpasms\backend\TEntities\bin\Debug\XiangXiENtities.dll.config
-F:\code\tyreacpasms\backend\TEntities\bin\Debug\XiangXiENtities.dll
-F:\code\tyreacpasms\backend\TEntities\bin\Debug\XiangXiENtities.pdb
 F:\code\tyreacpasms\backend\TEntities\bin\Debug\EntityFramework.dll
 F:\code\tyreacpasms\backend\TEntities\bin\Debug\EntityFramework.SqlServer.dll
 F:\code\tyreacpasms\backend\TEntities\bin\Debug\ICSharpCode.SharpZipLib.dll
@@ -58,8 +55,6 @@ F:\code\tyreacpasms\backend\TEntities\bin\Debug\zh-Hans\EntityFramework.SqlServe
 F:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.csprojAssemblyReference.cache
 F:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.csproj.CoreCompileInputs.cache
 F:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.csproj.CopyComplete
-F:\code\tyreacpasms\backend\TEntities\obj\Debug\XiangXiENtities.dll
-F:\code\tyreacpasms\backend\TEntities\obj\Debug\XiangXiENtities.pdb
 D:\code\tyreacpasms\backend\TEntities\bin\Debug\XiangXiENtities.dll.config
 D:\code\tyreacpasms\backend\TEntities\bin\Debug\XiangXiENtities.dll
 D:\code\tyreacpasms\backend\TEntities\bin\Debug\XiangXiENtities.pdb
@@ -91,3 +86,8 @@ D:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.csproj.CopyComplete
 D:\code\tyreacpasms\backend\TEntities\obj\Debug\XiangXiENtities.dll
 D:\code\tyreacpasms\backend\TEntities\obj\Debug\XiangXiENtities.pdb
 D:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.csprojAssemblyReference.cache
+F:\code\tyreacpasms\backend\TEntities\bin\Debug\TEntities.dll.config
+F:\code\tyreacpasms\backend\TEntities\bin\Debug\TEntities.dll
+F:\code\tyreacpasms\backend\TEntities\bin\Debug\TEntities.pdb
+F:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.dll
+F:\code\tyreacpasms\backend\TEntities\obj\Debug\TEntities.pdb
