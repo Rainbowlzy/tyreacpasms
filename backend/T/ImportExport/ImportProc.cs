@@ -2,8 +2,8 @@
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/12/2018 18:00:09
- * 生成版本：11/12/2018 18:00:02 
+ * 生成时间：11/14/2018 16:33:12
+ * 生成版本：11/14/2018 16:32:59 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 using System;
@@ -32,91 +32,6 @@ namespace T
             {
 				if(string.IsNullOrEmpty(title)) return string.Empty;
 											
-				else if (title == "Supplier")
-				{
-					buf.AppendLine("唯一编号\t供应商编号\t供应商名称\t联系方式\t办公地点\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (Supplier);
-					foreach (var entity in tx.Supplier)
-					{
-						buf.Append(entity.id);
-						buf.Append("\t");
-						
-													
-						buf.Append(entity.SSupplierNumber);buf.Append("\t");
-														
-						buf.Append(entity.SSupplierName);buf.Append("\t");
-														
-						buf.Append(entity.SCommonModeOfContact);buf.Append("\t");
-														
-						buf.Append(entity.SOfficeLocation);buf.Append("\t");
-							
-                        buf.Append(entity.ord); buf.Append("\t");
-                        buf.Append(entity.VersionNo); buf.Append("\t");
-                        buf.Append(entity.TransactionID); buf.Append("\t");
-                        buf.Append(entity.CreateBy); buf.Append("\t");
-                        buf.Append(entity.CreateOn); buf.Append("\t");
-                        buf.Append(entity.UpdateBy); buf.Append("\t");
-                        buf.Append(entity.UpdateOn); buf.Append("\t");
-                        buf.Append(entity.DataLevel); buf.Append("\r\n");
-					}
-				}
-											
-				else if (title == "Warehouse")
-				{
-					buf.AppendLine("唯一编号\t仓库编号\t容量\t地点\t负责人工号\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (Warehouse);
-					foreach (var entity in tx.Warehouse)
-					{
-						buf.Append(entity.id);
-						buf.Append("\t");
-						
-													
-						buf.Append(entity.WWarehouseNumber);buf.Append("\t");
-														
-						buf.Append(entity.WCapacity);buf.Append("\t");
-														
-						buf.Append(entity.WLocality);buf.Append("\t");
-														
-						buf.Append(entity.WResponsibleForManualNumber);buf.Append("\t");
-							
-                        buf.Append(entity.ord); buf.Append("\t");
-                        buf.Append(entity.VersionNo); buf.Append("\t");
-                        buf.Append(entity.TransactionID); buf.Append("\t");
-                        buf.Append(entity.CreateBy); buf.Append("\t");
-                        buf.Append(entity.CreateOn); buf.Append("\t");
-                        buf.Append(entity.UpdateBy); buf.Append("\t");
-                        buf.Append(entity.UpdateOn); buf.Append("\t");
-                        buf.Append(entity.DataLevel); buf.Append("\r\n");
-					}
-				}
-											
-				else if (title == "Customertype")
-				{
-					buf.AppendLine("唯一编号\t客户编号\t姓名\t联系方式\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (Customertype);
-					foreach (var entity in tx.Customertype)
-					{
-						buf.Append(entity.id);
-						buf.Append("\t");
-						
-													
-						buf.Append(entity.CCustomerNumber);buf.Append("\t");
-														
-						buf.Append(entity.CName);buf.Append("\t");
-														
-						buf.Append(entity.CCommonModeOfContact);buf.Append("\t");
-							
-                        buf.Append(entity.ord); buf.Append("\t");
-                        buf.Append(entity.VersionNo); buf.Append("\t");
-                        buf.Append(entity.TransactionID); buf.Append("\t");
-                        buf.Append(entity.CreateBy); buf.Append("\t");
-                        buf.Append(entity.CreateOn); buf.Append("\t");
-                        buf.Append(entity.UpdateBy); buf.Append("\t");
-                        buf.Append(entity.UpdateOn); buf.Append("\t");
-                        buf.Append(entity.DataLevel); buf.Append("\r\n");
-					}
-				}
-											
 				else if (title == "Cargo")
 				{
 					buf.AppendLine("唯一编号\t货物编号\t货物名称\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
@@ -142,23 +57,29 @@ namespace T
 					}
 				}
 											
-				else if (title == "GoodsShelves")
+				else if (title == "PurchaseUnitPrice")
 				{
-					buf.AppendLine("唯一编号\t货架编号\t容量\t地点\t负责人工号\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (GoodsShelves);
-					foreach (var entity in tx.GoodsShelves)
+					buf.AppendLine("唯一编号\t供应商编号\t货物编号\t采购员工号\t日期\t数量\t价格\t备注\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					var type = typeof (PurchaseUnitPrice);
+					foreach (var entity in tx.PurchaseUnitPrice)
 					{
 						buf.Append(entity.id);
 						buf.Append("\t");
 						
 													
-						buf.Append(entity.GSShelfNumber);buf.Append("\t");
+						buf.Append(entity.PUPSupplierNumber);buf.Append("\t");
 														
-						buf.Append(entity.GSCapacity);buf.Append("\t");
+						buf.Append(entity.PUPCargoNumber);buf.Append("\t");
 														
-						buf.Append(entity.GSLocality);buf.Append("\t");
+						buf.Append(entity.PUPPurchasingStaffNumber);buf.Append("\t");
 														
-						buf.Append(entity.GSResponsibleForManualNumber);buf.Append("\t");
+						buf.Append(entity.PUPDate);buf.Append("\t");
+														
+						buf.Append(entity.PUPAmount);buf.Append("\t");
+														
+						buf.Append(entity.PUPPrice);buf.Append("\t");
+														
+						buf.Append(entity.PUPRemarks);buf.Append("\t");
 							
                         buf.Append(entity.ord); buf.Append("\t");
                         buf.Append(entity.VersionNo); buf.Append("\t");
@@ -200,29 +121,21 @@ namespace T
 					}
 				}
 											
-				else if (title == "Procure")
+				else if (title == "Customertype")
 				{
-					buf.AppendLine("唯一编号\t供应商编号\t货物编号\t采购员工号\t日期\t数量\t价格\t备注\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (Procure);
-					foreach (var entity in tx.Procure)
+					buf.AppendLine("唯一编号\t客户编号\t姓名\t联系方式\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					var type = typeof (Customertype);
+					foreach (var entity in tx.Customertype)
 					{
 						buf.Append(entity.id);
 						buf.Append("\t");
 						
 													
-						buf.Append(entity.PSupplierNumber);buf.Append("\t");
+						buf.Append(entity.CCustomerNumber);buf.Append("\t");
 														
-						buf.Append(entity.PCargoNumber);buf.Append("\t");
+						buf.Append(entity.CName);buf.Append("\t");
 														
-						buf.Append(entity.PPurchasingStaffNumber);buf.Append("\t");
-														
-						buf.Append(entity.PDate);buf.Append("\t");
-														
-						buf.Append(entity.PAmount);buf.Append("\t");
-														
-						buf.Append(entity.PPrice);buf.Append("\t");
-														
-						buf.Append(entity.PRemarks);buf.Append("\t");
+						buf.Append(entity.CCommonModeOfContact);buf.Append("\t");
 							
                         buf.Append(entity.ord); buf.Append("\t");
                         buf.Append(entity.VersionNo); buf.Append("\t");
@@ -235,29 +148,116 @@ namespace T
 					}
 				}
 											
-				else if (title == "Sales")
+				else if (title == "GoodsShelves")
+				{
+					buf.AppendLine("唯一编号\t货架编号\t容量\t地点\t负责人工号\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					var type = typeof (GoodsShelves);
+					foreach (var entity in tx.GoodsShelves)
+					{
+						buf.Append(entity.id);
+						buf.Append("\t");
+						
+													
+						buf.Append(entity.GSShelfNumber);buf.Append("\t");
+														
+						buf.Append(entity.GSCapacity);buf.Append("\t");
+														
+						buf.Append(entity.GSLocality);buf.Append("\t");
+														
+						buf.Append(entity.GSResponsibleForManualNumber);buf.Append("\t");
+							
+                        buf.Append(entity.ord); buf.Append("\t");
+                        buf.Append(entity.VersionNo); buf.Append("\t");
+                        buf.Append(entity.TransactionID); buf.Append("\t");
+                        buf.Append(entity.CreateBy); buf.Append("\t");
+                        buf.Append(entity.CreateOn); buf.Append("\t");
+                        buf.Append(entity.UpdateBy); buf.Append("\t");
+                        buf.Append(entity.UpdateOn); buf.Append("\t");
+                        buf.Append(entity.DataLevel); buf.Append("\r\n");
+					}
+				}
+											
+				else if (title == "Warehouse")
+				{
+					buf.AppendLine("唯一编号\t仓库编号\t容量\t地点\t负责人工号\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					var type = typeof (Warehouse);
+					foreach (var entity in tx.Warehouse)
+					{
+						buf.Append(entity.id);
+						buf.Append("\t");
+						
+													
+						buf.Append(entity.WWarehouseNumber);buf.Append("\t");
+														
+						buf.Append(entity.WCapacity);buf.Append("\t");
+														
+						buf.Append(entity.WLocality);buf.Append("\t");
+														
+						buf.Append(entity.WResponsibleForManualNumber);buf.Append("\t");
+							
+                        buf.Append(entity.ord); buf.Append("\t");
+                        buf.Append(entity.VersionNo); buf.Append("\t");
+                        buf.Append(entity.TransactionID); buf.Append("\t");
+                        buf.Append(entity.CreateBy); buf.Append("\t");
+                        buf.Append(entity.CreateOn); buf.Append("\t");
+                        buf.Append(entity.UpdateBy); buf.Append("\t");
+                        buf.Append(entity.UpdateOn); buf.Append("\t");
+                        buf.Append(entity.DataLevel); buf.Append("\r\n");
+					}
+				}
+											
+				else if (title == "Supplier")
+				{
+					buf.AppendLine("唯一编号\t供应商编号\t供应商名称\t联系方式\t办公地点\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					var type = typeof (Supplier);
+					foreach (var entity in tx.Supplier)
+					{
+						buf.Append(entity.id);
+						buf.Append("\t");
+						
+													
+						buf.Append(entity.SSupplierNumber);buf.Append("\t");
+														
+						buf.Append(entity.SSupplierName);buf.Append("\t");
+														
+						buf.Append(entity.SCommonModeOfContact);buf.Append("\t");
+														
+						buf.Append(entity.SOfficeLocation);buf.Append("\t");
+							
+                        buf.Append(entity.ord); buf.Append("\t");
+                        buf.Append(entity.VersionNo); buf.Append("\t");
+                        buf.Append(entity.TransactionID); buf.Append("\t");
+                        buf.Append(entity.CreateBy); buf.Append("\t");
+                        buf.Append(entity.CreateOn); buf.Append("\t");
+                        buf.Append(entity.UpdateBy); buf.Append("\t");
+                        buf.Append(entity.UpdateOn); buf.Append("\t");
+                        buf.Append(entity.DataLevel); buf.Append("\r\n");
+					}
+				}
+											
+				else if (title == "SalesUnitPrice")
 				{
 					buf.AppendLine("唯一编号\t货物编号\t客户编号\t销售员工号\t日期\t数量\t价格\t备注\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (Sales);
-					foreach (var entity in tx.Sales)
+					var type = typeof (SalesUnitPrice);
+					foreach (var entity in tx.SalesUnitPrice)
 					{
 						buf.Append(entity.id);
 						buf.Append("\t");
 						
 													
-						buf.Append(entity.SCargoNumber);buf.Append("\t");
+						buf.Append(entity.SUPCargoNumber);buf.Append("\t");
 														
-						buf.Append(entity.SCustomerNumber);buf.Append("\t");
+						buf.Append(entity.SUPCustomerNumber);buf.Append("\t");
 														
-						buf.Append(entity.SSalesStaffNumber);buf.Append("\t");
+						buf.Append(entity.SUPSalesStaffNumber);buf.Append("\t");
 														
-						buf.Append(entity.SDate);buf.Append("\t");
+						buf.Append(entity.SUPDate);buf.Append("\t");
 														
-						buf.Append(entity.SAmount);buf.Append("\t");
+						buf.Append(entity.SUPAmount);buf.Append("\t");
 														
-						buf.Append(entity.SPrice);buf.Append("\t");
+						buf.Append(entity.SUPPrice);buf.Append("\t");
 														
-						buf.Append(entity.SRemarks);buf.Append("\t");
+						buf.Append(entity.SUPRemarks);buf.Append("\t");
 							
                         buf.Append(entity.ord); buf.Append("\t");
                         buf.Append(entity.VersionNo); buf.Append("\t");
@@ -270,58 +270,27 @@ namespace T
 					}
 				}
 											
-				else if (title == "Furnish")
-				{
-					buf.AppendLine("唯一编号\t供应商编号\t货物编号\t日期\t数量\t备注\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (Furnish);
-					foreach (var entity in tx.Furnish)
-					{
-						buf.Append(entity.id);
-						buf.Append("\t");
-						
-													
-						buf.Append(entity.FSupplierNumber);buf.Append("\t");
-														
-						buf.Append(entity.FCargoNumber);buf.Append("\t");
-														
-						buf.Append(entity.FDate);buf.Append("\t");
-														
-						buf.Append(entity.FAmount);buf.Append("\t");
-														
-						buf.Append(entity.FRemarks);buf.Append("\t");
-							
-                        buf.Append(entity.ord); buf.Append("\t");
-                        buf.Append(entity.VersionNo); buf.Append("\t");
-                        buf.Append(entity.TransactionID); buf.Append("\t");
-                        buf.Append(entity.CreateBy); buf.Append("\t");
-                        buf.Append(entity.CreateOn); buf.Append("\t");
-                        buf.Append(entity.UpdateBy); buf.Append("\t");
-                        buf.Append(entity.UpdateOn); buf.Append("\t");
-                        buf.Append(entity.DataLevel); buf.Append("\r\n");
-					}
-				}
-											
-				else if (title == "WarehousingRecord")
+				else if (title == "SupplyList")
 				{
 					buf.AppendLine("唯一编号\t仓库编号\t货物编号\t仓库管理员工号\t日期\t数量\t备注\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (WarehousingRecord);
-					foreach (var entity in tx.WarehousingRecord)
+					var type = typeof (SupplyList);
+					foreach (var entity in tx.SupplyList)
 					{
 						buf.Append(entity.id);
 						buf.Append("\t");
 						
 													
-						buf.Append(entity.WRWarehouseNumber);buf.Append("\t");
+						buf.Append(entity.SLWarehouseNumber);buf.Append("\t");
 														
-						buf.Append(entity.WRCargoNumber);buf.Append("\t");
+						buf.Append(entity.SLCargoNumber);buf.Append("\t");
 														
-						buf.Append(entity.WRWarehouseManagementStaffNumber);buf.Append("\t");
+						buf.Append(entity.SLWarehouseManagementStaffNumber);buf.Append("\t");
 														
-						buf.Append(entity.WRDate);buf.Append("\t");
+						buf.Append(entity.SLDate);buf.Append("\t");
 														
-						buf.Append(entity.WRAmount);buf.Append("\t");
+						buf.Append(entity.SLAmount);buf.Append("\t");
 														
-						buf.Append(entity.WRRemarks);buf.Append("\t");
+						buf.Append(entity.SLRemarks);buf.Append("\t");
 							
                         buf.Append(entity.ord); buf.Append("\t");
                         buf.Append(entity.VersionNo); buf.Append("\t");
@@ -334,27 +303,27 @@ namespace T
 					}
 				}
 											
-				else if (title == "ReplenishmentApplicationForm")
+				else if (title == "ReplenishmentBill")
 				{
 					buf.AppendLine("唯一编号\t货架编号\t货物编号\t仓库管理员工号\t日期\t数量\t备注\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (ReplenishmentApplicationForm);
-					foreach (var entity in tx.ReplenishmentApplicationForm)
+					var type = typeof (ReplenishmentBill);
+					foreach (var entity in tx.ReplenishmentBill)
 					{
 						buf.Append(entity.id);
 						buf.Append("\t");
 						
 													
-						buf.Append(entity.RAFShelfNumber);buf.Append("\t");
+						buf.Append(entity.RBShelfNumber);buf.Append("\t");
 														
-						buf.Append(entity.RAFCargoNumber);buf.Append("\t");
+						buf.Append(entity.RBCargoNumber);buf.Append("\t");
 														
-						buf.Append(entity.RAFWarehouseManagementStaffNumber);buf.Append("\t");
+						buf.Append(entity.RBWarehouseManagementStaffNumber);buf.Append("\t");
 														
-						buf.Append(entity.RAFDate);buf.Append("\t");
+						buf.Append(entity.RBDate);buf.Append("\t");
 														
-						buf.Append(entity.RAFAmount);buf.Append("\t");
+						buf.Append(entity.RBAmount);buf.Append("\t");
 														
-						buf.Append(entity.RAFRemarks);buf.Append("\t");
+						buf.Append(entity.RBRemarks);buf.Append("\t");
 							
                         buf.Append(entity.ord); buf.Append("\t");
                         buf.Append(entity.VersionNo); buf.Append("\t");
@@ -613,7 +582,7 @@ namespace T
             using (var tx = new DefaultContext())
             {
                 Dictionary<string, Dictionary<string, string>> dic = null;
-                string cacheFile = "table_mapping_file2018-11-12T180002.txt";
+                string cacheFile = "table_mapping_file2018-11-14T163259.txt";
                 if (File.Exists(cacheFile))
                     dic = File.ReadAllText(cacheFile).Deserialize<Dictionary<string, Dictionary<string, string>>>();
                 else
@@ -621,27 +590,25 @@ namespace T
 #region init
 					dic = new Dictionary<string, Dictionary<string,string>>();
 									
-					dic.Add("Supplier", new Dictionary<string,string>{ {"SSupplierNumber","供应商编号"},{"SSupplierName","供应商名称"},{"SCommonModeOfContact","联系方式"},{"SOfficeLocation","办公地点"} });
-										
-					dic.Add("Warehouse", new Dictionary<string,string>{ {"WWarehouseNumber","仓库编号"},{"WCapacity","容量"},{"WLocality","地点"},{"WResponsibleForManualNumber","负责人工号"} });
-										
-					dic.Add("Customertype", new Dictionary<string,string>{ {"CCustomerNumber","客户编号"},{"CName","姓名"},{"CCommonModeOfContact","联系方式"} });
-										
 					dic.Add("Cargo", new Dictionary<string,string>{ {"CCargoNumber","货物编号"},{"CNameOfGoods","货物名称"} });
 										
-					dic.Add("GoodsShelves", new Dictionary<string,string>{ {"GSShelfNumber","货架编号"},{"GSCapacity","容量"},{"GSLocality","地点"},{"GSResponsibleForManualNumber","负责人工号"} });
+					dic.Add("PurchaseUnitPrice", new Dictionary<string,string>{ {"PUPSupplierNumber","供应商编号"},{"PUPCargoNumber","货物编号"},{"PUPPurchasingStaffNumber","采购员工号"},{"PUPDate","日期"},{"PUPAmount","数量"},{"PUPPrice","价格"},{"PUPRemarks","备注"} });
 										
 					dic.Add("Staffname", new Dictionary<string,string>{ {"SJobNumber","工号"},{"SName","姓名"},{"SEducation","学历"},{"SCommonModeOfContact","联系方式"} });
 										
-					dic.Add("Procure", new Dictionary<string,string>{ {"PSupplierNumber","供应商编号"},{"PCargoNumber","货物编号"},{"PPurchasingStaffNumber","采购员工号"},{"PDate","日期"},{"PAmount","数量"},{"PPrice","价格"},{"PRemarks","备注"} });
+					dic.Add("Customertype", new Dictionary<string,string>{ {"CCustomerNumber","客户编号"},{"CName","姓名"},{"CCommonModeOfContact","联系方式"} });
 										
-					dic.Add("Sales", new Dictionary<string,string>{ {"SCargoNumber","货物编号"},{"SCustomerNumber","客户编号"},{"SSalesStaffNumber","销售员工号"},{"SDate","日期"},{"SAmount","数量"},{"SPrice","价格"},{"SRemarks","备注"} });
+					dic.Add("GoodsShelves", new Dictionary<string,string>{ {"GSShelfNumber","货架编号"},{"GSCapacity","容量"},{"GSLocality","地点"},{"GSResponsibleForManualNumber","负责人工号"} });
 										
-					dic.Add("Furnish", new Dictionary<string,string>{ {"FSupplierNumber","供应商编号"},{"FCargoNumber","货物编号"},{"FDate","日期"},{"FAmount","数量"},{"FRemarks","备注"} });
+					dic.Add("Warehouse", new Dictionary<string,string>{ {"WWarehouseNumber","仓库编号"},{"WCapacity","容量"},{"WLocality","地点"},{"WResponsibleForManualNumber","负责人工号"} });
 										
-					dic.Add("WarehousingRecord", new Dictionary<string,string>{ {"WRWarehouseNumber","仓库编号"},{"WRCargoNumber","货物编号"},{"WRWarehouseManagementStaffNumber","仓库管理员工号"},{"WRDate","日期"},{"WRAmount","数量"},{"WRRemarks","备注"} });
+					dic.Add("Supplier", new Dictionary<string,string>{ {"SSupplierNumber","供应商编号"},{"SSupplierName","供应商名称"},{"SCommonModeOfContact","联系方式"},{"SOfficeLocation","办公地点"} });
 										
-					dic.Add("ReplenishmentApplicationForm", new Dictionary<string,string>{ {"RAFShelfNumber","货架编号"},{"RAFCargoNumber","货物编号"},{"RAFWarehouseManagementStaffNumber","仓库管理员工号"},{"RAFDate","日期"},{"RAFAmount","数量"},{"RAFRemarks","备注"} });
+					dic.Add("SalesUnitPrice", new Dictionary<string,string>{ {"SUPCargoNumber","货物编号"},{"SUPCustomerNumber","客户编号"},{"SUPSalesStaffNumber","销售员工号"},{"SUPDate","日期"},{"SUPAmount","数量"},{"SUPPrice","价格"},{"SUPRemarks","备注"} });
+										
+					dic.Add("SupplyList", new Dictionary<string,string>{ {"SLWarehouseNumber","仓库编号"},{"SLCargoNumber","货物编号"},{"SLWarehouseManagementStaffNumber","仓库管理员工号"},{"SLDate","日期"},{"SLAmount","数量"},{"SLRemarks","备注"} });
+										
+					dic.Add("ReplenishmentBill", new Dictionary<string,string>{ {"RBShelfNumber","货架编号"},{"RBCargoNumber","货物编号"},{"RBWarehouseManagementStaffNumber","仓库管理员工号"},{"RBDate","日期"},{"RBAmount","数量"},{"RBRemarks","备注"} });
 										
 					dic.Add("MenuConfiguration", new Dictionary<string,string>{ {"MCCaption","标题"},{"MCParentTitle","父级标题"},{"MCLink","链接"},{"MCMenuType","菜单类型"},{"MCSequence","顺序"},{"MCDisplayName","显示名称"},{"MCPicture","图片"} });
 										
@@ -665,36 +632,6 @@ namespace T
 				var transactionId = Guid.NewGuid().ToString();
                 var keypair = dic[fileType]; //commentses.ToDictionary(f => f.column_name, f => f.column_description);
                 if (string.IsNullOrEmpty(fileType)) return ;
-				else if (fileType == "Supplier") ExcelHelper.ExcelToNewEntityList<Supplier>(keypair, filePath, out errorMsg).ForEach(one=>{
-                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
-                    one.CreateOn = one.CreateOn ?? DateTime.Now;
-                    one.TransactionID = transactionId;
-                    one.UpdateOn = DateTime.Now;
-                    one.IsDeleted = 0;
-                    one.DataLevel = user?.DataLevel ?? "01";
-					tx.Supplier.AddOrUpdate(one);
-					});
-				else if (fileType == "Warehouse") ExcelHelper.ExcelToNewEntityList<Warehouse>(keypair, filePath, out errorMsg).ForEach(one=>{
-                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
-                    one.CreateOn = one.CreateOn ?? DateTime.Now;
-                    one.TransactionID = transactionId;
-                    one.UpdateOn = DateTime.Now;
-                    one.IsDeleted = 0;
-                    one.DataLevel = user?.DataLevel ?? "01";
-					tx.Warehouse.AddOrUpdate(one);
-					});
-				else if (fileType == "Customertype") ExcelHelper.ExcelToNewEntityList<Customertype>(keypair, filePath, out errorMsg).ForEach(one=>{
-                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
-                    one.CreateOn = one.CreateOn ?? DateTime.Now;
-                    one.TransactionID = transactionId;
-                    one.UpdateOn = DateTime.Now;
-                    one.IsDeleted = 0;
-                    one.DataLevel = user?.DataLevel ?? "01";
-					tx.Customertype.AddOrUpdate(one);
-					});
 				else if (fileType == "Cargo") ExcelHelper.ExcelToNewEntityList<Cargo>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
@@ -705,7 +642,7 @@ namespace T
                     one.DataLevel = user?.DataLevel ?? "01";
 					tx.Cargo.AddOrUpdate(one);
 					});
-				else if (fileType == "GoodsShelves") ExcelHelper.ExcelToNewEntityList<GoodsShelves>(keypair, filePath, out errorMsg).ForEach(one=>{
+				else if (fileType == "PurchaseUnitPrice") ExcelHelper.ExcelToNewEntityList<PurchaseUnitPrice>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
                     one.CreateOn = one.CreateOn ?? DateTime.Now;
@@ -713,7 +650,7 @@ namespace T
                     one.UpdateOn = DateTime.Now;
                     one.IsDeleted = 0;
                     one.DataLevel = user?.DataLevel ?? "01";
-					tx.GoodsShelves.AddOrUpdate(one);
+					tx.PurchaseUnitPrice.AddOrUpdate(one);
 					});
 				else if (fileType == "Staffname") ExcelHelper.ExcelToNewEntityList<Staffname>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
@@ -725,7 +662,7 @@ namespace T
                     one.DataLevel = user?.DataLevel ?? "01";
 					tx.Staffname.AddOrUpdate(one);
 					});
-				else if (fileType == "Procure") ExcelHelper.ExcelToNewEntityList<Procure>(keypair, filePath, out errorMsg).ForEach(one=>{
+				else if (fileType == "Customertype") ExcelHelper.ExcelToNewEntityList<Customertype>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
                     one.CreateOn = one.CreateOn ?? DateTime.Now;
@@ -733,9 +670,9 @@ namespace T
                     one.UpdateOn = DateTime.Now;
                     one.IsDeleted = 0;
                     one.DataLevel = user?.DataLevel ?? "01";
-					tx.Procure.AddOrUpdate(one);
+					tx.Customertype.AddOrUpdate(one);
 					});
-				else if (fileType == "Sales") ExcelHelper.ExcelToNewEntityList<Sales>(keypair, filePath, out errorMsg).ForEach(one=>{
+				else if (fileType == "GoodsShelves") ExcelHelper.ExcelToNewEntityList<GoodsShelves>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
                     one.CreateOn = one.CreateOn ?? DateTime.Now;
@@ -743,9 +680,9 @@ namespace T
                     one.UpdateOn = DateTime.Now;
                     one.IsDeleted = 0;
                     one.DataLevel = user?.DataLevel ?? "01";
-					tx.Sales.AddOrUpdate(one);
+					tx.GoodsShelves.AddOrUpdate(one);
 					});
-				else if (fileType == "Furnish") ExcelHelper.ExcelToNewEntityList<Furnish>(keypair, filePath, out errorMsg).ForEach(one=>{
+				else if (fileType == "Warehouse") ExcelHelper.ExcelToNewEntityList<Warehouse>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
                     one.CreateOn = one.CreateOn ?? DateTime.Now;
@@ -753,9 +690,9 @@ namespace T
                     one.UpdateOn = DateTime.Now;
                     one.IsDeleted = 0;
                     one.DataLevel = user?.DataLevel ?? "01";
-					tx.Furnish.AddOrUpdate(one);
+					tx.Warehouse.AddOrUpdate(one);
 					});
-				else if (fileType == "WarehousingRecord") ExcelHelper.ExcelToNewEntityList<WarehousingRecord>(keypair, filePath, out errorMsg).ForEach(one=>{
+				else if (fileType == "Supplier") ExcelHelper.ExcelToNewEntityList<Supplier>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
                     one.CreateOn = one.CreateOn ?? DateTime.Now;
@@ -763,9 +700,9 @@ namespace T
                     one.UpdateOn = DateTime.Now;
                     one.IsDeleted = 0;
                     one.DataLevel = user?.DataLevel ?? "01";
-					tx.WarehousingRecord.AddOrUpdate(one);
+					tx.Supplier.AddOrUpdate(one);
 					});
-				else if (fileType == "ReplenishmentApplicationForm") ExcelHelper.ExcelToNewEntityList<ReplenishmentApplicationForm>(keypair, filePath, out errorMsg).ForEach(one=>{
+				else if (fileType == "SalesUnitPrice") ExcelHelper.ExcelToNewEntityList<SalesUnitPrice>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
                     one.CreateOn = one.CreateOn ?? DateTime.Now;
@@ -773,7 +710,27 @@ namespace T
                     one.UpdateOn = DateTime.Now;
                     one.IsDeleted = 0;
                     one.DataLevel = user?.DataLevel ?? "01";
-					tx.ReplenishmentApplicationForm.AddOrUpdate(one);
+					tx.SalesUnitPrice.AddOrUpdate(one);
+					});
+				else if (fileType == "SupplyList") ExcelHelper.ExcelToNewEntityList<SupplyList>(keypair, filePath, out errorMsg).ForEach(one=>{
+                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
+                    one.CreateOn = one.CreateOn ?? DateTime.Now;
+                    one.TransactionID = transactionId;
+                    one.UpdateOn = DateTime.Now;
+                    one.IsDeleted = 0;
+                    one.DataLevel = user?.DataLevel ?? "01";
+					tx.SupplyList.AddOrUpdate(one);
+					});
+				else if (fileType == "ReplenishmentBill") ExcelHelper.ExcelToNewEntityList<ReplenishmentBill>(keypair, filePath, out errorMsg).ForEach(one=>{
+                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
+                    one.CreateOn = one.CreateOn ?? DateTime.Now;
+                    one.TransactionID = transactionId;
+                    one.UpdateOn = DateTime.Now;
+                    one.IsDeleted = 0;
+                    one.DataLevel = user?.DataLevel ?? "01";
+					tx.ReplenishmentBill.AddOrUpdate(one);
 					});
 				else if (fileType == "MenuConfiguration") ExcelHelper.ExcelToNewEntityList<MenuConfiguration>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";

@@ -29,17 +29,16 @@ namespace TEntities.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 			
-			modelBuilder.Entity<Supplier>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<Warehouse>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<Customertype>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<Cargo>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<GoodsShelves>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<PurchaseUnitPrice>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<Staffname>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<Procure>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<Sales>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<Furnish>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<WarehousingRecord>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
-			modelBuilder.Entity<ReplenishmentApplicationForm>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<Customertype>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<GoodsShelves>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<Warehouse>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<Supplier>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<SalesUnitPrice>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<SupplyList>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<ReplenishmentBill>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<MenuConfiguration>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<RoleMenu>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<UserRole>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
@@ -88,114 +87,6 @@ namespace TEntities.EF
 				UpdateBy = CreateBy
 			});
 			
-			if (!MenuConfiguration.Any(t => t.MCCaption == "供应商"))
-			{
-				RoleMenu.Add(new RoleMenu
-				{
-					RMRoleName = "超级管理员",
-					RMMenuTitle = "供应商",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-					CreateOn = DateTime.Now,
-					UpdateOn = DateTime.Now,
-					UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					MCDisplayName = "供应商",
-					MCCaption = "供应商",
-					MCLink = "/pagelist/Supplier",
-					MCParentTitle = "后台首页",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var supplier = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "供应商");
-			if(supplier!=null)
-			{
-				supplier.MCLink = "/pagelist/SupplierList.html";
-				MenuConfiguration.AddOrUpdate(supplier);
-			}
-
-			if (!MenuConfiguration.Any(t => t.MCCaption == "仓库"))
-			{
-				RoleMenu.Add(new RoleMenu
-				{
-					RMRoleName = "超级管理员",
-					RMMenuTitle = "仓库",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-					CreateOn = DateTime.Now,
-					UpdateOn = DateTime.Now,
-					UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					MCDisplayName = "仓库",
-					MCCaption = "仓库",
-					MCLink = "/pagelist/Warehouse",
-					MCParentTitle = "后台首页",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var warehouse = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "仓库");
-			if(warehouse!=null)
-			{
-				warehouse.MCLink = "/pagelist/WarehouseList.html";
-				MenuConfiguration.AddOrUpdate(warehouse);
-			}
-
-			if (!MenuConfiguration.Any(t => t.MCCaption == "客户"))
-			{
-				RoleMenu.Add(new RoleMenu
-				{
-					RMRoleName = "超级管理员",
-					RMMenuTitle = "客户",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-					CreateOn = DateTime.Now,
-					UpdateOn = DateTime.Now,
-					UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					MCDisplayName = "客户",
-					MCCaption = "客户",
-					MCLink = "/pagelist/Customertype",
-					MCParentTitle = "后台首页",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var customertype = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "客户");
-			if(customertype!=null)
-			{
-				customertype.MCLink = "/pagelist/CustomertypeList.html";
-				MenuConfiguration.AddOrUpdate(customertype);
-			}
-
 			if (!MenuConfiguration.Any(t => t.MCCaption == "货物"))
 			{
 				RoleMenu.Add(new RoleMenu
@@ -232,12 +123,12 @@ namespace TEntities.EF
 				MenuConfiguration.AddOrUpdate(cargo);
 			}
 
-			if (!MenuConfiguration.Any(t => t.MCCaption == "货架"))
+			if (!MenuConfiguration.Any(t => t.MCCaption == "采购单"))
 			{
 				RoleMenu.Add(new RoleMenu
 				{
 					RMRoleName = "超级管理员",
-					RMMenuTitle = "货架",
+					RMMenuTitle = "采购单",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -248,9 +139,9 @@ namespace TEntities.EF
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					MCDisplayName = "货架",
-					MCCaption = "货架",
-					MCLink = "/pagelist/GoodsShelves",
+					MCDisplayName = "采购单",
+					MCCaption = "采购单",
+					MCLink = "/pagelist/PurchaseUnitPrice",
 					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
@@ -261,11 +152,11 @@ namespace TEntities.EF
                     UpdateBy = CreateBy
 				});
 			}
-			var goodsshelves = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "货架");
-			if(goodsshelves!=null)
+			var purchaseunitprice = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "采购单");
+			if(purchaseunitprice!=null)
 			{
-				goodsshelves.MCLink = "/pagelist/GoodsShelvesList.html";
-				MenuConfiguration.AddOrUpdate(goodsshelves);
+				purchaseunitprice.MCLink = "/pagelist/PurchaseUnitPriceList.html";
+				MenuConfiguration.AddOrUpdate(purchaseunitprice);
 			}
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "员工"))
@@ -304,12 +195,12 @@ namespace TEntities.EF
 				MenuConfiguration.AddOrUpdate(staffname);
 			}
 
-			if (!MenuConfiguration.Any(t => t.MCCaption == "采购"))
+			if (!MenuConfiguration.Any(t => t.MCCaption == "客户"))
 			{
 				RoleMenu.Add(new RoleMenu
 				{
 					RMRoleName = "超级管理员",
-					RMMenuTitle = "采购",
+					RMMenuTitle = "客户",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -320,9 +211,9 @@ namespace TEntities.EF
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					MCDisplayName = "采购",
-					MCCaption = "采购",
-					MCLink = "/pagelist/Procure",
+					MCDisplayName = "客户",
+					MCCaption = "客户",
+					MCLink = "/pagelist/Customertype",
 					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
@@ -333,19 +224,19 @@ namespace TEntities.EF
                     UpdateBy = CreateBy
 				});
 			}
-			var procure = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "采购");
-			if(procure!=null)
+			var customertype = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "客户");
+			if(customertype!=null)
 			{
-				procure.MCLink = "/pagelist/ProcureList.html";
-				MenuConfiguration.AddOrUpdate(procure);
+				customertype.MCLink = "/pagelist/CustomertypeList.html";
+				MenuConfiguration.AddOrUpdate(customertype);
 			}
 
-			if (!MenuConfiguration.Any(t => t.MCCaption == "销售"))
+			if (!MenuConfiguration.Any(t => t.MCCaption == "货架"))
 			{
 				RoleMenu.Add(new RoleMenu
 				{
 					RMRoleName = "超级管理员",
-					RMMenuTitle = "销售",
+					RMMenuTitle = "货架",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -356,9 +247,9 @@ namespace TEntities.EF
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					MCDisplayName = "销售",
-					MCCaption = "销售",
-					MCLink = "/pagelist/Sales",
+					MCDisplayName = "货架",
+					MCCaption = "货架",
+					MCLink = "/pagelist/GoodsShelves",
 					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
@@ -369,19 +260,19 @@ namespace TEntities.EF
                     UpdateBy = CreateBy
 				});
 			}
-			var sales = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "销售");
-			if(sales!=null)
+			var goodsshelves = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "货架");
+			if(goodsshelves!=null)
 			{
-				sales.MCLink = "/pagelist/SalesList.html";
-				MenuConfiguration.AddOrUpdate(sales);
+				goodsshelves.MCLink = "/pagelist/GoodsShelvesList.html";
+				MenuConfiguration.AddOrUpdate(goodsshelves);
 			}
 
-			if (!MenuConfiguration.Any(t => t.MCCaption == "供应"))
+			if (!MenuConfiguration.Any(t => t.MCCaption == "仓库"))
 			{
 				RoleMenu.Add(new RoleMenu
 				{
 					RMRoleName = "超级管理员",
-					RMMenuTitle = "供应",
+					RMMenuTitle = "仓库",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -392,9 +283,9 @@ namespace TEntities.EF
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					MCDisplayName = "供应",
-					MCCaption = "供应",
-					MCLink = "/pagelist/Furnish",
+					MCDisplayName = "仓库",
+					MCCaption = "仓库",
+					MCLink = "/pagelist/Warehouse",
 					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
@@ -405,19 +296,19 @@ namespace TEntities.EF
                     UpdateBy = CreateBy
 				});
 			}
-			var furnish = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "供应");
-			if(furnish!=null)
+			var warehouse = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "仓库");
+			if(warehouse!=null)
 			{
-				furnish.MCLink = "/pagelist/FurnishList.html";
-				MenuConfiguration.AddOrUpdate(furnish);
+				warehouse.MCLink = "/pagelist/WarehouseList.html";
+				MenuConfiguration.AddOrUpdate(warehouse);
 			}
 
-			if (!MenuConfiguration.Any(t => t.MCCaption == "入库"))
+			if (!MenuConfiguration.Any(t => t.MCCaption == "供应商"))
 			{
 				RoleMenu.Add(new RoleMenu
 				{
 					RMRoleName = "超级管理员",
-					RMMenuTitle = "入库",
+					RMMenuTitle = "供应商",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -428,9 +319,9 @@ namespace TEntities.EF
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					MCDisplayName = "入库",
-					MCCaption = "入库",
-					MCLink = "/pagelist/WarehousingRecord",
+					MCDisplayName = "供应商",
+					MCCaption = "供应商",
+					MCLink = "/pagelist/Supplier",
 					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
@@ -441,19 +332,19 @@ namespace TEntities.EF
                     UpdateBy = CreateBy
 				});
 			}
-			var warehousingrecord = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "入库");
-			if(warehousingrecord!=null)
+			var supplier = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "供应商");
+			if(supplier!=null)
 			{
-				warehousingrecord.MCLink = "/pagelist/WarehousingRecordList.html";
-				MenuConfiguration.AddOrUpdate(warehousingrecord);
+				supplier.MCLink = "/pagelist/SupplierList.html";
+				MenuConfiguration.AddOrUpdate(supplier);
 			}
 
-			if (!MenuConfiguration.Any(t => t.MCCaption == "补货"))
+			if (!MenuConfiguration.Any(t => t.MCCaption == "销售单"))
 			{
 				RoleMenu.Add(new RoleMenu
 				{
 					RMRoleName = "超级管理员",
-					RMMenuTitle = "补货",
+					RMMenuTitle = "销售单",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
 					IsDeleted = 0,
@@ -464,9 +355,9 @@ namespace TEntities.EF
 				});
 				MenuConfiguration.Add(new MenuConfiguration
 				{
-					MCDisplayName = "补货",
-					MCCaption = "补货",
-					MCLink = "/pagelist/ReplenishmentApplicationForm",
+					MCDisplayName = "销售单",
+					MCCaption = "销售单",
+					MCLink = "/pagelist/SalesUnitPrice",
 					MCParentTitle = "后台首页",
 					CreateBy = CreateBy,
 					TransactionID = TransactionID,
@@ -477,11 +368,83 @@ namespace TEntities.EF
                     UpdateBy = CreateBy
 				});
 			}
-			var replenishmentapplicationform = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "补货");
-			if(replenishmentapplicationform!=null)
+			var salesunitprice = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "销售单");
+			if(salesunitprice!=null)
 			{
-				replenishmentapplicationform.MCLink = "/pagelist/ReplenishmentApplicationFormList.html";
-				MenuConfiguration.AddOrUpdate(replenishmentapplicationform);
+				salesunitprice.MCLink = "/pagelist/SalesUnitPriceList.html";
+				MenuConfiguration.AddOrUpdate(salesunitprice);
+			}
+
+			if (!MenuConfiguration.Any(t => t.MCCaption == "供货单"))
+			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "供货单",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
+				MenuConfiguration.Add(new MenuConfiguration
+				{
+					MCDisplayName = "供货单",
+					MCCaption = "供货单",
+					MCLink = "/pagelist/SupplyList",
+					MCParentTitle = "后台首页",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+			}
+			var supplylist = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "供货单");
+			if(supplylist!=null)
+			{
+				supplylist.MCLink = "/pagelist/SupplyListList.html";
+				MenuConfiguration.AddOrUpdate(supplylist);
+			}
+
+			if (!MenuConfiguration.Any(t => t.MCCaption == "补货单"))
+			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "补货单",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
+				MenuConfiguration.Add(new MenuConfiguration
+				{
+					MCDisplayName = "补货单",
+					MCCaption = "补货单",
+					MCLink = "/pagelist/ReplenishmentBill",
+					MCParentTitle = "后台首页",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+			}
+			var replenishmentbill = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "补货单");
+			if(replenishmentbill!=null)
+			{
+				replenishmentbill.MCLink = "/pagelist/ReplenishmentBillList.html";
+				MenuConfiguration.AddOrUpdate(replenishmentbill);
 			}
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "菜单配置"))
@@ -777,29 +740,14 @@ namespace TEntities.EF
 		}
 
         /// <summary>
-        ///  供应商 
-        /// </summary>
-        public virtual DbSet<Supplier> Supplier { get; set; }
-
-        /// <summary>
-        ///  仓库 
-        /// </summary>
-        public virtual DbSet<Warehouse> Warehouse { get; set; }
-
-        /// <summary>
-        ///  客户 
-        /// </summary>
-        public virtual DbSet<Customertype> Customertype { get; set; }
-
-        /// <summary>
         ///  货物 
         /// </summary>
         public virtual DbSet<Cargo> Cargo { get; set; }
 
         /// <summary>
-        ///  货架 
+        ///  采购单 
         /// </summary>
-        public virtual DbSet<GoodsShelves> GoodsShelves { get; set; }
+        public virtual DbSet<PurchaseUnitPrice> PurchaseUnitPrice { get; set; }
 
         /// <summary>
         ///  员工 
@@ -807,29 +755,39 @@ namespace TEntities.EF
         public virtual DbSet<Staffname> Staffname { get; set; }
 
         /// <summary>
-        ///  采购 
+        ///  客户 
         /// </summary>
-        public virtual DbSet<Procure> Procure { get; set; }
+        public virtual DbSet<Customertype> Customertype { get; set; }
 
         /// <summary>
-        ///  销售 
+        ///  货架 
         /// </summary>
-        public virtual DbSet<Sales> Sales { get; set; }
+        public virtual DbSet<GoodsShelves> GoodsShelves { get; set; }
 
         /// <summary>
-        ///  供应 
+        ///  仓库 
         /// </summary>
-        public virtual DbSet<Furnish> Furnish { get; set; }
+        public virtual DbSet<Warehouse> Warehouse { get; set; }
 
         /// <summary>
-        ///  入库 
+        ///  供应商 
         /// </summary>
-        public virtual DbSet<WarehousingRecord> WarehousingRecord { get; set; }
+        public virtual DbSet<Supplier> Supplier { get; set; }
 
         /// <summary>
-        ///  补货 
+        ///  销售单 
         /// </summary>
-        public virtual DbSet<ReplenishmentApplicationForm> ReplenishmentApplicationForm { get; set; }
+        public virtual DbSet<SalesUnitPrice> SalesUnitPrice { get; set; }
+
+        /// <summary>
+        ///  供货单 
+        /// </summary>
+        public virtual DbSet<SupplyList> SupplyList { get; set; }
+
+        /// <summary>
+        ///  补货单 
+        /// </summary>
+        public virtual DbSet<ReplenishmentBill> ReplenishmentBill { get; set; }
 
         /// <summary>
         ///  菜单配置 

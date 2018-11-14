@@ -16,239 +16,6 @@ namespace EF.Entities
 {
 	
     /// <summary>
-    ///  供应商 
-    /// </summary>
-	[Table("Supplier")]
-    public class Supplier 
-    {
-			        
-        /// <summary>
-        ///  Supplier编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  供应商编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "供应商编号不能为空")]
-		
-        public Nullable<int> SSupplierNumber { get; set; }
-			
-        /// <summary>
-        ///  供应商名称 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "供应商名称不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string SSupplierName { get; set; }
-			
-        /// <summary>
-        ///  联系方式 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "联系方式不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string SCommonModeOfContact { get; set; }
-			
-        /// <summary>
-        ///  办公地点 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "办公地点不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string SOfficeLocation { get; set; }
-	}
-
-	
-    /// <summary>
-    ///  仓库 
-    /// </summary>
-	[Table("Warehouse")]
-    public class Warehouse 
-    {
-			        
-        /// <summary>
-        ///  Warehouse编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  仓库编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "仓库编号不能为空")]
-		
-        public Nullable<int> WWarehouseNumber { get; set; }
-			
-        /// <summary>
-        ///  容量 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "容量不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string WCapacity { get; set; }
-			
-        /// <summary>
-        ///  地点 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "地点不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string WLocality { get; set; }
-			
-        /// <summary>
-        ///  负责人工号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "负责人工号不能为空")]
-		
-        public Nullable<int> WResponsibleForManualNumber { get; set; }
-	}
-
-	
-    /// <summary>
-    ///  客户 
-    /// </summary>
-	[Table("Customertype")]
-    public class Customertype 
-    {
-			        
-        /// <summary>
-        ///  Customertype编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  客户编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "客户编号不能为空")]
-		
-        public Nullable<int> CCustomerNumber { get; set; }
-			
-        /// <summary>
-        ///  姓名 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "姓名不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string CName { get; set; }
-			
-        /// <summary>
-        ///  联系方式 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "联系方式不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string CCommonModeOfContact { get; set; }
-	}
-
-	
-    /// <summary>
     ///  货物 
     /// </summary>
 	[Table("Cargo")]
@@ -315,14 +82,14 @@ namespace EF.Entities
 
 	
     /// <summary>
-    ///  货架 
+    ///  采购单 
     /// </summary>
-	[Table("GoodsShelves")]
-    public class GoodsShelves 
+	[Table("PurchaseUnitPrice")]
+    public class PurchaseUnitPrice 
     {
 			        
         /// <summary>
-        ///  GoodsShelves编号
+        ///  PurchaseUnitPrice编号
         /// </summary>
 		[Key]
         public int id { get; set; }
@@ -365,32 +132,54 @@ namespace EF.Entities
         public int? ord { get; set; }
 			
         /// <summary>
-        ///  货架编号 INT 
+        ///  供应商编号 INT 
         /// </summary>
-		// [NotNullValidator(MessageTemplate = "货架编号不能为空")]
+		// [NotNullValidator(MessageTemplate = "供应商编号不能为空")]
 		
-        public Nullable<int> GSShelfNumber { get; set; }
+        public Nullable<int> PUPSupplierNumber { get; set; }
 			
         /// <summary>
-        ///  容量 NVARCHAR(50) 50
+        ///  货物编号 INT 
         /// </summary>
-		// [NotNullValidator(MessageTemplate = "容量不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string GSCapacity { get; set; }
-			
-        /// <summary>
-        ///  地点 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "地点不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string GSLocality { get; set; }
-			
-        /// <summary>
-        ///  负责人工号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "负责人工号不能为空")]
+		// [NotNullValidator(MessageTemplate = "货物编号不能为空")]
 		
-        public Nullable<int> GSResponsibleForManualNumber { get; set; }
+        public Nullable<int> PUPCargoNumber { get; set; }
+			
+        /// <summary>
+        ///  采购员工号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "采购员工号不能为空")]
+		
+        public Nullable<int> PUPPurchasingStaffNumber { get; set; }
+			
+        /// <summary>
+        ///  日期 DATETIME 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "日期不能为空")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+		
+        public Nullable<DateTime> PUPDate { get; set; }
+			
+        /// <summary>
+        ///  数量 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "数量不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string PUPAmount { get; set; }
+			
+        /// <summary>
+        ///  价格 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "价格不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string PUPPrice { get; set; }
+			
+        /// <summary>
+        ///  备注 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "备注不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string PUPRemarks { get; set; }
 	}
 
 	
@@ -475,14 +264,14 @@ namespace EF.Entities
 
 	
     /// <summary>
-    ///  采购 
+    ///  客户 
     /// </summary>
-	[Table("Procure")]
-    public class Procure 
+	[Table("Customertype")]
+    public class Customertype 
     {
 			        
         /// <summary>
-        ///  Procure编号
+        ///  Customertype编号
         /// </summary>
 		[Key]
         public int id { get; set; }
@@ -523,353 +312,39 @@ namespace EF.Entities
         ///  排序
         /// </summary>
         public int? ord { get; set; }
-			
-        /// <summary>
-        ///  供应商编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "供应商编号不能为空")]
-		
-        public Nullable<int> PSupplierNumber { get; set; }
-			
-        /// <summary>
-        ///  货物编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "货物编号不能为空")]
-		
-        public Nullable<int> PCargoNumber { get; set; }
-			
-        /// <summary>
-        ///  采购员工号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "采购员工号不能为空")]
-		
-        public Nullable<int> PPurchasingStaffNumber { get; set; }
-			
-        /// <summary>
-        ///  日期 DATETIME 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "日期不能为空")]
-				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
-		
-        public Nullable<DateTime> PDate { get; set; }
-			
-        /// <summary>
-        ///  数量 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "数量不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string PAmount { get; set; }
-			
-        /// <summary>
-        ///  价格 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "价格不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string PPrice { get; set; }
-			
-        /// <summary>
-        ///  备注 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "备注不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string PRemarks { get; set; }
-	}
-
-	
-    /// <summary>
-    ///  销售 
-    /// </summary>
-	[Table("Sales")]
-    public class Sales 
-    {
-			        
-        /// <summary>
-        ///  Sales编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  货物编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "货物编号不能为空")]
-		
-        public Nullable<int> SCargoNumber { get; set; }
 			
         /// <summary>
         ///  客户编号 INT 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "客户编号不能为空")]
 		
-        public Nullable<int> SCustomerNumber { get; set; }
+        public Nullable<int> CCustomerNumber { get; set; }
 			
         /// <summary>
-        ///  销售员工号 INT 
+        ///  姓名 NVARCHAR(50) 50
         /// </summary>
-		// [NotNullValidator(MessageTemplate = "销售员工号不能为空")]
-		
-        public Nullable<int> SSalesStaffNumber { get; set; }
-			
-        /// <summary>
-        ///  日期 DATETIME 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "日期不能为空")]
-				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
-		
-        public Nullable<DateTime> SDate { get; set; }
-			
-        /// <summary>
-        ///  数量 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "数量不能为空")]
+		// [NotNullValidator(MessageTemplate = "姓名不能为空")]
 		/* [StringLengthValidator(0,50)] */
-        public string SAmount { get; set; }
+        public string CName { get; set; }
 			
         /// <summary>
-        ///  价格 NVARCHAR(50) 50
+        ///  联系方式 NVARCHAR(50) 50
         /// </summary>
-		// [NotNullValidator(MessageTemplate = "价格不能为空")]
+		// [NotNullValidator(MessageTemplate = "联系方式不能为空")]
 		/* [StringLengthValidator(0,50)] */
-        public string SPrice { get; set; }
-			
-        /// <summary>
-        ///  备注 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "备注不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string SRemarks { get; set; }
+        public string CCommonModeOfContact { get; set; }
 	}
 
 	
     /// <summary>
-    ///  供应 
+    ///  货架 
     /// </summary>
-	[Table("Furnish")]
-    public class Furnish 
+	[Table("GoodsShelves")]
+    public class GoodsShelves 
     {
 			        
         /// <summary>
-        ///  Furnish编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  供应商编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "供应商编号不能为空")]
-		
-        public Nullable<int> FSupplierNumber { get; set; }
-			
-        /// <summary>
-        ///  货物编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "货物编号不能为空")]
-		
-        public Nullable<int> FCargoNumber { get; set; }
-			
-        /// <summary>
-        ///  日期 DATETIME 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "日期不能为空")]
-				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
-		
-        public Nullable<DateTime> FDate { get; set; }
-			
-        /// <summary>
-        ///  数量 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "数量不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string FAmount { get; set; }
-			
-        /// <summary>
-        ///  备注 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "备注不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string FRemarks { get; set; }
-	}
-
-	
-    /// <summary>
-    ///  入库 
-    /// </summary>
-	[Table("WarehousingRecord")]
-    public class WarehousingRecord 
-    {
-			        
-        /// <summary>
-        ///  WarehousingRecord编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  仓库编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "仓库编号不能为空")]
-		
-        public Nullable<int> WRWarehouseNumber { get; set; }
-			
-        /// <summary>
-        ///  货物编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "货物编号不能为空")]
-		
-        public Nullable<int> WRCargoNumber { get; set; }
-			
-        /// <summary>
-        ///  仓库管理员工号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "仓库管理员工号不能为空")]
-		
-        public Nullable<int> WRWarehouseManagementStaffNumber { get; set; }
-			
-        /// <summary>
-        ///  日期 DATETIME 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "日期不能为空")]
-				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
-		
-        public Nullable<DateTime> WRDate { get; set; }
-			
-        /// <summary>
-        ///  数量 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "数量不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string WRAmount { get; set; }
-			
-        /// <summary>
-        ///  备注 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "备注不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string WRRemarks { get; set; }
-	}
-
-	
-    /// <summary>
-    ///  补货 
-    /// </summary>
-	[Table("ReplenishmentApplicationForm")]
-    public class ReplenishmentApplicationForm 
-    {
-			        
-        /// <summary>
-        ///  ReplenishmentApplicationForm编号
+        ///  GoodsShelves编号
         /// </summary>
 		[Key]
         public int id { get; set; }
@@ -916,21 +391,261 @@ namespace EF.Entities
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "货架编号不能为空")]
 		
-        public Nullable<int> RAFShelfNumber { get; set; }
+        public Nullable<int> GSShelfNumber { get; set; }
+			
+        /// <summary>
+        ///  容量 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "容量不能为空")]
+		
+        public Nullable<int> GSCapacity { get; set; }
+			
+        /// <summary>
+        ///  地点 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "地点不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string GSLocality { get; set; }
+			
+        /// <summary>
+        ///  负责人工号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "负责人工号不能为空")]
+		
+        public Nullable<int> GSResponsibleForManualNumber { get; set; }
+	}
+
+	
+    /// <summary>
+    ///  仓库 
+    /// </summary>
+	[Table("Warehouse")]
+    public class Warehouse 
+    {
+			        
+        /// <summary>
+        ///  Warehouse编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+			
+        /// <summary>
+        ///  仓库编号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "仓库编号不能为空")]
+		
+        public Nullable<int> WWarehouseNumber { get; set; }
+			
+        /// <summary>
+        ///  容量 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "容量不能为空")]
+		
+        public Nullable<int> WCapacity { get; set; }
+			
+        /// <summary>
+        ///  地点 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "地点不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string WLocality { get; set; }
+			
+        /// <summary>
+        ///  负责人工号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "负责人工号不能为空")]
+		
+        public Nullable<int> WResponsibleForManualNumber { get; set; }
+	}
+
+	
+    /// <summary>
+    ///  供应商 
+    /// </summary>
+	[Table("Supplier")]
+    public class Supplier 
+    {
+			        
+        /// <summary>
+        ///  Supplier编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+			
+        /// <summary>
+        ///  供应商编号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "供应商编号不能为空")]
+		
+        public Nullable<int> SSupplierNumber { get; set; }
+			
+        /// <summary>
+        ///  供应商名称 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "供应商名称不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string SSupplierName { get; set; }
+			
+        /// <summary>
+        ///  联系方式 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "联系方式不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string SCommonModeOfContact { get; set; }
+			
+        /// <summary>
+        ///  办公地点 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "办公地点不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string SOfficeLocation { get; set; }
+	}
+
+	
+    /// <summary>
+    ///  销售单 
+    /// </summary>
+	[Table("SalesUnitPrice")]
+    public class SalesUnitPrice 
+    {
+			        
+        /// <summary>
+        ///  SalesUnitPrice编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
 			
         /// <summary>
         ///  货物编号 INT 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "货物编号不能为空")]
 		
-        public Nullable<int> RAFCargoNumber { get; set; }
+        public Nullable<int> SUPCargoNumber { get; set; }
 			
         /// <summary>
-        ///  仓库管理员工号 INT 
+        ///  客户编号 INT 
         /// </summary>
-		// [NotNullValidator(MessageTemplate = "仓库管理员工号不能为空")]
+		// [NotNullValidator(MessageTemplate = "客户编号不能为空")]
 		
-        public Nullable<int> RAFWarehouseManagementStaffNumber { get; set; }
+        public Nullable<int> SUPCustomerNumber { get; set; }
+			
+        /// <summary>
+        ///  销售员工号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "销售员工号不能为空")]
+		
+        public Nullable<int> SUPSalesStaffNumber { get; set; }
 			
         /// <summary>
         ///  日期 DATETIME 
@@ -938,21 +653,218 @@ namespace EF.Entities
 		// [NotNullValidator(MessageTemplate = "日期不能为空")]
 				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
 		
-        public Nullable<DateTime> RAFDate { get; set; }
+        public Nullable<DateTime> SUPDate { get; set; }
 			
         /// <summary>
         ///  数量 NVARCHAR(50) 50
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "数量不能为空")]
 		/* [StringLengthValidator(0,50)] */
-        public string RAFAmount { get; set; }
+        public string SUPAmount { get; set; }
+			
+        /// <summary>
+        ///  价格 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "价格不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string SUPPrice { get; set; }
 			
         /// <summary>
         ///  备注 NVARCHAR(50) 50
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "备注不能为空")]
 		/* [StringLengthValidator(0,50)] */
-        public string RAFRemarks { get; set; }
+        public string SUPRemarks { get; set; }
+	}
+
+	
+    /// <summary>
+    ///  供货单 
+    /// </summary>
+	[Table("SupplyList")]
+    public class SupplyList 
+    {
+			        
+        /// <summary>
+        ///  SupplyList编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+			
+        /// <summary>
+        ///  仓库编号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "仓库编号不能为空")]
+		
+        public Nullable<int> SLWarehouseNumber { get; set; }
+			
+        /// <summary>
+        ///  货物编号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "货物编号不能为空")]
+		
+        public Nullable<int> SLCargoNumber { get; set; }
+			
+        /// <summary>
+        ///  仓库管理员工号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "仓库管理员工号不能为空")]
+		
+        public Nullable<int> SLWarehouseManagementStaffNumber { get; set; }
+			
+        /// <summary>
+        ///  日期 DATETIME 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "日期不能为空")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+		
+        public Nullable<DateTime> SLDate { get; set; }
+			
+        /// <summary>
+        ///  数量 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "数量不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string SLAmount { get; set; }
+			
+        /// <summary>
+        ///  备注 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "备注不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string SLRemarks { get; set; }
+	}
+
+	
+    /// <summary>
+    ///  补货单 
+    /// </summary>
+	[Table("ReplenishmentBill")]
+    public class ReplenishmentBill 
+    {
+			        
+        /// <summary>
+        ///  ReplenishmentBill编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+			
+        /// <summary>
+        ///  货架编号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "货架编号不能为空")]
+		
+        public Nullable<int> RBShelfNumber { get; set; }
+			
+        /// <summary>
+        ///  货物编号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "货物编号不能为空")]
+		
+        public Nullable<int> RBCargoNumber { get; set; }
+			
+        /// <summary>
+        ///  仓库管理员工号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "仓库管理员工号不能为空")]
+		
+        public Nullable<int> RBWarehouseManagementStaffNumber { get; set; }
+			
+        /// <summary>
+        ///  日期 DATETIME 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "日期不能为空")]
+				//[RelativeDateTimeValidator(-140, DateTimeUnit.Year, 0, DateTimeUnit.Second, MessageTemplate = "日期格式错误")]
+		
+        public Nullable<DateTime> RBDate { get; set; }
+			
+        /// <summary>
+        ///  数量 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "数量不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string RBAmount { get; set; }
+			
+        /// <summary>
+        ///  备注 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "备注不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string RBRemarks { get; set; }
 	}
 
 	

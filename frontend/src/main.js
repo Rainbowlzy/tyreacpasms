@@ -8,16 +8,6 @@ import BootstrapVue from 'bootstrap-vue'
 import Vuex from 'vuex'
 import store from './store'
 
-
-//import AMap from 'vue-amap'
-
-//Vue.use(AMap);
-//AMap.initAMapApiLoader({
-//  key: 'd19bd922e0ef902491adfea1eb684502',
-//  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor']
-//});
-
-
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 Vue.use(VueCookie);
@@ -30,8 +20,8 @@ Vue.config.productionTip = false;
 Vue.http.interceptors.push((request, next) => {
   request.credentials = true;
   next();
-  });
-  
+});
+
 new Vue({
   render: h => h(App),
   store,

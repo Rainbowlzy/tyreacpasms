@@ -291,7 +291,7 @@ foreach(var col in table.Columns.Where(p=>p.dbtype.Contains("NVARCHAR"))){
 				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
                 searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
                 var isordered = false;
-                var search = searchModel.SearchKey ?? @params["search"];
+                var search = @params["search"] ?? searchModel.SearchKey;
                 var sort = searchModel.Sort ?? @params["sort"];
 				var order = @params["order"];
 <#
@@ -341,11 +341,7 @@ else {
 if(column_to_search.Any()){
 #>
 				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.id!=-1<#
-								foreach(var col in column_to_search){
-								#>||t.<#=col#>.Contains(search)<#
-								}
-								#>);
+					query = query.Where(t=><#=string.Join("||",column_to_search.Select(col=>string.Format("t.{0}.Contains(search)",col)))#>);
 				}
 <# } #>
                 if(sort=="ord")

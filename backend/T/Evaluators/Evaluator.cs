@@ -23,10 +23,167 @@ namespace T.Evaluators
         private UserInformation _user;
 
         private CommonRequest Request { get; set; }
-        
+
         protected Evaluator()
         {
             _user = CurrentUserInformation;
+
+            using (var ctx = new DefaultContext())
+            {
+                ctx.BuildMenu();
+                ctx.SaveChanges();
+                var TransactionID = Guid.NewGuid().ToString();
+                if (ctx.Warehouse.Any()) return;
+                ctx.Cargo.AddRange("海尔冰箱，格力空调，海尔洗衣机，三星洗衣机".Split(new[] { '，' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => new Cargo
+                    {
+                        CNameOfGoods = s,
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    }));
+                ctx.Supplier.AddRange("海尔，格力，三星".Split(new[] { '，' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => new Supplier
+                    {
+                        SSupplierName = s,
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    }));
+                ctx.Warehouse.AddRange(new[]
+                {
+                    new Warehouse
+                    {
+                        WLocality = "五角场仓库",
+                        WResponsibleForManualNumber = 10003,
+                        WCapacity = 500,
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    },
+                    new Warehouse
+                    {
+                        WLocality = "新江湾城仓库",
+                        WResponsibleForManualNumber = 10004,
+                        WCapacity = 500,
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    }
+                });
+                ctx.Customertype.AddRange(new[]
+                {
+                    new Customertype
+                    {
+                        CCustomerNumber = 30001,
+                        CName = "张三",
+                        CCommonModeOfContact = "13222210188",
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    },
+                    new Customertype
+                    {
+                        CCustomerNumber = 30002,
+                        CName = "李四",
+                        CCommonModeOfContact = "13222210183",
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    },
+                });
+                ctx.GoodsShelves.AddRange(new[]
+                {
+                    new GoodsShelves
+                    {
+                        GSResponsibleForManualNumber = 10003,
+                        GSLocality = "五角场货架",
+                        GSCapacity = 500,
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    },
+                    new GoodsShelves
+                    {
+                        GSResponsibleForManualNumber = 10004,
+                        GSLocality = "新江湾城货架",
+                        GSCapacity = 500,
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    }
+                });
+                ctx.Staffname.AddRange(new[]
+                {
+                    new Staffname
+                    {
+                        SJobNumber = 10001,
+                        SName = "销售员1",
+                        SCommonModeOfContact = "13222210155",
+                        SEducation = "本科",
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    },
+                    new Staffname
+                    {
+                        SJobNumber = 10002,
+                        SName = "销售员2",
+                        SCommonModeOfContact = "13222288101",
+                        SEducation = "本科",
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    },
+                    new Staffname
+                    {
+                        SJobNumber = 10003,
+                        SName = "仓库管理员1",
+                        SCommonModeOfContact = "13222210991",
+                        SEducation = "本科",
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    },
+                    new Staffname
+                    {
+                        SJobNumber = 10004,
+                        SName = "仓库管理员2",
+                        SCommonModeOfContact = "13222440101",
+                        SEducation = "本科",
+                        CreateBy = "JOB",
+                        TransactionID = TransactionID,
+                        IsDeleted = 0,
+                        DataLevel = "01",
+                        CreateOn = DateTime.Now,
+                    },
+                });
+
+
+                ctx.SaveChanges();
+            }
         }
 
         public virtual string Comments => "重写此方法给出中文描述";
