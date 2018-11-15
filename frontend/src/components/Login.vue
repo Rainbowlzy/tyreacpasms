@@ -12,7 +12,7 @@
         </b-alert>
         <div class="row">
 
-            <div class="col-xs-1"><label for="UILoginName" class="control-label">登录名</label></div>
+            <div class="col-xs-1"><label for="UILoginName" class="control-label">用户</label></div>
             <div class="col-xs-3">
                 <input type="text" @keydown.enter="login" class="form-control" id="UILoginName" v-model="user.UILoginName" placeholder="请输入登录名"/>
             </div>
