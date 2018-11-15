@@ -129,7 +129,7 @@ export default {
             evt.preventDefault();
             if (this.$data.currentOne) {
                 Axios({
-                    url: `http://122.193.9.83/tyreacpasms/DefaultHandler.ashx`,
+                    url: `/DefaultHandler.ashx`,
                     params: {
                         method: `save${caption}`,
                         data: encodeURIComponent(JSON.stringify(this.$data.currentOne))
@@ -157,7 +157,7 @@ export default {
             evt.preventDefault();
             if (this.$data.current) {
                 Axios({
-                    url: `http://122.193.9.83/tyreacpasms/DefaultHandler.ashx`,
+                    url: `/DefaultHandler.ashx`,
                     params: {
                         method: `save${caption}`,
                         data: encodeURIComponent(JSON.stringify(this.$data.current.item))
@@ -206,9 +206,9 @@ export default {
                 data_to_post = encodeURIComponent(
                     JSON.stringify(vm.row_to_delete.item)
                 ),
-                token = this.$store.state.user.token;
+                token = vm.$store.state.user.token;
             Axios({
-                    url: `http://122.193.9.83/tyreacpasms/DefaultHandler.ashx`,
+                    url: `/DefaultHandler.ashx`,
                     params: {
                         method: `delete${caption}`,
                         data: data_to_post
@@ -240,7 +240,7 @@ export default {
                 caption = this.$route.params.mccaption,
                 token = this.$store.state.user.token,
                 result = Axios({
-                    url: `http://122.193.9.83/tyreacpasms/DefaultHandler.ashx`,
+                    url: `/DefaultHandler.ashx`,
                     params: {
                         method: `get${caption}list`,
                         auth_user: token,

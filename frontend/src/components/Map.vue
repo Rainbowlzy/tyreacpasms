@@ -85,7 +85,7 @@
         name: 'Business',
         mounted: function () {
             var vm = this;
-            this.$http.get('http://122.193.9.83/tyreacpasms/DefaultHandler.ashx?method=GetMapCategoryEvaluator').then(function (categories) {
+            this.$http.get('/DefaultHandler.ashx?method=GetMapCategoryEvaluator').then(function (categories) {
                 vm.$data.categories = categories.body;
             });
             var map = this.map = new AMap.Map('amap', {
@@ -99,7 +99,7 @@
             // 绘制香溪社区边框图开始
             // 据说要不到点位，所以随便画好了。
             var address = "香溪社区外框图";
-            this.$http.get("http://122.193.9.83/tyreacpasms/DefaultHandler.ashx?method=getpoilist", {
+            this.$http.get("/DefaultHandler.ashx?method=getpoilist", {
                 params: {
                     data: {search: address, limit: 4000, sort: 'ord'}
                 }
@@ -279,7 +279,7 @@
                 var map = this.map;
                 $('.map_right_nav').hide();
                 $('.map_right_com').hide();
-                this.$http.get('http://122.193.9.83/tyreacpasms/DefaultHandler.ashx?method='+option.method, {
+                this.$http.get('/DefaultHandler.ashx?method='+option.method, {
                     params:{
                         data:$.extend({limit: 4000}, option.params)
                     }

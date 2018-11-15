@@ -191,6 +191,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorReport.cs" />
     <Compile Include="Evaluators\EvaluatorGen.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
