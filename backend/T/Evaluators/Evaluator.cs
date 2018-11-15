@@ -495,21 +495,33 @@ namespace T.Evaluators
 
         public object Eval(CommonRequest request)
         {
-            var method = request.method.ToLower();
-            if ("save,delete".Split(',').Any(s => method.StartsWith(s)))
+            try
             {
-                var keys = Sessions?.Keys.Where(p => p.Contains(method.Substring(3) + ",")).ToList();
-                if (keys != null)
-                    foreach (var key in keys)
-                    {
-                        Sessions.Remove(key);
-                    }
+                var method = request.method.ToLower();
+                if ("save,delete".Split(',').Any(s => method.StartsWith(s)))
+                {
+                    var keys = Sessions?.Keys.Where(p => p.Contains(method.Substring(3) + ",")).ToList();
+                    if (keys != null)
+                        foreach (var key in keys)
+                        {
+                            Sessions.Remove(key);
+                        }
 
-                return OnAfterEvaluate(Evaluate(OnBeforeEvaluate(request)));
+                    return OnAfterEvaluate(Evaluate(OnBeforeEvaluate(request)));
+                }
+
+                return Cache($"{request.method},{request.data},{request.auth}",
+                    () => OnAfterEvaluate(Evaluate(OnBeforeEvaluate(request))));
             }
-
-            return Cache($"{request.method},{request.data},{request.auth}",
-                () => OnAfterEvaluate(Evaluate(OnBeforeEvaluate(request))));
+            catch (Exception e)
+            {
+                return new
+                {
+                    success = false,
+                    message = e.Message,
+                    exception = e
+                };
+            }
         }
 
         protected abstract object Evaluate(CommonRequest request);

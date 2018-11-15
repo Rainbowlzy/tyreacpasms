@@ -2,8 +2,8 @@
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/14/2018 23:55:51
- * 生成版本：11/14/2018 22:32:14 
+ * 生成时间：11/15/2018 13:03:09
+ * 生成版本：11/15/2018 13:03:04 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 using System;
@@ -30,33 +30,6 @@ namespace T
             using (var tx = new DefaultContext())
             {
 				if(string.IsNullOrEmpty(title)) return string.Empty;
-											
-				else if (title == "Customertype")
-				{
-					buf.AppendLine("唯一编号\t客户编号\t姓名\t联系方式\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
-					var type = typeof (Customertype);
-					foreach (var entity in tx.Customertype)
-					{
-						buf.Append(entity.id);
-						buf.Append("\t");
-						
-													
-						buf.Append(entity.CCustomerNumber);buf.Append("\t");
-														
-						buf.Append(entity.CName);buf.Append("\t");
-														
-						buf.Append(entity.CCommonModeOfContact);buf.Append("\t");
-							
-                        buf.Append(entity.ord); buf.Append("\t");
-                        buf.Append(entity.VersionNo); buf.Append("\t");
-                        buf.Append(entity.TransactionID); buf.Append("\t");
-                        buf.Append(entity.CreateBy); buf.Append("\t");
-                        buf.Append(entity.CreateOn); buf.Append("\t");
-                        buf.Append(entity.UpdateBy); buf.Append("\t");
-                        buf.Append(entity.UpdateOn); buf.Append("\t");
-                        buf.Append(entity.DataLevel); buf.Append("\r\n");
-					}
-				}
 											
 				else if (title == "Supplier")
 				{
@@ -89,7 +62,7 @@ namespace T
 											
 				else if (title == "Cargo")
 				{
-					buf.AppendLine("唯一编号\t货物编号\t货物名称\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					buf.AppendLine("唯一编号\t货物编号\t货物名称\t型号\t有无配件\t售价\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
 					var type = typeof (Cargo);
 					foreach (var entity in tx.Cargo)
 					{
@@ -100,6 +73,49 @@ namespace T
 						buf.Append(entity.CCargoNumber);buf.Append("\t");
 														
 						buf.Append(entity.CNameOfGoods);buf.Append("\t");
+														
+						buf.Append(entity.CModel);buf.Append("\t");
+														
+						buf.Append(entity.CHaveParts);buf.Append("\t");
+														
+						buf.Append(entity.CPrice);buf.Append("\t");
+							
+                        buf.Append(entity.ord); buf.Append("\t");
+                        buf.Append(entity.VersionNo); buf.Append("\t");
+                        buf.Append(entity.TransactionID); buf.Append("\t");
+                        buf.Append(entity.CreateBy); buf.Append("\t");
+                        buf.Append(entity.CreateOn); buf.Append("\t");
+                        buf.Append(entity.UpdateBy); buf.Append("\t");
+                        buf.Append(entity.UpdateOn); buf.Append("\t");
+                        buf.Append(entity.DataLevel); buf.Append("\r\n");
+					}
+				}
+											
+				else if (title == "Customertype")
+				{
+					buf.AppendLine("唯一编号\t客户编号\t姓名\t联系方式\t性别\t出生年月\t地址\t邮编\t备注\t顺序号\t版本号\t会话编号\t创建人\t创建时间\t更新人\t更新时间\t数据级别\t");
+					var type = typeof (Customertype);
+					foreach (var entity in tx.Customertype)
+					{
+						buf.Append(entity.id);
+						buf.Append("\t");
+						
+													
+						buf.Append(entity.CCustomerNumber);buf.Append("\t");
+														
+						buf.Append(entity.CName);buf.Append("\t");
+														
+						buf.Append(entity.CCommonModeOfContact);buf.Append("\t");
+														
+						buf.Append(entity.CChairperson);buf.Append("\t");
+														
+						buf.Append(entity.CDateOfBirth);buf.Append("\t");
+														
+						buf.Append(entity.CAddress);buf.Append("\t");
+														
+						buf.Append(entity.CZipCode);buf.Append("\t");
+														
+						buf.Append(entity.CRemarks);buf.Append("\t");
 							
                         buf.Append(entity.ord); buf.Append("\t");
                         buf.Append(entity.VersionNo); buf.Append("\t");
@@ -581,7 +597,7 @@ namespace T
             using (var tx = new DefaultContext())
             {
                 Dictionary<string, Dictionary<string, string>> dic = null;
-                string cacheFile = "table_mapping_file2018-11-14T223214.txt";
+                string cacheFile = "table_mapping_file2018-11-15T130304.txt";
                 if (File.Exists(cacheFile))
                     dic = File.ReadAllText(cacheFile).Deserialize<Dictionary<string, Dictionary<string, string>>>();
                 else
@@ -589,11 +605,11 @@ namespace T
 #region init
 					dic = new Dictionary<string, Dictionary<string,string>>();
 									
-					dic.Add("Customertype", new Dictionary<string,string>{ {"CCustomerNumber","客户编号"},{"CName","姓名"},{"CCommonModeOfContact","联系方式"} });
-										
 					dic.Add("Supplier", new Dictionary<string,string>{ {"SSupplierNumber","供应商编号"},{"SSupplierName","供应商名称"},{"SCommonModeOfContact","联系方式"},{"SOfficeLocation","办公地点"} });
 										
-					dic.Add("Cargo", new Dictionary<string,string>{ {"CCargoNumber","货物编号"},{"CNameOfGoods","货物名称"} });
+					dic.Add("Cargo", new Dictionary<string,string>{ {"CCargoNumber","货物编号"},{"CNameOfGoods","货物名称"},{"CModel","型号"},{"CHaveParts","有无配件"},{"CPrice","售价"} });
+										
+					dic.Add("Customertype", new Dictionary<string,string>{ {"CCustomerNumber","客户编号"},{"CName","姓名"},{"CCommonModeOfContact","联系方式"},{"CChairperson","性别"},{"CDateOfBirth","出生年月"},{"CAddress","地址"},{"CZipCode","邮编"},{"CRemarks","备注"} });
 										
 					dic.Add("Staffname", new Dictionary<string,string>{ {"SJobNumber","工号"},{"SName","姓名"},{"SEducation","学历"},{"SCommonModeOfContact","联系方式"} });
 										
@@ -631,16 +647,6 @@ namespace T
 				var transactionId = Guid.NewGuid().ToString();
                 var keypair = dic[fileType]; //commentses.ToDictionary(f => f.column_name, f => f.column_description);
                 if (string.IsNullOrEmpty(fileType)) return ;
-				else if (fileType == "Customertype") ExcelHelper.ExcelToNewEntityList<Customertype>(keypair, filePath, out errorMsg).ForEach(one=>{
-                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
-                    one.CreateOn = one.CreateOn ?? DateTime.Now;
-                    one.TransactionID = transactionId;
-                    one.UpdateOn = DateTime.Now;
-                    one.IsDeleted = 0;
-                    one.DataLevel = user?.DataLevel ?? "01";
-					tx.Customertype.AddOrUpdate(one);
-					});
 				else if (fileType == "Supplier") ExcelHelper.ExcelToNewEntityList<Supplier>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
                     one.UpdateBy = user?.UILoginName ?? "未登录用户";
@@ -660,6 +666,16 @@ namespace T
                     one.IsDeleted = 0;
                     one.DataLevel = user?.DataLevel ?? "01";
 					tx.Cargo.AddOrUpdate(one);
+					});
+				else if (fileType == "Customertype") ExcelHelper.ExcelToNewEntityList<Customertype>(keypair, filePath, out errorMsg).ForEach(one=>{
+                    one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                    one.UpdateBy = user?.UILoginName ?? "未登录用户";
+                    one.CreateOn = one.CreateOn ?? DateTime.Now;
+                    one.TransactionID = transactionId;
+                    one.UpdateOn = DateTime.Now;
+                    one.IsDeleted = 0;
+                    one.DataLevel = user?.DataLevel ?? "01";
+					tx.Customertype.AddOrUpdate(one);
 					});
 				else if (fileType == "Staffname") ExcelHelper.ExcelToNewEntityList<Staffname>(keypair, filePath, out errorMsg).ForEach(one=>{
                     one.CreateBy = one.CreateBy ?? user?.UILoginName ?? "未登录用户";

@@ -28,9 +28,9 @@ namespace TEntities.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 			
-			modelBuilder.Entity<Customertype>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<Supplier>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<Cargo>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
+			modelBuilder.Entity<Customertype>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<Staffname>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<Warehouse>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
 			modelBuilder.Entity<GoodsShelves>().Property(p => p.id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity); 
@@ -86,42 +86,6 @@ namespace TEntities.EF
 				UpdateBy = CreateBy
 			});
 			
-			if (!MenuConfiguration.Any(t => t.MCCaption == "客户"))
-			{
-				RoleMenu.Add(new RoleMenu
-				{
-					RMRoleName = "超级管理员",
-					RMMenuTitle = "客户",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-					CreateOn = DateTime.Now,
-					UpdateOn = DateTime.Now,
-					UpdateBy = CreateBy
-				});
-				MenuConfiguration.Add(new MenuConfiguration
-				{
-					MCDisplayName = "客户",
-					MCCaption = "客户",
-					MCLink = "/pagelist/Customertype",
-					MCParentTitle = "后台首页",
-					CreateBy = CreateBy,
-					TransactionID = TransactionID,
-					IsDeleted = 0,
-					DataLevel = "01",
-                    CreateOn = DateTime.Now,
-                    UpdateOn = DateTime.Now,
-                    UpdateBy = CreateBy
-				});
-			}
-			var customertype = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "客户");
-			if(customertype!=null)
-			{
-				customertype.MCLink = "/pagelist/CustomertypeList.html";
-				MenuConfiguration.AddOrUpdate(customertype);
-			}
-
 			if (!MenuConfiguration.Any(t => t.MCCaption == "供应商"))
 			{
 				RoleMenu.Add(new RoleMenu
@@ -192,6 +156,42 @@ namespace TEntities.EF
 			{
 				cargo.MCLink = "/pagelist/CargoList.html";
 				MenuConfiguration.AddOrUpdate(cargo);
+			}
+
+			if (!MenuConfiguration.Any(t => t.MCCaption == "客户"))
+			{
+				RoleMenu.Add(new RoleMenu
+				{
+					RMRoleName = "超级管理员",
+					RMMenuTitle = "客户",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+					CreateOn = DateTime.Now,
+					UpdateOn = DateTime.Now,
+					UpdateBy = CreateBy
+				});
+				MenuConfiguration.Add(new MenuConfiguration
+				{
+					MCDisplayName = "客户",
+					MCCaption = "客户",
+					MCLink = "/pagelist/Customertype",
+					MCParentTitle = "后台首页",
+					CreateBy = CreateBy,
+					TransactionID = TransactionID,
+					IsDeleted = 0,
+					DataLevel = "01",
+                    CreateOn = DateTime.Now,
+                    UpdateOn = DateTime.Now,
+                    UpdateBy = CreateBy
+				});
+			}
+			var customertype = MenuConfiguration.FirstOrDefault(t => t.MCCaption == "客户");
+			if(customertype!=null)
+			{
+				customertype.MCLink = "/pagelist/CustomertypeList.html";
+				MenuConfiguration.AddOrUpdate(customertype);
 			}
 
 			if (!MenuConfiguration.Any(t => t.MCCaption == "员工"))
@@ -739,11 +739,6 @@ namespace TEntities.EF
 		}
 
         /// <summary>
-        ///  客户 
-        /// </summary>
-        public virtual DbSet<Customertype> Customertype { get; set; }
-
-        /// <summary>
         ///  供应商 
         /// </summary>
         public virtual DbSet<Supplier> Supplier { get; set; }
@@ -752,6 +747,11 @@ namespace TEntities.EF
         ///  货物 
         /// </summary>
         public virtual DbSet<Cargo> Cargo { get; set; }
+
+        /// <summary>
+        ///  客户 
+        /// </summary>
+        public virtual DbSet<Customertype> Customertype { get; set; }
 
         /// <summary>
         ///  员工 

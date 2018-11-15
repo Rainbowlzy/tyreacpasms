@@ -1,8 +1,8 @@
 ﻿
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖
- * 生成时间：11/14/2018 23:55:51
- * 生成版本：11/14/2018 22:32:14 
+ * 生成时间：11/15/2018 13:03:09
+ * 生成版本：11/15/2018 13:03:04 
  * 作者：路正遥
  * ------------------------------------------------------------ */
 
@@ -24,304 +24,6 @@ using TEntities.EF;
 
 namespace T.Evaluators
 {
-
-    /// <summary>
-    /// 【客户】7次查询分别得到七天内记录的条数，形成柱状图，折线图
-    /// </summary>
-    public partial class CustomertypeCountEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
-                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
-                var list = dates.Select(p => ctx.Customertype.Count(m => m.CreateOn==p)).ToList();
-                return new
-                {
-                    sum = list.Sum(),
-                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
-                    series = list
-                };
-            }
-        }
-        public override string Comments=> "【客户】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
-    }
-	public partial class TruncateCustomertypeEvaluator : Evaluator
-	{
-        protected override object Evaluate(CommonRequest request)
-		{
-            using (var ctx = new DefaultContext())
-			{
-                ctx.Customertype.RemoveRange(ctx.Customertype);
-				ctx.SaveChanges();
-			}
-			return new
-			{
-				success = true,
-				message = "操作成功"
-			};
-		}
-	}
-    /// <summary>
-    /// 删除【客户】
-    /// </summary>
-    public partial class DeleteCustomertypeEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var data = JsonConvert.DeserializeObject<Customertype>(HttpUtility.UrlDecode(request.data));
-            if (data == null)
-                return new CommonOutputT<string>
-                {
-                    success = false,
-                    message = "参数错误"
-                };
-            using (var ctx = new DefaultContext())
-            {
-                var one = ctx.Customertype.Find(data.id);
-				if(one==null){
-					return new CommonOutputT<string>
-					{
-						success = false,
-						message = "未找到需要删除的数据"
-					};
-				}
-                one.IsDeleted = 1;
-				ctx.Customertype.AddOrUpdate(one);
-				ctx.SaveChanges();
-				return new CommonOutputT<string>
-				{
-					success = true,
-					message = "删除成功"
-				};
-            }
-			
-        }
-        public override string Comments=> "删除一条客户记录";
-    }
-	
-    /// <summary>
-    /// 保存【客户】
-    /// </summary>
-    public partial class SaveCustomertypeEvaluator : Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            var user = CurrentUserInformation;
-            if (user==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "请登录"
-                };
-            }
-			var s = request.data;
-            if (s==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "缺少参数"
-                };
-            }
-			Customertype entity = null;
-			try
-			{
-				entity = JsonConvert.DeserializeObject<Customertype>(HttpUtility.UrlDecode(s));
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = $"填写内容格式错误：{exception.Message}",
-					input = s
-				};
-			}
-            if (entity==null)
-            {
-                return new
-                {
-                    success = false,
-                    message = "参数格式不正确"
-                };
-            }
-
-			try
-			{
-				foreach (ValidationResult result in Validation.Validate(entity))
-				{
-					return new
-					{
-						success = false,
-						message = result.Message
-					};
-				}
-			}
-			catch(Exception exception)
-			{
-				return new
-				{
-					success = false,
-					message = exception.Message
-				};
-			}
-			
-            using (var ctx = new DefaultContext())
-            {
-				// 行级排他锁开始
-                var transactionId = Guid.NewGuid().ToString();
-                var isnew = entity.TransactionID == null;
-                if (!isnew)
-                {
-                    var one = ctx.Customertype.FirstOrDefault(p=>p.id==entity.id);
-                    if(one==null) return new
-                    {
-                        success = false,
-                        message = "编辑错误，未找到ID"
-                    };
-                    if (one.VersionNo != entity.VersionNo) return new
-                    {
-                        success = false,
-                        message = "发生数据写冲突"
-                    };
-                    one.VersionNo++;
-                    one.TransactionID = transactionId;
-					ctx.Customertype.AddOrUpdate(one);
-					try
-					{
-						ctx.SaveChanges();
-					}
-					catch(Exception exception)
-					{
-						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
-						// return new
-						// {
-						// 	 success = false,
-						// 	 message = exception.Message,
-						// 	 exception, one, transactionId, entity
-						// };
-					}
-                    entity.VersionNo = one.VersionNo;
-                }
-				
-
-								// NVARCHAR(50) 姓名
-				entity.CName = HttpUtility.UrlDecode(entity.CName);
-					// NVARCHAR(50) 联系方式
-				entity.CCommonModeOfContact = HttpUtility.UrlDecode(entity.CCommonModeOfContact);
-	
-                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
-                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
-                entity.CreateOn = entity.CreateOn ?? Now;
-                entity.TransactionID = transactionId;
-                entity.UpdateOn = Now;
-                entity.IsDeleted = 0;
-	            entity.VersionNo = entity.VersionNo ?? 0;
-                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
-				ctx.Customertype.AddOrUpdate(entity);
-				try
-				{
-					ctx.SaveChanges();
-				}
-				catch(Exception exception)
-				{
-					return new
-					{
-						success = false,
-						message = exception.Message,
-						exception, transactionId, entity
-					};
-				}
-				// 行级排他锁结束
-                return new
-                {
-                    success = true,
-                    message = "操作成功"
-                };
-            }
-        }
-        public override string Comments=> "保存一条Customertype记录";
-    }
-	
-    /// <summary>
-    /// 查询空的【客户】
-    /// </summary>
-    public partial class GetCustomertypeEmptyEvaluator:Evaluator
-    {
-        protected override object Evaluate(CommonRequest request)
-        {
-            return new Customertype();
-        }
-        public override string Comments=> "获取空的客户记录";
-    }
-	
-    /// <summary>
-    /// 查询【客户】列表
-    /// </summary>
-    public partial class GetCustomertypeListEvaluator : Evaluator
-    {
-        public override string Comments=> "获取Customertype列表 ";
-        protected override object Evaluate(CommonRequest request)
-        {
-            using (var ctx = new DefaultContext())
-            {
-				var datalevel = CurrentUserInformation?.DataLevel;
-                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<CustomertypeSearchModel>() ?? new CustomertypeSearchModel();
-                var query = ctx.Customertype.Where(t=>t.IsDeleted==0);
-                var @params = request.context.Request.Params;
-                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
-				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
-                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
-                var isordered = false;
-                var search = @params["search"] ?? searchModel.SearchKey;
-                var sort = searchModel.Sort ?? @params["sort"];
-				var order = @params["order"];
-				// CCustomerNumber INT 客户编号 
-                if(searchModel.MinCCustomerNumber!=null) query = query.Where(t=>t.CCustomerNumber>=searchModel.MinCCustomerNumber);
-                if(searchModel.MaxCCustomerNumber!=null) query = query.Where(t=>t.CCustomerNumber<=searchModel.MaxCCustomerNumber);
-                if(sort=="CCustomerNumber")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.CCustomerNumber):query.OrderByDescending(t=>t.CCustomerNumber);
-                    isordered = true;
-                }
-				// CName NVARCHAR(50) 姓名 
-                if(!string.IsNullOrEmpty(searchModel.CName)) query = query.Where(t=>t.CName.Contains(searchModel.CName));
-                if(sort=="CName")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.CName):query.OrderByDescending(t=>t.CName);
-                    isordered = true;
-                }
-				// CCommonModeOfContact NVARCHAR(50) 联系方式 
-                if(!string.IsNullOrEmpty(searchModel.CCommonModeOfContact)) query = query.Where(t=>t.CCommonModeOfContact.Contains(searchModel.CCommonModeOfContact));
-                if(sort=="CCommonModeOfContact")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.CCommonModeOfContact):query.OrderByDescending(t=>t.CCommonModeOfContact);
-                    isordered = true;
-                }
-				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.CName.Contains(search)||t.CCommonModeOfContact.Contains(search));
-				}
-                if(sort=="ord")
-                {
-					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
-                    isordered = true;
-                }
-
-                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
-                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
-                var total = query.Count();
-                var sql = query.ToString();
-                return new CommonOutputList<Customertype>
-                {
-                    success = true, rows = rows, total = total, message="查询成功"
-                };
-            }
-        }
-    }
-
 
     /// <summary>
     /// 【供应商】7次查询分别得到七天内记录的条数，形成柱状图，折线图
@@ -815,6 +517,12 @@ namespace T.Evaluators
 
 								// NVARCHAR(50) 货物名称
 				entity.CNameOfGoods = HttpUtility.UrlDecode(entity.CNameOfGoods);
+					// NVARCHAR(50) 型号
+				entity.CModel = HttpUtility.UrlDecode(entity.CModel);
+					// NVARCHAR(50) 有无配件
+				entity.CHaveParts = HttpUtility.UrlDecode(entity.CHaveParts);
+					// NVARCHAR(50) 售价
+				entity.CPrice = HttpUtility.UrlDecode(entity.CPrice);
 	
                 entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
                 entity.UpdateBy = user?.UILoginName ?? "未登录用户";
@@ -897,8 +605,29 @@ namespace T.Evaluators
 					query = order=="asc"?query.OrderBy(t=>t.CNameOfGoods):query.OrderByDescending(t=>t.CNameOfGoods);
                     isordered = true;
                 }
+				// CModel NVARCHAR(50) 型号 
+                if(!string.IsNullOrEmpty(searchModel.CModel)) query = query.Where(t=>t.CModel.Contains(searchModel.CModel));
+                if(sort=="CModel")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CModel):query.OrderByDescending(t=>t.CModel);
+                    isordered = true;
+                }
+				// CHaveParts NVARCHAR(50) 有无配件 
+                if(!string.IsNullOrEmpty(searchModel.CHaveParts)) query = query.Where(t=>t.CHaveParts.Contains(searchModel.CHaveParts));
+                if(sort=="CHaveParts")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CHaveParts):query.OrderByDescending(t=>t.CHaveParts);
+                    isordered = true;
+                }
+				// CPrice NVARCHAR(50) 售价 
+                if(!string.IsNullOrEmpty(searchModel.CPrice)) query = query.Where(t=>t.CPrice.Contains(searchModel.CPrice));
+                if(sort=="CPrice")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CPrice):query.OrderByDescending(t=>t.CPrice);
+                    isordered = true;
+                }
 				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.CNameOfGoods.Contains(search));
+					query = query.Where(t=>t.CNameOfGoods.Contains(search)||t.CModel.Contains(search)||t.CHaveParts.Contains(search)||t.CPrice.Contains(search));
 				}
                 if(sort=="ord")
                 {
@@ -911,6 +640,349 @@ namespace T.Evaluators
                 var total = query.Count();
                 var sql = query.ToString();
                 return new CommonOutputList<Cargo>
+                {
+                    success = true, rows = rows, total = total, message="查询成功"
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 【客户】7次查询分别得到七天内记录的条数，形成柱状图，折线图
+    /// </summary>
+    public partial class CustomertypeCountEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+                var now = Parse(request.context.Request.Params["date"] ?? Now.ToString("yyyy-MM-dd"));
+                var dates = Range(1, 7).Select(p => now.AddDays(-1 * p)).ToList();
+                var list = dates.Select(p => ctx.Customertype.Count(m => m.CreateOn==p)).ToList();
+                return new
+                {
+                    sum = list.Sum(),
+                    xaxis = dates.Select(p => p.ToString("yyyy-MM-dd")).ToList(),
+                    series = list
+                };
+            }
+        }
+        public override string Comments=> "【客户】7次查询分别得到七天内记录的条数，形成柱状图，折线图";
+    }
+	public partial class TruncateCustomertypeEvaluator : Evaluator
+	{
+        protected override object Evaluate(CommonRequest request)
+		{
+            using (var ctx = new DefaultContext())
+			{
+                ctx.Customertype.RemoveRange(ctx.Customertype);
+				ctx.SaveChanges();
+			}
+			return new
+			{
+				success = true,
+				message = "操作成功"
+			};
+		}
+	}
+    /// <summary>
+    /// 删除【客户】
+    /// </summary>
+    public partial class DeleteCustomertypeEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var data = JsonConvert.DeserializeObject<Customertype>(HttpUtility.UrlDecode(request.data));
+            if (data == null)
+                return new CommonOutputT<string>
+                {
+                    success = false,
+                    message = "参数错误"
+                };
+            using (var ctx = new DefaultContext())
+            {
+                var one = ctx.Customertype.Find(data.id);
+				if(one==null){
+					return new CommonOutputT<string>
+					{
+						success = false,
+						message = "未找到需要删除的数据"
+					};
+				}
+                one.IsDeleted = 1;
+				ctx.Customertype.AddOrUpdate(one);
+				ctx.SaveChanges();
+				return new CommonOutputT<string>
+				{
+					success = true,
+					message = "删除成功"
+				};
+            }
+			
+        }
+        public override string Comments=> "删除一条客户记录";
+    }
+	
+    /// <summary>
+    /// 保存【客户】
+    /// </summary>
+    public partial class SaveCustomertypeEvaluator : Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            var user = CurrentUserInformation;
+            if (user==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "请登录"
+                };
+            }
+			var s = request.data;
+            if (s==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "缺少参数"
+                };
+            }
+			Customertype entity = null;
+			try
+			{
+				entity = JsonConvert.DeserializeObject<Customertype>(HttpUtility.UrlDecode(s));
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = $"填写内容格式错误：{exception.Message}",
+					input = s
+				};
+			}
+            if (entity==null)
+            {
+                return new
+                {
+                    success = false,
+                    message = "参数格式不正确"
+                };
+            }
+
+			try
+			{
+				foreach (ValidationResult result in Validation.Validate(entity))
+				{
+					return new
+					{
+						success = false,
+						message = result.Message
+					};
+				}
+			}
+			catch(Exception exception)
+			{
+				return new
+				{
+					success = false,
+					message = exception.Message
+				};
+			}
+			
+            using (var ctx = new DefaultContext())
+            {
+				// 行级排他锁开始
+                var transactionId = Guid.NewGuid().ToString();
+                var isnew = entity.TransactionID == null;
+                if (!isnew)
+                {
+                    var one = ctx.Customertype.FirstOrDefault(p=>p.id==entity.id);
+                    if(one==null) return new
+                    {
+                        success = false,
+                        message = "编辑错误，未找到ID"
+                    };
+                    if (one.VersionNo != entity.VersionNo) return new
+                    {
+                        success = false,
+                        message = "发生数据写冲突"
+                    };
+                    one.VersionNo++;
+                    one.TransactionID = transactionId;
+					ctx.Customertype.AddOrUpdate(one);
+					try
+					{
+						ctx.SaveChanges();
+					}
+					catch(Exception exception)
+					{
+						// 遇到数据库中的脏数据，走到这里，前面的Entity数据合法，直接跳过这里的数据校验阶段，使用最先到达的正确数据。
+						// return new
+						// {
+						// 	 success = false,
+						// 	 message = exception.Message,
+						// 	 exception, one, transactionId, entity
+						// };
+					}
+                    entity.VersionNo = one.VersionNo;
+                }
+				
+
+								// NVARCHAR(50) 姓名
+				entity.CName = HttpUtility.UrlDecode(entity.CName);
+					// NVARCHAR(50) 联系方式
+				entity.CCommonModeOfContact = HttpUtility.UrlDecode(entity.CCommonModeOfContact);
+					// NVARCHAR(50) 性别
+				entity.CChairperson = HttpUtility.UrlDecode(entity.CChairperson);
+					// NVARCHAR(50) 出生年月
+				entity.CDateOfBirth = HttpUtility.UrlDecode(entity.CDateOfBirth);
+					// NVARCHAR(50) 地址
+				entity.CAddress = HttpUtility.UrlDecode(entity.CAddress);
+					// NVARCHAR(50) 邮编
+				entity.CZipCode = HttpUtility.UrlDecode(entity.CZipCode);
+					// NVARCHAR(50) 备注
+				entity.CRemarks = HttpUtility.UrlDecode(entity.CRemarks);
+	
+                entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
+                entity.UpdateBy = user?.UILoginName ?? "未登录用户";
+                entity.CreateOn = entity.CreateOn ?? Now;
+                entity.TransactionID = transactionId;
+                entity.UpdateOn = Now;
+                entity.IsDeleted = 0;
+	            entity.VersionNo = entity.VersionNo ?? 0;
+                entity.DataLevel = entity.DataLevel ?? user?.DataLevel ?? "019999";
+				ctx.Customertype.AddOrUpdate(entity);
+				try
+				{
+					ctx.SaveChanges();
+				}
+				catch(Exception exception)
+				{
+					return new
+					{
+						success = false,
+						message = exception.Message,
+						exception, transactionId, entity
+					};
+				}
+				// 行级排他锁结束
+                return new
+                {
+                    success = true,
+                    message = "操作成功"
+                };
+            }
+        }
+        public override string Comments=> "保存一条Customertype记录";
+    }
+	
+    /// <summary>
+    /// 查询空的【客户】
+    /// </summary>
+    public partial class GetCustomertypeEmptyEvaluator:Evaluator
+    {
+        protected override object Evaluate(CommonRequest request)
+        {
+            return new Customertype();
+        }
+        public override string Comments=> "获取空的客户记录";
+    }
+	
+    /// <summary>
+    /// 查询【客户】列表
+    /// </summary>
+    public partial class GetCustomertypeListEvaluator : Evaluator
+    {
+        public override string Comments=> "获取Customertype列表 ";
+        protected override object Evaluate(CommonRequest request)
+        {
+            using (var ctx = new DefaultContext())
+            {
+				var datalevel = CurrentUserInformation?.DataLevel;
+                var searchModel = HttpUtility.UrlDecode(request.data).Deserialize<CustomertypeSearchModel>() ?? new CustomertypeSearchModel();
+                var query = ctx.Customertype.Where(t=>t.IsDeleted==0);
+                var @params = request.context.Request.Params;
+                searchModel.PageSize = (@params["limit"] ?? searchModel.PageSize.ToString()).ToInt();
+				searchModel.PageSize = searchModel.PageSize==0?4000:searchModel.PageSize;
+                searchModel.PageIndex = (@params["offset"]).ToInt()/ searchModel.PageSize;
+                var isordered = false;
+                var search = @params["search"] ?? searchModel.SearchKey;
+                var sort = searchModel.Sort ?? @params["sort"];
+				var order = @params["order"];
+				// CCustomerNumber INT 客户编号 
+                if(searchModel.MinCCustomerNumber!=null) query = query.Where(t=>t.CCustomerNumber>=searchModel.MinCCustomerNumber);
+                if(searchModel.MaxCCustomerNumber!=null) query = query.Where(t=>t.CCustomerNumber<=searchModel.MaxCCustomerNumber);
+                if(sort=="CCustomerNumber")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CCustomerNumber):query.OrderByDescending(t=>t.CCustomerNumber);
+                    isordered = true;
+                }
+				// CName NVARCHAR(50) 姓名 
+                if(!string.IsNullOrEmpty(searchModel.CName)) query = query.Where(t=>t.CName.Contains(searchModel.CName));
+                if(sort=="CName")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CName):query.OrderByDescending(t=>t.CName);
+                    isordered = true;
+                }
+				// CCommonModeOfContact NVARCHAR(50) 联系方式 
+                if(!string.IsNullOrEmpty(searchModel.CCommonModeOfContact)) query = query.Where(t=>t.CCommonModeOfContact.Contains(searchModel.CCommonModeOfContact));
+                if(sort=="CCommonModeOfContact")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CCommonModeOfContact):query.OrderByDescending(t=>t.CCommonModeOfContact);
+                    isordered = true;
+                }
+				// CChairperson NVARCHAR(50) 性别 
+                if(!string.IsNullOrEmpty(searchModel.CChairperson)) query = query.Where(t=>t.CChairperson.Contains(searchModel.CChairperson));
+                if(sort=="CChairperson")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CChairperson):query.OrderByDescending(t=>t.CChairperson);
+                    isordered = true;
+                }
+				// CDateOfBirth NVARCHAR(50) 出生年月 
+                if(!string.IsNullOrEmpty(searchModel.CDateOfBirth)) query = query.Where(t=>t.CDateOfBirth.Contains(searchModel.CDateOfBirth));
+                if(sort=="CDateOfBirth")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CDateOfBirth):query.OrderByDescending(t=>t.CDateOfBirth);
+                    isordered = true;
+                }
+				// CAddress NVARCHAR(50) 地址 
+                if(!string.IsNullOrEmpty(searchModel.CAddress)) query = query.Where(t=>t.CAddress.Contains(searchModel.CAddress));
+                if(sort=="CAddress")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CAddress):query.OrderByDescending(t=>t.CAddress);
+                    isordered = true;
+                }
+				// CZipCode NVARCHAR(50) 邮编 
+                if(!string.IsNullOrEmpty(searchModel.CZipCode)) query = query.Where(t=>t.CZipCode.Contains(searchModel.CZipCode));
+                if(sort=="CZipCode")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CZipCode):query.OrderByDescending(t=>t.CZipCode);
+                    isordered = true;
+                }
+				// CRemarks NVARCHAR(50) 备注 
+                if(!string.IsNullOrEmpty(searchModel.CRemarks)) query = query.Where(t=>t.CRemarks.Contains(searchModel.CRemarks));
+                if(sort=="CRemarks")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.CRemarks):query.OrderByDescending(t=>t.CRemarks);
+                    isordered = true;
+                }
+				if(!string.IsNullOrEmpty(search)){
+					query = query.Where(t=>t.CName.Contains(search)||t.CCommonModeOfContact.Contains(search)||t.CChairperson.Contains(search)||t.CDateOfBirth.Contains(search)||t.CAddress.Contains(search)||t.CZipCode.Contains(search)||t.CRemarks.Contains(search));
+				}
+                if(sort=="ord")
+                {
+					query = order=="asc"?query.OrderBy(t=>t.ord):query.OrderByDescending(t=>t.ord);
+                    isordered = true;
+                }
+
+                if(!isordered) query = query.OrderByDescending(t=>t.UpdateOn);
+                var rows = query.Skip((searchModel.PageIndex)*searchModel.PageSize).Take(searchModel.PageSize).ToList();
+                var total = query.Count();
+                var sql = query.ToString();
+                return new CommonOutputList<Customertype>
                 {
                     success = true, rows = rows, total = total, message="查询成功"
                 };
@@ -2019,9 +2091,7 @@ namespace T.Evaluators
                 }
 				
 
-								// NVARCHAR(50) 数量
-				entity.PUPAmount = HttpUtility.UrlDecode(entity.PUPAmount);
-					// NVARCHAR(50) 价格
+								// NVARCHAR(50) 价格
 				entity.PUPPrice = HttpUtility.UrlDecode(entity.PUPPrice);
 					// NVARCHAR(50) 备注
 				entity.PUPRemarks = HttpUtility.UrlDecode(entity.PUPRemarks);
@@ -2124,8 +2194,9 @@ namespace T.Evaluators
 					query = order=="asc"?query.OrderBy(t=>t.PUPDate):query.OrderByDescending(t=>t.PUPDate);
                     isordered = true;
                 }
-				// PUPAmount NVARCHAR(50) 数量 
-                if(!string.IsNullOrEmpty(searchModel.PUPAmount)) query = query.Where(t=>t.PUPAmount.Contains(searchModel.PUPAmount));
+				// PUPAmount INT 数量 
+                if(searchModel.MinPUPAmount!=null) query = query.Where(t=>t.PUPAmount>=searchModel.MinPUPAmount);
+                if(searchModel.MaxPUPAmount!=null) query = query.Where(t=>t.PUPAmount<=searchModel.MaxPUPAmount);
                 if(sort=="PUPAmount")
                 {
 					query = order=="asc"?query.OrderBy(t=>t.PUPAmount):query.OrderByDescending(t=>t.PUPAmount);
@@ -2146,7 +2217,7 @@ namespace T.Evaluators
                     isordered = true;
                 }
 				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.PUPAmount.Contains(search)||t.PUPPrice.Contains(search)||t.PUPRemarks.Contains(search));
+					query = query.Where(t=>t.PUPPrice.Contains(search)||t.PUPRemarks.Contains(search));
 				}
                 if(sort=="ord")
                 {
@@ -2350,9 +2421,7 @@ namespace T.Evaluators
                 }
 				
 
-								// NVARCHAR(50) 数量
-				entity.SUPAmount = HttpUtility.UrlDecode(entity.SUPAmount);
-					// NVARCHAR(50) 价格
+								// NVARCHAR(50) 价格
 				entity.SUPPrice = HttpUtility.UrlDecode(entity.SUPPrice);
 					// NVARCHAR(50) 备注
 				entity.SUPRemarks = HttpUtility.UrlDecode(entity.SUPRemarks);
@@ -2455,8 +2524,9 @@ namespace T.Evaluators
 					query = order=="asc"?query.OrderBy(t=>t.SUPDate):query.OrderByDescending(t=>t.SUPDate);
                     isordered = true;
                 }
-				// SUPAmount NVARCHAR(50) 数量 
-                if(!string.IsNullOrEmpty(searchModel.SUPAmount)) query = query.Where(t=>t.SUPAmount.Contains(searchModel.SUPAmount));
+				// SUPAmount INT 数量 
+                if(searchModel.MinSUPAmount!=null) query = query.Where(t=>t.SUPAmount>=searchModel.MinSUPAmount);
+                if(searchModel.MaxSUPAmount!=null) query = query.Where(t=>t.SUPAmount<=searchModel.MaxSUPAmount);
                 if(sort=="SUPAmount")
                 {
 					query = order=="asc"?query.OrderBy(t=>t.SUPAmount):query.OrderByDescending(t=>t.SUPAmount);
@@ -2477,7 +2547,7 @@ namespace T.Evaluators
                     isordered = true;
                 }
 				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.SUPAmount.Contains(search)||t.SUPPrice.Contains(search)||t.SUPRemarks.Contains(search));
+					query = query.Where(t=>t.SUPPrice.Contains(search)||t.SUPRemarks.Contains(search));
 				}
                 if(sort=="ord")
                 {
@@ -2681,9 +2751,7 @@ namespace T.Evaluators
                 }
 				
 
-								// NVARCHAR(50) 数量
-				entity.SLAmount = HttpUtility.UrlDecode(entity.SLAmount);
-					// NVARCHAR(50) 备注
+								// NVARCHAR(50) 备注
 				entity.SLRemarks = HttpUtility.UrlDecode(entity.SLRemarks);
 	
                 entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
@@ -2784,8 +2852,9 @@ namespace T.Evaluators
 					query = order=="asc"?query.OrderBy(t=>t.SLDate):query.OrderByDescending(t=>t.SLDate);
                     isordered = true;
                 }
-				// SLAmount NVARCHAR(50) 数量 
-                if(!string.IsNullOrEmpty(searchModel.SLAmount)) query = query.Where(t=>t.SLAmount.Contains(searchModel.SLAmount));
+				// SLAmount INT 数量 
+                if(searchModel.MinSLAmount!=null) query = query.Where(t=>t.SLAmount>=searchModel.MinSLAmount);
+                if(searchModel.MaxSLAmount!=null) query = query.Where(t=>t.SLAmount<=searchModel.MaxSLAmount);
                 if(sort=="SLAmount")
                 {
 					query = order=="asc"?query.OrderBy(t=>t.SLAmount):query.OrderByDescending(t=>t.SLAmount);
@@ -2799,7 +2868,7 @@ namespace T.Evaluators
                     isordered = true;
                 }
 				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.SLAmount.Contains(search)||t.SLRemarks.Contains(search));
+					query = query.Where(t=>t.SLRemarks.Contains(search));
 				}
                 if(sort=="ord")
                 {
@@ -3003,9 +3072,7 @@ namespace T.Evaluators
                 }
 				
 
-								// NVARCHAR(50) 数量
-				entity.RBAmount = HttpUtility.UrlDecode(entity.RBAmount);
-					// NVARCHAR(50) 备注
+								// NVARCHAR(50) 备注
 				entity.RBRemarks = HttpUtility.UrlDecode(entity.RBRemarks);
 	
                 entity.CreateBy = entity.CreateBy ?? user?.UILoginName ?? "未登录用户";
@@ -3106,8 +3173,9 @@ namespace T.Evaluators
 					query = order=="asc"?query.OrderBy(t=>t.RBDate):query.OrderByDescending(t=>t.RBDate);
                     isordered = true;
                 }
-				// RBAmount NVARCHAR(50) 数量 
-                if(!string.IsNullOrEmpty(searchModel.RBAmount)) query = query.Where(t=>t.RBAmount.Contains(searchModel.RBAmount));
+				// RBAmount INT 数量 
+                if(searchModel.MinRBAmount!=null) query = query.Where(t=>t.RBAmount>=searchModel.MinRBAmount);
+                if(searchModel.MaxRBAmount!=null) query = query.Where(t=>t.RBAmount<=searchModel.MaxRBAmount);
                 if(sort=="RBAmount")
                 {
 					query = order=="asc"?query.OrderBy(t=>t.RBAmount):query.OrderByDescending(t=>t.RBAmount);
@@ -3121,7 +3189,7 @@ namespace T.Evaluators
                     isordered = true;
                 }
 				if(!string.IsNullOrEmpty(search)){
-					query = query.Where(t=>t.RBAmount.Contains(search)||t.RBRemarks.Contains(search));
+					query = query.Where(t=>t.RBRemarks.Contains(search));
 				}
                 if(sort=="ord")
                 {

@@ -8,79 +8,6 @@ namespace TEntities.EF
 {
 	
     /// <summary>
-    ///  客户 
-    /// </summary>
-	[Table("Customertype")]
-    public class Customertype 
-    {
-			        
-        /// <summary>
-        ///  Customertype编号
-        /// </summary>
-		[Key]
-        public int id { get; set; }
-        /// <summary>
-        ///  版本号
-        /// </summary>
-        public int? VersionNo { get; set; }
-        /// <summary>
-        ///  创建人
-        /// </summary>
-        public string CreateBy { get; set; }
-        /// <summary>
-        ///  创建时间
-        /// </summary>
-        public DateTime? CreateOn { get; set; }
-        /// <summary>
-        ///  更新时间
-        /// </summary>
-        public string UpdateBy { get; set; }
-        /// <summary>
-        ///  更新人
-        /// </summary>
-        public DateTime? UpdateOn { get; set; }
-        /// <summary>
-        ///  事务编号
-        /// </summary>
-        public string TransactionID { get; set; }
-        /// <summary>
-        ///  是否删除
-        /// </summary>
-		[Index]
-        public int? IsDeleted { get; set; }
-        /// <summary>
-        ///  数据级别
-        /// </summary>
-        public string DataLevel { get; set; }
-        /// <summary>
-        ///  排序
-        /// </summary>
-        public int? ord { get; set; }
-			
-        /// <summary>
-        ///  客户编号 INT 
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "客户编号不能为空")]
-		
-        public Nullable<int> CCustomerNumber { get; set; }
-			
-        /// <summary>
-        ///  姓名 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "姓名不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string CName { get; set; }
-			
-        /// <summary>
-        ///  联系方式 NVARCHAR(50) 50
-        /// </summary>
-		// [NotNullValidator(MessageTemplate = "联系方式不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string CCommonModeOfContact { get; set; }
-	}
-
-	
-    /// <summary>
     ///  供应商 
     /// </summary>
 	[Table("Supplier")]
@@ -223,6 +150,135 @@ namespace TEntities.EF
 		// [NotNullValidator(MessageTemplate = "货物名称不能为空")]
 		/* [StringLengthValidator(0,50)] */
         public string CNameOfGoods { get; set; }
+			
+        /// <summary>
+        ///  型号 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "型号不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CModel { get; set; }
+			
+        /// <summary>
+        ///  有无配件 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "有无配件不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CHaveParts { get; set; }
+			
+        /// <summary>
+        ///  售价 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "售价不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CPrice { get; set; }
+	}
+
+	
+    /// <summary>
+    ///  客户 
+    /// </summary>
+	[Table("Customertype")]
+    public class Customertype 
+    {
+			        
+        /// <summary>
+        ///  Customertype编号
+        /// </summary>
+		[Key]
+        public int id { get; set; }
+        /// <summary>
+        ///  版本号
+        /// </summary>
+        public int? VersionNo { get; set; }
+        /// <summary>
+        ///  创建人
+        /// </summary>
+        public string CreateBy { get; set; }
+        /// <summary>
+        ///  创建时间
+        /// </summary>
+        public DateTime? CreateOn { get; set; }
+        /// <summary>
+        ///  更新时间
+        /// </summary>
+        public string UpdateBy { get; set; }
+        /// <summary>
+        ///  更新人
+        /// </summary>
+        public DateTime? UpdateOn { get; set; }
+        /// <summary>
+        ///  事务编号
+        /// </summary>
+        public string TransactionID { get; set; }
+        /// <summary>
+        ///  是否删除
+        /// </summary>
+		[Index]
+        public int? IsDeleted { get; set; }
+        /// <summary>
+        ///  数据级别
+        /// </summary>
+        public string DataLevel { get; set; }
+        /// <summary>
+        ///  排序
+        /// </summary>
+        public int? ord { get; set; }
+			
+        /// <summary>
+        ///  客户编号 INT 
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "客户编号不能为空")]
+		
+        public Nullable<int> CCustomerNumber { get; set; }
+			
+        /// <summary>
+        ///  姓名 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "姓名不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CName { get; set; }
+			
+        /// <summary>
+        ///  联系方式 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "联系方式不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CCommonModeOfContact { get; set; }
+			
+        /// <summary>
+        ///  性别 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "性别不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CChairperson { get; set; }
+			
+        /// <summary>
+        ///  出生年月 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "出生年月不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CDateOfBirth { get; set; }
+			
+        /// <summary>
+        ///  地址 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "地址不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CAddress { get; set; }
+			
+        /// <summary>
+        ///  邮编 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "邮编不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CZipCode { get; set; }
+			
+        /// <summary>
+        ///  备注 NVARCHAR(50) 50
+        /// </summary>
+		// [NotNullValidator(MessageTemplate = "备注不能为空")]
+		/* [StringLengthValidator(0,50)] */
+        public string CRemarks { get; set; }
 	}
 
 	
@@ -546,11 +602,11 @@ namespace TEntities.EF
         public Nullable<DateTime> PUPDate { get; set; }
 			
         /// <summary>
-        ///  数量 NVARCHAR(50) 50
+        ///  数量 INT 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "数量不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string PUPAmount { get; set; }
+		
+        public Nullable<int> PUPAmount { get; set; }
 			
         /// <summary>
         ///  价格 NVARCHAR(50) 50
@@ -648,11 +704,11 @@ namespace TEntities.EF
         public Nullable<DateTime> SUPDate { get; set; }
 			
         /// <summary>
-        ///  数量 NVARCHAR(50) 50
+        ///  数量 INT 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "数量不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string SUPAmount { get; set; }
+		
+        public Nullable<int> SUPAmount { get; set; }
 			
         /// <summary>
         ///  价格 NVARCHAR(50) 50
@@ -750,11 +806,11 @@ namespace TEntities.EF
         public Nullable<DateTime> SLDate { get; set; }
 			
         /// <summary>
-        ///  数量 NVARCHAR(50) 50
+        ///  数量 INT 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "数量不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string SLAmount { get; set; }
+		
+        public Nullable<int> SLAmount { get; set; }
 			
         /// <summary>
         ///  备注 NVARCHAR(50) 50
@@ -845,11 +901,11 @@ namespace TEntities.EF
         public Nullable<DateTime> RBDate { get; set; }
 			
         /// <summary>
-        ///  数量 NVARCHAR(50) 50
+        ///  数量 INT 
         /// </summary>
 		// [NotNullValidator(MessageTemplate = "数量不能为空")]
-		/* [StringLengthValidator(0,50)] */
-        public string RBAmount { get; set; }
+		
+        public Nullable<int> RBAmount { get; set; }
 			
         /// <summary>
         ///  备注 NVARCHAR(50) 50
