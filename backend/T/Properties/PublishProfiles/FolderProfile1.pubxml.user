@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+此文件由 Web 项目的发布/打包过程使用。可以通过编辑此 MSBuild 文件
+自定义此过程的行为。为了解与此相关的更多内容，请访问 https://go.microsoft.com/fwlink/?LinkID=208121。 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\code\tyreacpasms\backend\T\bin\Release\Publish</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/23/2017 13:15:18</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>10/23/2017 13:15:20</publishTime>
+    </File>
+    <File Include="bin/ICSharpCode.SharpZipLib.dll">
+      <publishTime>01/03/2011 14:16:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>02/13/2018 16:28:04</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Caching.dll">
+      <publishTime>05/11/2011 12:51:38</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Common.dll">
+      <publishTime>04/25/2013 10:04:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Logging.dll">
+      <publishTime>04/25/2013 10:04:16</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Validation.dll">
+      <publishTime>04/25/2013 10:04:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/25/2012 11:48:56</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/24/2018 17:44:14</publishTime>
+    </File>
+    <File Include="bin/NPOI.dll">
+      <publishTime>03/21/2017 07:53:26</publishTime>
+    </File>
+    <File Include="bin/NPOI.OOXML.dll">
+      <publishTime>03/21/2017 07:53:26</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXml4Net.dll">
+      <publishTime>03/21/2017 07:53:26</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXmlFormats.dll">
+      <publishTime>03/21/2017 07:53:26</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>11/13/2012 12:19:34</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>05/10/2018 22:42:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>05/10/2018 22:38:08</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>05/10/2018 22:38:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>05/10/2018 22:42:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>05/10/2018 22:42:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>05/10/2018 22:42:40</publishTime>
+    </File>
+    <File Include="bin/T.dll">
+      <publishTime>11/15/2018 13:12:19</publishTime>
+    </File>
+    <File Include="bin/T.pdb">
+      <publishTime>11/15/2018 13:12:19</publishTime>
+    </File>
+    <File Include="bin/TEntities.dll">
+      <publishTime>11/15/2018 13:12:18</publishTime>
+    </File>
+    <File Include="bin/TEntities.dll.config">
+      <publishTime>11/07/2018 16:09:17</publishTime>
+    </File>
+    <File Include="bin/TEntities.pdb">
+      <publishTime>11/15/2018 13:12:18</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/EntityFramework.resources.dll">
+      <publishTime>10/23/2017 13:15:34</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/EntityFramework.SqlServer.resources.dll">
+      <publishTime>10/23/2017 13:15:34</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
+      <publishTime>05/10/2018 22:42:44</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
+      <publishTime>05/10/2018 22:38:14</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
+      <publishTime>05/10/2018 22:38:36</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Deployment.resources.dll">
+      <publishTime>05/10/2018 22:42:44</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Razor.resources.dll">
+      <publishTime>05/10/2018 22:42:44</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
+      <publishTime>05/10/2018 22:42:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css.map">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css.map">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css.map">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css.map">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="DefaultHandler.ashx">
+      <publishTime>11/07/2018 15:46:31</publishTime>
+    </File>
+    <File Include="ExcelImport.ashx">
+      <publishTime>11/07/2018 15:46:32</publishTime>
+    </File>
+    <File Include="ExportData.ashx">
+      <publishTime>11/07/2018 15:46:32</publishTime>
+    </File>
+    <File Include="ExportSchema.ashx">
+      <publishTime>11/07/2018 15:46:32</publishTime>
+    </File>
+    <File Include="Handler1.ashx">
+      <publishTime>11/07/2018 15:46:33</publishTime>
+    </File>
+    <File Include="ImageHandler.ashx">
+      <publishTime>08/30/2018 19:43:58</publishTime>
+    </File>
+    <File Include="ImageUpload.ashx">
+      <publishTime>11/07/2018 15:46:33</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>10/11/2018 15:19:24</publishTime>
+    </File>
+    <File Include="Version.ashx">
+      <publishTime>11/07/2018 15:46:34</publishTime>
+    </File>
+    <File Include="ViewPage1.cshtml">
+      <publishTime>08/30/2018 19:43:59</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>11/15/2018 13:12:20</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

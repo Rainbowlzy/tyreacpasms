@@ -160,28 +160,138 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Site.css" />
+    <Content Include="css\0-common\baguetteBox.css" />
+    <Content Include="css\0-common\bootstrap-datetimepicker.min.css" />
+    <Content Include="css\0-common\bootstrap-select.min.css" />
+    <Content Include="css\0-common\bootstrap-table.css" />
+    <Content Include="css\0-common\bootstrap-theme.css" />
+    <Content Include="css\0-common\bootstrap-theme.min.css" />
+    <Content Include="css\0-common\bootstrap.css" />
+    <Content Include="css\0-common\bootstrap.min.css" />
+    <Content Include="css\0-common\common.css" />
+    <Content Include="css\0-common\fileinput.min.css" />
+    <Content Include="css\0-common\fullcalendar.min.css" />
+    <Content Include="css\0-common\images\layers-2x.png" />
+    <Content Include="css\0-common\images\layers.png" />
+    <Content Include="css\0-common\images\marker-icon-2x.png" />
+    <Content Include="css\0-common\images\marker-icon.png" />
+    <Content Include="css\0-common\images\marker-shadow.png" />
+    <Content Include="css\0-common\img\diy\1_close.png" />
+    <Content Include="css\0-common\img\diy\1_open.png" />
+    <Content Include="css\0-common\img\diy\2.png" />
+    <Content Include="css\0-common\img\diy\3.png" />
+    <Content Include="css\0-common\img\diy\4.png" />
+    <Content Include="css\0-common\img\diy\5.png" />
+    <Content Include="css\0-common\img\diy\6.png" />
+    <Content Include="css\0-common\img\diy\7.png" />
+    <Content Include="css\0-common\img\diy\8.png" />
+    <Content Include="css\0-common\img\diy\9.png" />
+    <Content Include="css\0-common\img\line_conn.gif" />
+    <Content Include="css\0-common\img\line_conn.png" />
+    <Content Include="css\0-common\img\loading.gif" />
+    <Content Include="css\0-common\img\metro.gif" />
+    <Content Include="css\0-common\img\metro.png" />
+    <Content Include="css\0-common\img\zTreeStandard.gif" />
+    <Content Include="css\0-common\img\zTreeStandard.png" />
+    <Content Include="css\0-common\leaflet.css" />
+    <Content Include="css\0-common\metroStyle.css" />
+    <Content Include="css\0-common\zTreeStyle.css" />
+    <Content Include="css\1-login\login.css" />
+    <Content Include="css\2-index\business.css" />
+    <Content Include="css\2-index\index.css" />
+    <Content Include="css\2-index\main.css" />
+    <Content Include="css\3-map\map.css" />
+    <Content Include="css\7-dynamic\DYNC_Information.css" />
+    <Content Include="css\amazeui.min.css" />
+    <Content Include="css\app.1ceb1680.css" />
+    <Content Include="css\app.5440fa5e.css" />
+    <Content Include="css\app.57bba219.css" />
+    <Content Include="css\app.f00e9a98.css" />
+    <Content Include="css\bootstrap-datetimepicker.min.css" />
+    <Content Include="css\bootstrap-select.min.css" />
+    <Content Include="css\bootstrap-table.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\chunk-vendors.1439989b.css" />
+    <Content Include="css\chunk-vendors.db004505.css" />
+    <Content Include="css\common.css" />
+    <Content Include="css\docs.css" />
+    <Content Include="css\docs.min.css" />
+    <Content Include="css\fileinput.min.css" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="css\fullcalendar\fullcalendar.css" />
+    <Content Include="css\fullcalendar\maincontent.css" />
+    <Content Include="css\fullcalendar\mainstructure.css" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_glass_75_d0e5f5_1x400.bak.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_glass_75_d0e5f5_1x400old.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_glass_85_dfeffc_1x400old.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100old.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="css\fullcalendar\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="css\fullcalendar\redmond\jquery-ui-1.8.1.custom.css" />
+    <Content Include="css\H-ui.admin.css" />
+    <Content Include="css\H-ui.css" />
+    <Content Include="css\H-ui.login.css" />
+    <Content Include="css\H-ui.min.css" />
+    <Content Include="css\H-ui.reset.css" />
+    <Content Include="css\img\loading-sm.gif" />
+    <Content Include="css\img\loading.gif" />
+    <Content Include="css\index.css" />
+    <Content Include="css\login\reset.css" />
+    <Content Include="css\login\style.css" />
+    <Content Include="css\login\supersized.css" />
+    <Content Include="css\main.css" />
+    <Content Include="css\showMessage.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\system.css" />
     <Content Include="Evaluators\EvaluatorGen.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EvaluatorGen.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="css\0-common\bootstrap-theme.css.map" />
+    <Content Include="css\0-common\bootstrap.css.map" />
+    <Content Include="css\bootstrap.css.map" />
+    <Content Include="css\compile" />
+    <Content Include="css\compile.map" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="css\fullcalendar\redmond\images\Thumbs.db" />
+    <Content Include="css\main.css.map" />
+    <Content Include="css\main.scss" />
+    <Content Include="js\app.4bf36c2f.js.map" />
+    <Content Include="js\app.5e1b33f0.js.map" />
+    <Content Include="js\app.837df537.js.map" />
+    <Content Include="js\app.fd1bb53c.js.map" />
+    <Content Include="js\chunk-vendors.81cbbb87.js.map" />
+    <Content Include="js\chunk-vendors.ea08b020.js.map" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <Content Include="favicon.ico" />
     <Content Include="ImportExport\ImportProc.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ImportProc.cs</LastGenOutput>
     </Content>
+    <Content Include="index.html" />
+    <Content Include="js\app.4bf36c2f.js" />
+    <Content Include="js\app.5e1b33f0.js" />
+    <Content Include="js\app.837df537.js" />
+    <Content Include="js\app.fd1bb53c.js" />
+    <Content Include="js\chunk-vendors.81cbbb87.js" />
+    <Content Include="js\chunk-vendors.ea08b020.js" />
     <Content Include="Models\SearchFormModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SearchFormModel.cs</LastGenOutput>
@@ -191,6 +301,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorReport.cs" />
     <Compile Include="Evaluators\EvaluatorGen.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -199,6 +310,7 @@
     <Compile Include="Evaluators\GetCurrentUserInformationEvaluator.cs" />
     <Compile Include="Evaluators\CacheOptionsAttribute.cs" />
     <Compile Include="Evaluators\CommonOutputList.cs" />
+    <Compile Include="Evaluators\SaveReplenishmentBillEvaluator.cs" />
     <Compile Include="ImportExport\ImportProc.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -271,6 +383,7 @@
     <Content Include="Version.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="ViewPage1.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
