@@ -311,6 +311,7 @@
     <Compile Include="Evaluators\CacheOptionsAttribute.cs" />
     <Compile Include="Evaluators\CommonOutputList.cs" />
     <Compile Include="Evaluators\SaveReplenishmentBillEvaluator.cs" />
+    <Compile Include="Evaluators\SaveSalesUnitPriceEvaluator.cs" />
     <Compile Include="ImportExport\ImportProc.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -29,25 +29,18 @@ namespace T
             var auth = authUser == null ? "" : HttpUtility.UrlDecode(authUser.Value);
             if (string.IsNullOrEmpty(auth)) auth = request.Params["auth_user"] ?? "";
             if (!string.IsNullOrEmpty(auth)) auth = auth.Split(',').FirstOrDefault();
-            var method = request.Params["method"];
-            var qmethod = request.QueryString["method"];
-            var data = HttpUtility.UrlDecode(request.Params["data"]);
-            var qdata = request.QueryString["data"];
-            var crequest = new CommonRequest
-            {
-                auth = auth,
-                method = method ?? qmethod ?? "",
-                data = data ?? qdata ?? "",
-                context = context
-            };
+            var data = HttpUtility.UrlDecode(request.Params["data"])?? request.QueryString["data"]??"";
+            var method = (request.Params["method"] ?? request.QueryString["method"] ?? "").Trim().ToLower();
             response.Cookies.Add(new HttpCookie("auth_user", auth));
             response.ContentType = "application/json";
-
-            //            response.AddHeader("Access-Control-Allow-Origin", "http://localhost:8080");
-            var validationResults = Validation.Validate(crequest);
+            var validationResults = Validation.Validate(new CommonRequest
+            {
+                auth = auth,
+                method = method,
+                data = data
+            });
             foreach (ValidationResult result in validationResults)
             {
-                crequest.context = null;
                 error(result.Message);
                 response.Write(JsonConvert.SerializeObject(new
                 {
@@ -57,15 +50,21 @@ namespace T
                 return;
             }
 
-            var evaluator = "evaluator";
-            crequest.method = crequest.method.ToLower();
-            if (crequest.method.Contains(evaluator))
-                crequest.method =
-                    crequest.method.Substring(0, crequest.method.IndexOf(evaluator, StringComparison.Ordinal));
-            crequest.method += evaluator;
-            using (IEvaluator ieval = Evaluator.Build(crequest))
+            using (IEvaluator ieval = Evaluator.Build(new CommonRequest
             {
-                var val = ieval.Eval(crequest);
+                auth = auth,
+                method = method,
+                data = data,
+                context = context
+            }))
+            {
+                var val = ieval.Eval(new CommonRequest
+                {
+                    auth = auth,
+                    method = method,
+                    data = data,
+                    context = context
+                });
                 var json = JsonConvert.SerializeObject(val);
                 response.Write(json);
             }

@@ -10,6 +10,9 @@
                 {{message}}
             </b-alert>
             <div class="row">
+                <h1>{{table_name_ch}}</h1>
+            </div>
+            <div class="row">
                 <b-form-group horizontal label="搜索" class="mb-0">
                     <b-input-group>
                         <b-form-input v-model="filter" placeholder="搜索" />

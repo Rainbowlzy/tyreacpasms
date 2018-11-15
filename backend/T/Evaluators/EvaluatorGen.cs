@@ -2313,8 +2313,8 @@ namespace T.Evaluators
         }
         public override string Comments=> "删除一条销售单记录";
     }
-	
-    /// <summary>
+
+	/// <summary>
     /// 保存【销售单】
     /// </summary>
     public partial class SaveSalesUnitPriceEvaluator : Evaluator

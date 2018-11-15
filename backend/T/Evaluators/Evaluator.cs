@@ -314,6 +314,8 @@ namespace T.Evaluators
             }
         }
 
+        public static Dictionary<string, IEvaluator> Registrations1 => Registrations;
+
         /// <summary>  
         /// 创建GET方式的HTTP请求  
         /// </summary>  
@@ -401,7 +403,7 @@ namespace T.Evaluators
             return buf;
         }
 
-        private static readonly Dictionary<string, Type> types = new[] {typeof(Evaluator), typeof(DefaultContext)}
+        private static readonly Dictionary<string, Type> Types = new[] {typeof(Evaluator), typeof(DefaultContext)}
             .SelectMany(t => t.Assembly.GetTypes())
             .GroupBy(t => t.Name.ToLower())
             .ToDictionary(t => t.Key, t => t.FirstOrDefault());
@@ -411,8 +413,15 @@ namespace T.Evaluators
         /// </summary>
         private static readonly Dictionary<string, IEvaluator> Registrations = typeof(Evaluator).Assembly.GetTypes()
             .Where(t => t.BaseType == typeof(Evaluator))
-            .GroupBy(t => t.Name.ToLower())
-            .ToDictionary(t => t.Key, t => Activator.CreateInstance(t.FirstOrDefault()) as IEvaluator);
+            .GroupBy(t => t.Name.ToLower().Replace(nameof(Evaluator).ToLower(), string.Empty))
+            .ToDictionary(t => t.Key, New);
+
+        private static IEvaluator New(IGrouping<string, Type> t)
+        {
+            var type = t.FirstOrDefault();
+            if (type == null) return (IEvaluator) null;
+            return Activator.CreateInstance(type) as IEvaluator;
+        }
 
         protected object Redirect(string method)
         {
@@ -425,8 +434,8 @@ namespace T.Evaluators
         {
             typeName = typeName.TrimStart("get".ToCharArray()).TrimStart("save".ToCharArray())
                 .TrimStart("delete".ToCharArray()).TrimEnd("list".ToCharArray()).TrimEnd("count".ToCharArray());
-            if (!types.ContainsKey(typeName)) return null;
-            return Activator.CreateInstance(types[typeName]);
+            if (!Types.ContainsKey(typeName)) return null;
+            return Activator.CreateInstance(Types[typeName]);
         }
 
         public static UserInformation GetUser(string auth_user)
@@ -460,7 +469,7 @@ namespace T.Evaluators
             {
                 return
                     new ShowEvaluator(
-                        Registrations.Keys
+                        Registrations1.Keys
                             .Select(p => p.Replace("evaluator", string.Empty))
                             .Select(p => new
                             {
@@ -482,12 +491,12 @@ namespace T.Evaluators
             //    return new RemoteEvaluator();
             //}
 
-            if (!Registrations.ContainsKey(method))
+            if (!Registrations1.ContainsKey(method))
             {
                 throw new Exception($"Method not found with {method}");
             }
 
-            var evaluator = Registrations[method];
+            var evaluator = Registrations1[method];
             var o = evaluator as Evaluator;
             if (o != null) o.Request = request;
             return evaluator;
