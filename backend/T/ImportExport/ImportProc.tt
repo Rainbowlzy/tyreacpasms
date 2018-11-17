@@ -1,7 +1,7 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
 <#@ include file="..\..\TEntities\CodeTemplates\Manager.ttinclude"#>
 <#@ output extension=".cs" #>
-<#@ assembly name="$(SolutionDir)\Generator\bin\Debug\Generator.dll"#>
+
 
 /* ------------------------------------------------------------ *
  * 此文件由生成器引擎根据既有规则生成，所有手工的更改将会被覆盖

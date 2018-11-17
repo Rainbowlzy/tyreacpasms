@@ -58,7 +58,7 @@ namespace T.Evaluators
                     new Warehouse
                     {
                         WLocality = "五角场仓库",
-                        WResponsibleForManualNumber = 10003,
+                        WWarehouseNumber = 10003,
                         WCapacity = 500,
                         CreateBy = "JOB",
                         TransactionID = TransactionID,
@@ -69,7 +69,7 @@ namespace T.Evaluators
                     new Warehouse
                     {
                         WLocality = "新江湾城仓库",
-                        WResponsibleForManualNumber = 10004,
+                        WWarehouseNumber = 10004,
                         WCapacity = 500,
                         CreateBy = "JOB",
                         TransactionID = TransactionID,
@@ -84,7 +84,7 @@ namespace T.Evaluators
                     {
                         CCustomerNumber = 30001,
                         CName = "张三",
-                        CCommonModeOfContact = "13222210188",
+                        CContactNumber = "13222210188",
                         CreateBy = "JOB",
                         TransactionID = TransactionID,
                         IsDeleted = 0,
@@ -95,7 +95,7 @@ namespace T.Evaluators
                     {
                         CCustomerNumber = 30002,
                         CName = "李四",
-                        CCommonModeOfContact = "13222210183",
+                        CContactNumber = "13222210183",
                         CreateBy = "JOB",
                         TransactionID = TransactionID,
                         IsDeleted = 0,
@@ -107,7 +107,7 @@ namespace T.Evaluators
                 {
                     new GoodsShelves
                     {
-                        GSResponsibleForManualNumber = 10003,
+                        GSShelfNumber = 10003,
                         GSLocality = "五角场货架",
                         GSCapacity = 500,
                         CreateBy = "JOB",
@@ -118,7 +118,7 @@ namespace T.Evaluators
                     },
                     new GoodsShelves
                     {
-                        GSResponsibleForManualNumber = 10004,
+                        GSShelfNumber = 10004,
                         GSLocality = "新江湾城货架",
                         GSCapacity = 500,
                         CreateBy = "JOB",
@@ -134,7 +134,7 @@ namespace T.Evaluators
                     {
                         SJobNumber = 10001,
                         SName = "销售员1",
-                        SCommonModeOfContact = "13222210155",
+                        SContactNumber = "13222210155",
                         SEducation = "本科",
                         CreateBy = "JOB",
                         TransactionID = TransactionID,
@@ -146,7 +146,7 @@ namespace T.Evaluators
                     {
                         SJobNumber = 10002,
                         SName = "销售员2",
-                        SCommonModeOfContact = "13222288101",
+                        SContactNumber = "13222288101",
                         SEducation = "本科",
                         CreateBy = "JOB",
                         TransactionID = TransactionID,
@@ -158,7 +158,7 @@ namespace T.Evaluators
                     {
                         SJobNumber = 10003,
                         SName = "仓库管理员1",
-                        SCommonModeOfContact = "13222210991",
+                        SContactNumber = "13222210991",
                         SEducation = "本科",
                         CreateBy = "JOB",
                         TransactionID = TransactionID,
@@ -170,7 +170,7 @@ namespace T.Evaluators
                     {
                         SJobNumber = 10004,
                         SName = "仓库管理员2",
-                        SCommonModeOfContact = "13222440101",
+                        SContactNumber = "13222440101",
                         SEducation = "本科",
                         CreateBy = "JOB",
                         TransactionID = TransactionID,

@@ -20,17 +20,17 @@ namespace T.Evaluators
                 var time = bill.RBDate ?? DateTime.Now;
                 var warehouse =
                     ctx.Warehouse.FirstOrDefault(t =>
-                        t.WWarehouseNumber == bill.RBWarehouseManagementStaffNumber && t.IsDeleted == 0);
+                        t.WWarehouseNumber == bill.RBWarehouseNumber && t.IsDeleted == 0);
                 if (warehouse == null) throw new Exception("没有找到对应的仓库，请检查仓库编号");
-                var totalIn = ctx.SupplyList.Where(t =>
-                                      t.SLWarehouseNumber == bill.RBWarehouseManagementStaffNumber &&
-                                      t.SLCargoNumber == bill.RBCargoNumber &&
-                                      t.SLDate <= time &&
+                var totalIn = ctx.SupplyWarehousingList.Where(t =>
+                                      t.SWLWarehouseNumber == bill.RBWarehouseNumber &&
+                                      t.SWLCargoNumber == bill.RBCargoNumber &&
+                                      t.SWLDate <= time &&
                                       t.IsDeleted == 0)
-                                  .Sum(t => t.SLAmount) ?? 0;
+                                  .Sum(t => t.SWLAmount) ?? 0;
                 var totalOut = ctx.ReplenishmentBill
-                                   .Where(t => t.RBWarehouseManagementStaffNumber ==
-                                               bill.RBWarehouseManagementStaffNumber &&
+                                   .Where(t => t.RBWarehouseNumber ==
+                                               bill.RBWarehouseNumber &&
                                                t.RBCargoNumber == bill.RBCargoNumber &&
                                                t.RBDate <= time &&
                                                t.IsDeleted == 0)
@@ -38,6 +38,7 @@ namespace T.Evaluators
                 var remaining = totalIn - totalOut;
                 if (remaining < (bill.RBAmount ?? 0)) throw new Exception($"仓库库存不足，当前库存（{remaining}）");
             }
+
             return request;
         }
     }
